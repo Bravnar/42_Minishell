@@ -1,0 +1,2 @@
+# minishell
+Starting minishell
