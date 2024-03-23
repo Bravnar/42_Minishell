@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
+#    By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 19:50:57 by smuravyev         #+#    #+#              #
-#    Updated: 2024/03/21 15:37:41 by smuravye         ###   ########.fr        #
+#    Updated: 2024/03/23 19:04:46 by smuravyev        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ OBJS_EXISTS=	.cache_exists
 
 $(NAME): $(OBJS)
 					@make -C $(LIBFT) all
-					@$(CC) -o $(NAME) $(OBJS) $(LIBFT)/my_lib.a
+					@$(CC) -o $(NAME) $(OBJS) $(LIBFT)/my_lib.a -lreadline
 					@echo "$(YELLOW)\no------------------------------------o$(RESET)"
 					@echo "$(GREEN)|           MINISHELL_COMPILED       |$(RESET)"
 					@echo "$(YELLOW)o------------------------------------o\n$(RESET)"

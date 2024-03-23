@@ -3,17 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/03/21 15:36:17 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:10:40 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define PROMPT "EHL_Bangers ---> $ "
+
+/*----------------------------------------------------------------------------*/
+/*                                  LIBRARIES                                 */
+/*----------------------------------------------------------------------------*/
+
 # include "../lib/includes/my_lib.h"
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 
 /*----------------------------------------------------------------------------*/
 /*                                 STRUCTURES                                 */
