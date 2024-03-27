@@ -6,7 +6,7 @@
 /*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:57:04 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/03/23 19:18:52 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/03/27 14:19:11 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(void)
 		user_input = readline(PROMPT);
 		if (user_input == NULL)
 			break ;
+		if (user_input[0])
+		add_history(user_input);
 		ft_echo(user_input);
 		if (strcmp(user_input, "Done") == 0)
 		{
