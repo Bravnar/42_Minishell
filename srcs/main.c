@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 20:57:04 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/03/27 14:19:11 by smuravyev        ###   ########.fr       */
+/*   Created: 2024/03/27 20:21:36 by hmorand           #+#    #+#             */
+/*   Updated: 2024/03/27 20:21:36 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <string.h>
 
 void ft_echo(const char *str)
-{	
+{
 	if (!ft_strncmp(str, "echo", 4))
 	{
 		str += 4;
