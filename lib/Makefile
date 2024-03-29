@@ -44,6 +44,7 @@ MEMORYDIR			=	memory
 PRINTFDIR			=	printf
 PUTDIR				=	put
 STRINGDIR			=	string
+GARBAGEDIR			=	garbage
 
 # Rules --------------------------------------------------------------------- #
 
@@ -55,7 +56,7 @@ $(NAME):				$(OBJS)
 							@echo "\n\no------------------------------------o"
 							@echo "|          MY_LIB_COMPILED           |"
 							@echo "o------------------------------------o"
-									
+
 $(OBJECTDIR)/%.o:		$(SOURCEDIR)/%.c
 							@mkdir	-p	$(@D)
 #								@mkdir -p $(OBJECTDIR)
@@ -67,6 +68,7 @@ $(OBJECTDIR)/%.o:		$(SOURCEDIR)/%.c
 #								@mkdir -p $(OBJECTDIR)/$(PRINTFDIR)
 #								@mkdir -p $(OBJECTDIR)/$(PUTDIR)
 #								@mkdir -p $(OBJECTDIR)/$(STRINGDIR)
+#								@mkdir -p $(OBJECTDIR)/$(GARBAGEDIR)
 							@printf	"\033[KCompiling libft -----------> $<\r"
 							@$(CC) $(CFLAGS) -I $(HEADERDIR) -c $< -o $@
 
@@ -80,5 +82,5 @@ fclean:					clean
 
 re:						fclean all
 								@echo "MY_LIB.a has been cleaned and reset!"
-								
+
 .PHONY:					all clean fclean re

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_lib.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 20:58:47 by bravnar           #+#    #+#             */
-/*   Updated: 2024/01/30 18:21:58 by smuravye         ###   ########.fr       */
+/*   Created: 2024/03/27 20:20:16 by hmorand           #+#    #+#             */
+/*   Updated: 2024/03/27 20:20:16 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdarg.h>
+# include "garbage.h"
 
 /* ************************************************************************** */
 /*                          CONVERTER FUNCTIONS                               */
