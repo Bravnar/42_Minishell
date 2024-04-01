@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:16:57 by hmorand           #+#    #+#             */
-/*   Updated: 2024/03/27 20:16:57 by hmorand          ###   ########.ch       */
+/*   Updated: 2024/04/01 14:00:45 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ typedef struct s_garbage
 	void				*content;
 	struct s_garbage	*next;
 	struct s_garbage	*previous;
-} t_garbage;
-
+}	t_garbage;
 
 void		gfree(void *address);
 void		*galloc(size_t size);

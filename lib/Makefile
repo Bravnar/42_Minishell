@@ -6,7 +6,7 @@
 #    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/03 16:33:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/01/09 16:35:14 by smuravye         ###   ########.fr        #
+#    Updated: 2024/04/01 15:49:16 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,10 @@ RM					=	rm	-rf
 MV					=	mv
 MKDIR				=	mkdir
 AR					=	ar	rcs
+
+# Colors --------------------------------------------------------------------- #
+
+BG_GREEN := "\x1B[42m"
 
 # Source Folder -------------------------------------------------------------- #
 
@@ -70,6 +74,7 @@ $(OBJECTDIR)/%.o:		$(SOURCEDIR)/%.c
 #								@mkdir -p $(OBJECTDIR)/$(STRINGDIR)
 #								@mkdir -p $(OBJECTDIR)/$(GARBAGEDIR)
 							@printf	"\033[KCompiling libft -----------> $<\r"
+							@echo "$(BG_GREEN) \c"
 							@$(CC) $(CFLAGS) -I $(HEADERDIR) -c $< -o $@
 
 clean:
