@@ -6,7 +6,7 @@
 #    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 19:50:57 by smuravyev         #+#    #+#              #
-#    Updated: 2024/04/02 13:23:38 by smuravye         ###   ########.fr        #
+#    Updated: 2024/04/02 16:18:48 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ OBJS=		$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_DOCS)))
 OBJS_EXISTS=	.cache_exists
 
 $(NAME): $(OBJS)
-					@echo "\n\nCompiling LIBFT: \n"
+					@echo "\n\nCompiling LIBFT: (courtesy of rrouille)\n"
 					@make -C $(LIBFT) all
 					@$(CC) -o $(NAME) $(OBJS) $(LIBFT)/my_lib.a -lreadline
 					@echo "$(YELLOW)\no------------------------------------o$(RESET)"
