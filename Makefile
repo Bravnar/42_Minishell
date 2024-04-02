@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+         #
+#    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 19:50:57 by smuravyev         #+#    #+#              #
-#    Updated: 2024/03/23 19:04:46 by smuravyev        ###   ########.fr        #
+#    Updated: 2024/04/02 13:23:38 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ OBJS=		$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_DOCS)))
 OBJS_EXISTS=	.cache_exists
 
 $(NAME): $(OBJS)
+					@echo "\n\nCompiling LIBFT: \n"
 					@make -C $(LIBFT) all
 					@$(CC) -o $(NAME) $(OBJS) $(LIBFT)/my_lib.a -lreadline
 					@echo "$(YELLOW)\no------------------------------------o$(RESET)"
@@ -47,7 +48,7 @@ all:			$(NAME)
 
 $(OBJS_DIR)%.o:		$(SRCS_DIR)%.c | $(OBJS_EXISTS)
 						@$(CC) $(CFLAGS) $(HEAD_DIR) -o $@ -c $<
-						@printf	"$(CYAN)\033[KCompiling project -----------> $<\r"$(RESET)
+						@printf	"\033[KCompiling project -----------> $<\r"
 					
 $(OBJS_EXISTS):
 					@mkdir -p $(OBJS_DIR)

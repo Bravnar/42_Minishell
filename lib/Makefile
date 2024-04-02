@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+         #
+#    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/03 16:33:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/04/01 21:58:58 by smuravyev        ###   ########.fr        #
+#    Updated: 2024/04/02 13:21:51 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ AR					=	ar	rcs
 
 # Colors --------------------------------------------------------------------- #
 
-BG_GREEN = \033[42m
+BG_GREEN = \\033[42m
+NO_COLOR = \\033[0m
 
 # Source Folder -------------------------------------------------------------- #
 
@@ -73,9 +74,10 @@ $(OBJECTDIR)/%.o:		$(SOURCEDIR)/%.c
 #								@mkdir -p $(OBJECTDIR)/$(PUTDIR)
 #								@mkdir -p $(OBJECTDIR)/$(STRINGDIR)
 #								@mkdir -p $(OBJECTDIR)/$(GARBAGEDIR)
-							@printf	"\033[KCompiling libft -----------> $<\r"
+							@echo "$(BG_GREEN) $(NO_COLOR)\c"
+#							@printf	"\033[KCompiling libft -----------> $<\r"
 							@$(CC) $(CFLAGS) -I $(HEADERDIR) -c $< -o $@
-							@echo "$(BG_GREEN) \c"
+							
 
 clean:
 								@$(RM)	$(OBJECTDIR)
