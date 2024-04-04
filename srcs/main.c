@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:21:36 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/01 16:39:48 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:32:23 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_echo(const char *str)
 int	main(void)
 {
 	char	*user_input;
+	char    **breakdown;
 
 	signal(3, NULL);
 	user_input = NULL;
@@ -44,11 +45,17 @@ int	main(void)
 			break ;
 		if (user_input[0])
 			add_history(user_input);
-		ft_echo(user_input);
+		//ft_echo(user_input);
 		if (strcmp(user_input, "Done") == 0)
 		{
 			free(user_input);
 			break ;
+		}
+		breakdown = mh_parse(user_input);
+		int i = -1;
+		while (breakdown[++i])
+		{
+			printf("[%s]\n", breakdown[i]);
 		}
 		free(user_input);
 	}
@@ -66,4 +73,17 @@ Plan of action:
 
 First idea:
 	Use a similar parser to pipex to breakdown user input and store it in a linked list!
+ */
+
+/* 
+Actual main should look something like this
+
+int main (int ac, char **av, char **env)
+{
+	check_input();
+	initialize_structs();
+	parsing();
+	execution();
+	cleanup() or just dump_garbage();
+}
  */

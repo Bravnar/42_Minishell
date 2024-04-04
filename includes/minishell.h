@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/01 15:51:41 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:15:59 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,20 @@ typedef struct s_main
 	struct s_list	*l_list;
 }	t_main;
 
+typedef struct s_parse
+{
+	int		i;
+	char	q_char;
+	int		count;
+	char	**args_list;
+	int		args_count;
+	int		len;
+}	t_parse;
+
 /*----------------------------------------------------------------------------*/
 /*                                  FUNCTIONS                                 */
 /*----------------------------------------------------------------------------*/
 
+char	**mh_parse(char *u_input);
 
 #endif

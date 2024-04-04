@@ -6,7 +6,7 @@
 #    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 19:50:57 by smuravyev         #+#    #+#              #
-#    Updated: 2024/04/02 16:18:48 by smuravye         ###   ########.fr        #
+#    Updated: 2024/04/04 10:46:43 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ WHITE=\033[0;37m
 RESET=\033[0m
 
 SRCS_DOCS=	main \
+			mh_parser \
 			
 			
 SRCS= 		$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_DOCS)))
