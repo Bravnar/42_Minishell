@@ -6,7 +6,7 @@
 #    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 19:50:57 by smuravyev         #+#    #+#              #
-#    Updated: 2024/04/05 15:21:36 by smuravye         ###   ########.fr        #
+#    Updated: 2024/04/06 14:43:50 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ WHITE=\033[0;37m
 RESET=\033[0m
 
 SRCS_DOCS=	main \
-			lexer \
+			lexer3 \
 			
 			
 SRCS= 		$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_DOCS)))

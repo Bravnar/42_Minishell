@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:21:36 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/05 16:19:44 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:08:25 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(void)
 			free(user_input);
 			break ;
 		}
-		breakdown = mh_lex(user_input);
+		breakdown = lex(user_input);
 		free(user_input);
 		int i = -1;
 		while (breakdown[++i])
