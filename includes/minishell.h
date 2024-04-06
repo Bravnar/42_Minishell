@@ -6,14 +6,12 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/04 16:15:59 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:38:04 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
-# define PROMPT "EHL_Bangers $ "
 
 /*----------------------------------------------------------------------------*/
 /*                                  LIBRARIES                                 */
@@ -33,6 +31,13 @@
 # include <unistd.h>
 # include "colors.h"
 
+/*----------------------------------------------------------------------------*/
+/*                                  DEFINES                                   */
+/*----------------------------------------------------------------------------*/
+
+# define PROMPT "EHL_Bangers $ "
+# define TRUE 1
+# define FALSE 0
 
 /*----------------------------------------------------------------------------*/
 /*                                 STRUCTURES                                 */
@@ -40,8 +45,8 @@
 
 typedef struct s_llist
 {
-	char	*str;
-	int		index;
+	char			*str;
+	int				index;
 	struct s_list	*prev;
 	struct s_list	*next;
 }	t_llist;
@@ -68,6 +73,6 @@ typedef struct s_parse
 /*                                  FUNCTIONS                                 */
 /*----------------------------------------------------------------------------*/
 
-char	**mh_parse(char *u_input);
+char	**mh_lex(char *u_input);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 19:50:57 by smuravyev         #+#    #+#              #
-#    Updated: 2024/04/04 10:46:43 by smuravye         ###   ########.fr        #
+#    Updated: 2024/04/05 15:21:36 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ OBJS_DIR = 	objs/
 LIBFT = 	lib
 CC = 		gcc
 CFLAGS = 	-Wall -Werror -Wextra -I
+#SANITIZE = -g3 -fsanitize=address
 
 # Color Variables
 RED=\033[0;31m
@@ -29,7 +30,7 @@ WHITE=\033[0;37m
 RESET=\033[0m
 
 SRCS_DOCS=	main \
-			mh_parser \
+			lexer \
 			
 			
 SRCS= 		$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_DOCS)))
@@ -40,7 +41,7 @@ OBJS_EXISTS=	.cache_exists
 $(NAME): $(OBJS)
 					@echo "\n\nCompiling LIBFT: (courtesy of rrouille)\n"
 					@make -C $(LIBFT) all
-					@$(CC) -o $(NAME) $(OBJS) $(LIBFT)/my_lib.a -lreadline
+					@$(CC) -o $(NAME) $(OBJS) $(LIBFT)/my_lib.a -lreadline $(SANITIZE)
 					@echo "$(YELLOW)\no------------------------------------o$(RESET)"
 					@echo "$(GREEN)|           MINISHELL_COMPILED       |$(RESET)"
 					@echo "$(YELLOW)o------------------------------------o\n$(RESET)"
@@ -48,7 +49,7 @@ $(NAME): $(OBJS)
 all:			$(NAME)
 
 $(OBJS_DIR)%.o:		$(SRCS_DIR)%.c | $(OBJS_EXISTS)
-						@$(CC) $(CFLAGS) $(HEAD_DIR) -o $@ -c $<
+						@$(CC) $(CFLAGS) $(HEAD_DIR) -o $@ -c $< $(SANITIZE)
 						@printf	"\033[KCompiling project -----------> $<\r"
 					
 $(OBJS_EXISTS):

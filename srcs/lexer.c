@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mh_parser.c                                        :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 10:46:50 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/04 16:34:20 by smuravye         ###   ########.fr       */
+/*   Created: 2024/04/05 12:37:26 by smuravye          #+#    #+#             */
+/*   Updated: 2024/04/05 14:43:49 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*handle_quote(char **cmd, t_parse *p)
 	return (result);
 }
 
-char	**mh_parse(char *u_input)
+char	**mh_lex(char *u_input)
 {
 	t_parse	p;
 
@@ -95,5 +95,8 @@ char	**mh_parse(char *u_input)
 		else if (!p.q_char && *u_input)
 			p.args_list[p.i++] = handle_space(&u_input, &p);
 	}
+	p.args_list[p.i] = NULL;
 	return (p.args_list);
 }
+/* IMPORTANT:
+	Need to add a thing that handles \" \' \$ etc" */

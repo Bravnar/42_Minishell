@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:21:36 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/04 16:32:23 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:19:44 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(void)
 	char	*user_input;
 	char    **breakdown;
 
-	signal(3, NULL);
 	user_input = NULL;
 	while (1)
 	{
@@ -51,13 +50,15 @@ int	main(void)
 			free(user_input);
 			break ;
 		}
-		breakdown = mh_parse(user_input);
+		breakdown = mh_lex(user_input);
+		free(user_input);
 		int i = -1;
 		while (breakdown[++i])
 		{
-			printf("[%s]\n", breakdown[i]);
+			printf("(%s)-->", breakdown[i]);
 		}
-		free(user_input);
+		printf("\n");
+		
 	}
 	return (0);
 }
