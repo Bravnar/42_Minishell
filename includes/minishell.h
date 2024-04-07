@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/06 15:45:18 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:11:58 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@
 # define TRUE 1
 # define FALSE 0
 # define WHITESPACE " \t\n\r\f\v"
-# define SPECIAL "<>|"
+# define SPECIAL "<>|;"
 # define QUOTES "\"\'"
 # define SPECIAL_W_SPACE " <>|;"
+# define REDIRS "<>"
+# define PIPE "|"
 
 
 /*----------------------------------------------------------------------------*/

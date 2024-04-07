@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 15:39:40 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/06 15:49:02 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/07 11:38:07 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ static int	count_strs(char *str, char *charset)
 	{
 		while (str[i] && is_in_charset(str[i], charset))
 		{
+			if (!(str[i + 1] == str[i] || str[i] == ' '))
+				elem_count++;
 			i++;
-			elem_count++;
 		}
 		if (str[i])
 			elem_count++;
@@ -55,10 +56,14 @@ static int	strlen_til_sep(char *str, char *charset)
 	int	i;
 
 	i = 0;
-	while (str[i] && !is_in_charset(str[i], charset))
+	if (is_in_charset(str[i], SPECIAL))
 	{
-		i++;
+		while (str[i] && str[i] == str[0])
+			i++;
+		return (i);
 	}
+	while (str[i] && !is_in_charset(str[i], charset))
+		i++;
 	return (i);
 }
 
@@ -86,24 +91,26 @@ char	**ft_shellsplit(char *str, char *charset)
 {
 	char	**breakdown;
 	int		i;
+	int		token_len;
 
 	i = 0;
 	if (str == NULL)
 		return (NULL);
+	printf("Count = %d\n", count_strs(str, charset));
 	breakdown = malloc(sizeof(char *) * (count_strs(str, charset) + 1));
 	if (breakdown == NULL)
 		return (NULL);
 	while (*str)
 	{
-		while (*str && is_in_charset(*str, charset))
+		while (*str && is_in_charset(*str, WHITESPACE))
 			str++;
 		if (*str)
 		{
+			token_len = strlen_til_sep(str, charset);
 			breakdown[i] = save_str(str, charset);
+			str += token_len;
 			i++;
 		}
-		while (*str && !is_in_charset(*str, charset))
-			str++;
 	}
 	breakdown[i] = 0;
 	return (breakdown);

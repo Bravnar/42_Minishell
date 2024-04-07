@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:20:33 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/06 11:07:54 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:17:38 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_parse
 	char	**args_list;
 	int		args_count;
 	int		len;
+	int		invalid_token;
 }	t_parse;
 
 #endif
