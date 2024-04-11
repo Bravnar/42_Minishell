@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_shellsplit.c                                    :+:      :+:    :+:   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 15:39:40 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/07 11:38:07 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:48:57 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_in_charset(char c, char *charset)
-{
-	int	i;
-
-	i = 0;
-	while (charset[i])
-	{
-		if (c == charset[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static int	count_strs(char *str, char *charset)
+int	count_strs(char *str, char *charset)
 {
 	int	i;
 	int	elem_count;
@@ -51,7 +37,7 @@ static int	count_strs(char *str, char *charset)
 	return (elem_count);
 }
 
-static int	strlen_til_sep(char *str, char *charset)
+int	strlen_til_sep(char *str, char *charset)
 {
 	int	i;
 
@@ -67,7 +53,7 @@ static int	strlen_til_sep(char *str, char *charset)
 	return (i);
 }
 
-static char	*save_str(char *str, char *charset)
+char	*save_str(char *str, char *charset)
 {
 	int		str_len;
 	int		i;
@@ -87,7 +73,7 @@ static char	*save_str(char *str, char *charset)
 	return (arr_word);
 }
 
-char	**ft_shellsplit(char *str, char *charset)
+/* char	**ft_shellsplit(char *str, char *charset)
 {
 	char	**breakdown;
 	int		i;
@@ -96,7 +82,6 @@ char	**ft_shellsplit(char *str, char *charset)
 	i = 0;
 	if (str == NULL)
 		return (NULL);
-	printf("Count = %d\n", count_strs(str, charset));
 	breakdown = malloc(sizeof(char *) * (count_strs(str, charset) + 1));
 	if (breakdown == NULL)
 		return (NULL);
@@ -114,4 +99,4 @@ char	**ft_shellsplit(char *str, char *charset)
 	}
 	breakdown[i] = 0;
 	return (breakdown);
-}
+} */

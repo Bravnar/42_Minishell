@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:20:33 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/07 12:17:38 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:19:09 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ typedef struct s_parse
 {
 	int		i;
 	char	q_char;
-	int		backslash;
+	int		backslash; // how?
 	int		count;
 	char	*work_line;
-	char	**args_list;
+	char	**args;
+	int		token_len;
 	int		args_count;
 	int		len;
 	int		invalid_token;
+	int		invalid_quote;
 }	t_parse;
 
 #endif

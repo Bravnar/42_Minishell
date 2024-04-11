@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/07 12:11:58 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:56:20 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,9 @@
 char	**mh_lex(char *u_input);
 char	**lex(char *input);
 char	**ft_shellsplit(char *str, char *charset);
+int		is_in_charset(char c, char *charset);
+int		strlen_til_sep(char *str, char *charset);
+char	*save_str(char *str, char *charset);
+int		count_args(char *str, char *charset);
 
 #endif
