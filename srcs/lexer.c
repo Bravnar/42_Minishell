@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:39:57 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/11 18:58:53 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:22:15 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ char	**ft_supersplit(t_parse *p, char *charset)
 {
 	if (p->work_line == NULL)
 		return (NULL);
-	printf("Count: %d\n", count_args(p->work_line, charset));
-	p->args = malloc(sizeof(char *) * (count_args(p->work_line, charset)));
+	//printf("Count: %d\n", count_args(p->work_line, charset));
+	//p->args = malloc(sizeof(char *) * (count_args(p->work_line, charset)));
+	p->args = malloc(sizeof(char *) * 10);
 	if (!p->args)
 		return (NULL);
 	while (*(p)->work_line)
@@ -100,6 +101,7 @@ char	**lex(char *input)
 
 	ft_bzero(&p, sizeof(t_parse));
 	p.work_line = ft_strtrim(input, WHITESPACE);
+	//printf("Count of quotes: %d\n", count_quotes2(p.work_line));
 	p.args = ft_supersplit(&p, SPECIAL_W_SPACE);
 	p.invalid_token = check_validity(p.args, SPECIAL);
 	if (p.invalid_token)

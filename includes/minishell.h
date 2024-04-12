@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/11 18:56:20 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:10:12 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int		is_in_charset(char c, char *charset);
 int		strlen_til_sep(char *str, char *charset);
 char	*save_str(char *str, char *charset);
 int		count_args(char *str, char *charset);
+int		count_quotes2(char *str);
 
 #endif
