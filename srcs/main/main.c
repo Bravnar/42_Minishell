@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:21:36 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/06 15:08:25 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:17:35 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_echo(const char *str)
 int	main(void)
 {
 	char	*user_input;
-	char    **breakdown;
+	t_token	*breakdown;
 
 	user_input = NULL;
 	while (1)
@@ -50,13 +50,15 @@ int	main(void)
 			free(user_input);
 			break ;
 		}
-		breakdown = lex(user_input);
+		breakdown = lex_input(user_input);
+		if (!breakdown)
+			return (1);
 		free(user_input);
-		int i = -1;
-		while (breakdown[++i])
+		//int i = -1;
+		/* while (breakdown[++i])
 		{
 			printf("(%s)-->", breakdown[i]);
-		}
+		} */
 		printf("\n");
 		
 	}

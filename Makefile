@@ -5,19 +5,28 @@
 #                                                     +:+ +:+         +:+      #
 #    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/08 19:50:57 by smuravyev         #+#    #+#              #
-#    Updated: 2024/04/11 18:56:47 by smuravye         ###   ########.fr        #
+#    Created: 2024/04/16 09:51:12 by smuravye          #+#    #+#              #
+#    Updated: 2024/04/16 13:46:17 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 		minishell
-HEAD_DIR = 	includes
-SRCS_DIR = 	srcs/
-OBJS_DIR = 	objs/
+NAME= minishell
+
+INCLUDES = includes
+
+SRCS= 	srcs/main/main.c \
+		srcs/lexer/linked_lex.c srcs/lexer/lex_utils.c \
+		srcs/lexer/linked_utils.c \
+#		srcs/lexer/lexer.c srcs/lexer/lexer_count.c srcs/lexer/lexer_utils.c \
+		
+CC= gcc
+
+CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
+
 LIBFT = 	lib
-CC = 		gcc
-CFLAGS = 	-Wall -Werror -Wextra -I
-#SANITIZE = -g3 -fsanitize=address
+LIBFT_LIB = $(LIBFT)/my_lib.a
+
+#SANITIZE= -g3 -fsanitize=address
 
 # Color Variables
 RED=\033[0;31m
@@ -29,44 +38,27 @@ CYAN=\033[0;36m
 WHITE=\033[0;37m
 RESET=\033[0m
 
-SRCS_DOCS=	main \
-			lexer \
-			lexer_utils \
-			lexer_count \
-			
-			
-SRCS= 		$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_DOCS)))
-OBJS=		$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_DOCS)))
+all: $(NAME)
 
-OBJS_EXISTS=	.cache_exists
+$(NAME) : $(SRCS)
+			@echo "\n\nCompiling LIBFT: (courtesy of rrouille)\n"
+			@make -C $(LIBFT) all
+			@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_LIB) -lreadline $(SANITIZE)
+			@echo "$(YELLOW)\no------------------------------------o$(RESET)"
+			@echo "$(GREEN)|           MINISHELL_COMPILED       |$(RESET)"
+			@echo "$(YELLOW)o------------------------------------o\n$(RESET)"
 
-$(NAME): $(OBJS)
-					@echo "\n\nCompiling LIBFT: (courtesy of rrouille)\n"
-					@make -C $(LIBFT) all
-					@$(CC) -o $(NAME) $(OBJS) $(LIBFT)/my_lib.a -lreadline $(SANITIZE)
-					@echo "$(YELLOW)\no------------------------------------o$(RESET)"
-					@echo "$(GREEN)|           MINISHELL_COMPILED       |$(RESET)"
-					@echo "$(YELLOW)o------------------------------------o\n$(RESET)"
-
-all:			$(NAME)
-
-$(OBJS_DIR)%.o:		$(SRCS_DIR)%.c | $(OBJS_EXISTS)
-						@$(CC) $(CFLAGS) $(HEAD_DIR) -o $@ -c $< $(SANITIZE)
-						@printf	"\033[KCompiling project -----------> $<\r"
-					
-$(OBJS_EXISTS):
-					@mkdir -p $(OBJS_DIR)
-	
 clean:
-					@rm -rf $(OBJS_DIR)
-					@make -C $(LIBFT) clean
+	@echo "${RED}Cleaning up...${RESET}"
+	@rm -f $(NAME)
+	@echo "${GREEN}Cleanup done.${RESET}"
 
-fclean: 		clean
-					@make -C $(LIBFT) fclean
-					@rm -f $(NAME)
-					@echo "$(YELLOW)\no------------------------------------o$(RESET)"
-					@echo "$(RED)|           MINISHELL_CLEARED        |$(RESET)"
-					@echo "$(YELLOW)o------------------------------------o\n$(RESET)"
+fclean: 	clean
+		@make -C $(LIBFT) fclean
+		@rm -f $(NAME)
+		@echo "$(YELLOW)\no------------------------------------o$(RESET)"
+		@echo "$(RED)|           MINISHELL_CLEARED        |$(RESET)"
+		@echo "$(YELLOW)o------------------------------------o\n$(RESET)"
 
 re: 			fclean all
 

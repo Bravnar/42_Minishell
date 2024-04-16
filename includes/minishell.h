@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/12 14:10:12 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:25:32 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define WHITESPACE " \t\n\r\f\v"
 # define SPECIAL "<>|;"
 # define QUOTES "\"\'"
-# define SPECIAL_W_SPACE " <>|;"
+# define SPECIAL_W_SPACE " <>|;\'\""
 # define REDIRS "<>"
 # define PIPE "|"
 
@@ -54,10 +54,22 @@
 char	**mh_lex(char *u_input);
 char	**lex(char *input);
 char	**ft_shellsplit(char *str, char *charset);
-int		is_in_charset(char c, char *charset);
-int		strlen_til_sep(char *str, char *charset);
 char	*save_str(char *str, char *charset);
 int		count_args(char *str, char *charset);
 int		count_quotes2(char *str);
+
+/* New tokenizer */
+
+/* Linked list funcs */
+t_token	*lex_input(char *input);
+t_token	*new_token(char *value);
+void	add_token(t_token **token_list, t_token *new_token);
+void	free_tokens(t_token *token_list);
+void	print_list(t_token **head);
+
+/* Helper funcs */
+int		strlen_til_sep(char *str, char *charset);
+int		is_in_charset(char c, char *charset);
+int		check_before(char *input, t_quotes *q);
 
 #endif
