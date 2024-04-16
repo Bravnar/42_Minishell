@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/16 15:25:32 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:42:06 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 /*                                  DEFINES                                   */
 /*----------------------------------------------------------------------------*/
 
-# define PROMPT "EHL_Bangers $ "
+# define PROMPT CYAN"EHL_Bangers $ "RESET
 # define TRUE 1
 # define FALSE 0
 # define WHITESPACE " \t\n\r\f\v"

@@ -6,15 +6,15 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:23:09 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/16 15:24:57 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:44:42 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_before(char *input, t_quotes *q)
+int	check_quotes(char *input, t_quotes *q)
 {
-	int		i;
+		int		i;
 
 	i = -1;
 	while (input[++i])
@@ -33,6 +33,16 @@ int	check_before(char *input, t_quotes *q)
 	if (q->count_s % 2 || q->count_d % 2)
 		return (1);
 	return (0);
+}
+
+int	check_before(char *input, t_quotes *q)
+{
+	if (check_quotes(input, q))
+		return (QUOTES_ERR);
+	if (check_redirs(input, q))
+		return (REDIR_ERR);
+	if (check_pipes(input, q))
+		return (PIPE_ERR);
 }
 
 int	is_in_charset(char c, char *charset)

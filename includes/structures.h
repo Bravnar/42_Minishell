@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:20:33 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/16 15:09:50 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:42:44 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ typedef enum e_type
 	APPEND_IN,
 	APPEND_OUT,
 }	t_type;
+
+typedef enum e_error
+{
+	QUOTES_ERR,
+	REDIR_ERR,
+	PIPE_ERR,
+}	t_error;
 
 typedef struct s_token
 {
