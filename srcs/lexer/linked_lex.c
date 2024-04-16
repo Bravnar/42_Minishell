@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:21:47 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/16 15:25:55 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:11:28 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_token	*lex_input(char *input)
 	ft_bzero(&p, sizeof(t_parse));
 	head = NULL;
 	p.work_line = ft_strtrim(input, WHITESPACE);
-	if (check_before(p.work_line, &p.quotes))
+	if (check_quotes(p.work_line, &p.quotes))
 	{
 		printf(RED"Quotes issue detected\n"RESET);
 		return (NULL);

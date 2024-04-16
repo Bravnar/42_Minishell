@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:21:36 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/16 14:17:35 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:24:39 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ int	main(void)
 		if (strcmp(user_input, "Done") == 0)
 		{
 			free(user_input);
+			free_tokens(breakdown);
 			break ;
 		}
 		breakdown = lex_input(user_input);
 		if (!breakdown)
 			return (1);
 		free(user_input);
+		free_tokens(breakdown);
 		//int i = -1;
 		/* while (breakdown[++i])
 		{
 			printf("(%s)-->", breakdown[i]);
 		} */
-		printf("\n");
-		
 	}
 	return (0);
 }

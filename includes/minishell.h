@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/16 15:42:06 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:10:56 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void	print_list(t_token **head);
 int		strlen_til_sep(char *str, char *charset);
 int		is_in_charset(char c, char *charset);
 int		check_before(char *input, t_quotes *q);
+int		check_quotes(char *input, t_quotes *q);
 
 #endif
