@@ -6,7 +6,7 @@
 #    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/16 09:51:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/04/16 13:46:17 by smuravye         ###   ########.fr        #
+#    Updated: 2024/04/17 14:27:25 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS= 	srcs/main/main.c \
 		srcs/lexer/linked_lex.c srcs/lexer/lex_utils.c \
 		srcs/lexer/linked_utils.c \
 #		srcs/lexer/lexer.c srcs/lexer/lexer_count.c srcs/lexer/lexer_utils.c \
-		
+
 CC= gcc
 
 CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
@@ -41,6 +41,12 @@ RESET=\033[0m
 all: $(NAME)
 
 $(NAME) : $(SRCS)
+			@echo "$(CYAN) _______  __    __   __         .______        ___      .__   __.   _______  _______ .______          _______.";
+			@echo "$(RED)|   ____||  |  |  | |  |        |   _  \      /   \     |  \ |  |  /  _____||   ____||   _  \        /       |";
+			@echo "$(CYAN)|  |__   |  |__|  | |  |        |  |_)  |    /  ^  \    |   \|  | |  |  __  |  |__   |  |_)  |      |   (----\`";
+			@echo "$(RED)|   __|  |   __   | |  |        |   _  <    /  /_\  \   |  . \`  | |  | |_ | |   __|  |      /        \   \    ";
+			@echo "$(CYAN)|  |____ |  |  |  | |  \`----.   |  |_)  |  /  _____  \  |  |\   | |  |__| | |  |____ |  |\  \----.----)   |   ";
+			@echo "$(RED)|_______||__|  |__| |_______|   |______/  /__/     \__\ |__| \__|  \______| |_______|| _| \`._____|_______/    $(RESET)";
 			@echo "\n\nCompiling LIBFT: (courtesy of rrouille)\n"
 			@make -C $(LIBFT) all
 			@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_LIB) -lreadline $(SANITIZE)
@@ -49,6 +55,13 @@ $(NAME) : $(SRCS)
 			@echo "$(YELLOW)o------------------------------------o\n$(RESET)"
 
 clean:
+	@echo "$(CYAN) _______  __    __   __         .______        ___      .__   __.   _______  _______ .______          _______.";
+	@echo "$(RED)|   ____||  |  |  | |  |        |   _  \      /   \     |  \ |  |  /  _____||   ____||   _  \        /       |";
+	@echo "$(CYAN)|  |__   |  |__|  | |  |        |  |_)  |    /  ^  \    |   \|  | |  |  __  |  |__   |  |_)  |      |   (----\`";
+	@echo "$(RED)|   __|  |   __   | |  |        |   _  <    /  /_\  \   |  . \`  | |  | |_ | |   __|  |      /        \   \    ";
+	@echo "$(CYAN)|  |____ |  |  |  | |  \`----.   |  |_)  |  /  _____  \  |  |\   | |  |__| | |  |____ |  |\  \----.----)   |   ";
+	@echo "$(RED)|_______||__|  |__| |_______|   |______/  /__/     \__\ |__| \__|  \______| |_______|| _| \`._____|_______/    $(RESET)";
+	@echo "                                                                                                              ";
 	@echo "${RED}Cleaning up...${RESET}"
 	@rm -f $(NAME)
 	@echo "${GREEN}Cleanup done.${RESET}"
@@ -62,4 +75,6 @@ fclean: 	clean
 
 re: 			fclean all
 
-.PHONY: all clean fclean re libft
+
+
+.PHONY: all header clean fclean re libft
