@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 14:56:56 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/20 14:56:56 by hmorand          ###   ########.ch       */
+/*   Created: 2024/04/20 16:55:33 by hmorand           #+#    #+#             */
+/*   Updated: 2024/04/20 16:55:33 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ int		check_quotes(char *input, t_quotes *q);
 /* Builtins */
 void	pwd(void);
 void	cd(char *dirname);
+void	env(char **ENV);
+void	echo(char **args, char **ENV);
 
 #endif

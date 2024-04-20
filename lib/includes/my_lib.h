@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_lib.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 20:20:16 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/06 14:42:42 by smuravye         ###   ########.fr       */
+/*   Created: 2024/04/20 17:07:06 by hmorand           #+#    #+#             */
+/*   Updated: 2024/04/20 17:07:06 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		ft_atoi(const char *nptr);
 char	*ft_itoa(int n);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+char	*ft_strtoupper(char *str);
 
 /* ************************************************************************** */
 /*                          GET NEXT LINE                                     */
@@ -35,7 +36,7 @@ int		ft_toupper(int c);
 #  define BUFFER_SIZE 1
 # endif
 
-typedef struct s_gnl
+	typedef struct s_gnl
 {
 	char			*line;
 	struct s_gnl	*next;

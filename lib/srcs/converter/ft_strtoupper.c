@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 16:54:29 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/20 16:54:29 by hmorand          ###   ########.ch       */
+/*   Created: 2024/04/20 17:05:57 by hmorand           #+#    #+#             */
+/*   Updated: 2024/04/20 17:06:22 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	env(char **ENV)
+char	*ft_strtoupper(char *str)
 {
 	int	i;
 
 	i = -1;
-	while (ENV[++i])
-		printf("%s\n", ENV[i]);
+	while (str[i])
+	{
+		if (str[i] >= 97 && str[i] <= 122)
+			str[i] -= 32;
+	}
+	return (str);
 }
-/*
-int	main(int argc, char *argv[], char *ENV[])
-{
-	(void) argv;
-	(void) argc;
-
-	env(ENV);
-	return (-1);
-} */
