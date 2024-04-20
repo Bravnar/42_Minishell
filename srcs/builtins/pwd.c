@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 14:31:39 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/20 14:38:22 by hmorand          ###   ########.ch       */
+/*   Created: 2024/04/20 17:11:21 by hmorand           #+#    #+#             */
+/*   Updated: 2024/04/20 17:11:21 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	pwd(void)
 {

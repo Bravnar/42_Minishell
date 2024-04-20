@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 17:07:39 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/20 17:07:39 by hmorand          ###   ########.ch       */
+/*   Created: 2024/04/20 17:11:43 by hmorand           #+#    #+#             */
+/*   Updated: 2024/04/20 17:11:51 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_env_var(char *str, int *j, char **ENV)
 		else
 		{
 			i = 0;
-			varname = ft_split(str+1, ' ')[0];
+			varname = ft_split(str + 1, ' ')[0];
 			len = ft_strlen(varname) - 1;
 			if (!ft_strncmp("path", varname, len))
 				varname = ft_strtoupper(varname);
@@ -39,7 +39,6 @@ void	print_env_var(char *str, int *j, char **ENV)
 	else
 		printf("%c", str[*j]);
 }
-
 
 void	echo(char **args, char **ENV)
 {
