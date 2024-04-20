@@ -6,7 +6,7 @@
 #    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/16 09:51:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/04/17 17:00:30 by smuravye         ###   ########.fr        #
+#    Updated: 2024/04/20 14:41:34 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ INCLUDES = includes
 SRCS= 	srcs/main/main.c \
 		srcs/lexer/linked_lex.c srcs/lexer/lex_utils.c \
 		srcs/lexer/linked_utils.c \
+		srcs/builtins/pwd.c \
 #		srcs/lexer/lexer.c srcs/lexer/lexer_count.c srcs/lexer/lexer_utils.c \
 
 CC= gcc
