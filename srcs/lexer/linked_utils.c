@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 13:12:46 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/16 13:39:14 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:16:49 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_token	*new_token(char *value)
 
 	token->value = ft_strdup(value);
 	token->next = NULL;
+	token->prev = NULL;
 	return (token);
 }
 
@@ -39,6 +40,7 @@ void	add_token(t_token **token_list, t_token *new_token)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new_token;
+		new_token->prev = tmp;
 	}
 }
 
@@ -62,7 +64,7 @@ void	print_list(t_token **head)
 	tmp = *head;
 	while (tmp != NULL)
 	{
-		printf("(%s)-->", tmp->value);
+		printf("(%s, SP_BEFORE: %d, SP_AFTER: %d)-->", tmp->value, tmp->has_space_before, tmp->has_space_after);
 		tmp = tmp->next;
 	}
 	printf("(NULL)\n");

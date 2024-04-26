@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:20:33 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/16 16:42:44 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:06:49 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef enum e_error
 typedef struct s_token
 {
 	char			*value;
-	int				type;
-	int				is_arg;
+	int				has_space_before;
+	int				has_space_after;
 	struct s_token	*next;
 	struct s_token	*prev;	
 }					t_token;
