@@ -6,7 +6,7 @@
 /*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:20:33 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/26 16:06:49 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/04/30 13:45:41 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef enum e_error
 	PIPE_ERR,
 }	t_error;
 
+/* USED */
+
 typedef struct s_token
 {
 	char			*value;
@@ -45,6 +47,18 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;	
 }					t_token;
+
+/* USED */
+
+typedef struct s_parse_prep
+{
+	t_type				type;
+	int					has_quote;
+	int					needs_expand;
+	int					index;
+	struct s_parse_prep	*next;
+	struct s_parse_prep *prev;
+}	t_parse_prep;
 
 typedef struct s_main
 {
@@ -61,6 +75,8 @@ typedef struct s_quotes
 	int	in_single;
 	int	in_double;
 }	t_quotes;
+
+/* USED */
 
 typedef struct s_parse
 {

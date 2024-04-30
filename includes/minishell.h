@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/16 19:10:56 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:12:44 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,9 @@ int		strlen_til_sep(char *str, char *charset);
 int		is_in_charset(char c, char *charset);
 int		check_before(char *input, t_quotes *q);
 int		check_quotes(char *input, t_quotes *q);
+
+char	*get_exec_path(char *cmd, char **env);
+void	free_arr(char **arr);
+char	*get_path_line(char **envp);
 
 #endif

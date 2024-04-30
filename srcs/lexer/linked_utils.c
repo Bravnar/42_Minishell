@@ -6,7 +6,7 @@
 /*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 13:12:46 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/26 16:16:49 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/04/30 11:54:17 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	print_list(t_token **head)
 	tmp = *head;
 	while (tmp != NULL)
 	{
-		printf("(%s, SP_BEFORE: %d, SP_AFTER: %d)-->", tmp->value, tmp->has_space_before, tmp->has_space_after);
+		// printf("(%s, SP_BEFORE: %d, SP_AFTER: %d)-->", tmp->value, tmp->has_space_before, tmp->has_space_after);
+		printf("(%s)-->", tmp->value);
 		tmp = tmp->next;
 	}
 	printf("(NULL)\n");
