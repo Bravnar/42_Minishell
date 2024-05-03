@@ -6,11 +6,11 @@
 /*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:21:36 by hmorand           #+#    #+#             */
-/*   Updated: 2024/05/02 16:55:45 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/03 18:21:53 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
+#include "minishell.h"
 #include <string.h>
 
 void	ft_echo(const char *str)

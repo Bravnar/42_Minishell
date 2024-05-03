@@ -6,7 +6,7 @@
 #    By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/16 09:51:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/05/02 17:01:54 by smuravyev        ###   ########.fr        #
+#    Updated: 2024/05/03 17:25:11 by smuravyev        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@ NAME= minishell
 
 INCLUDES = includes
 
-SRCS= 	srcs/main/alt_main.c \
-#		srcs/lexer/linked_lex.c srcs/lexer/lex_utils.c \
-#		srcs/lexer/linked_utils.c \
+SRCS= 	srcs/main/main.c \
+		srcs/lexer/lex_utils.c \
+		srcs/lexer/linked_utils.c \
+		srcs/lexer/linked_lex.c
 #		srcs/lexer/lexer.c srcs/lexer/lexer_count.c srcs/lexer/lexer_utils.c \
 
 CC= gcc
@@ -26,7 +27,7 @@ CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
 LIBFT = 	lib
 LIBFT_LIB = $(LIBFT)/my_lib.a
 
-#SANITIZE= -g3 -fsanitize=address
+SANITIZE= -g3 -fsanitize=address
 
 # Color Variables
 RED=\033[0;31m

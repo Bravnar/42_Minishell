@@ -6,7 +6,7 @@
 /*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:17:34 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/30 17:32:35 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/03 16:15:44 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ typedef enum e_type
 	HEREDOC,
 	CMD_FULL,
 }	t_type;
+
+typedef struct s_lex_info
+{
+	int		i;
+	char	q_char;
+	int		backslash;
+	int		count;
+	int		token_len;
+	int		len;
+	char	*cur;
+	char	*token;
+}	t_lex_info;
 
 typedef struct s_lex
 {
@@ -63,6 +75,7 @@ typedef struct s_shell
 	char				*trimmed_input;
 	char				*prompt;
 	t_lex				*lexems;
+	t_lex_info			*lex_info;
 	t_token				*tokens;
 	t_cmd_tbl			*cmd_tbl;
 }	t_shell;

@@ -6,7 +6,7 @@
 /*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/02 16:59:49 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/03 18:23:07 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # include <limits.h>
 # include <unistd.h>
 # include "colors.h"
-/* # include "structures.h" */
-# include "alt_structs.h"
+# include "structures.h"
+/* # include "alt_structs.h" */
 
 /*----------------------------------------------------------------------------*/
 /*                                  DEFINES                                   */
@@ -59,23 +59,26 @@ char	*save_str(char *str, char *charset);
 int		count_args(char *str, char *charset);
 int		count_quotes2(char *str);
 
-/* New tokenizer */
-
-/* Linked list funcs */
 t_token	*lex_input(char *input);
 t_token	*new_token(char *value);
 void	add_token(t_token **token_list, t_token *new_token);
 void	free_tokens(t_token *token_list);
 void	print_list(t_token **head);
 
-/* Helper funcs */
 int		strlen_til_sep(char *str, char *charset);
 int		is_in_charset(char c, char *charset);
-//int		check_before(char *input, t_quotes *q);
-//int		check_quotes(char *input, t_quotes *q);
 
 char	*get_exec_path(char *cmd, char **env);
 void	free_arr(char **arr);
 char	*get_path_line(char **envp);
+int		check_quotes(char *input, t_quotes *q);
+
+
+/* void	alt_lex(t_shell *main);
+t_lex	*new_token(char *value);
+void	add_token(t_lex **token_list, t_lex *new_token);
+void	free_tokens(t_lex *token_list);
+void	print_list(t_lex **head);
+ */
 
 #endif
