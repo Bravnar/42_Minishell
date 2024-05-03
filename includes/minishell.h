@@ -6,7 +6,7 @@
 /*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/30 14:12:44 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/02 16:59:49 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 # include <limits.h>
 # include <unistd.h>
 # include "colors.h"
-# include "structures.h"
+/* # include "structures.h" */
+# include "alt_structs.h"
 
 /*----------------------------------------------------------------------------*/
 /*                                  DEFINES                                   */
@@ -70,8 +71,8 @@ void	print_list(t_token **head);
 /* Helper funcs */
 int		strlen_til_sep(char *str, char *charset);
 int		is_in_charset(char c, char *charset);
-int		check_before(char *input, t_quotes *q);
-int		check_quotes(char *input, t_quotes *q);
+//int		check_before(char *input, t_quotes *q);
+//int		check_quotes(char *input, t_quotes *q);
 
 char	*get_exec_path(char *cmd, char **env);
 void	free_arr(char **arr);

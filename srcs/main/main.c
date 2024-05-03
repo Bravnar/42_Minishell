@@ -6,11 +6,11 @@
 /*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:21:36 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/30 15:47:57 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/02 16:55:45 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+//#include "minishell.h"
 #include <string.h>
 
 void	ft_echo(const char *str)
@@ -30,6 +30,12 @@ void	ft_echo(const char *str)
 		write(1, "\n", 1);
 	}
 }
+
+/* int	main(int ac, char **av, char **envp)
+{
+	t_main	shell;
+	ft_bzero(&shell, sizeof(t_main));
+} */
 
 int	main(void)
 {
@@ -52,7 +58,7 @@ int	main(void)
 			break ;
 		}
 		breakdown = lex_input(user_input);
-		parser(breakdown);
+		//parser(breakdown);
 		if (!breakdown)
 			return (1);
 		free(user_input);
