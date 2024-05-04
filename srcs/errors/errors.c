@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/04 12:59:58 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/04 16:40:43 by bravnar          ###   ########.fr       */
+/*   Created: 2024/05/04 14:31:34 by bravnar           #+#    #+#             */
+/*   Updated: 2024/05/04 15:06:28 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	gameplay_loop(t_main *shell)
+void	print_error(char *err)
 {
-	t_lex	*lex;
-	
-	lex = shell->l;
-	while (true)
-	{
-		lex->input = readline(shell->prompt);
-		if (!lex->input)
-			break ;
-		if (lex->input[0])
-			add_history(lex->input);
-		lexer(lex);
-		free(lex->input);
-		free_tokens(lex->link);
-		lex->link = NULL;
-	}
+	while(*err)
+		write(STDERR_FILENO, err++, 1);
+	write(STDERR_FILENO, "\n", 1);
 }
 
-int	main(int ac, char **av, char **envp)
+void	error_handler(t_err code)
 {
-	t_main	*shell;
-	
-	(void)	ac;
-	(void)	av;
-	shell = init_structs(envp);
-	gameplay_loop(shell);
+	if (code == BAD_QUOTES)
+		print_error("bash: error near unrecognized token");
 }

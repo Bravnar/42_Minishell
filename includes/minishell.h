@@ -6,7 +6,7 @@
 /*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/04 13:01:37 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/04 15:23:16 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <limits.h>
 # include <unistd.h>
 # include "colors.h"
+# include "structs.h"
 // # include "structures.h"
 /* # include "alt_structs.h" */
 
@@ -52,8 +53,16 @@
 /*                                  FUNCTIONS                                 */
 /*----------------------------------------------------------------------------*/
 
+t_main	*init_structs(char **envp);
+void	lexer(t_lex	*l);
+void	error_handler(t_err code);
+void	check_syntax(t_lex *l);
 
 
+void	print_list(t_llex **head);
+void	free_tokens(t_llex *token_list);
+void	add_token(t_llex **token_list, t_llex *new_token);
+t_llex	*new_token(char *value);
 
 
 
@@ -92,7 +101,7 @@ char	*get_path_line(char **envp);
 int		check_quotes(char *input, t_quotes *q);
 
 
-/* void	alt_lex(t_shell *main);
+void	alt_lex(t_shell *main);
 t_lex	*new_token(char *value);
 void	add_token(t_lex **token_list, t_lex *new_token);
 void	free_tokens(t_lex *token_list);

@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/04 12:59:58 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/04 16:40:43 by bravnar          ###   ########.fr       */
+/*   Created: 2024/05/04 14:18:25 by bravnar           #+#    #+#             */
+/*   Updated: 2024/05/04 15:05:54 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	gameplay_loop(t_main *shell)
+void	check_quotes(t_lex	*l)
 {
-	t_lex	*lex;
-	
-	lex = shell->l;
-	while (true)
-	{
-		lex->input = readline(shell->prompt);
-		if (!lex->input)
-			break ;
-		if (lex->input[0])
-			add_history(lex->input);
-		lexer(lex);
-		free(lex->input);
-		free_tokens(lex->link);
-		lex->link = NULL;
-	}
+	l->err_code = NO_ERR;
 }
 
-int	main(int ac, char **av, char **envp)
+void	check_redirs(t_lex	*l)
 {
-	t_main	*shell;
-	
-	(void)	ac;
-	(void)	av;
-	shell = init_structs(envp);
-	gameplay_loop(shell);
+	l->err_code = NO_ERR;
+}
+
+void	check_pipes(t_lex	*l)
+{
+	l->err_code = NO_ERR;
+}
+
+
+void	check_syntax(t_lex *l)
+{
+	check_quotes(l);
+	check_redirs(l);
+	check_pipes(l);
+	if (l->err_code)
+		error_handler(l->err_code);
 }

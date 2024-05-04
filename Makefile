@@ -6,7 +6,7 @@
 #    By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/16 09:51:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/05/04 12:58:41 by bravnar          ###   ########.fr        #
+#    Updated: 2024/05/04 15:47:58 by bravnar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,13 @@ NAME= minishell
 
 INCLUDES = includes
 
-SRCS= 	
+SRCS= 	srcs/main/main.c \
+		srcs/init/init.c \
+		srcs/lexer/lexer.c \
+		srcs/errors/errors.c \
+		srcs/syntax/check_syntax.c \
+		srcs/lexer/linked_list_utils.c \
+		
 
 CC= gcc
 
