@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+         #
+#    By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/16 09:51:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/05/03 17:25:11 by smuravyev        ###   ########.fr        #
+#    Updated: 2024/05/04 12:58:41 by bravnar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,7 @@ NAME= minishell
 
 INCLUDES = includes
 
-SRCS= 	srcs/main/main.c \
-		srcs/lexer/lex_utils.c \
-		srcs/lexer/linked_utils.c \
-		srcs/lexer/linked_lex.c
-#		srcs/lexer/lexer.c srcs/lexer/lexer_count.c srcs/lexer/lexer_utils.c \
+SRCS= 	
 
 CC= gcc
 
@@ -70,6 +66,7 @@ clean:
 fclean: 	clean
 		@make -C $(LIBFT) fclean
 		@rm -f $(NAME)
+		@rm -rf objs
 		@echo "$(YELLOW)\no------------------------------------o$(RESET)"
 		@echo "$(RED)|           MINISHELL_CLEARED        |$(RESET)"
 		@echo "$(YELLOW)o------------------------------------o\n$(RESET)"

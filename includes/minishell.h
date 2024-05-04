@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/03 18:23:07 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/04 13:01:37 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include <limits.h>
 # include <unistd.h>
 # include "colors.h"
-# include "structures.h"
+// # include "structures.h"
 /* # include "alt_structs.h" */
 
 /*----------------------------------------------------------------------------*/
@@ -52,7 +52,25 @@
 /*                                  FUNCTIONS                                 */
 /*----------------------------------------------------------------------------*/
 
-char	**mh_lex(char *u_input);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* char	**mh_lex(char *u_input);
 char	**lex(char *input);
 char	**ft_shellsplit(char *str, char *charset);
 char	*save_str(char *str, char *charset);

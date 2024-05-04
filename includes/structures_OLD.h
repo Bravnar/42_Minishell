@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
+/*   structures_OLD.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:20:33 by smuravye          #+#    #+#             */
-/*   Updated: 2024/04/30 13:45:41 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/04 13:00:35 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_H
-# define STRUCTURES_H
+#ifndef STRUCTURES_OLD_H
+# define STRUCTURES_OLD_H
 
 /*----------------------------------------------------------------------------*/
 /*                                 STRUCTURES                                 */

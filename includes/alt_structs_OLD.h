@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alt_structs.h                                      :+:      :+:    :+:   */
+/*   alt_structs_OLD.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:17:34 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/03 16:15:44 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/04 13:00:57 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALT_STRUCTS_H
-# define ALT_STRUCTS_H
+#ifndef ALT_STRUCTS_OLD_H
+# define ALT_STRUCTS_OLD_H
 
 typedef enum e_type
 {
