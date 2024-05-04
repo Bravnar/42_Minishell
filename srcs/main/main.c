@@ -6,7 +6,7 @@
 /*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 12:59:58 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/04 16:40:43 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/04 18:27:23 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ void	gameplay_loop(t_main *shell)
 			break ;
 		if (lex->input[0])
 			add_history(lex->input);
-		lexer(lex);
+		if (lexer(lex))
+		{
+			free(lex->input);
+			free_tokens(lex->link);
+			continue ;
+		}
 		free(lex->input);
 		free_tokens(lex->link);
 		lex->link = NULL;

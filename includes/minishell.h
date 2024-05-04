@@ -6,7 +6,7 @@
 /*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/04 15:23:16 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/04 18:30:59 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,18 @@
 /*----------------------------------------------------------------------------*/
 
 t_main	*init_structs(char **envp);
-void	lexer(t_lex	*l);
+int		lexer(t_lex	*l);
 void	error_handler(t_err code);
-void	check_syntax(t_lex *l);
+void	check_syntax(t_llex **l);
 
 
 void	print_list(t_llex **head);
 void	free_tokens(t_llex *token_list);
 void	add_token(t_llex **token_list, t_llex *new_token);
 t_llex	*new_token(char *value);
+
+int		check_quotes(t_lex *l);
+void	reset_quotes(t_lex *l);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:59:04 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/04 17:40:45 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/04 18:32:02 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,14 @@ void	lex_input(t_lex *l, char *charset)
 	}
 }
 
-void	lexer(t_lex	*l)
+int	lexer(t_lex	*l)
 {
 	l->trim = ft_strtrim(l->input, WHITESPACE);
+	reset_quotes(l);
+	if (check_quotes(l))
+		return (error_handler(BAD_QUOTES), 1);
 	lex_input(l, SPECIAL_W_SPACE);
-	//check_syntax(l);
+	//check_simple_syntax(l);
 	print_list(&l->link);
+	return (0);
 }

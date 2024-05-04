@@ -6,7 +6,7 @@
 /*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:06:51 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/04 14:58:40 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/04 18:18:23 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ typedef struct s_lex
 {
 	int				i;
 	int				j;
+	int				s_quotes;
+	int				d_quotes;
+	int				s_count;
+	int				d_count;
 	char			q_char;
 	int				backslash;
 	int				token_len;
