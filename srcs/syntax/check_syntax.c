@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:18:25 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/04 18:31:06 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/07 14:31:10 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	check_quotes(t_lex *l)
 		return (1);
 	return (0);
 }
+
 
 /* void	check_syntax(t_lex *l)
 {
