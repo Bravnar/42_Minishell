@@ -6,7 +6,7 @@
 /*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:59:04 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/08 18:51:32 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/09 11:25:45 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,12 @@ int	lexer(t_lex	*l)
 	print_list(&l->link);
 	return (0);
 }
+
+/* TO DO TODAY:
+	--> Finish checking redirs and pipes
+	--> Start working on type assigning logic
+		--> Don't forget stuff like needs expansion Y/N
+	--> Allocate an empty string
+
+
+ */
