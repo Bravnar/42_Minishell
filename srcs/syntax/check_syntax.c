@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:18:25 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/07 14:31:10 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/09 16:46:28 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,59 @@ void	reset_quotes(t_lex *l)
 	l->s_count = 0;
 	l->s_quotes = 0;
 	l->i = 0;
-	
+
+}
+
+int	check_redirs(t_lex *l)
+{
+	t_llex	*tmp;
+
+	tmp = l->link;
+	l->err_code = 0;
+	while (tmp)
+	{
+		if (ft_strchr(REDIRS, tmp->value[0]))
+		{
+			if (ms_lstsize(l->link) == 1)
+				l->err_code = BAD_REDIRS_NL;
+			else if (tmp->next && ft_strchr(REDIRS, tmp->next->value[0]))
+				l->err_code = BAD_REDIRS;
+			else if (ft_strlen(tmp->value) > 2)
+				l->err_code = BAD_REDIRS;
+			else if (!tmp->next)
+				l->err_code = BAD_REDIRS;
+		}
+		tmp = tmp->next;
+	}
+	if (l->err_code)
+		return (1);
+	return (0);
+}
+
+int	check_pipes(t_lex *l)
+{
+	t_llex	*tmp;
+
+	tmp = l->link;
+	l->err_code = 0;
+	while (tmp)
+	{
+		if (ft_strchr(PIPE, tmp->value[0]))
+		{
+			if (ms_lstsize(l->link) == 1)
+				l->err_code = BAD_PIPES;
+			else if (tmp->next && ft_strchr(PIPE, tmp->next->value[0]))
+				l->err_code = BAD_PIPES;
+			else if (ft_strlen(tmp->value) > 1)
+				l->err_code = BAD_PIPES;
+			else if (!tmp->next)
+				l->err_code = BAD_PIPES;
+		}
+		tmp = tmp->next;
+	}
+	if (l->err_code)
+		return (1);
+	return (0);
 }
 
 int	check_quotes(t_lex *l)

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:06:51 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/04 18:18:23 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/09 15:57:12 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
-# define STRUCTS
+# define STRUCTS_H
 
 typedef enum e_type
 {
@@ -33,6 +33,7 @@ typedef enum e_err
 	BAD_QUOTES,
 	BAD_REDIRS,
 	BAD_PIPES,
+	BAD_REDIRS_NL,
 }	t_err;
 
 typedef struct s_llex

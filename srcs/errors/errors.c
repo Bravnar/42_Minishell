@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:31:34 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/04 18:24:53 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:38:57 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,10 @@ void	error_handler(t_err code)
 {
 	if (code == BAD_QUOTES)
 		print_error(RED"minishell: Mismatched quotation marks."RESET);
+	else if (code == BAD_REDIRS)
+		print_error(RED"minishell: syntax error near unexpected token '>' or '<'."RESET);
+	else if (code == BAD_REDIRS_NL)
+		print_error(RED"minishell: syntax error near unexpected token 'newline'"RESET);
+	else if (code == BAD_PIPES)
+		print_error(RED"minishell: syntax error near unexpected token '|'"RESET);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:22:18 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/04 16:40:33 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:11:50 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,17 @@ void	print_list(t_llex **head)
 		tmp = tmp->next;
 	}
 	printf("(NULL)\n");
+}
+
+int	ms_lstsize(t_llex *lst)
+{
+	int	size;
+
+	size = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		size++;
+	}
+	return (size);
 }

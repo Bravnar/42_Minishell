@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/04 18:30:59 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:37:31 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ t_llex	*new_token(char *value);
 
 int		check_quotes(t_lex *l);
 void	reset_quotes(t_lex *l);
+int		check_redirs(t_lex *l);
+int		check_pipes(t_lex *l);
+int		ms_lstsize(t_llex *lst);
 
 
 

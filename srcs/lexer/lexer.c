@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:59:04 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/09 11:25:45 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/09 16:38:00 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	handle_special(t_lex *l)
 {
-	char cur_special;
-	
+	char	cur_special;
+
 	cur_special = l->trim[l->j];
 	while (l->trim[l->j] == cur_special)
 		l->j++;
@@ -72,16 +72,70 @@ int	lexer(t_lex	*l)
 	l->trim = ft_strtrim(l->input, WHITESPACE);
 	reset_quotes(l);
 	if (check_quotes(l))
-		return (error_handler(BAD_QUOTES), 1);
+		return (error_handler(l->err_code), 1);
 	lex_input(l, SPECIAL_W_SPACE);
-	/* if (check_redirs(&l->link))
-		return (error_hadler(BAD_REDIRS), 1);
-	if (check_pipes(&l->link))
-		return (error_handler(BAD_PIPES), 1); */
-	//check_simple_syntax(l);
+	if (check_redirs(l) || check_pipes(l))
+		return (error_handler(l->err_code), 1);
 	print_list(&l->link);
 	return (0);
 }
+
+/* int	check_redirs(t_lex *l)
+{
+	t_llex	*tmp;
+
+	tmp = l->link;
+	while (tmp)
+	{
+		if (ft_strlen(tmp->value) > 2)
+		{
+			l->err_code = BAD_REDIRS;
+			return (1);
+		}
+		if ((tmp->value[0] == '>' || tmp->value[0] == '<') \
+			&& (tmp->value[1] == '\0' || tmp->value[1] == tmp->value[0]))
+		{
+			if (!tmp->next || !tmp->next->value)
+			{
+				l->err_code = BAD_REDIRS;
+				return (1);
+			}
+			tmp = tmp->next;
+		}
+		l->err_code = BAD_REDIRS;
+		return (1);
+	}
+	return (0);
+} */
+
+/* int	check_pipe(t_lex *l)
+{
+	t_llex *tmp;
+
+	tmp = l->link;
+	while (tmp)
+	{
+		if (ft_strlen(tmp->value) > 1)
+		{
+			l->err_code = BAD_PIPES;
+			return (1);
+		}
+		if (tmp->value[0] == '|')
+		{
+			if (!tmp->next || !tmp->next->value)
+			{
+				l->err_code = BAD_PIPES;
+				return (1);
+			}
+			tmp = tmp->next;
+		}
+		l->err_code = BAD_PIPES;
+		return (1);
+	}
+	return (0);
+} */
+
+
 
 /* TO DO TODAY:
 	--> Finish checking redirs and pipes

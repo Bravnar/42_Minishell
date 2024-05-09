@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+         #
+#    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/16 09:51:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/05/09 11:34:45 by smuravyev        ###   ########.fr        #
+#    Updated: 2024/05/09 14:34:57 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS= 	srcs/main/main.c \
 		srcs/errors/errors.c \
 		srcs/syntax/check_syntax.c \
 		srcs/lexer/linked_list_utils.c \
-		srcs/parser/parser.c \
+#		srcs/parser/parser.c \
 		
 		
 
