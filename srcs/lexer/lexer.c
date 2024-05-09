@@ -6,7 +6,7 @@
 /*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:59:04 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/07 14:40:59 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/05/08 18:51:32 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ int	lexer(t_lex	*l)
 	if (check_quotes(l))
 		return (error_handler(BAD_QUOTES), 1);
 	lex_input(l, SPECIAL_W_SPACE);
-	if (check_redirs(&l->link))
+	/* if (check_redirs(&l->link))
 		return (error_hadler(BAD_REDIRS), 1);
 	if (check_pipes(&l->link))
-		return (error_handler(BAD_PIPES), 1);
+		return (error_handler(BAD_PIPES), 1); */
 	//check_simple_syntax(l);
 	print_list(&l->link);
 	return (0);
