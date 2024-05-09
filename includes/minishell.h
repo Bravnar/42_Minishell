@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/09 16:37:31 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:53:04 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@
 t_main	*init_structs(char **envp);
 int		lexer(t_lex	*l);
 void	error_handler(t_err code);
-void	check_syntax(t_llex **l);
-
 
 void	print_list(t_llex **head);
 void	free_tokens(t_llex *token_list);
