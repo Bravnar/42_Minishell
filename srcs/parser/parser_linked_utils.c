@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_list_utils.c                                :+:      :+:    :+:   */
+/*   parser_linked_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/04 15:22:18 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/10 16:58:55 by smuravye         ###   ########.fr       */
+/*   Created: 2024/05/10 11:20:52 by smuravye          #+#    #+#             */
+/*   Updated: 2024/05/10 15:54:01 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_llex	*new_token(char *value)
+t_tok	*tok_new_token(char *value)
 {
-	t_llex	*token;
+	t_tok	*token;
 
-	token = malloc(sizeof(t_llex));
+	token = malloc(sizeof(t_tok));
 	if (!token)
 		return (NULL);
 
 	token->value = ft_strdup(value);
 	token->is_in_quotes = 0;
-	token->needs_exp = 0;
-	token->index = 0;
+	token->index = -1;
+	token->needs_expansion = 0;
 	token->type = NONE;
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);
 }
 
-void	add_token(t_llex **token_list, t_llex *new_token)
+void	tok_add_token(t_tok **token_list, t_tok *new_token)
 {
-	t_llex	*tmp;
+	t_tok	*tmp;
 
 	if (!*token_list)
 	{
@@ -48,9 +48,9 @@ void	add_token(t_llex **token_list, t_llex *new_token)
 	}
 }
 
-void	free_tokens(t_llex *token_list)
+void	tok_free_tokens(t_tok *token_list)
 {
-	t_llex	*tmp;
+	t_tok	*tmp;
 
 	while (token_list)
 	{
@@ -61,22 +61,21 @@ void	free_tokens(t_llex *token_list)
 	}
 }
 
-void	print_list(t_llex **head)
+void	tok_print_list(t_tok **head)
 {
-	t_llex	*tmp;
+	t_tok	*tmp;
 
 	tmp = *head;
 	while (tmp != NULL)
 	{
 		printf("(I:%d | V:%s | Q:%d | IS_ARG: %d | TYPE: %d)-->", \
-			tmp->index, tmp->value, \
-			tmp->is_in_quotes, tmp->needs_exp, tmp->type);
+			tmp->index, tmp->value, tmp->is_in_quotes, tmp->needs_expansion, tmp->type);
 		tmp = tmp->next;
 	}
 	printf("(NULL)\n");
 }
 
-int	ms_lstsize(t_llex *lst)
+int	tok_ms_lstsize(t_tok *lst)
 {
 	int	size;
 

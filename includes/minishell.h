@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/09 16:53:04 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:07:22 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ int		check_redirs(t_lex *l);
 int		check_pipes(t_lex *l);
 int		ms_lstsize(t_llex *lst);
 
+t_tok	*tok_new_token(char *value);
+void	tok_add_token(t_tok **token_list, t_tok *new_token);
+void	tok_free_tokens(t_tok *token_list);
+void	tok_print_list(t_tok **head);
+void	parser(t_main *shell);
+int		tok_ms_lstsize(t_tok *lst);
 
 
 

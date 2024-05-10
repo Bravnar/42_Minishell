@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:59:04 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/09 16:38:00 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:19:04 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,39 @@ void	lex_input(t_lex *l, char *charset)
 	}
 }
 
+void	work_args(t_llex *tmp)
+{
+	int		i;
+	
+	i = -1;
+	if (ft_strchr(QUOTES, tmp->value[0]))
+		tmp->is_in_quotes = tmp->value[0];
+	if (tmp->value[0] == '$')
+		tmp->needs_exp = 1;
+	else if (tmp->is_in_quotes)
+	{
+		while (ft_strchr(QUOTES, tmp->value[++i]))
+			;
+		if (tmp->value[i - 1] == '\"' && tmp->value[i] == '$')
+			tmp->needs_exp = 1;
+	}
+}
+
+void	fill_info(t_lex *l)
+{
+	t_llex	*tmp;
+	int		index;
+
+	tmp = l->link;
+	index = 0;
+	while (tmp)
+	{
+		work_args(tmp);
+		tmp->index = index++;
+		tmp = tmp->next;
+	}
+}
+
 int	lexer(t_lex	*l)
 {
 	l->trim = ft_strtrim(l->input, WHITESPACE);
@@ -76,6 +109,7 @@ int	lexer(t_lex	*l)
 	lex_input(l, SPECIAL_W_SPACE);
 	if (check_redirs(l) || check_pipes(l))
 		return (error_handler(l->err_code), 1);
+	fill_info(l);
 	print_list(&l->link);
 	return (0);
 }

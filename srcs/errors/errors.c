@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:31:34 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/09 16:38:57 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/10 10:11:13 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_error(char *err)
 {
-	while(*err)
+	while (*err)
 		write(STDERR_FILENO, err++, 1);
 	write(STDERR_FILENO, "\n", 1);
 }

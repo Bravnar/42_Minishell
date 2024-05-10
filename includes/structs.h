@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:06:51 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/09 15:57:12 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:39:42 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 typedef enum e_type
 {
+	NONE,
 	CMD,
 	ARG,
 	INFILE,
@@ -39,6 +40,10 @@ typedef enum e_err
 typedef struct s_llex
 {
 	char			*value;
+	char			is_in_quotes;
+	int				index;
+	int				needs_exp;
+	t_type			type;
 	struct s_llex	*next;
 	struct s_llex	*prev;
 }	t_llex;
@@ -66,7 +71,7 @@ typedef struct s_tok
 {
 	char			*value;
 	int				needs_expansion;
-	int				is_in_quotes;
+	char			is_in_quotes;
 	int				index;
 	t_type			type;
 	struct s_tok	*next;

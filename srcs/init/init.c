@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:18:19 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/04 16:19:48 by bravnar          ###   ########.fr       */
+/*   Updated: 2024/05/10 10:11:32 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ t_llex	*init_llex(void)
 t_lex	*init_lex(void)
 {
 	t_lex	*lex;
+
 	lex = calloc(1, sizeof(t_lex));
-	/* if (lex)
-	{
-		lex->link = init_llex();
-	} */
 	return (lex);
 }
 
@@ -41,6 +38,7 @@ t_cmds	*init_cmds(void)
 t_main	*init_structs(char **envp)
 {
 	t_main	*shell;
+
 	shell = ft_calloc(1, sizeof(t_main));
 	if (shell)
 	{
