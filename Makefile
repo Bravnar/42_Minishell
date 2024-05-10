@@ -6,7 +6,7 @@
 #    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/16 09:51:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/05/10 16:59:06 by smuravye         ###   ########.fr        #
+#    Updated: 2024/05/10 18:58:00 by smuravye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,12 @@ INCLUDES = includes
 
 SRCS= 	srcs/main/main.c \
 		srcs/init/init.c \
-		srcs/lexer/lexer.c \
+		srcs/lexer/lexer_main.c \
 		srcs/errors/errors.c \
 		srcs/syntax/check_syntax.c \
-		srcs/lexer/linked_list_utils.c \
+		srcs/lexer/lexer_funcs.c \
+		srcs/lexer/lexer_info_fill.c \
+		srcs/lexer/lexer_llist_utils.c \
 #		srcs/parser/parser.c \
 		srcs/parser/parser_linked_utils.c \
 		

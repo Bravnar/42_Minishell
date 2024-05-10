@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/10 14:07:22 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/10 19:08:49 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define WHITESPACE " \t\n\r\f\v"
 # define SPECIAL "<>|;"
 # define QUOTES "\"\'"
-# define SPECIAL_W_SPACE " <>|;\'\""
+# define SPECIAL_W_SPACE " $<>|;\'\""
 # define REDIRS "<>"
 # define PIPE "|"
 
@@ -53,35 +53,38 @@
 /*                                  FUNCTIONS                                 */
 /*----------------------------------------------------------------------------*/
 
+/* INIT */
 t_main	*init_structs(char **envp);
-int		lexer(t_lex	*l);
+
+/* ERRORS */
 void	error_handler(t_err code);
+
+/* LEXER MAIN*/
+
+int		lexer(t_lex	*l);
+
+/* LEXER FUNCS */
+
+void	lex_input(t_lex *l, char *charset);
+
+/* LEXER INFO FILL */
+
+void	fill_info(t_lex *l);
+
+/* LEXER LLIST UTILS */
 
 void	print_list(t_llex **head);
 void	free_tokens(t_llex *token_list);
 void	add_token(t_llex **token_list, t_llex *new_token);
 t_llex	*new_token(char *value);
+int		ms_lstsize(t_llex *lst);
+
+/* CHECK SYNTAX */
 
 int		check_quotes(t_lex *l);
 void	reset_quotes(t_lex *l);
 int		check_redirs(t_lex *l);
 int		check_pipes(t_lex *l);
-int		ms_lstsize(t_llex *lst);
-
-t_tok	*tok_new_token(char *value);
-void	tok_add_token(t_tok **token_list, t_tok *new_token);
-void	tok_free_tokens(t_tok *token_list);
-void	tok_print_list(t_tok **head);
-void	parser(t_main *shell);
-int		tok_ms_lstsize(t_tok *lst);
-
-
-
-
-
-
-
-
 
 
 

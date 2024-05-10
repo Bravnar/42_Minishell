@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:18:19 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/10 10:11:32 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:36:20 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ t_lex	*init_lex(void)
 	return (lex);
 }
 
-t_tok	*init_tok(void)
+/* t_tok	*init_tok(void)
 {
 	return (calloc(1, sizeof(t_tok)));
-}
+} */
 
 t_cmds	*init_cmds(void)
 {
@@ -43,7 +43,7 @@ t_main	*init_structs(char **envp)
 	if (shell)
 	{
 		shell->l = init_lex();
-		shell->tok = init_tok();
+		//shell->tok = init_tok();
 		shell->cmds = init_cmds();
 		shell->prompt = PROMPT;
 		shell->env = envp;

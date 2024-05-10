@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:06:51 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/10 16:39:42 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:35:21 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_lex
 	t_llex			*link;
 }	t_lex;
 
-typedef struct s_tok
+/* typedef struct s_tok
 {
 	char			*value;
 	int				needs_expansion;
@@ -76,11 +76,11 @@ typedef struct s_tok
 	t_type			type;
 	struct s_tok	*next;
 	struct s_tok	*prev;
-}	t_tok;
+}	t_tok; */
 
 typedef struct s_cmds
 {
-	t_tok			*group;
+	//t_tok			*group;
 	t_type			type;
 	int				index;
 	struct s_cmds	*next;
@@ -94,7 +94,7 @@ typedef struct s_main
 	char			**env;
 	char			*prompt;
 	t_lex			*l;
-	t_tok			*tok;
+	//t_tok			*tok;
 	t_cmds			*cmds;
 }	t_main;
 

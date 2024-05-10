@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_list_utils.c                                :+:      :+:    :+:   */
+/*   lexer_llist_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:22:18 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/10 16:58:55 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/10 19:18:46 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_llex	*new_token(char *value)
 	token = malloc(sizeof(t_llex));
 	if (!token)
 		return (NULL);
-
 	token->value = ft_strdup(value);
 	token->is_in_quotes = 0;
 	token->needs_exp = 0;
@@ -68,7 +67,7 @@ void	print_list(t_llex **head)
 	tmp = *head;
 	while (tmp != NULL)
 	{
-		printf("(I:%d | V:%s | Q:%d | IS_ARG: %d | TYPE: %d)-->", \
+		printf("(I:%d | V:%s | Q:%d | IS_ARG: %d | TYPE: %d)-->\n", \
 			tmp->index, tmp->value, \
 			tmp->is_in_quotes, tmp->needs_exp, tmp->type);
 		tmp = tmp->next;
