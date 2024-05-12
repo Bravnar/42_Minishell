@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info_fill.c                                        :+:      :+:    :+:   */
+/*   lexer_info_fill.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:26:42 by smuravye          #+#    #+#             */
-/*   Updated: 2024/05/10 18:33:37 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/12 12:33:56 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	work_args(t_llex *tmp)
 		tmp->needs_exp = 1;
 	else if (tmp->is_in_quotes)
 	{
-		while (ft_strchr(QUOTES, tmp->value[++i]))
+		while (tmp->value[++i] && ft_strchr(QUOTES, tmp->value[i]))
 			;
 		if (tmp->value[i - 1] == '\"' && tmp->value[i] == '$')
 			tmp->needs_exp = 1;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_llist_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:22:18 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/10 19:18:46 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/12 12:47:06 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_llex	*new_token(char *value)
+t_llex	*new_token(char *value,	int is_con)
 {
 	t_llex	*token;
 
@@ -23,6 +23,10 @@ t_llex	*new_token(char *value)
 	token->is_in_quotes = 0;
 	token->needs_exp = 0;
 	token->index = 0;
+	if (is_con)
+		token->conn_with_prev = 1;
+	else
+		token->conn_with_prev = 0;
 	token->type = NONE;
 	token->next = NULL;
 	token->prev = NULL;
@@ -67,9 +71,9 @@ void	print_list(t_llex **head)
 	tmp = *head;
 	while (tmp != NULL)
 	{
-		printf("(I:%d | V:%s | Q:%d | IS_ARG: %d | TYPE: %d)-->\n", \
+		printf("(I:%d | V:%s | Q:%d | IS_ARG: %d | IS_CON: %d)-->\n", \
 			tmp->index, tmp->value, \
-			tmp->is_in_quotes, tmp->needs_exp, tmp->type);
+			tmp->is_in_quotes, tmp->needs_exp, tmp->conn_with_prev);
 		tmp = tmp->next;
 	}
 	printf("(NULL)\n");

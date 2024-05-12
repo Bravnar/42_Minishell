@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/10 19:08:49 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/12 12:45:10 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	fill_info(t_lex *l);
 void	print_list(t_llex **head);
 void	free_tokens(t_llex *token_list);
 void	add_token(t_llex **token_list, t_llex *new_token);
-t_llex	*new_token(char *value);
+//t_llex	*new_token(char *value);
+t_llex	*new_token(char *value,	int is_con);
 int		ms_lstsize(t_llex *lst);
 
 /* CHECK SYNTAX */

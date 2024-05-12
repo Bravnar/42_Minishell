@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 13:06:51 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/10 18:35:21 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/12 12:39:27 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_llex
 	char			is_in_quotes;
 	int				index;
 	int				needs_exp;
+	int				conn_with_prev;
 	t_type			type;
 	struct s_llex	*next;
 	struct s_llex	*prev;
