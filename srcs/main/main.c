@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 17:08:47 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/20 17:09:00 by hmorand          ###   ########.ch       */
+/*   Created: 2024/04/22 11:25:33 by hmorand           #+#    #+#             */
+/*   Updated: 2024/04/22 11:26:31 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <string.h>
 
-void	ft_echo(const char *str)
+/* void	ft_echo(const char *str)
 {
 	if (!ft_strncmp(str, "echo ", 5))
 	{
@@ -63,7 +63,7 @@ int	main(void)
 		}
 	}
 	return (0);
-}
+} */
 
 /*
 Plan of action:
@@ -92,7 +92,7 @@ int main (int ac, char **av, char **env)
 }
 	*/
 
-/* int main(int ac, char **av, char **ENV)
+int main(int ac, char **av, char **ENV)
 {
 	(void)	ac;
 	//(void)	av;
@@ -100,4 +100,4 @@ int main (int ac, char **av, char **env)
 	av+=2;
 	echo(av, ENV);
 	//env(ENV);
-} */
+}

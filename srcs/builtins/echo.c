@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	print_env_var(char *str, int *j, char **ENV)
+bool	print_env_var(char *str, int *j, char **ENV)
 {
 	int		i;
 	int		len;
