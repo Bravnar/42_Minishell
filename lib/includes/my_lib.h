@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_lib.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 20:20:16 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/06 14:42:42 by smuravye         ###   ########.fr       */
+/*   Created: 2024/05/13 20:02:07 by hmorand           #+#    #+#             */
+/*   Updated: 2024/05/13 20:02:07 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	*ft_realloc(void *ptr, size_t size);
 /* ************************************************************************** */
 
 int		ft_printf(const char *str, ...);
+int		ft_fprintf(int fd, const char *str, ...);
 int		print_s(const char *str, int fd);
 int		print_x(unsigned int n, int fd, const char token);
 int		print_id(int n, int fd);
