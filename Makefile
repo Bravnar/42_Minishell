@@ -1,27 +1,19 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/16 09:51:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/04/20 16:54:51 by smuravye         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME= minishell
 
 INCLUDES = includes
 
 SRCS= 	srcs/main/main.c \
-		srcs/lexer/linked_lex.c srcs/lexer/lex_utils.c \
-		srcs/lexer/linked_utils.c \
-		srcs/builtins/pwd.c \
-		srcs/builtins/cd.c \
-		srcs/builtins/env.c \
-		srcs/builtins/echo.c \
-#		srcs/lexer/lexer.c srcs/lexer/lexer_count.c srcs/lexer/lexer_utils.c \
+        srcs/init/init.c \
+        srcs/lexer/lexer_main.c \
+        srcs/errors/errors.c \
+        srcs/syntax/check_syntax.c \
+        srcs/lexer/lexer_funcs.c \
+        srcs/lexer/lexer_info_fill.c \
+        srcs/lexer/lexer_llist_utils.c \
+        srcs/builtins/pwd.c \
+        srcs/builtins/cd.c \
+        srcs/builtins/env.c \
+        srcs/builtins/echo.c \
 
 CC= gcc
 
@@ -30,7 +22,7 @@ CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
 LIBFT = 	lib
 LIBFT_LIB = $(LIBFT)/my_lib.a
 
-#SANITIZE= -g3 -fsanitize=address
+SANITIZE= -g3 -fsanitize=address
 
 # Color Variables
 RED=\033[0;31m
@@ -73,6 +65,7 @@ clean:
 fclean: 	clean
 		@make -C $(LIBFT) fclean
 		@rm -f $(NAME)
+		@rm -rf objs
 		@echo "$(YELLOW)\no------------------------------------o$(RESET)"
 		@echo "$(RED)|           MINISHELL_CLEARED        |$(RESET)"
 		@echo "$(YELLOW)o------------------------------------o\n$(RESET)"
