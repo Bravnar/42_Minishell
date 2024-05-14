@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 17:11:43 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/20 17:11:51 by hmorand          ###   ########.ch       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 bool	print_env_var(char *str, int *j, char **ENV)
@@ -38,6 +26,7 @@ bool	print_env_var(char *str, int *j, char **ENV)
 	}
 	else
 		printf("%c", str[*j]);
+	return (true); // to be fixed
 }
 
 void	echo(char **args, char **ENV)
