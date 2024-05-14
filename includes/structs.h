@@ -25,6 +25,14 @@ typedef enum e_err
 	BAD_REDIRS_NL,
 }	t_err;
 
+typedef struct s_envp
+{
+	char			*key;
+	char			*value;
+	struct s_envp	*next;
+	struct s_envp	*prev;
+}	t_envp;
+
 typedef struct s_llex
 {
 	char			*value;
@@ -56,20 +64,8 @@ typedef struct s_lex
 	t_llex			*link;
 }	t_lex;
 
-/* typedef struct s_tok
-{
-	char			*value;
-	int				needs_expansion;
-	char			is_in_quotes;
-	int				index;
-	t_type			type;
-	struct s_tok	*next;
-	struct s_tok	*prev;
-}	t_tok; */
-
 typedef struct s_cmds
 {
-	//t_tok			*group;
 	t_type			type;
 	int				index;
 	struct s_cmds	*next;
@@ -80,11 +76,11 @@ typedef struct s_main
 {
 	int				ac;
 	char			**av;
-	char			**env;
+	char			**envp;
 	char			*prompt;
 	t_lex			*l;
-	//t_tok			*tok;
 	t_cmds			*cmds;
+	t_envp			*env;
 }	t_main;
 
 #endif

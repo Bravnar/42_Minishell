@@ -42,9 +42,11 @@
 /*----------------------------------------------------------------------------*/
 
 /* INIT */
+
 t_main	*init_structs(char **envp);
 
 /* ERRORS */
+
 void	error_handler(t_err code);
 
 /* LEXER MAIN*/
@@ -74,6 +76,21 @@ int		check_quotes(t_lex *l);
 void	reset_quotes(t_lex *l);
 int		check_redirs(t_lex *l);
 int		check_pipes(t_lex *l);
+
+/* ENV */
+
+t_envp	*new_env_node(char *key, char *value);
+void	add_env_node(t_envp **envp_head, t_envp *new_envp_node);
+void	print_envp(t_envp **head);
+void	populate_envp(t_main *shell);
+t_envp	*get_env(t_envp **head, char *var);
+void	free_nodes(t_envp *token_list);
+
+/* CLEANUP */
+
+void	free_lex(t_lex *lex);
+void	free_cmds(t_cmds *cmds);
+void	free_main(t_main *shell);
 
 /* char	**mh_lex(char *u_input);
 char	**lex(char *input);

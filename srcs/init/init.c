@@ -1,9 +1,9 @@
 #include "minishell.h"
 
-t_llex	*init_llex(void)
+/* t_llex	*init_llex(void)
 {
 	return (calloc(1, sizeof(t_llex)));
-}
+} */
 
 t_lex	*init_lex(void)
 {
@@ -12,11 +12,6 @@ t_lex	*init_lex(void)
 	lex = calloc(1, sizeof(t_lex));
 	return (lex);
 }
-
-/* t_tok	*init_tok(void)
-{
-	return (calloc(1, sizeof(t_tok)));
-} */
 
 t_cmds	*init_cmds(void)
 {
@@ -31,10 +26,10 @@ t_main	*init_structs(char **envp)
 	if (shell)
 	{
 		shell->l = init_lex();
-		//shell->tok = init_tok();
 		shell->cmds = init_cmds();
 		shell->prompt = PROMPT;
-		shell->env = envp;
+		shell->envp = envp;
+		populate_envp(shell);
 	}
 	return (shell);
 }

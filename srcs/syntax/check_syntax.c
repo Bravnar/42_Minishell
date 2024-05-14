@@ -79,7 +79,10 @@ int	check_quotes(t_lex *l)
 		}
 	}
 	if (l->s_count % 2 || l->d_count % 2)
+	{
+		l->err_code = BAD_QUOTES;
 		return (1);
+	}
 	return (0);
 }
 

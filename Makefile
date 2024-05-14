@@ -2,18 +2,21 @@ NAME= minishell
 
 INCLUDES = includes
 
-SRCS= 	srcs/main/main.c \
-        srcs/init/init.c \
-        srcs/lexer/lexer_main.c \
-        srcs/errors/errors.c \
-        srcs/syntax/check_syntax.c \
-        srcs/lexer/lexer_funcs.c \
-        srcs/lexer/lexer_info_fill.c \
-        srcs/lexer/lexer_llist_utils.c \
-        srcs/builtins/pwd.c \
-        srcs/builtins/cd.c \
-        srcs/builtins/env.c \
-        srcs/builtins/echo.c \
+SRCS=	srcs/main/main.c \
+		srcs/init/init.c \
+		srcs/lexer/lexer_main.c \
+		srcs/errors/errors.c \
+		srcs/syntax/check_syntax.c \
+		srcs/lexer/lexer_funcs.c \
+		srcs/lexer/lexer_info_fill.c \
+		srcs/lexer/lexer_llist_utils.c \
+		srcs/builtins/pwd.c \
+		srcs/builtins/cd.c \
+		srcs/builtins/env.c \
+		srcs/builtins/echo.c \
+		srcs/env/envp.c \
+		srcs/env/envp_utils.c \
+		srcs/cleanup/clean.c \
 
 CC= gcc
 
@@ -22,7 +25,7 @@ CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
 LIBFT = 	lib
 LIBFT_LIB = $(LIBFT)/my_lib.a
 
-SANITIZE= -g3 -fsanitize=address
+#SANITIZE= -g3 -fsanitize=address
 
 # Color Variables
 RED=\033[0;31m

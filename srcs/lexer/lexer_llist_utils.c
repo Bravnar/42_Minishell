@@ -43,6 +43,8 @@ void	free_tokens(t_llex *token_list)
 {
 	t_llex	*tmp;
 
+	if (!token_list)
+		return ;
 	while (token_list)
 	{
 		tmp = token_list;
@@ -50,6 +52,7 @@ void	free_tokens(t_llex *token_list)
 		free(tmp->value);
 		free(tmp);
 	}
+	tmp = NULL;
 }
 
 void	print_list(t_llex **head)
@@ -59,7 +62,7 @@ void	print_list(t_llex **head)
 	tmp = *head;
 	while (tmp != NULL)
 	{
-		printf("(I:%d | V:%s | Q:%d | IS_ARG: %d | IS_CON: %d)-->\n", \
+		printf("(I:%d | V:%s | Q:%d | IS_VAR: %d | IS_CON: %d)-->\n", \
 			tmp->index, tmp->value, \
 			tmp->is_in_quotes, tmp->needs_exp, tmp->conn_with_prev);
 		tmp = tmp->next;
