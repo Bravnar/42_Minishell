@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lexer_funcs.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/04 13:59:04 by bravnar           #+#    #+#             */
-/*   Updated: 2024/05/12 12:51:57 by bravnar          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 void	handle_dollar(t_lex *l)
@@ -60,7 +48,7 @@ void	handle_special(t_lex *l)
 void	handle_other(t_lex *l, char *charset)
 {
 	char	*substr;
-	
+
 	while (l->trim[l->j] && !ft_strchr(charset, l->trim[l->j]))
 		l->j++;
 	substr = ft_substr(l->trim, l->i, l->j - l->i);
@@ -83,7 +71,6 @@ void	handle_quotes(t_lex *l)
 	if (l->trim[l->j] == l->q_char)
 		l->j++;
 	substr = ft_substr(l->trim, l->i, l->j - l->i);
-	printf("is_con: %d\n", is_con);
 	add_token(&l->link, new_token(substr, is_con));
 	free(substr);
 	l->i = l->j;
