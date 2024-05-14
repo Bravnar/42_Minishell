@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 17:07:06 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/20 17:07:06 by hmorand          ###   ########.ch       */
+/*   Created: 2024/05/13 20:02:07 by hmorand           #+#    #+#             */
+/*   Updated: 2024/05/13 20:02:07 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	*ft_realloc(void *ptr, size_t size);
 /* ************************************************************************** */
 
 int		ft_printf(const char *str, ...);
+int		ft_fprintf(int fd, const char *str, ...);
 int		print_s(const char *str, int fd);
 int		print_x(unsigned int n, int fd, const char token);
 int		print_id(int n, int fd);
