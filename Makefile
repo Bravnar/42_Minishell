@@ -17,6 +17,7 @@ SRCS=	srcs/main/main.c \
 		srcs/env/envp.c \
 		srcs/env/envp_utils.c \
 		srcs/cleanup/clean.c \
+		srcs/parser/parser.c \
 
 CC= gcc
 

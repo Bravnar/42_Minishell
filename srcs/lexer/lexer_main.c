@@ -10,6 +10,7 @@ int	lexer(t_lex	*l)
 	if (check_redirs(l) || check_pipes(l))
 		return (error_handler(l->err_code), 1);
 	fill_info(l);
+	parser(l);
 	print_list(&l->link);
 	return (0);
 }

@@ -10,9 +10,10 @@ typedef enum e_type
 	OUTFILE,
 	REDIR_IN,
 	REDIR_OUT,
-	PIPE,
+	PIPE_SYMBOL,
 	APPEND,
 	HEREDOC,
+	HEREDOC_END,
 	CMD_FULL,
 }	t_type;
 
@@ -66,7 +67,9 @@ typedef struct s_lex
 
 typedef struct s_cmds
 {
-	t_type			type;
+	char			**cmd_grp;
+	char			*file_in;
+	char			*file_out;
 	int				index;
 	struct s_cmds	*next;
 	struct s_cmds	*prev;

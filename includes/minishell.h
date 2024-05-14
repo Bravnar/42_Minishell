@@ -92,6 +92,10 @@ void	free_lex(t_lex *lex);
 void	free_cmds(t_cmds *cmds);
 void	free_main(t_main *shell);
 
+/* PARSER */
+
+void	parser(t_lex *l);
+
 /* char	**mh_lex(char *u_input);
 char	**lex(char *input);
 char	**ft_shellsplit(char *str, char *charset);

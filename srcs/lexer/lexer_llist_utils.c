@@ -62,9 +62,9 @@ void	print_list(t_llex **head)
 	tmp = *head;
 	while (tmp != NULL)
 	{
-		printf("(I:%d | V:%s | Q:%d | IS_VAR: %d | IS_CON: %d)-->\n", \
+		printf("(I:%d | V:%s | Q:%d | IS_VAR: %d | IS_CON: %d | TYPE: %d)-->\n", \
 			tmp->index, tmp->value, \
-			tmp->is_in_quotes, tmp->needs_exp, tmp->conn_with_prev);
+			tmp->is_in_quotes, tmp->needs_exp, tmp->conn_with_prev, tmp->type);
 		tmp = tmp->next;
 	}
 	printf("(NULL)\n");
