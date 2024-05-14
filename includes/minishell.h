@@ -96,12 +96,17 @@ void	free_arr(char **arr);
 char	*get_path_line(char **envp);
 int		check_quotes(char *input, t_quotes *q);
 
-
 void	alt_lex(t_shell *main);
 t_lex	*new_token(char *value);
 void	add_token(t_lex **token_list, t_lex *new_token);
 void	free_tokens(t_lex *token_list);
 void	print_list(t_lex **head);
  */
+
+/* Builtins */
+void	pwd(void);
+void	cd(char *dirname);
+void	env(char **ENV);
+void	echo(char **args, char **ENV);
 
 #endif

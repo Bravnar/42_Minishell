@@ -11,6 +11,7 @@ void	gameplay_loop(t_main *shell)
 		lex->input = readline(shell->prompt);
 		if (!lex->input)
 			break ;
+
 		if (lex->input[0])
 			add_history(lex->input);
 		lexer(lex);

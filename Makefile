@@ -3,17 +3,17 @@ NAME= minishell
 INCLUDES = includes
 
 SRCS= 	srcs/main/main.c \
-		srcs/init/init.c \
-		srcs/lexer/lexer_main.c \
-		srcs/errors/errors.c \
-		srcs/syntax/check_syntax.c \
-		srcs/lexer/lexer_funcs.c \
-		srcs/lexer/lexer_info_fill.c \
-		srcs/lexer/lexer_llist_utils.c \
-#		srcs/parser/parser.c \
-		srcs/parser/parser_linked_utils.c \
-		
-		
+        srcs/init/init.c \
+        srcs/lexer/lexer_main.c \
+        srcs/errors/errors.c \
+        srcs/syntax/check_syntax.c \
+        srcs/lexer/lexer_funcs.c \
+        srcs/lexer/lexer_info_fill.c \
+        srcs/lexer/lexer_llist_utils.c \
+        srcs/builtins/pwd.c \
+        srcs/builtins/cd.c \
+        srcs/builtins/env.c \
+        srcs/builtins/echo.c \
 
 CC= gcc
 
