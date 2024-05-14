@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 19:53:13 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/04/16 19:10:56 by smuravye         ###   ########.fr       */
+/*   Created: 2024/04/20 16:55:33 by hmorand           #+#    #+#             */
+/*   Updated: 2024/04/20 16:55:33 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,11 @@ int		strlen_til_sep(char *str, char *charset);
 int		is_in_charset(char c, char *charset);
 int		check_before(char *input, t_quotes *q);
 int		check_quotes(char *input, t_quotes *q);
+
+/* Builtins */
+void	pwd(void);
+void	cd(char *dirname);
+void	env(char **ENV);
+void	echo(char **args, char **ENV);
 
 #endif

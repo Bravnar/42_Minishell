@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 20:21:36 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/16 19:24:39 by smuravye         ###   ########.fr       */
+/*   Created: 2024/04/22 11:25:33 by hmorand           #+#    #+#             */
+/*   Updated: 2024/04/22 11:26:31 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <string.h>
 
-void	ft_echo(const char *str)
+/* void	ft_echo(const char *str)
 {
 	if (!ft_strncmp(str, "echo ", 5))
 	{
@@ -57,14 +57,15 @@ int	main(void)
 		free(user_input);
 		free_tokens(breakdown);
 		//int i = -1;
-		/* while (breakdown[++i])
+		while (breakdown[++i])
 		{
 			printf("(%s)-->", breakdown[i]);
-		} */
+		}
 	}
 	return (0);
-}
-/* 
+} */
+
+/*
 Plan of action:
 	1) Utilise a parser that is similar to the one done in pipex
 	2) Find a way to store these variables (linked list?)
@@ -76,9 +77,9 @@ Plan of action:
 
 First idea:
 	Use a similar parser to pipex to breakdown user input and store it in a linked list!
- */
+	*/
 
-/* 
+/*
 Actual main should look something like this
 
 int main (int ac, char **av, char **env)
@@ -89,4 +90,14 @@ int main (int ac, char **av, char **env)
 	execution();
 	cleanup() or just dump_garbage();
 }
- */
+	*/
+
+int main(int ac, char **av, char **ENV)
+{
+	(void)	ac;
+	//(void)	av;
+
+	av+=2;
+	echo(av, ENV);
+	//env(ENV);
+}

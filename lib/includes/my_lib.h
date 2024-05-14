@@ -26,6 +26,7 @@ int		ft_atoi(const char *nptr);
 char	*ft_itoa(int n);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+char	*ft_strtoupper(char *str);
 
 /* ************************************************************************** */
 /*                          GET NEXT LINE                                     */
@@ -35,7 +36,7 @@ int		ft_toupper(int c);
 #  define BUFFER_SIZE 1
 # endif
 
-typedef struct s_gnl
+	typedef struct s_gnl
 {
 	char			*line;
 	struct s_gnl	*next;
