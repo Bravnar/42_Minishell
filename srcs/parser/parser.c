@@ -34,7 +34,7 @@ void	handle_pipe(t_llex **tmp)
 	*tmp = (*tmp)->next;
 }
 
-void	parser(t_lex *l)
+void	parser_logic(t_lex *l)
 {
 	t_llex	*tmp;
 
@@ -59,6 +59,36 @@ void	parser(t_lex *l)
 			tmp->type = CMD;
 		tmp = tmp->next;
 	}
+}
+
+t_cmds	*lex_to_cmds(t_main *shell, t_lex *lex)
+{
+	t_llex	*tmp;
+
+	tmp = lex->link;
+	while (tmp)
+	{
+		while (tmp && tmp->type != PIPE_SYMBOL)
+		{
+			if (tmp->type == CMD)
+				add_to_arr();
+			else if (tmp->type == INFILE || tmp->type == OUTFILE)
+				assign_file();
+			tmp = tmp->next;
+		}
+		tmp = tmp->next;
+	}
+}
+
+void	parser_main(t_main *shell)
+{
+	t_lex	*lex;
+	t_cmds	*new_node;
+
+	lex = shell->l;
+	parser_logic(lex);
+	shell->cmds = lex_to_cmds(shell, lex);
+
 }
 
 // void	parser(t_lex *l)
