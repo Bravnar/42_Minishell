@@ -61,7 +61,7 @@ void	parser_logic(t_lex *l)
 	}
 }
 
-t_cmds	*lex_to_cmds(t_main *shell, t_lex *lex)
+/* t_cmds	*lex_to_cmds(t_main *shell, t_lex *lex)
 {
 	t_llex	*tmp;
 
@@ -78,16 +78,16 @@ t_cmds	*lex_to_cmds(t_main *shell, t_lex *lex)
 		}
 		tmp = tmp->next;
 	}
-}
+} */
 
-void	parser_main(t_main *shell)
+void	parser_main(t_lex *lex)
 {
-	t_lex	*lex;
-	t_cmds	*new_node;
+	//t_lex	*lex;
+	//t_cmds	*new_node;
 
-	lex = shell->l;
+	//lex = shell->l;
 	parser_logic(lex);
-	shell->cmds = lex_to_cmds(shell, lex);
+	//shell->cmds = lex_to_cmds(shell, lex);
 
 }
 

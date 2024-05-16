@@ -95,8 +95,8 @@ void	free_main(t_main *shell);
 /* PARSER */
 
 void	parser_logic(t_lex *l);
-void	parser_main(t_main *shell);
-
+//void	parser_main(t_main *shell);
+void	parser_main(t_lex *lex);
 void	print_cmds(t_cmds **head);
 void	add_cmd_node(t_cmds **envp_head, t_cmds *new_envp_node);
 t_cmds	*new_cmd_node(char *key, char *value);
