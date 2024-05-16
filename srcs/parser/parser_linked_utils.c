@@ -1,77 +1,66 @@
 #include "minishell.h"
 
-t_tok	*tok_new_token(char *value)
+// void	free_cmds(t_cmds *token_list)
+// {
+// 	t_cmds	*tmp;
+
+// 	if (!token_list)
+// 		return ;
+// 	while (token_list)
+// 	{
+// 		tmp = token_list;
+// 		token_list = token_list->next;
+// 		if (tmp->key)
+// 			free(tmp->key);
+// 		if (tmp->value)
+// 			free(tmp->value);
+// 		free(tmp);
+// 	}
+// }
+
+t_cmds	*new_cmd_node(char *key, char *value)
 {
-	t_tok	*token;
+	t_cmds	*node;
 
-	token = malloc(sizeof(t_tok));
-	if (!token)
+	node = malloc(sizeof(t_cmds));
+	if (!node)
 		return (NULL);
-
-	token->value = ft_strdup(value);
-	token->is_in_quotes = 0;
-	token->index = -1;
-	token->needs_expansion = 0;
-	token->type = NONE;
-	token->next = NULL;
-	token->prev = NULL;
-	return (token);
+	ft_bzero(node, 1);
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
 }
 
-void	tok_add_token(t_tok **token_list, t_tok *new_token)
+void	add_cmd_node(t_cmds **envp_head, t_cmds *new_envp_node)
 {
-	t_tok	*tmp;
+	t_cmds	*tmp;
 
-	if (!*token_list)
+	if (!*envp_head)
 	{
-		*token_list = new_token;
+		*envp_head = new_envp_node;
 	}
 	else
 	{
-		tmp = *token_list;
+		tmp = *envp_head;
 		while (tmp->next)
 			tmp = tmp->next;
-		tmp->next = new_token;
-		new_token->prev = tmp;
+		tmp->next = new_envp_node;
+		new_envp_node->prev = tmp;
 	}
 }
 
-void	tok_free_tokens(t_tok *token_list)
+void	print_cmds(t_cmds **head)
 {
-	t_tok	*tmp;
-
-	while (token_list)
-	{
-		tmp = token_list;
-		token_list = token_list->next;
-		free(tmp->value);
-		free(tmp);
-	}
-}
-
-void	tok_print_list(t_tok **head)
-{
-	t_tok	*tmp;
+	t_cmds	*tmp;
+	int		i;
 
 	tmp = *head;
+	i = 0;
 	while (tmp != NULL)
 	{
-		printf("(I:%d | V:%s | Q:%d | IS_ARG: %d | TYPE: %d)-->", \
-			tmp->index, tmp->value, tmp->is_in_quotes, tmp->needs_expansion, tmp->type);
-		tmp = tmp->next;
+		while (tmp->cmd_grp[++i])
+			printf("%s\n");
+		printf("File in: %s\n", tmp->file_in);
+		printf("File out:%s\n", tmp->file_out);
 	}
-	printf("(NULL)\n");
-}
-
-int	tok_ms_lstsize(t_tok *lst)
-{
-	int	size;
-
-	size = 0;
-	while (lst != NULL)
-	{
-		lst = lst->next;
-		size++;
-	}
-	return (size);
 }

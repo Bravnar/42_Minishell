@@ -41,41 +41,24 @@
 /*                                  FUNCTIONS                                 */
 /*----------------------------------------------------------------------------*/
 
-/* INIT */
+/*----------------------------------BUILTINS DIR------------------------------*/
 
-t_main	*init_structs(char **envp);
+/* Builtins */
 
-/* ERRORS */
+void	pwd(void);
+void	cd(char *dirname);
+void	env(char **ENV);
+void	echo(char **args, char **ENV);
 
-void	error_handler(t_err code);
+/*----------------------------------CLEANUP DIR-------------------------------*/
 
-/* LEXER MAIN*/
+/* CLEANUP */
 
-int		lexer(t_lex	*l);
+void	free_lex(t_lex *lex);
+void	free_cmds(t_cmds *cmds);
+void	free_main(t_main *shell);
 
-/* LEXER FUNCS */
-
-void	lex_input(t_lex *l, char *charset);
-
-/* LEXER INFO FILL */
-
-void	fill_info(t_lex *l);
-
-/* LEXER LLIST UTILS */
-
-void	print_list(t_llex **head);
-void	free_tokens(t_llex *token_list);
-void	add_token(t_llex **token_list, t_llex *new_token);
-//t_llex	*new_token(char *value);
-t_llex	*new_token(char *value,	int is_con);
-int		ms_lstsize(t_llex *lst);
-
-/* CHECK SYNTAX */
-
-int		check_quotes(t_lex *l);
-void	reset_quotes(t_lex *l);
-int		check_redirs(t_lex *l);
-int		check_pipes(t_lex *l);
+/*----------------------------------ENV DIR-----------------------------------*/
 
 /* ENV */
 
@@ -86,53 +69,80 @@ void	populate_envp(t_main *shell);
 t_envp	*get_env(t_envp **head, char *var);
 void	free_nodes(t_envp *token_list);
 
-/* CLEANUP */
+/*----------------------------------ERRORS DIR--------------------------------*/
 
-void	free_lex(t_lex *lex);
-void	free_cmds(t_cmds *cmds);
-void	free_main(t_main *shell);
+/* ERRORS */
 
-/* PARSER */
+void	error_handler(t_err code);
+
+/*----------------------------------INIT DIR----------------------------------*/
+
+/* INIT */
+
+t_main	*init_structs(char **envp);
+
+/*----------------------------------LEXER DIR---------------------------------*/
+
+/* LEXER MAIN*/
+
+//int		lexer(t_lex	*l);
+int		lexer(t_lex	*l, t_main *shell);
+
+/* LEXER FUNCS */
+
+void	lex_input(t_lex *l, char *charset);
+void	handle_quotes(t_lex *l);
+void	handle_other(t_lex *l, char *charset);
+void	handle_special(t_lex *l);
+void	handle_dollar(t_lex *l);
+
+/* LEXER INFO FILL */
+
+void	fill_info(t_lex *l);
+void	work_args(t_llex *tmp);
+
+/* LEXER LLIST UTILS */
+
+void	print_list(t_llex **head);
+void	free_tokens(t_llex *token_list);
+void	add_token(t_llex **token_list, t_llex *new_token);
+//t_llex	*new_token(char *value);
+t_llex	*new_token(char *value,	int is_con);
+int		ms_lstsize(t_llex *lst);
+
+/*----------------------------------MAIN DIR----------------------------------*/
+
+int		main(int ac, char **av, char **envp);
+void	gameplay_loop(t_main *shell);
+void	free_all(t_main *shell);
+
+/*----------------------------------PARSER DIR--------------------------------*/
+
+/* PARSER_MAIN */
+
+// void	parser_main(t_lex *lex);
+void	parser_main(t_main *shell);
+
+/* PARSER_FUNCS */
 
 void	parser_logic(t_lex *l);
-//void	parser_main(t_main *shell);
-void	parser_main(t_lex *lex);
+void	handle_pipe(t_llex **tmp);
+void	handle_complex_redirs(t_llex *tmp);
+void	handle_complex_redirs(t_llex *tmp);
+
+/* PARSER LINKED UTILS */
+
 void	print_cmds(t_cmds **head);
 void	add_cmd_node(t_cmds **envp_head, t_cmds *new_envp_node);
 t_cmds	*new_cmd_node(char *key, char *value);
 
-/* char	**mh_lex(char *u_input);
-char	**lex(char *input);
-char	**ft_shellsplit(char *str, char *charset);
-char	*save_str(char *str, char *charset);
-int		count_args(char *str, char *charset);
-int		count_quotes2(char *str);
+/*----------------------------------SYNTAX DIR--------------------------------*/
 
-t_token	*lex_input(char *input);
-t_token	*new_token(char *value);
-void	add_token(t_token **token_list, t_token *new_token);
-void	free_tokens(t_token *token_list);
-void	print_list(t_token **head);
+/* CHECK SYNTAX */
 
-int		strlen_til_sep(char *str, char *charset);
-int		is_in_charset(char c, char *charset);
-
-char	*get_exec_path(char *cmd, char **env);
-void	free_arr(char **arr);
-char	*get_path_line(char **envp);
-int		check_quotes(char *input, t_quotes *q);
-
-void	alt_lex(t_shell *main);
-t_lex	*new_token(char *value);
-void	add_token(t_lex **token_list, t_lex *new_token);
-void	free_tokens(t_lex *token_list);
-void	print_list(t_lex **head);
- */
-
-/* Builtins */
-void	pwd(void);
-void	cd(char *dirname);
-void	env(char **ENV);
-void	echo(char **args, char **ENV);
+int		check_quotes(t_lex *l);
+void	reset_quotes(t_lex *l);
+int		check_redirs(t_lex *l);
+int		check_pipes(t_lex *l);
 
 #endif

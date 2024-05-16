@@ -68,8 +68,11 @@ typedef struct s_lex
 typedef struct s_cmds
 {
 	char			**cmd_grp;
+	char			**files_to_check;
 	char			*file_in;
 	char			*file_out;
+	int				is_heredoc;
+	int				is_append;
 	int				index;
 	struct s_cmds	*next;
 	struct s_cmds	*prev;

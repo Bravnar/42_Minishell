@@ -32,7 +32,7 @@ void	gameplay_loop(t_main *shell)
 			break ;
 		if (lex->input[0])
 			add_history(lex->input);
-		lexer(lex);
+		lexer(lex, shell);
 		if (lex->link)
 		{
 			if (!ft_strcmp(lex->link->value, "env"))

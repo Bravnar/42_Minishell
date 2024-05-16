@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	lexer(t_lex	*l)
+int	lexer(t_lex	*l, t_main *shell)
 {
 	l->trim = ft_strtrim(l->input, WHITESPACE);
 	reset_quotes(l);
@@ -10,7 +10,7 @@ int	lexer(t_lex	*l)
 	if (check_redirs(l) || check_pipes(l))
 		return (error_handler(l->err_code), 1);
 	fill_info(l);
-	parser_main(l);
+	parser_main(shell);
 	print_list(&l->link);
 	return (0);
 }
