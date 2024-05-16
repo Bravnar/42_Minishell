@@ -136,3 +136,13 @@ void	parser_main(t_main *shell)
 // }
 
 
+/* How to do:
+	go over the linked list
+	if you encounter redir_in or redir_out or heredoc or append
+	save into file_in / file_out until meet pipe (overwriting the stuff)
+	then delete each one of these nodes
+	the goal is to remain with only cmds and args
+	malloc an char ** of size of linked list up until the pipe (maybe counter variable)
+	then skip pipe,
+	rinse and repeat until end of linked list
+ */
