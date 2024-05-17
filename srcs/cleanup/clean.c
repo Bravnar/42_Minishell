@@ -21,6 +21,13 @@ void	free_cmds(t_cmds *cmds)
 	free(cmds);
 }
 
+void	free_count(t_counts *counts)
+{
+	if (!counts)
+		return ;
+	free(counts);
+}
+
 
 void	free_main(t_main *shell)
 {
@@ -28,6 +35,7 @@ void	free_main(t_main *shell)
 		return ;
 	free_lex(shell->l);
 	free_cmds(shell->cmds);
+	free_count(shell->counts);
 	free_nodes(shell->env);
 	free (shell);
 }

@@ -66,7 +66,7 @@ t_envp	*new_env_node(char *key, char *value);
 void	add_env_node(t_envp **envp_head, t_envp *new_envp_node);
 void	print_envp(t_envp **head);
 void	populate_envp(t_main *shell);
-t_envp	*get_env(t_envp **head, char *var);
+char	*get_env(t_envp **head, char *var);
 void	free_nodes(t_envp *token_list);
 
 /*----------------------------------ERRORS DIR--------------------------------*/
@@ -122,6 +122,7 @@ void	free_all(t_main *shell);
 
 // void	parser_main(t_lex *lex);
 void	parser_main(t_main *shell);
+void	parser_create_cmds(t_main *shell);
 
 /* PARSER_FUNCS */
 
@@ -135,6 +136,13 @@ void	handle_complex_redirs(t_llex *tmp);
 void	print_cmds(t_cmds **head);
 void	add_cmd_node(t_cmds **envp_head, t_cmds *new_envp_node);
 t_cmds	*new_cmd_node(char *key, char *value);
+
+/* PARSER FILES */
+
+t_files	*get_files(t_llex **head, t_main *shell);
+void	free_files(t_files *files_list);
+void	add_file(t_files **file_head, t_files *new_file);
+t_files	*new_file(t_llex *llex, t_main *shell);
 
 /*----------------------------------SYNTAX DIR--------------------------------*/
 

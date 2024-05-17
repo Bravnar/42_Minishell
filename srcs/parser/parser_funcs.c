@@ -24,7 +24,7 @@ void	handle_complex_redirs(t_llex *tmp)
 	else if (!ft_strcmp(">>", tmp->value))
 	{
 		tmp->type = APPEND;
-		tmp->next->type = OUTFILE;
+		tmp->next->type = OUTFILE_APP;
 	}
 }
 
@@ -45,7 +45,8 @@ void	parser_logic(t_lex *l)
 		{
 			if (!ft_strcmp("<", tmp->value) || !ft_strcmp(">", tmp->value))
 				handle_simple_redirs(tmp);
-			else if (!ft_strcmp("<<", tmp->value) || !ft_strcmp(">>", tmp->value))
+			else if (!ft_strcmp("<<", tmp->value) \
+			|| !ft_strcmp(">>", tmp->value))
 				handle_complex_redirs(tmp);
 			else if (!ft_strcmp("|", tmp->value))
 			{
@@ -60,14 +61,3 @@ void	parser_logic(t_lex *l)
 		tmp = tmp->next;
 	}
 }
-
-/* How to do:
-	go over the linked list
-	if you encounter redir_in or redir_out or heredoc or append
-	save into file_in / file_out until meet pipe (overwriting the stuff)
-	then delete each one of these nodes
-	the goal is to remain with only cmds and args
-	malloc an char ** of size of linked list up until the pipe (maybe counter variable)
-	then skip pipe,
-	rinse and repeat until end of linked list
- */

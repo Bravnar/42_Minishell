@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_envp	*get_env(t_envp **head, char *var)
+char	*get_env(t_envp **head, char *var)
 {
 	t_envp	*tmp;
 
@@ -11,7 +11,7 @@ t_envp	*get_env(t_envp **head, char *var)
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, var))
-			return (tmp);
+			return (tmp->value);
 		tmp = tmp->next;
 	}
 	return (NULL);

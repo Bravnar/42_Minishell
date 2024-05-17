@@ -8,6 +8,7 @@ typedef enum e_type
 	ARG,
 	INFILE,
 	OUTFILE,
+	OUTFILE_APP,
 	REDIR_IN,
 	REDIR_OUT,
 	PIPE_SYMBOL,
@@ -33,6 +34,14 @@ typedef struct s_envp
 	struct s_envp	*next;
 	struct s_envp	*prev;
 }	t_envp;
+
+typedef struct s_counts
+{
+	int				count_in_files;
+	int				count_out_files;
+	int				count_cmds;
+	int				count_pipes;
+}	t_counts;
 
 typedef struct s_llex
 {
@@ -65,10 +74,18 @@ typedef struct s_lex
 	t_llex			*link;
 }	t_lex;
 
+typedef struct s_files
+{
+	char			*file_name;
+	t_type			type;
+	struct s_files	*next;
+	struct s_files	*prev;
+}	t_files;
+
 typedef struct s_cmds
 {
 	char			**cmd_grp;
-	char			**files_to_check;
+	t_files			*files;
 	char			*file_in;
 	char			*file_out;
 	int				is_heredoc;
@@ -87,6 +104,7 @@ typedef struct s_main
 	t_lex			*l;
 	t_cmds			*cmds;
 	t_envp			*env;
+	t_counts		*counts;
 }	t_main;
 
 #endif

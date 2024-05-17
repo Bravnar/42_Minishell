@@ -19,7 +19,7 @@ SRCS=	srcs/main/main.c \
 		srcs/cleanup/clean.c \
 		srcs/parser/parser_main.c \
 		srcs/parser/parser_funcs.c \
-		
+		srcs/parser/parser_files.c \
 
 CC= gcc
 
@@ -28,7 +28,7 @@ CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
 LIBFT = 	lib
 LIBFT_LIB = $(LIBFT)/my_lib.a
 
-#SANITIZE= -g3 -fsanitize=address
+SANITIZE= -g3 -fsanitize=address
 
 # Color Variables
 RED=\033[0;31m
