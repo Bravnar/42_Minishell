@@ -18,10 +18,15 @@ t_lex	*init_lex(void)
 	return (lex);
 }
 
-/* t_cmds	*init_cmds(void)
+t_cmds	*init_cmds(void)
 {
-	return (ft_calloc(1, sizeof(t_cmds)));
-} */
+	t_cmds	*cmds;
+
+	cmds = ft_calloc(1, sizeof(t_cmds));
+	if (!cmds)
+		return (NULL);
+	return (cmds);
+}
 
 t_main	*init_structs(char **envp)
 {
@@ -31,7 +36,7 @@ t_main	*init_structs(char **envp)
 	if (shell)
 	{
 		shell->l = init_lex();
-		//shell->cmds = init_cmds();
+		shell->cmds = init_cmds();
 		shell->counts = init_counts();
 		shell->prompt = PROMPT;
 		shell->envp = envp;

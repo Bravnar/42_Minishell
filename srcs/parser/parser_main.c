@@ -19,38 +19,37 @@
 	4) Repeat until the end
 	 */
 
-void	print_files(t_files	*files)
+void	print_files(t_files	**files)
 {
 	t_files	*tmp;
 
-	tmp = files;
+	tmp = *files;
 	while (tmp)
 	{
-		printf("V:%s | TYPE: %d)-->", tmp->file_name, tmp->type);
+		printf("V:%s | TYPE: %d)-->\n", tmp->file_name, tmp->type);
 		tmp = tmp->next;
 	}
 	printf(" NULL\n");
 }
 
-void	print_cmds_struct(t_cmds *cmds)
+void	print_cmds_struct(t_cmds **cmds)
 {
 	t_cmds	*tmp;
-	int		i;
+	//int		i;
 
-	i = 0;
-	tmp = cmds;
-	printf("Im here\n");
+	tmp = *cmds;
 	while (tmp)
 	{
-		printf("Im here\n");
-		printf("CMDS **: [");
-		while (tmp->cmd_grp[i])
-			printf("\"%s, \"", tmp->cmd_grp[i++]);
-		printf("]\n");
-		print_files(tmp->files);
+		//i = 1;
+		printf("CMDS **: [\n");
+		// while (tmp->cmd_grp[i])
+		// 	printf("\"%s, \"", tmp->cmd_grp[i++]);
+		// printf("cmd grp: %s\n", tmp->cmd_grp[1]);
+		// printf("]\n");
+		print_files(&tmp->files);
 		printf("file_in: %s\n", tmp->file_in);
 		printf("is_heredoc: %d\n", tmp->is_heredoc);
-		printf("file_out: %s\n", tmp->file_in);
+		printf("file_out: %s\n", tmp->file_out);
 		printf("is_append: %d\n", tmp->is_append);
 		tmp = tmp->next;
 	}
@@ -131,7 +130,8 @@ t_cmds	*new_cmds_node(char **cmds, t_files *files, int index)
 {
 	t_cmds	*node;
 
-	node = ft_calloc(1, sizeof(t_cmds));
+	// node = ft_calloc(1, sizeof(t_cmds));
+	node = malloc(sizeof(t_cmds));
 	if (!node)
 		return (NULL);
 	node->cmd_grp = cmds;
@@ -139,6 +139,8 @@ t_cmds	*new_cmds_node(char **cmds, t_files *files, int index)
 	node->index = index;
 	get_last_infile(node, files);
 	get_last_outfile(node, files);
+	node->next = NULL;
+	node->prev = NULL;
 	return (node);
 }
 
@@ -164,6 +166,7 @@ char	**get_cmds(t_llex *tmp, t_main *shell)
 	int		i;
 
 	i = 0;
+	printf("count: %d\n", shell->counts->count_cmds);
 	cmd_list = malloc(sizeof(char *) * (shell->counts->count_cmds + 1));
 	if (!cmd_list)
 		return (NULL);
@@ -200,11 +203,12 @@ void	parser_create_cmds(t_main *shell)
 		{
 			count_all(count, shell->l);
 			cmds = get_cmds(tmp, shell);
-			if (!cmds)
-				continue ;
+			// if (!cmds)
+			// 	continue ;
 			files_head = get_files(&tmp, shell);
-			if (!files_head)
-				continue ;
+			//print_files(&files_head);
+			// if (!files_head)
+			// 	continue ;
 			add_cmds_tbl(&shell->cmds, new_cmds_node(cmds, files_head, 0));
 			ft_free_arr(cmds);
 			cmds = NULL;
@@ -224,5 +228,11 @@ void	parser_main(t_main *shell)
 	lex = shell->l;
 	parser_logic(lex);
 	parser_create_cmds(shell);
-	print_cmds_struct(shell->cmds);
+	// printf("Checking if shell->cmds is NULL: %p\n", (void*)shell->cmds);
+	// if (shell->cmds != NULL && shell->cmds->cmd_grp != NULL)
+    // 	printf("test: %s\n", shell->cmds->cmd_grp[0]);
+	// else
+    // 	printf("cmd_grp is NULL or shell->cmds is NULL\n");
+
+	//print_cmds_struct(&shell->cmds);
 }
