@@ -97,7 +97,10 @@ char **create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 		if (iter && iter->type == CMD)
 		{
 			if (iter->needs_exp)
+			{
+				printf("Result of get_env: %s\n", get_env(&shell->env, iter->value));
 				cmd_list[i++] = ft_strdup(get_env(&shell->env, iter->value));
+			}
 			else
 				cmd_list[i++] = ft_strdup(iter->value);
 		}
