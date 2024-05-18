@@ -17,11 +17,11 @@ SRCS=	srcs/main/main.c \
 		srcs/env/envp.c \
 		srcs/env/envp_utils.c \
 		srcs/cleanup/clean.c \
-		srcs/parser/parser_main.c \
-		srcs/parser/parser_test.c \
-		srcs/parser/parser_funcs.c \
-		srcs/parser/parser_files.c \
 		srcs/parser/parser_cmds.c \
+		srcs/parser/parser_files.c \
+		srcs/parser/parser_funcs.c \
+		srcs/parser/parser_main.c \
+		srcs/parser/parser_free.c \
 
 CC= gcc
 

@@ -120,15 +120,14 @@ void	free_all(t_main *shell);
 
 /* PARSER_MAIN */
 
-// void	parser_main(t_lex *lex);
 void	parser_main(t_main *shell);
-void	parser_create_cmds(t_main *shell);
+void	parser_body(t_main *shell);
 
 /* PARSER_CMDS */
 
-char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count);
-void	add_cmds_test(t_cmds **head, t_cmds *new_node);
-t_cmds	*new_cmds_test(char **cmds, t_files *files, int index);
+char 	**create_cmd_arr(t_llex *tmp, t_main *shell, int count);
+void	add_cmds_node(t_cmds **head, t_cmds *new_node);
+t_cmds	*new_cmds_node(char **cmds, t_files *files, int index);
 int		count_commands(t_llex *head);
 
 /* PARSER_FUNCS */
@@ -138,22 +137,17 @@ void	handle_pipe(t_llex **tmp);
 void	handle_complex_redirs(t_llex *tmp);
 void	handle_complex_redirs(t_llex *tmp);
 
-/* PARSER LINKED UTILS */
-
-void	print_cmds(t_cmds **head);
-void	add_cmd_node(t_cmds **envp_head, t_cmds *new_envp_node);
-t_cmds	*new_cmd_node(char *key, char *value);
-
 /* PARSER FILES */
 
-t_files	*get_files(t_llex **head, t_main *shell);
-void	free_files(t_files *files_list);
-void	add_file(t_files **file_head, t_files *new_file);
-t_files	*new_file(t_llex *llex, t_main *shell);
+t_files	*create_files_list(t_llex **tmp, t_main *shell);
+void	add_file_node(t_files **file_head, t_files *new_file);
+t_files	*new_file_node(t_llex *llex, t_main *shell);
 
-/* PARSER TEST */
+/* PARSER FREE */
 
-void	parser_test(t_main *shell);
+void	clear_t_cmds(t_main *shell);
+void	free_cmds_nodes(t_cmds *head);
+void	free_files_nodes(t_files *head);
 
 /*----------------------------------SYNTAX DIR--------------------------------*/
 

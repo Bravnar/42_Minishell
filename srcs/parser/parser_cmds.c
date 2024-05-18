@@ -16,14 +16,37 @@ int	count_commands(t_llex *head)
 	return (i);
 }
 
-t_cmds	*new_cmds_test(char **cmds, t_files *files, int index)
+char	**duplicate_cmds(char **cmds)
+{
+	char	**result;
+	int		i;
+
+	i = -1;
+	while(cmds[++i])
+		;
+	result = malloc(sizeof(char *) * (i + 1));
+	if (!result)
+		return (NULL);
+	i = -1;
+	while (cmds[++i])
+	{
+		result[i] = ft_strdup(cmds[i]);
+		//free(cmds[i]);
+	}
+	result[i] = NULL;
+	//free(cmds);
+	//cmds = NULL;
+	return (result);
+}
+
+t_cmds	*new_cmds_node(char **cmds, t_files *files, int index)
 {
 	t_cmds	*node;
 
 	node = malloc(sizeof(t_cmds));
 	if (!node)
 		return (NULL);
-	node->cmd_grp = cmds;
+	node->cmd_grp = duplicate_cmds(cmds);
 	node->files = files;
 	node->index = index;
 	node->file_in = NULL;
@@ -37,7 +60,7 @@ t_cmds	*new_cmds_test(char **cmds, t_files *files, int index)
 	return (node);
 }
 
-void	add_cmds_test(t_cmds **head, t_cmds *new_node)
+void	add_cmds_node(t_cmds **head, t_cmds *new_node)
 {
 	t_cmds	*tmp;
 
@@ -45,12 +68,9 @@ void	add_cmds_test(t_cmds **head, t_cmds *new_node)
 		printf("Error: head is NULL\n");
 	if (!new_node)
 		printf("Error: new_node is NULL\n");
-	printf("What's in the head? %s\n", (*head)->file_in);
+	//printf("What's in the head? %s\n", (*head)->file_in);
 	if (!*head)
-	{
-		printf("Do I trigger?\n");
 		*head = new_node;
-	}
 	else
 	{
 		tmp = *head;

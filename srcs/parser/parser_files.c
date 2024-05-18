@@ -1,21 +1,6 @@
 #include "minishell.h"
 
-void	free_files(t_files *files_list)
-{
-	t_files	*tmp;
-
-	if (!files_list)
-		return ;
-	while (files_list)
-	{
-		tmp = files_list;
-		files_list = files_list->next;
-		free(tmp->file_name);
-		free(tmp);
-	}
-}
-
-t_files	*new_file(t_llex *llex, t_main *shell)
+t_files	*new_file_node(t_llex *llex, t_main *shell)
 {
 	t_files	*new;
 
@@ -32,7 +17,7 @@ t_files	*new_file(t_llex *llex, t_main *shell)
 	return (new);
 }
 
-void	add_file(t_files **file_head, t_files *new_file)
+void	add_file_node(t_files **file_head, t_files *new_file)
 {
 	t_files	*tmp;
 
@@ -48,22 +33,22 @@ void	add_file(t_files **file_head, t_files *new_file)
 	}
 }
 
-t_files	*get_files(t_llex **head, t_main *shell)
+t_files	*create_files_list(t_llex **tmp, t_main *shell)
 {
-	t_llex	*tmp;
+	t_llex	*iter;
 	t_files	*files_head;
 
 	files_head = NULL;
-	tmp = *head;
-	while (tmp && tmp->type != PIPE_SYMBOL)
+	iter = *tmp;
+	while (iter && iter->type != PIPE_SYMBOL)
 	{
-		if (tmp && (tmp->type == INFILE || tmp->type == HEREDOC_END \
-		|| tmp->type == OUTFILE || tmp->type == OUTFILE_APP))
-			add_file(&files_head, new_file(tmp, shell));
-		tmp = tmp->next;
+		if (iter && (iter->type == INFILE || iter->type == HEREDOC_END \
+		|| iter->type == OUTFILE || iter->type == OUTFILE_APP))
+			add_file_node(&files_head, new_file_node(iter, shell));
+		iter = iter->next;
 	}
-	if (tmp && tmp->next)
-		tmp = tmp->next;
-	*head = tmp;
+	/* if (iter && iter->next)
+		iter = iter->next; */
+	*tmp = iter;
 	return (files_head);
 }

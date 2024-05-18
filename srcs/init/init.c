@@ -18,12 +18,14 @@ t_lex	*init_lex(void)
 	return (lex);
 }
 
-t_cmds	*init_cmds(void)
+/* t_cmds	*init_cmds(void)
 {
 	t_cmds	*cmds;
 
 	cmds = malloc(sizeof(t_cmds));
-	cmds->files = malloc(sizeof(t_files));
+	if (!cmds)
+		return (NULL);
+	cmds->files = init_files();
 	cmds->cmd_grp = NULL;
 	cmds->file_in = NULL;
 	cmds->file_out = NULL;
@@ -31,7 +33,8 @@ t_cmds	*init_cmds(void)
 	cmds->is_append = 0;
 	cmds->is_heredoc = 0;
 	return (cmds);
-}
+} */
+
 
 t_main	*init_structs(char **envp)
 {
@@ -41,7 +44,7 @@ t_main	*init_structs(char **envp)
 	if (shell)
 	{
 		shell->l = init_lex();
-		shell->cmds = init_cmds();
+		//shell->cmds = init_cmds();
 		shell->counts = init_counts();
 		shell->prompt = PROMPT;
 		shell->envp = envp;
