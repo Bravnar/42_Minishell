@@ -11,6 +11,6 @@ int	lexer(t_lex	*l, t_main *shell)
 		return (error_handler(l->err_code), 1);
 	fill_info(l);
 	parser_main(shell);
-	print_list(&l->link);
+	// print_list(&l->link);
 	return (0);
 }

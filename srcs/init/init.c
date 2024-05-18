@@ -22,9 +22,14 @@ t_cmds	*init_cmds(void)
 {
 	t_cmds	*cmds;
 
-	cmds = ft_calloc(1, sizeof(t_cmds));
-	if (!cmds)
-		return (NULL);
+	cmds = malloc(sizeof(t_cmds));
+	cmds->files = malloc(sizeof(t_files));
+	cmds->cmd_grp = NULL;
+	cmds->file_in = NULL;
+	cmds->file_out = NULL;
+	cmds->index = 0;
+	cmds->is_append = 0;
+	cmds->is_heredoc = 0;
 	return (cmds);
 }
 

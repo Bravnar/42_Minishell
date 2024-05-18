@@ -124,6 +124,13 @@ void	free_all(t_main *shell);
 void	parser_main(t_main *shell);
 void	parser_create_cmds(t_main *shell);
 
+/* PARSER_CMDS */
+
+char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count);
+void	add_cmds_test(t_cmds **head, t_cmds *new_node);
+t_cmds	*new_cmds_test(char **cmds, t_files *files, int index);
+int		count_commands(t_llex *head);
+
 /* PARSER_FUNCS */
 
 void	parser_logic(t_lex *l);
@@ -143,6 +150,10 @@ t_files	*get_files(t_llex **head, t_main *shell);
 void	free_files(t_files *files_list);
 void	add_file(t_files **file_head, t_files *new_file);
 t_files	*new_file(t_llex *llex, t_main *shell);
+
+/* PARSER TEST */
+
+void	parser_test(t_main *shell);
 
 /*----------------------------------SYNTAX DIR--------------------------------*/
 

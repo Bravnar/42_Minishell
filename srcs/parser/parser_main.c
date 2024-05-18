@@ -220,8 +220,18 @@ void	parser_create_cmds(t_main *shell)
 			tmp = tmp->next;
 	}
 }
-
 void	parser_main(t_main *shell)
+{
+	t_lex	*lex;
+	
+	lex = shell->l;
+	parser_logic(lex);
+	parser_test(shell);
+	print_list(&lex->link);
+
+}
+
+/* void	parser_main(t_main *shell)
 {
 	t_lex	*lex;
 
@@ -235,4 +245,5 @@ void	parser_main(t_main *shell)
     // 	printf("cmd_grp is NULL or shell->cmds is NULL\n");
 
 	//print_cmds_struct(&shell->cmds);
-}
+} */
+
