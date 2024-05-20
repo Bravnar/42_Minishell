@@ -35,7 +35,6 @@ t_lex	*init_lex(void)
 	return (cmds);
 } */
 
-
 t_main	*init_structs(char **envp)
 {
 	t_main	*shell;
@@ -46,9 +45,13 @@ t_main	*init_structs(char **envp)
 		shell->l = init_lex();
 		//shell->cmds = init_cmds();
 		shell->counts = init_counts();
-		shell->prompt = PROMPT;
+		shell->prompt = BOLD_CYAN PROMPT RESET;
 		shell->envp = envp;
+		shell->has_env = 1;
 		populate_envp(shell);
+		shell->username = get_env(&shell->env, "$USER");
+		if (shell->username == NULL)
+			shell->prompt = BOLD_YELLOW FACE BOLD_WHITE THROW RESET;
 	}
 	return (shell);
 }

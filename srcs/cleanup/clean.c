@@ -37,5 +37,6 @@ void	free_main(t_main *shell)
 	free_cmds(shell->cmds);
 	free_count(shell->counts);
 	free_nodes(shell->env);
+	clear_t_cmds(shell);
 	free (shell);
 }
