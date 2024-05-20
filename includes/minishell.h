@@ -26,7 +26,7 @@
 /*                                  DEFINES                                   */
 /*----------------------------------------------------------------------------*/
 
-# define PROMPT CYAN"EHL_Bangers $ "RESET
+# define PROMPT "EHL_Bangers $ "
 # define TRUE 1
 # define FALSE 0
 # define WHITESPACE " \t\n\r\f\v"
@@ -35,6 +35,11 @@
 # define SPECIAL_W_SPACE " $<>|;\'\""
 # define REDIRS "<>"
 # define PIPE "|"
+# define PIPE_REDIRS "|<>"
+# define FACE "(\u256F\u00B0\u25A1\u00B0)\u256F"
+# define THROW "\uFE35 \u253Benv\u253B--> "
+
+# define SHELL "minish\x1B[1;34mEHL: \x1B[0m"
 
 
 /*----------------------------------------------------------------------------*/

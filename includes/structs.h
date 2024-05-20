@@ -101,6 +101,8 @@ typedef struct s_main
 	char			**av;
 	char			**envp;
 	char			*prompt;
+	char			*username;
+	int				has_env;
 	t_lex			*l;
 	t_cmds			*cmds;
 	t_envp			*env;

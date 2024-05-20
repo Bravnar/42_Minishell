@@ -22,8 +22,10 @@ int	check_redirs(t_lex *l)
 		{
 			if (ms_lstsize(l->link) == 1)
 				l->err_code = BAD_REDIRS_NL;
-			else if (tmp->next && ft_strchr(REDIRS, tmp->next->value[0]))
+			else if (tmp->next && (ft_strchr(REDIRS, tmp->next->value[0])))
 				l->err_code = BAD_REDIRS;
+			else if (tmp->next && (ft_strchr(PIPE, tmp->next->value[0])))
+				l->err_code = BAD_PIPES;
 			else if (ft_strlen(tmp->value) > 2)
 				l->err_code = BAD_REDIRS;
 			else if (!tmp->next)

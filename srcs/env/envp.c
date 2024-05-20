@@ -1,11 +1,28 @@
 #include "minishell.h"
 
+void	no_env_handle(t_main *shell)
+{
+	t_envp	*new_node;
+	char	*get_path;
+	char	path[PATH_MAX];
+
+	get_path = NULL;
+	shell->has_env = 0;
+	shell->prompt = BOLD_YELLOW FACE BOLD_WHITE THROW RESET;
+	get_path = getcwd(get_path, sizeof(path));
+	new_node = new_env_node("PWD", get_path);
+	add_env_node(&shell->env, new_node);
+	new_node = new_env_node("SHLVL", "1");
+	add_env_node(&shell->env, new_node);
+	new_node = new_env_node("_", "/usr/bin/env");
+	add_env_node(&shell->env, new_node);
+}
+
 char	*get_env(t_envp **head, char *var)
 {
 	t_envp	*tmp;
 
 	tmp = *head;
-
 	if (*var == '$')
 		var++;
 	while (tmp)
@@ -24,6 +41,8 @@ void	populate_envp(t_main *shell)
 	char	**tmp_split;
 	t_envp	*new_node;
 
+	if (shell->envp[0] == NULL)
+		no_env_handle(shell);
 	i = -1;
 	while (shell->envp[++i])
 	{
