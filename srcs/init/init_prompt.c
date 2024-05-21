@@ -1,5 +1,14 @@
 #include "minishell.h"
 
+void	join_continued(char *final, t_main *shell)
+{
+	char	*one;
+
+	one = ft_strjoin(G_ARROW_SIGN, final);
+	shell->prompt = ft_strdup(one);
+	free(one);
+}
+
 char	*join_prompt(char **part)
 {
 	int		i;
@@ -39,9 +48,9 @@ void	terminal_prompt(t_main *shell)
 	tmp = join_prompt(curr_wd);
 	ft_free_arr(curr_wd);
 	full = ft_strjoin(intro, tmp);
-	final = ft_strjoin(full, "$ ");
-	//full = ft_strjoin(full, "$ ");
-	shell->prompt = ft_strdup(final);
+	final = ft_strjoin(full, X_SIGN);
+	join_continued(final, shell);
+	//shell->prompt = ft_strdup(final);
 	free(intro);
 	free(final);
 	free(full);

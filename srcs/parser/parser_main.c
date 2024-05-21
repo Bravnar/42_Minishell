@@ -59,7 +59,7 @@ void	parser_main(t_main *shell)
 	lex = shell->l;
 	parser_logic(lex);
 	parser_body(shell);
-	//print_list(&lex->link);
-	print_main_struct(&shell->cmds);
-	clear_t_cmds(shell);
+	// print_list(&lex->link);
+	// print_main_struct(&shell->cmds);
+	//clear_t_cmds(shell);
 }

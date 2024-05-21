@@ -11,10 +11,6 @@ SRCS=	srcs/main/main.c \
 		srcs/lexer/lexer_funcs.c \
 		srcs/lexer/lexer_info_fill.c \
 		srcs/lexer/lexer_llist_utils.c \
-		srcs/builtins/pwd.c \
-		srcs/builtins/cd.c \
-		srcs/builtins/env.c \
-		srcs/builtins/echo.c \
 		srcs/env/envp.c \
 		srcs/env/envp_utils.c \
 		srcs/cleanup/clean.c \
@@ -23,6 +19,11 @@ SRCS=	srcs/main/main.c \
 		srcs/parser/parser_funcs.c \
 		srcs/parser/parser_main.c \
 		srcs/parser/parser_free.c \
+		srcs/builtins_stan/cd.c \
+		#srcs/builtins/pwd.c \
+		#rcs/builtins/cd.c \
+		#srcs/builtins/env.c \
+		#srcs/builtins/echo.c \
 
 CC= gcc
 

@@ -26,7 +26,6 @@
 /*                                  DEFINES                                   */
 /*----------------------------------------------------------------------------*/
 
-# define PROMPT "EHL_Bangers $ "
 # define TRUE 1
 # define FALSE 0
 # define WHITESPACE " \t\n\r\f\v"
@@ -39,7 +38,19 @@
 # define FACE "(\u256F\u00B0\u25A1\u00B0)\u256F"
 # define THROW "\uFE35 \u253Benv\u253B--> "
 
+/* PROMPT */
+
+# define PROMPT "EHL_Bangers $ "
 # define SHELL "\x1B[1;37mminish\x1B[1;34mEHL:\x1B[0m"
+# define G_ARROW_SIGN "\033[1;32m\u279c\033[0m  "
+# define R_ARROW_SIGN "\033[1;31m\u279c\033[0m  "
+# define SPACE_SIGN "\001\033[1;96m\002 "
+# define X_SIGN " \033[1;34m\u2718\033[0m "
+
+/* FOR ERRORS */
+# define MSHELL "minishell: "
+# define TOO_MANY_ARGS "too many arguments"
+# define NO_DIR "no such file or directory"
 
 
 /*----------------------------------------------------------------------------*/
@@ -50,10 +61,10 @@
 
 /* Builtins */
 
-void	pwd(void);
+/* void	pwd(void);
 void	cd(char *dirname);
 void	env(char **ENV);
-void	echo(char **args, char **ENV);
+void	echo(char **args, char **ENV); */
 
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
@@ -73,6 +84,7 @@ void	print_envp(t_envp **head);
 void	populate_envp(t_main *shell);
 char	*get_env(t_envp **head, char *var);
 void	free_nodes(t_envp *token_list);
+void	set_env(t_envp **head, char *key, char *value);
 
 /*----------------------------------ERRORS DIR--------------------------------*/
 
@@ -163,5 +175,7 @@ int		check_quotes(t_lex *l);
 void	reset_quotes(t_lex *l);
 int		check_redirs(t_lex *l);
 int		check_pipes(t_lex *l);
+
+void	cd(t_main *shell, char **cmds);
 
 #endif
