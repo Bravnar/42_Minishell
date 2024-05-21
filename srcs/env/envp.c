@@ -34,6 +34,25 @@ char	*get_env(t_envp **head, char *var)
 	return (NULL);
 }
 
+void	set_env(t_envp **head, char *key, char *value)
+{
+	t_envp	*tmp;
+
+	tmp = *head;
+	if (*key == '$')
+		key++;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->key, key))
+		{
+			if (tmp->value)
+				free(tmp->value);
+				tmp->value = ft_strdup(value);
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	populate_envp(t_main *shell)
 {
 	int		i;

@@ -3,6 +3,7 @@
 void	print_main_struct(t_cmds **main)
 {
 	t_cmds	*tmp;
+	t_files	*file_tmp;
 	int	i;
 
 	tmp = *main;
@@ -13,10 +14,11 @@ void	print_main_struct(t_cmds **main)
 		while (tmp->cmd_grp[++i])
 			printf("[%s]\n", tmp->cmd_grp[i]);
 		printf("..............\nFiles: \n");
-		while (tmp->files)
+		file_tmp = tmp->files;
+		while (file_tmp)
 		{
 			printf("name: %s type: %d\n", tmp->files->file_name, tmp->files->type);
-			tmp->files = tmp->files->next;
+			file_tmp = file_tmp->next;
 		}
 		printf("--------------------------\n");
 		tmp = tmp->next;
@@ -57,7 +59,7 @@ void	parser_main(t_main *shell)
 	lex = shell->l;
 	parser_logic(lex);
 	parser_body(shell);
-	print_list(&lex->link);
-	print_main_struct(&shell->cmds);
-	clear_t_cmds(shell);
+	// print_list(&lex->link);
+	// print_main_struct(&shell->cmds);
+	//clear_t_cmds(shell);
 }

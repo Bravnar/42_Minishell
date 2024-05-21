@@ -4,16 +4,13 @@ INCLUDES = includes
 
 SRCS=	srcs/main/main.c \
 		srcs/init/init.c \
+		srcs/init/init_prompt.c \
 		srcs/lexer/lexer_main.c \
 		srcs/errors/errors.c \
 		srcs/syntax/check_syntax.c \
 		srcs/lexer/lexer_funcs.c \
 		srcs/lexer/lexer_info_fill.c \
 		srcs/lexer/lexer_llist_utils.c \
-		srcs/builtins/pwd.c \
-		srcs/builtins/cd.c \
-		srcs/builtins/env.c \
-		srcs/builtins/echo.c \
 		srcs/env/envp.c \
 		srcs/env/envp_utils.c \
 		srcs/cleanup/clean.c \
@@ -22,6 +19,11 @@ SRCS=	srcs/main/main.c \
 		srcs/parser/parser_funcs.c \
 		srcs/parser/parser_main.c \
 		srcs/parser/parser_free.c \
+		srcs/builtins_stan/cd.c \
+		#srcs/builtins/pwd.c \
+		#rcs/builtins/cd.c \
+		#srcs/builtins/env.c \
+		#srcs/builtins/echo.c \
 
 CC= gcc
 
@@ -30,7 +32,8 @@ CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
 LIBFT = 	lib
 LIBFT_LIB = $(LIBFT)/my_lib.a
 
-SANITIZE= -g3 -fsanitize=address
+#SANITIZE= -g3 -fsanitize=address
+SANITIZE= -g
 
 # Color Variables
 RED=\033[0;31m

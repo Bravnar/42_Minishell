@@ -11,6 +11,11 @@ t_files	*new_file_node(t_llex *llex, t_main *shell)
 		new->file_name = ft_strdup(get_env(&shell->env, llex->value));
 	else
 		new->file_name = ft_strdup(llex->value);
+	if (!new->file_name)
+	{
+		free(new);
+		return (NULL);
+	}
 	new->type = llex->type;
 	new->next = NULL;
 	new->prev = NULL;
