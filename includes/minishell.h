@@ -39,7 +39,7 @@
 # define FACE "(\u256F\u00B0\u25A1\u00B0)\u256F"
 # define THROW "\uFE35 \u253Benv\u253B--> "
 
-# define SHELL "minish\x1B[1;34mEHL: \x1B[0m"
+# define SHELL "\x1B[1;37mminish\x1B[1;34mEHL:\x1B[0m"
 
 
 /*----------------------------------------------------------------------------*/
@@ -85,6 +85,7 @@ void	error_handler(t_err code);
 /* INIT */
 
 t_main	*init_structs(char **envp);
+void	terminal_prompt(t_main *shell);
 
 /*----------------------------------LEXER DIR---------------------------------*/
 

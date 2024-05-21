@@ -5,10 +5,10 @@
 	return (calloc(1, sizeof(t_llex)));
 } */
 
-t_counts	*init_counts(void)
+/* t_counts	*init_counts(void)
 {
 	return (ft_calloc(1, sizeof(t_counts)));
-}
+} */
 
 t_lex	*init_lex(void)
 {
@@ -43,12 +43,11 @@ t_main	*init_structs(char **envp)
 	if (shell)
 	{
 		shell->l = init_lex();
-		//shell->cmds = init_cmds();
-		shell->counts = init_counts();
-		shell->prompt = BOLD_CYAN PROMPT RESET;
+		// shell->counts = init_counts();
 		shell->envp = envp;
 		shell->has_env = 1;
 		populate_envp(shell);
+		terminal_prompt(shell);
 		shell->username = get_env(&shell->env, "$USER");
 		if (shell->username == NULL)
 			shell->prompt = BOLD_YELLOW FACE BOLD_WHITE THROW RESET;

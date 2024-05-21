@@ -39,6 +39,7 @@ void	gameplay_loop(t_main *shell)
 				print_envp(&shell->env);
 		}
 		free_all(shell);
+		clear_t_cmds(shell);
 		count++;
 	}
 }
