@@ -46,8 +46,10 @@ void	set_env(t_envp **head, char *key, char *value)
 		if (!ft_strcmp(tmp->key, key))
 		{
 			if (tmp->value)
+			{
 				free(tmp->value);
 				tmp->value = ft_strdup(value);
+			}
 		}
 		tmp = tmp->next;
 	}
