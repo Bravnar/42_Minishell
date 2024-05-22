@@ -19,7 +19,7 @@ void	go_home(t_main *shell, char **cmds, char *old_pwd)
 
 void	adjust_pwd(t_main *shell, char *old_pwd)
 {
-	char	path[PATH_MAX];
+	char	path[1024];
 	char	*get_path;
 
 	get_path = NULL;

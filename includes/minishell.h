@@ -41,11 +41,36 @@
 /* PROMPT */
 
 # define PROMPT "EHL_Bangers $ "
-# define SHELL "\x1B[1;37mminish\x1B[1;34mEHL:\x1B[0m"
-# define G_ARROW_SIGN "\033[1;32m\u279c\033[0m  "
-# define R_ARROW_SIGN "\033[1;31m\u279c\033[0m  "
-# define SPACE_SIGN "\001\033[1;96m\002 "
-# define X_SIGN " \033[1;34m\u2718\033[0m "
+// # define SHELL "\x1B[1;37mminish\x1B[1;34mEHL:\x1B[0m"
+// # define G_ARROW_SIGN "\001\033[1;32m\002\u279c\001\033[0m  "
+// # define R_ARROW_SIGN "\033[1;31m\u279c\033[0m  "
+// # define SPACE_SIGN "\001\033[1;96m\002 "
+// # define X_SIGN " \033[1;34m\002\u2718\001\033[0m\002 "
+
+// # define SHELL "\001\x1B[1;37m\002minish\001\x1B[1;34m\002EHL:\001\x1B[0m\002"
+
+
+// # define MINISH "\001\e\[1m\e[37m\002\001minish\002"
+// # define EHL "\001\e\[1m\e[34m\002\001EHL:\002\001\e[0m\002"
+// # define G_ARROW_SIGN "\001\e[1m\e[32m\002\001\u279c\002\001 \002"
+// # define X_SIGN "\001\e[1m\e[34m\002\001 \002\001\u2718\002\001 \002\001\e[0m\002"
+
+
+// # define MINISH "\001\033[1;37m\002minish"
+// # define EHL "\001\033[1;34m\002EHL:\001\033[0m\002"
+// # define G_ARROW_SIGN "\001\033[1;32m\002➜\001\033[0m\002  "
+// //# define G_ARROW_SIGN "\001\u279c\002"
+// # define X_SIGN "\001\033[1;34m\002 ✘ \001\033[0m\002"
+
+# define MINISH "\001\033[01;37m\002minish\001\033[00m\002"
+# define EHL "\001\033[01;34m\002EHL:\001\033[00m\002"
+# define G_ARROW_SIGN "\001\033[01;32m\002➜\001\033[00m\002  "
+# define X_SIGN "\001\033[01;34m\002 ✘ \001\033[00m\002"
+
+// # define MINISH "minish"
+// # define EHL "EHL:"
+// # define G_ARROW_SIGN "➜  "
+// # define X_SIGN " ✘ "
 
 /* FOR ERRORS */
 # define MSHELL "minishell: "
@@ -98,6 +123,8 @@ void	error_handler(t_err code);
 
 t_main	*init_structs(char **envp);
 void	terminal_prompt(t_main *shell);
+
+void 	print_prompt_info(const char *prompt);
 
 /*----------------------------------LEXER DIR---------------------------------*/
 

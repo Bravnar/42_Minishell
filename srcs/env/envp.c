@@ -4,7 +4,7 @@ void	no_env_handle(t_main *shell)
 {
 	t_envp	*new_node;
 	char	*get_path;
-	char	path[PATH_MAX];
+	char	path[1024];
 
 	get_path = NULL;
 	shell->has_env = 0;
