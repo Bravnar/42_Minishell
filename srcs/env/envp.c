@@ -1,21 +1,56 @@
 #include "minishell.h"
 
-void	no_env_handle(t_main *shell)
+char	*my_get_path(void)
 {
-	t_envp	*new_node;
 	char	*get_path;
 	char	path[1024];
 
 	get_path = NULL;
-	shell->has_env = 0;
-	shell->prompt = BOLD_YELLOW FACE BOLD_WHITE THROW RESET;
 	get_path = getcwd(get_path, sizeof(path));
+	return (get_path);
+}
+
+void	populate_no_env(t_main *shell)
+{
+	t_envp	*new_node;
+	char	*get_path;
+
+	get_path = my_get_path();
 	new_node = new_env_node("PWD", get_path);
 	add_env_node(&shell->env, new_node);
 	new_node = new_env_node("SHLVL", "1");
 	add_env_node(&shell->env, new_node);
 	new_node = new_env_node("_", "/usr/bin/env");
 	add_env_node(&shell->env, new_node);
+	free(get_path);
+}
+
+void	make_no_env_prompt(t_main *shell)
+{
+	char	*cwd;
+	char	*first_part;
+	char	*second_part;
+	char	*final;
+
+	if (shell->prompt)
+		free(shell->prompt);
+	cwd = my_get_path();
+	first_part = ft_better_join(FACE, THROW);
+	second_part = ft_better_join(first_part, cwd);
+	final = ft_better_join(second_part, X_YELLOW);
+	shell->prompt = ft_strdup(final);
+	free(cwd);
+	free(first_part);
+	free(second_part);
+	free(final);
+}
+
+void	no_env_handle(t_main *shell)
+{
+	shell->has_env = 0;
+	shell->prompt = NULL;
+	populate_no_env(shell);
+	//make_no_env_prompt(shell);
 }
 
 char	*get_env(t_envp **head, char *var)
@@ -63,7 +98,10 @@ void	populate_envp(t_main *shell)
 	t_envp	*new_node;
 
 	if (shell->envp[0] == NULL)
+	{
 		no_env_handle(shell);
+		return ;
+	}
 	i = -1;
 	while (shell->envp[++i])
 	{

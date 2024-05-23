@@ -23,12 +23,8 @@ void	builtins(t_cmds *cmds, t_main *shell)
 {
 	if (cmds && cmds->cmd_grp && cmds->cmd_grp[0])
 	{
-		//printf("current cmd_grp arg: %s\n", cmds->cmd_grp[0]);
 		if (!ft_strcmp(cmds->cmd_grp[0], "cd"))
-		{
-			//printf("executing cd\n");
 			cd(shell, cmds->cmd_grp);
-		}
 		else if (!ft_strcmp(cmds->cmd_grp[0], "env"))
 			print_envp(&shell->env);
 	}
@@ -36,8 +32,8 @@ void	builtins(t_cmds *cmds, t_main *shell)
 
 void	my_rl_initialize(void)
 {
-	int	fd;
-	int	saved_stdin;
+	int		fd;
+	int		saved_stdin;
 	char	*dummy;
 
 	fd = open("dev/null.c", O_RDONLY, 777);
@@ -56,15 +52,13 @@ void	my_rl_initialize(void)
 void	gameplay_loop(t_main *shell)
 {
 	t_lex	*lex;
-	//int		count = 0;
-	
+
 	lex = shell->l;
-	//while (count < 3)
-	my_rl_initialize();
+	if (!APPLE)
+		my_rl_initialize();
 	while (1)
 	{
 		terminal_prompt(shell);
-		//print_prompt_info(shell->prompt);
 		lex->input = readline(shell->prompt);
 		if (!lex->input)
 			break ;
@@ -74,7 +68,6 @@ void	gameplay_loop(t_main *shell)
 		builtins(shell->cmds, shell);
 		free_all(shell);
 		clear_t_cmds(shell);
-		//count++;
 	}
 }
 
@@ -82,8 +75,8 @@ int	main(int ac, char **av, char **envp)
 {
 	t_main	*shell;
 
-	(void)	ac;
-	(void)	av;
+	(void) ac;
+	(void) av;
 	shell = init_structs(envp);
 	gameplay_loop(shell);
 	free_main(shell);

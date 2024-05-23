@@ -34,7 +34,7 @@ char	*join_prompt(char **part)
 void print_prompt_info(const char *prompt) 
 {
     int visible_length = 0;
-    int actual_length = strlen(prompt);
+    int actual_length = ft_strlen(prompt);
     int i = 0;
 
     while (prompt[i] != '\0') {
@@ -65,7 +65,10 @@ void	terminal_prompt(t_main *shell)
 	char	*final;
 
 	if (!shell->has_env)
+	{
+		make_no_env_prompt(shell);
 		return ;
+	}
 	if (shell->prompt)
 		free(shell->prompt);
 	cwd = ft_split(get_env(&shell->env, "PWD"), '/');

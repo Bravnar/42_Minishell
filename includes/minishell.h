@@ -35,48 +35,54 @@
 # define REDIRS "<>"
 # define PIPE "|"
 # define PIPE_REDIRS "|<>"
-# define FACE "(\u256F\u00B0\u25A1\u00B0)\u256F"
-# define THROW "\uFE35 \u253Benv\u253B--> "
 
 /* PROMPT */
 
-# define PROMPT "EHL_Bangers $ "
-// # define SHELL "\x1B[1;37mminish\x1B[1;34mEHL:\x1B[0m"
-// # define G_ARROW_SIGN "\001\033[1;32m\002\u279c\001\033[0m  "
-// # define R_ARROW_SIGN "\033[1;31m\u279c\033[0m  "
-// # define SPACE_SIGN "\001\033[1;96m\002 "
-// # define X_SIGN " \033[1;34m\002\u2718\001\033[0m\002 "
+# ifdef __APPLE__
 
-// # define SHELL "\001\x1B[1;37m\002minish\001\x1B[1;34m\002EHL:\001\x1B[0m\002"
+/* APPLE VERSION */
 
+#  define APPLE 1
 
-// # define MINISH "\001\e\[1m\e[37m\002\001minish\002"
-// # define EHL "\001\e\[1m\e[34m\002\001EHL:\002\001\e[0m\002"
-// # define G_ARROW_SIGN "\001\e[1m\e[32m\002\001\u279c\002\001 \002"
-// # define X_SIGN "\001\e[1m\e[34m\002\001 \002\001\u2718\002\001 \002\001\e[0m\002"
+#  define MINISH "\033[01;37mminish\033[00m"
+#  define EHL "\033[01;34mEHL:\033[00m"
+#  define G_ARROW_SIGN "\033[01;32m➜\033[00m  "
+#  define X_SIGN "\033[01;34m ✘ \033[00m"
 
+// #  define MINISH "\001\033[01;37m\002minish\001\033[00m\002"
+// #  define EHL "\001\033[01;34m\002EHL:\001\033[00m\002"
+// #  define G_ARROW_SIGN "\001\033[01;32m\002➜\001\033[00m\002  "
+// #  define X_SIGN "\001\033[01;34m\002 ✘ \001\033[00m\002"
 
-// # define MINISH "\001\033[1;37m\002minish"
-// # define EHL "\001\033[1;34m\002EHL:\001\033[0m\002"
-// # define G_ARROW_SIGN "\001\033[1;32m\002➜\001\033[0m\002  "
-// //# define G_ARROW_SIGN "\001\u279c\002"
-// # define X_SIGN "\001\033[1;34m\002 ✘ \001\033[0m\002"
+/* NO ENV */
 
-# define MINISH "\001\033[01;37m\002minish\001\033[00m\002"
-# define EHL "\001\033[01;34m\002EHL:\001\033[00m\002"
-# define G_ARROW_SIGN "\001\033[01;32m\002➜\001\033[00m\002  "
-# define X_SIGN "\001\033[01;34m\002 ✘ \001\033[00m\002"
+#  define FACE "\033[1;33m(\u256F\u00B0\u25A1\u00B0)\u256F"
+#  define THROW "\033[1;37m \uFE35 | NO ENV |:\033[00m"
+#  define X_YELLOW "\033[01;33m ✘ \033[00m"
 
-// # define MINISH "minish"
-// # define EHL "EHL:"
-// # define G_ARROW_SIGN "➜  "
-// # define X_SIGN " ✘ "
+# else
+
+/* LINUX VERSION */
+
+#  define APPLE 0
+
+#  define MINISH "\001\033[01;37m\002minish\001\033[00m\002"
+#  define EHL "\001\033[01;34m\002EHL:\001\033[00m\002"
+#  define G_ARROW_SIGN "\001\033[01;32m\002➜\001\033[00m\002  "
+#  define X_SIGN "\001\033[01;34m\002 ✘ \001\033[00m\002"
+
+/* NO ENV LINUX */
+
+#  define FACE "\001\x1B[1;33m\002(\u256F\u00B0\u25A1\u00B0)\u256F"
+#  define THROW "\001\x1B[1;37m\002 \uFE35 | NO ENV |:\001\033[00m\002"
+#  define X_YELLOW "\001\033[01;33m\002 ✘ \001\033[00m\002"
+
+# endif
 
 /* FOR ERRORS */
 # define MSHELL "minishell: "
 # define TOO_MANY_ARGS "too many arguments"
 # define NO_DIR "no such file or directory"
-
 
 /*----------------------------------------------------------------------------*/
 /*                                  FUNCTIONS                                 */
@@ -110,6 +116,7 @@ void	populate_envp(t_main *shell);
 char	*get_env(t_envp **head, char *var);
 void	free_nodes(t_envp *token_list);
 void	set_env(t_envp **head, char *key, char *value);
+void	make_no_env_prompt(t_main *shell);
 
 /*----------------------------------ERRORS DIR--------------------------------*/
 
@@ -206,3 +213,24 @@ int		check_pipes(t_lex *l);
 void	cd(t_main *shell, char **cmds);
 
 #endif
+
+// # define SHELL "\x1B[1;37mminish\x1B[1;34mEHL:\x1B[0m"
+// # define G_ARROW_SIGN "\001\033[1;32m\002\u279c\001\033[0m  "
+// # define R_ARROW_SIGN "\033[1;31m\u279c\033[0m  "
+// # define SPACE_SIGN "\001\033[1;96m\002 "
+// # define X_SIGN " \033[1;34m\002\u2718\001\033[0m\002 "
+
+// # define SHELL "\001\x1B[1;37m\002minish\001\x1B[1;34m\002EHL:\001\x1B[0m\002"
+
+// # define MINISH "\001\e\[1m\e[37m\002\001minish\002"
+// # define EHL "\001\e\[1m\e[34m\002\001EHL:\002\001\e[0m\002"
+// # define G_ARROW_SIGN "\001\e[1m\e[32m\002\001\u279c\002\001 \002"
+// # define X_SIGN "\001\e[1m\e[34m\002\001 \002\001\u2718\002\001 \002\001\e[0m\002"
+
+
+// # define MINISH "\001\033[1;37m\002minish"
+// # define EHL "\001\033[1;34m\002EHL:\001\033[0m\002"
+// # define G_ARROW_SIGN "\001\033[1;32m\002➜\001\033[0m\002  "
+// //# define G_ARROW_SIGN "\001\u279c\002"
+// # define X_SIGN "\001\033[1;34m\002 ✘ \001\033[0m\002"
+

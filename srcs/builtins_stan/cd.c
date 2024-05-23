@@ -7,6 +7,7 @@ void	go_home(t_main *shell, char **cmds, char *old_pwd)
 
 	(void) cmds;
 	(void) old_pwd;
+	//if (!cmds[1] && !shell->has_env)
 	home_dir = get_env(&shell->env, "HOME");
 	// tmp = get_env(&shell->env, "HOME");
 	// home_dir = ft_strtrim(tmp, "/");
