@@ -25,6 +25,7 @@ typedef enum e_err
 	BAD_REDIRS,
 	BAD_PIPES,
 	BAD_REDIRS_NL,
+	MANY_ARGS,
 }	t_err;
 
 typedef struct s_envp
@@ -103,6 +104,7 @@ typedef struct s_main
 	char			*prompt;
 	char			*username;
 	int				has_env;
+	t_err			err_code;
 	t_lex			*l;
 	t_cmds			*cmds;
 	t_envp			*env;

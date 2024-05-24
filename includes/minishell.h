@@ -35,6 +35,8 @@
 # define REDIRS "<>"
 # define PIPE "|"
 # define PIPE_REDIRS "|<>"
+# define DOLLAR_CHARS "$?-0123456789"
+# define CANCEL_EXP "+~"
 
 /* PROMPT */
 
@@ -96,6 +98,16 @@
 void	cd(char *dirname);
 void	env(char **ENV);
 void	echo(char **args, char **ENV); */
+
+/*----------------------------------BUILTINS STAN DIR-------------------------*/
+
+/* CD */
+void	cd(t_main *shell, char **cmds);
+
+/* ENV */
+void	print_envp(t_envp **head);
+
+/* EXPORT */
 
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
@@ -181,6 +193,7 @@ char 	**create_cmd_arr(t_llex *tmp, t_main *shell, int count);
 void	add_cmds_node(t_cmds **head, t_cmds *new_node);
 t_cmds	*new_cmds_node(char **cmds, t_files *files, int index);
 int		count_commands(t_llex *head);
+char	*expand_if_needed(t_llex *iter, t_main *shell);
 
 /* PARSER_FUNCS */
 
@@ -209,8 +222,6 @@ int		check_quotes(t_lex *l);
 void	reset_quotes(t_lex *l);
 int		check_redirs(t_lex *l);
 int		check_pipes(t_lex *l);
-
-void	cd(t_main *shell, char **cmds);
 
 #endif
 

@@ -20,6 +20,7 @@ SRCS=	srcs/main/main.c \
 		srcs/parser/parser_main.c \
 		srcs/parser/parser_free.c \
 		srcs/builtins_stan/cd.c \
+		srcs/builtins_stan/env.c \
 		#srcs/builtins/pwd.c \
 		#rcs/builtins/cd.c \
 		#srcs/builtins/env.c \
@@ -32,8 +33,8 @@ CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
 LIBFT = 	lib
 LIBFT_LIB = $(LIBFT)/my_lib.a
 
-SANITIZE= -g3 -fsanitize=address
-# SANITIZE= -g
+#SANITIZE= -g3 -fsanitize=address
+SANITIZE= -g
 
 # Color Variables
 RED=\033[0;31m

@@ -58,7 +58,7 @@ void	add_env_node(t_envp **envp_head, t_envp *new_envp_node)
 	}
 }
 
-void	print_envp(t_envp **head)
+/* void	print_envp(t_envp **head)
 {
 	t_envp	*tmp;
 
@@ -73,4 +73,4 @@ void	print_envp(t_envp **head)
 		tmp = tmp->next;
 	}
 	// printf("}\n");
-}
+} */

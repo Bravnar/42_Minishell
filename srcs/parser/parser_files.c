@@ -41,6 +41,7 @@ void	add_file_node(t_files **file_head, t_files *new_file)
 t_files	*create_files_list(t_llex **tmp, t_main *shell)
 {
 	t_llex	*iter;
+	t_files	*new_node;
 	t_files	*files_head;
 
 	files_head = NULL;
@@ -49,11 +50,18 @@ t_files	*create_files_list(t_llex **tmp, t_main *shell)
 	{
 		if (iter && (iter->type == INFILE || iter->type == HEREDOC_END \
 		|| iter->type == OUTFILE || iter->type == OUTFILE_APP))
-			add_file_node(&files_head, new_file_node(iter, shell));
+		{
+			new_node = new_file_node(iter, shell);
+			if (!new_node)
+			{
+				iter = iter->next;
+				continue ;
+			}
+			else
+				add_file_node(&files_head, new_node);
+		}
 		iter = iter->next;
 	}
-	/* if (iter && iter->next)
-		iter = iter->next; */
 	*tmp = iter;
 	return (files_head);
 }

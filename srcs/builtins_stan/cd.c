@@ -81,7 +81,7 @@ void	cd(t_main *shell, char **cmds)
 		ft_fprintf(2, BOLD_RED"TMP! %s %s: %s\n"RESET, MSHELL, cmds[0], TOO_MANY_ARGS);
 		return ;
 	}
-	if (!cmds[1] || cmds[1][0] == '~')
+	if (!cmds[1] || !ft_strcmp(cmds[1], "~"))
 		go_home(shell, cmds, old_pwd);
 	else if (cmds[1][0] == '-')
 	{
@@ -97,3 +97,39 @@ void	cd(t_main *shell, char **cmds)
 	//printf(BOLD_YELLOW"PWD: %s\n"RESET, get_env(&shell->env, "PWD"));
 	//printf(BOLD_YELLOW"OLDPWD: %s\n"RESET, get_env(&shell->env, "OLDPWD"));
 }
+
+/* void	cd_check(t_main *shell, char **cmds, char *old_pwd)
+{
+	if (!cmds[1] || cmds[1][0] == '~')
+		cd_home(shell);
+	else if (cmds[1][0] == '-')
+		cd_swap(shell, old_pwd);
+	
+}
+
+void	cd_main(t_main *shell, char **cmds)
+{
+	char	*old_pwd;
+
+	old_pwd = get_env(&shell->env, "PWD");
+	if (cd_count(cmds))
+	{
+		shell->err_code = MANY_ARGS;
+		return (error_handler(shell->err_code));
+	}
+	if (!cmds || !cmds[0])
+		return ;
+	cd_check(shell, cmds, old_pwd);
+	adjust_pwd(shell, old_pwd);
+} */
+
+
+
+
+/* TODAY:
+	Finish cd and test everything
+	Organise all the files, for the builtins
+	Finish env + (env utils)
+	Start export (x=y etc.)
+	Create unset
+ */

@@ -22,7 +22,7 @@ char	**duplicate_cmds(char **cmds)
 	int		i;
 
 	i = -1;
-	while(cmds[++i])
+	while (cmds[++i])
 		;
 	result = malloc(sizeof(char *) * (i + 1));
 	if (!result)
@@ -81,7 +81,20 @@ void	add_cmds_node(t_cmds **head, t_cmds *new_node)
 	}
 }
 
-char **create_cmd_arr(t_llex *tmp, t_main *shell, int count)
+char	*expand_if_needed(t_llex *iter, t_main *shell)
+{
+	char	*expanded;
+
+	if (iter->needs_exp)
+	{
+		expanded = ft_strdup(get_env(&shell->env, iter->value));
+		if (expanded)
+			return (expanded);
+	}
+	return (ft_strdup(iter->value));
+}
+
+char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 {
 	char	**cmd_list;
 	t_llex	*iter;
@@ -95,18 +108,9 @@ char **create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 	while (iter && iter->type != PIPE_SYMBOL)
 	{
 		if (iter && iter->type == CMD)
-		{
-			if (iter->needs_exp)
-			{
-				printf("Result of get_env: %s\n", get_env(&shell->env, iter->value));
-				cmd_list[i++] = ft_strdup(get_env(&shell->env, iter->value));
-			}
-			else
-				cmd_list[i++] = ft_strdup(iter->value);
-		}
+			cmd_list[i++] = expand_if_needed(iter, shell);
 		iter = iter->next;
 	}
-	// *tmp = iter;
 	cmd_list[i] = NULL;
 	return (cmd_list);
 }
