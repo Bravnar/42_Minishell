@@ -102,11 +102,12 @@ char	*expand_if_needed(t_llex *iter, t_main *shell)
 	if (iter->needs_exp)
 	{
 		expanded = get_env(&shell->env, iter->value);
+		printf("expanded: %s\n", expanded);
 		if (expanded && expanded != iter->value)
 		{
 			dup_expanded = ft_strdup(expanded);
-			if (iter->value[0] == '~')
-				free(expanded);
+			// if (iter->value[0] == '~')
+			// 	free(expanded);
 			return (dup_expanded);
 		}
 	}

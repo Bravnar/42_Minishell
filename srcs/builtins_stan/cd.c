@@ -9,6 +9,7 @@ void	go_home(t_main *shell, char **cmds, char *old_pwd)
 	(void) old_pwd;
 	//if (!cmds[1] && !shell->has_env)
 	home_dir = get_env(&shell->env, "HOME");
+	printf("im in go_home, the home_dir is -> %s\n", home_dir);
 	// tmp = get_env(&shell->env, "HOME");
 	// home_dir = ft_strtrim(tmp, "/");
 	//printf("home_dir: %s\n", home_dir);
@@ -81,7 +82,8 @@ void	cd(t_main *shell, char **cmds)
 		ft_fprintf(2, BOLD_RED"TMP! %s %s: %s\n"RESET, MSHELL, cmds[0], TOO_MANY_ARGS);
 		return ;
 	}
-	if (!cmds[1] || !ft_strcmp(cmds[1], "~"))
+	//if (!cmds[1] || !ft_strcmp(cmds[1], "~"))
+	if (!cmds[1])
 		go_home(shell, cmds, old_pwd);
 	else if (cmds[1][0] == '-')
 	{

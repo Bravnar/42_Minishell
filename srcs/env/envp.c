@@ -22,6 +22,8 @@ void	populate_no_env(t_main *shell)
 	add_env_node(&shell->env, new_node);
 	new_node = new_env_node("_", "/usr/bin/env");
 	add_env_node(&shell->env, new_node);
+	new_node = new_env_node("HOME", NULL);
+	add_env_node(&shell->env, new_node);
 	free(get_path);
 }
 
@@ -50,7 +52,6 @@ void	no_env_handle(t_main *shell)
 	shell->has_env = 0;
 	shell->prompt = NULL;
 	populate_no_env(shell);
-	//make_no_env_prompt(shell);
 }
 char	*handle_tilde(t_envp **head, char *var)
 {

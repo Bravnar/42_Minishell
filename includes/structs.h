@@ -32,6 +32,7 @@ typedef struct s_envp
 {
 	char			*key;
 	char			*value;
+	int				printable;
 	struct s_envp	*next;
 	struct s_envp	*prev;
 }	t_envp;

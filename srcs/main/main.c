@@ -24,7 +24,7 @@ void	builtins(t_cmds *cmds, t_main *shell)
 	if (cmds && cmds->cmd_grp && cmds->cmd_grp[0])
 	{
 		if (!ft_strcmp(cmds->cmd_grp[0], "cd"))
-			cd(shell, cmds->cmd_grp);
+			cd_new(shell, cmds->cmd_grp);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "env"))
 			print_envp(&shell->env);
 	}
@@ -81,3 +81,15 @@ int	main(int ac, char **av, char **envp)
 	gameplay_loop(shell);
 	free_main(shell);
 }
+
+/* Things to do:
+	1) CD error on -> cd
+	2) Do export function
+		a) sort env alphabetically and print
+		b) be able to set environmental variables
+		c) if no equal sign, doesn't appear in env
+		d) set a flag for env to appear not appear in export
+	3) Do unset function
+	4) check how ~ behaves in no env
+
+ */

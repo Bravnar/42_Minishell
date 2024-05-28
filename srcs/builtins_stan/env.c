@@ -11,7 +11,8 @@ void	print_envp(t_envp **head)
 	while (tmp != NULL)
 	{
 		// printf(BOLD_YELLOW"\t\"%s\" : \"%s\"\n"RESET, tmp->key, tmp->value);
-		printf("%s=%s\n", tmp->key, tmp->value);
+		if (tmp->printable == 1)
+			printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
 	// printf("}\n");

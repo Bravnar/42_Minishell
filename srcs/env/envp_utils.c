@@ -25,16 +25,20 @@ t_envp	*new_env_node(char *key, char *value)
 	node = malloc(sizeof(t_envp));
 	if (!node)
 		return (NULL);
-	if (!key || !value)
-	{
-		node->key = ft_strdup("(NULL)");
-		node->value = ft_strdup("(NULL)");
-	}
+	if (!key)
+		node->key = NULL;
 	else
-	{
 		node->key = ft_strdup(key);
+	if (!value)
+		node->value = NULL;
+	else
 		node->value = ft_strdup(value);
-	}
+	if (!ft_strcmp(node->key, "HOME"))
+		node->printable = 2;
+	else if (!node->key || !node->value)
+		node->printable = 0;
+	else
+		node->printable = 1;
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);

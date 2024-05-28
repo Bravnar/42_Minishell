@@ -37,6 +37,7 @@
 # define PIPE_REDIRS "|<>"
 # define DOLLAR_CHARS "$?-0123456789"
 # define CANCEL_EXP "+~"
+# define NO_HOME "HOME not defined"
 
 /* PROMPT */
 
@@ -103,6 +104,8 @@ void	echo(char **args, char **ENV); */
 
 /* CD */
 void	cd(t_main *shell, char **cmds);
+
+void	cd_new(t_main *shell, char **cmds);
 
 /* ENV */
 void	print_envp(t_envp **head);
