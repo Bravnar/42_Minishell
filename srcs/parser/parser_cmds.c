@@ -80,7 +80,7 @@ void	add_cmds_node(t_cmds **head, t_cmds *new_node)
 	}
 }
 
-char	*expand_if_needed(t_llex *iter, t_main *shell)
+/* char	*expand_if_needed(t_llex *iter, t_main *shell)
 {
 	char	*expanded;
 
@@ -89,6 +89,26 @@ char	*expand_if_needed(t_llex *iter, t_main *shell)
 		expanded = ft_strdup(get_env(&shell->env, iter->value));
 		if (expanded)
 			return (expanded);
+	}
+	return (ft_strdup(iter->value));
+} */
+
+char	*expand_if_needed(t_llex *iter, t_main *shell)
+{
+	char	*expanded;
+	char	*dup_expanded;
+
+	dup_expanded = NULL;
+	if (iter->needs_exp)
+	{
+		expanded = get_env(&shell->env, iter->value);
+		if (expanded && expanded != iter->value)
+		{
+			dup_expanded = ft_strdup(expanded);
+			if (iter->value[0] == '~')
+				free(expanded);
+			return (dup_expanded);
+		}
 	}
 	return (ft_strdup(iter->value));
 }
