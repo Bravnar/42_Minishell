@@ -52,6 +52,20 @@ void	no_env_handle(t_main *shell)
 	populate_no_env(shell);
 	//make_no_env_prompt(shell);
 }
+char	*handle_tilde(t_envp **head, char *var)
+{
+	char	*home;
+	char	*result;
+
+	home = get_env(head, "HOME");
+	var++;
+	if (*var && *var == '/')
+	{
+		result = ft_strjoin(home, var);
+		return (result);
+	}
+	return (home);
+}
 
 char	*get_env(t_envp **head, char *var)
 {
@@ -60,6 +74,8 @@ char	*get_env(t_envp **head, char *var)
 	tmp = *head;
 	if (*var == '$')
 		var++;
+	if (*var == '~')
+		return (handle_tilde(head, var));
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, var))

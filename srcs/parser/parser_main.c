@@ -4,7 +4,7 @@ void	print_main_struct(t_cmds **main)
 {
 	t_cmds	*tmp;
 	t_files	*file_tmp;
-	int	i;
+	int		i;
 
 	tmp = *main;
 	while (tmp)

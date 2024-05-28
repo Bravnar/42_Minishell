@@ -68,7 +68,6 @@ void	add_cmds_node(t_cmds **head, t_cmds *new_node)
 		printf("Error: head is NULL\n");
 	if (!new_node)
 		printf("Error: new_node is NULL\n");
-	//printf("What's in the head? %s\n", (*head)->file_in);
 	if (!*head)
 		*head = new_node;
 	else
