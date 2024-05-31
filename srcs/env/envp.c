@@ -107,6 +107,23 @@ void	set_env(t_envp **head, char *key, char *value)
 	}
 }
 
+void	add_env(t_main *shell, char *str)
+{
+	char	**split;
+	t_envp	*new_node;
+
+	split = NULL;
+	if (ft_strchr(str, '='))
+	{
+		split = ft_split(str, '=');
+		new_node = new_env_node(split[0], split[1]);
+	}
+	else
+		new_node = new_env_node(str, NULL);
+	add_env_node(&shell->env, new_node);
+	ft_free_arr(split);
+}
+
 void	populate_envp(t_main *shell)
 {
 	int		i;

@@ -1,5 +1,9 @@
 #include "minishell.h"
 
+/* 
+THIS FILE CAN BE DELETED
+ */
+
 void	go_home(t_main *shell, char **cmds, char *old_pwd)
 {
 	char	*home_dir;
@@ -124,14 +128,3 @@ void	cd_main(t_main *shell, char **cmds)
 	cd_check(shell, cmds, old_pwd);
 	adjust_pwd(shell, old_pwd);
 } */
-
-
-
-
-/* TODAY:
-	Finish cd and test everything
-	Organise all the files, for the builtins
-	Finish env + (env utils)
-	Start export (x=y etc.)
-	Create unset
- */

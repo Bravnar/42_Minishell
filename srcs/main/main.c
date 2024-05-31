@@ -27,6 +27,8 @@ void	builtins(t_cmds *cmds, t_main *shell)
 			cd_new(shell, cmds->cmd_grp);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "env"))
 			print_envp(&shell->env);
+		else if (!ft_strcmp(cmds->cmd_grp[0], "export"))
+			export(shell, cmds->cmd_grp);
 	}
 }
 

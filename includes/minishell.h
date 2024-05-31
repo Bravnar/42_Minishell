@@ -111,6 +111,7 @@ void	cd_new(t_main *shell, char **cmds);
 void	print_envp(t_envp **head);
 
 /* EXPORT */
+void	export(t_main *shell, char **cmds);
 
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
@@ -132,6 +133,7 @@ char	*get_env(t_envp **head, char *var);
 void	free_nodes(t_envp *token_list);
 void	set_env(t_envp **head, char *key, char *value);
 void	make_no_env_prompt(t_main *shell);
+void	add_env(t_main *shell, char *str);
 
 /*----------------------------------ERRORS DIR--------------------------------*/
 
