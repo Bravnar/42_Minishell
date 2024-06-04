@@ -52,6 +52,32 @@ void	parser_body(t_main *shell)
 	}
 }
 
+/* Main parser function that does the following:
+   1) parser_logic() sets the types for all tokens
+      this is used as the main navigation system
+	  to determine the rest afterwards
+   2) parser_body() is the Big Bertha
+      using the information from 1) it creates the
+	  main structure to be passed to execution
+	  using pipes as the main separator it creates
+	  sub groups by putting commands and arguments into
+	  a char ** and files to check for redirection into
+	  a linked list within the main linked list 
+	  the final deliverable looks like this
+	  
+	typedef struct s_cmds
+	{
+		char			**cmd_grp; ---> char ** of all cmds and args per pipe partion
+		t_files			*files; ---> linked list of all files per pipe partition
+		char			*file_in; ---> currently inactive, purpose is to store the last infile
+		char			*file_out; ---> currently inactive, purpose is to store the last outfile
+		int				is_heredoc; ---> I don't remember if used, probably not yet
+		int				is_append; ---> idem
+		int				index; ---> unused, but can be implemented
+		struct s_cmds	*next;
+		struct s_cmds	*prev;
+	}	t_cmds;*/
+
 void	parser_main(t_main *shell)
 {
 	t_lex	*lex;

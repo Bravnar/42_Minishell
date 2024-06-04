@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+
+/* Gameplay loop free */
 void	free_all(t_main *shell)
 {
 	if (shell->l->input)
@@ -18,7 +20,9 @@ void	free_all(t_main *shell)
 		shell->l->link = NULL;
 	}
 }
-
+/* Simple ft_strcmp to check builtins
+   To "catch" the builtins before going
+   to execution */
 void	builtins(t_cmds *cmds, t_main *shell)
 {
 	if (cmds && cmds->cmd_grp && cmds->cmd_grp[0])
@@ -31,6 +35,10 @@ void	builtins(t_cmds *cmds, t_main *shell)
 			export(shell, cmds->cmd_grp);
 	}
 }
+
+/* Only used to trick the linux machines for correct compilation 
+   Uses an empty file to trick readline into executing once
+   without user input */
 
 void	my_rl_initialize(void)
 {
@@ -67,6 +75,7 @@ void	gameplay_loop(t_main *shell)
 		if (lex->input[0])
 			add_history(lex->input);
 		lexer(lex, shell);
+		//parser_main() should be called here, for now is in lexer()
 		builtins(shell->cmds, shell);
 		free_all(shell);
 		clear_t_cmds(shell);
@@ -83,15 +92,3 @@ int	main(int ac, char **av, char **envp)
 	gameplay_loop(shell);
 	free_main(shell);
 }
-
-/* Things to do:
-	1) CD error on -> cd
-	2) Do export function
-		a) sort env alphabetically and print
-		b) be able to set environmental variables
-		c) if no equal sign, doesn't appear in env
-		d) set a flag for env to appear not appear in export
-	3) Do unset function
-	4) check how ~ behaves in no env
-
- */

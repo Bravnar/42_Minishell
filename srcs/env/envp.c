@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+/* Adapted function to easily get current working directory */
 char	*my_get_path(void)
 {
 	char	*get_path;
@@ -10,6 +11,7 @@ char	*my_get_path(void)
 	return (get_path);
 }
 
+/* Function to populate the no environment linked list (hardcoded) */
 void	populate_no_env(t_main *shell)
 {
 	t_envp	*new_node;
@@ -27,6 +29,7 @@ void	populate_no_env(t_main *shell)
 	free(get_path);
 }
 
+/* Function to create the prompt for the no environment program */
 void	make_no_env_prompt(t_main *shell)
 {
 	char	*cwd;
@@ -47,12 +50,15 @@ void	make_no_env_prompt(t_main *shell)
 	free(final);
 }
 
+/* Main no_env function */
 void	no_env_handle(t_main *shell)
 {
 	shell->has_env = 0;
 	shell->prompt = NULL;
 	populate_no_env(shell);
 }
+
+/* Function that handles the '~' character during the main getter function */
 char	*handle_tilde(t_envp **head, char *var)
 {
 	char	*home;
@@ -68,6 +74,8 @@ char	*handle_tilde(t_envp **head, char *var)
 	return (home);
 }
 
+/* Main getter function, searches through the t_envp
+ linked list by key and returns the value */
 char	*get_env(t_envp **head, char *var)
 {
 	t_envp	*tmp;
@@ -86,6 +94,7 @@ char	*get_env(t_envp **head, char *var)
 	return (NULL);
 }
 
+/* Main setter function, searches through t_envp by key and changes the value */
 void	set_env(t_envp **head, char *key, char *value)
 {
 	t_envp	*tmp;
@@ -107,6 +116,8 @@ void	set_env(t_envp **head, char *key, char *value)
 	}
 }
 
+/* Main add function, adds a key : value + printable
+ data to the end of t_envp */
 void	add_env(t_main *shell, char *str)
 {
 	char	**split;
@@ -124,6 +135,8 @@ void	add_env(t_main *shell, char *str)
 	ft_free_arr(split);
 }
 
+/* Function that is called once at the beginning of the 
+program to create our local copy of the envp */
 void	populate_envp(t_main *shell)
 {
 	int		i;

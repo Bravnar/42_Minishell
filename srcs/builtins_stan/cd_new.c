@@ -72,6 +72,6 @@ void	cd_new(t_main *shell, char **cmds)
 /*
 TO DO with CD
 1) Create a separate function that will handle no env
-2) Fix prompt generation when outside of constraints of '~'
+2) Fix prompt generation when outside of constraints of '~' IMPORTANT
 
 */

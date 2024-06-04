@@ -31,6 +31,7 @@ char	*join_prompt(char **part)
 	return (tmp);
 }
 
+/* Additional function to debug - not needed otherwise */
 void print_prompt_info(const char *prompt) 
 {
     int visible_length = 0;
@@ -56,6 +57,10 @@ void print_prompt_info(const char *prompt)
     printf("Visible Length: %d\n", visible_length);
 }
 
+/* Refactor to reduce (26 lines!!)
+   Function that creates the prompt 
+   It uses a group of defined strings to
+   strjoin them and output to the prompt */
 void	terminal_prompt(t_main *shell)
 {
 	char	**cwd;
@@ -72,13 +77,8 @@ void	terminal_prompt(t_main *shell)
 	if (shell->prompt)
 		free(shell->prompt);
 	cwd = ft_split(get_env(&shell->env, "PWD"), '/');
-	// printf("len G_ARROW: %zu\n", ft_strlen(G_ARROW_SIGN));
-	// printf("len MINISH: %zu\n", ft_strlen(MINISH));
 	tmp = ft_better_join(G_ARROW_SIGN, MINISH);
-	// printf("len tmp: %zu\n", ft_strlen(tmp));
-	// printf("len EHL: %zu\n", ft_strlen(EHL));
 	full_start = ft_better_join(tmp, EHL);
-	// printf("len full_start: %zu\n", ft_strlen(full_start));
 	free(tmp);
 	tmp = join_prompt(cwd);
 	ft_free_arr(cwd);
@@ -89,53 +89,4 @@ void	terminal_prompt(t_main *shell)
 	free(full_start);
 	free(end);
 	free(final);
-
-	//print_prompt_info(shell->prompt);
 }
-
-/* 
-void	terminal_prompt(t_main *shell)
-{
-	char	*intro;
-	char	**curr_wd;
-	char	*full;
-	char	*tmp;
-	char	*final;
-
-	if (!shell->has_env)
-		return ;
-	if (shell->prompt != NULL)
-		free(shell->prompt);
-	intro = ft_strdup(SHELL);
-	curr_wd = ft_split(get_env(&shell->env, "PWD"), '/');
-	tmp = join_prompt(curr_wd);
-	ft_free_arr(curr_wd);
-	full = ft_better_join(intro, tmp);
-	final = ft_better_join(full, X_SIGN);
-	join_continued(final, shell);
-	free(intro);
-	free(final);
-	free(full);
-	free(tmp);
-} */
-
-/* void	terminal_prompt(t_main *shell)
-{
-	char	*cwd;
-	char	*intro;
-	char	*temp;
-
-	if (!shell->has_env)
-		return ;
-	if (shell->prompt != NULL)
-		free(shell->prompt);
-	cwd = get_env(&shell->env, "PWD");
-	intro = ft_better_join(G_ARROW_SIGN, SH);
-	temp = ft_better_join(intro, cwd);
-	free(intro);
-	intro = ft_better_join(temp, X_SIGN);
-	free(temp);
-	shell->prompt = ft_strdup(intro);
-	free(intro);
-}
- */

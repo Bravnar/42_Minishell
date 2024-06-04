@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+/* Quick function to initialize t_lex
+   ft_calloc allows all bytes to be set to 0 or NULL */
 t_lex	*init_lex(void)
 {
 	t_lex	*lex;
@@ -8,6 +10,8 @@ t_lex	*init_lex(void)
 	return (lex);
 }
 
+/* Function to initialize the main structure
+   Also calls the populate environment here! */
 t_main	*init_structs(char **envp)
 {
 	t_main	*shell;

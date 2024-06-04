@@ -103,15 +103,26 @@ void	echo(char **args, char **ENV); */
 /*----------------------------------BUILTINS STAN DIR-------------------------*/
 
 /* CD */
-void	cd(t_main *shell, char **cmds);
 
 void	cd_new(t_main *shell, char **cmds);
+int		cd_count(char **cmds);
+void	adjust_pwd(t_main *shell, char *old_pwd);
+void	swap_old_new(t_main *shell, char **cmds, char *old_pwd);
+void	go_home(t_main *shell, char **cmds, char *cwd);
 
 /* ENV */
 void	print_envp(t_envp **head);
 
+
 /* EXPORT */
 void	export(t_main *shell, char **cmds);
+void	sort_local_copy(t_envp	**local);
+void	swap_nodes(t_envp *a, t_envp *b);
+t_envp	*copy_list(t_envp *src);
+void	copy_work(t_envp *n_n, t_envp **l_h, t_envp **l_t, t_envp *curr);
+void	print_local_copy(t_envp **head);
+int		count_export_args(char **cmds);
+void	free_local_copy(t_envp *local);
 
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
@@ -146,9 +157,13 @@ void	error_handler(t_err code);
 /* INIT */
 
 t_main	*init_structs(char **envp);
-void	terminal_prompt(t_main *shell);
+t_lex	*init_lex(void);
 
+/* INIT_PROMPT */
+
+void	terminal_prompt(t_main *shell);
 void 	print_prompt_info(const char *prompt);
+char	*join_prompt(char **part);
 
 /*----------------------------------LEXER DIR---------------------------------*/
 
