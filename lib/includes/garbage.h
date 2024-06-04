@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:16:57 by hmorand           #+#    #+#             */
-/*   Updated: 2024/04/01 14:00:45 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:50:11 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define GARBAGE_H
 
 # include <stdlib.h>
-
 
 typedef struct s_garbage
 {

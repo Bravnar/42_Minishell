@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_free_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 16:34:48 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/19 00:09:40 by bravnar          ###   ########.fr       */
+/*   Created: 2024/05/14 14:32:14 by smuravye          #+#    #+#             */
+/*   Updated: 2024/05/17 19:07:10 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_lib.h"
 
-char	*ft_strdup(const char *s)
+void	ft_free_arr(char **arr)
 {
-	char	*new_str;
-	int		i;
+	int	i;
 
-	if (!s)
-		return (NULL);
 	i = 0;
-	new_str = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!new_str)
-		return (NULL);
-	while (s[i])
-	{
-		new_str[i] = s[i];
-		i++;
-	}
-	new_str[i] = '\0';
-	return (new_str);
+	if (!arr || !arr[i])
+		return ;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }

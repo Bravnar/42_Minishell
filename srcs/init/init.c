@@ -1,28 +1,17 @@
 #include "minishell.h"
 
-t_llex	*init_llex(void)
-{
-	return (calloc(1, sizeof(t_llex)));
-}
-
+/* Quick function to initialize t_lex
+   ft_calloc allows all bytes to be set to 0 or NULL */
 t_lex	*init_lex(void)
 {
 	t_lex	*lex;
 
-	lex = calloc(1, sizeof(t_lex));
+	lex = ft_calloc(1, sizeof(t_lex));
 	return (lex);
 }
 
-/* t_tok	*init_tok(void)
-{
-	return (calloc(1, sizeof(t_tok)));
-} */
-
-t_cmds	*init_cmds(void)
-{
-	return (calloc(1, sizeof(t_cmds)));
-}
-
+/* Function to initialize the main structure
+   Also calls the populate environment here! */
 t_main	*init_structs(char **envp)
 {
 	t_main	*shell;
@@ -31,10 +20,13 @@ t_main	*init_structs(char **envp)
 	if (shell)
 	{
 		shell->l = init_lex();
-		//shell->tok = init_tok();
-		shell->cmds = init_cmds();
-		shell->prompt = PROMPT;
-		shell->env = envp;
+		shell->envp = envp;
+		shell->has_env = 1;
+		shell->prompt = NULL;
+		populate_envp(shell);
+		shell->username = get_env(&shell->env, "$USER");
+		// if (shell->username == NULL)
+		// 	shell->prompt = BOLD_YELLOW FACE BOLD_WHITE THROW RESET;
 	}
 	return (shell);
 }

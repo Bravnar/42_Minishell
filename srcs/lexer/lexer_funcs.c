@@ -9,11 +9,11 @@ void	handle_dollar(t_lex *l)
 	if (l->j > 0 && !(ft_strchr(WHITESPACE, l->trim[l->j - 1])))
 		is_con = 1;
 	l->j++;
-	if (l->trim[l->j] == '$')
+	if (ft_strchr(DOLLAR_CHARS, l->trim[l->j]))
 	{
 		l->j++;
 		substr = ft_substr(l->trim, l->i, l->j - l->i);
-		add_token(&l->link, new_token(substr, 0));
+		add_token(&l->link, new_token(substr, is_con));
 		free(substr);
 	}
 	else
@@ -48,11 +48,15 @@ void	handle_special(t_lex *l)
 void	handle_other(t_lex *l, char *charset)
 {
 	char	*substr;
+	int		is_con;
 
+	is_con = 0;
+	if (l->j > 0 && !(ft_strchr(WHITESPACE, l->trim[l->j - 1])))
+		is_con = 1;
 	while (l->trim[l->j] && !ft_strchr(charset, l->trim[l->j]))
 		l->j++;
 	substr = ft_substr(l->trim, l->i, l->j - l->i);
-	add_token(&l->link, new_token(substr, 0));
+	add_token(&l->link, new_token(substr, is_con));
 	free(substr);
 	l->i = l->j;
 }

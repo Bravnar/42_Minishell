@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bravnar <bravnar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 16:34:48 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/05/19 00:09:40 by bravnar          ###   ########.fr       */
+/*   Created: 2024/02/20 16:20:45 by smuravye          #+#    #+#             */
+/*   Updated: 2024/05/19 00:03:57 by bravnar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_lib.h"
 
-char	*ft_strdup(const char *s)
+/* int	ft_strcmp(char *s1, char *s2)
 {
-	char	*new_str;
-	int		i;
+	int	i;
 
-	if (!s)
-		return (NULL);
 	i = 0;
-	new_str = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!new_str)
-		return (NULL);
-	while (s[i])
-	{
-		new_str[i] = s[i];
+	while (s1[i] == s2[i] && s1[i] && s2[i])
 		i++;
-	}
-	new_str[i] = '\0';
-	return (new_str);
+	return (s1[i] - s2[i]);
+} */
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }
