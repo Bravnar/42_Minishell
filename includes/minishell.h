@@ -269,6 +269,6 @@ int		check_pipes(t_lex *l);
 /*----------------------------------EXPERIMENTS-------------------------------*/
 
 void	display_args(t_cmds *cmds);
-int		check_infiles(t_main *shell, t_cmds *cmds);
+int		check_files(t_main *shell, t_cmds *cmds);
 
 #endif
