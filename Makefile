@@ -22,6 +22,7 @@ SRCS=	srcs/main/main.c \
 		srcs/builtins_stan/cd_new.c \
 		srcs/builtins_stan/env.c \
 		srcs/builtins_stan/export.c \
+		srcs/builtins_stan/echo.c \
 		#srcs/builtins/pwd.c \
 		#rcs/builtins/cd.c \
 		#srcs/builtins/env.c \

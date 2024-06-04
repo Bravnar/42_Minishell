@@ -74,6 +74,24 @@ char	*handle_tilde(t_envp **head, char *var)
 	return (home);
 }
 
+/* CAREFUL THIS LEAKS */
+
+char	*handle_quote(t_envp **head, char *var)
+{
+	char	*trim;
+	char	*expand;
+	char	*first;
+	char	*result;
+
+	trim = ft_strtrim(var, "'");
+	expand = get_env(head, trim);
+	free(trim);
+	first = ft_better_join("'", expand);
+	result = ft_better_join(first, "'");
+	free(first);
+	return (result);
+}
+
 /* Main getter function, searches through the t_envp
  linked list by key and returns the value */
 char	*get_env(t_envp **head, char *var)
@@ -81,6 +99,8 @@ char	*get_env(t_envp **head, char *var)
 	t_envp	*tmp;
 
 	tmp = *head;
+	if (*var == '\'')
+		return (handle_quote(head, var));
 	if (*var == '$')
 		var++;
 	if (*var == '~')
@@ -95,10 +115,12 @@ char	*get_env(t_envp **head, char *var)
 }
 
 /* Main setter function, searches through t_envp by key and changes the value */
-void	set_env(t_envp **head, char *key, char *value)
+void	set_env(t_envp **head, char *key, char *value, int print)
 {
 	t_envp	*tmp;
+	t_envp	*new_node;
 
+	new_node = NULL;
 	tmp = *head;
 	if (*key == '$')
 		key++;
@@ -106,14 +128,15 @@ void	set_env(t_envp **head, char *key, char *value)
 	{
 		if (!ft_strcmp(tmp->key, key))
 		{
-			if (tmp->value)
-			{
-				free(tmp->value);
-				tmp->value = ft_strdup(value);
-			}
+			free(tmp->value);
+			tmp->value = ft_strdup(value);
+			tmp->printable = print;
+			return ;
 		}
 		tmp = tmp->next;
 	}
+	new_node = new_env_node(key, value);
+	add_env_node(head, new_node);
 }
 
 /* Main add function, adds a key : value + printable
@@ -121,17 +144,15 @@ void	set_env(t_envp **head, char *key, char *value)
 void	add_env(t_main *shell, char *str)
 {
 	char	**split;
-	t_envp	*new_node;
 
 	split = NULL;
 	if (ft_strchr(str, '='))
 	{
 		split = ft_split(str, '=');
-		new_node = new_env_node(split[0], split[1]);
+		set_env(&shell->env, split[0], split[1], 1);
 	}
 	else
-		new_node = new_env_node(str, NULL);
-	add_env_node(&shell->env, new_node);
+		set_env(&shell->env, str, NULL, 0);
 	ft_free_arr(split);
 }
 

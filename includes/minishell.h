@@ -124,6 +124,9 @@ void	print_local_copy(t_envp **head);
 int		count_export_args(char **cmds);
 void	free_local_copy(t_envp *local);
 
+/* ECHO */
+void	echo(t_main *shell, char **cmds);
+
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
 /* CLEANUP */
@@ -142,7 +145,7 @@ void	print_envp(t_envp **head);
 void	populate_envp(t_main *shell);
 char	*get_env(t_envp **head, char *var);
 void	free_nodes(t_envp *token_list);
-void	set_env(t_envp **head, char *key, char *value);
+void	set_env(t_envp **head, char *key, char *value, int print);
 void	make_no_env_prompt(t_main *shell);
 void	add_env(t_main *shell, char *str);
 

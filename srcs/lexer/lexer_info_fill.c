@@ -38,7 +38,9 @@ void	work_args(t_llex *tmp)
 	{
 		while (tmp->value[++i] && ft_strchr(QUOTES, tmp->value[i]))
 			;
-		if (tmp->value[i - 1] == '\"' && tmp->value[i] == '$')
+		if ((tmp->value[i - 1] == '\"' && tmp->value[i] == '$') || \
+		(tmp->value[0] == '\"' && tmp->value[i - 1] == \
+		'\'' && tmp->value[i] == '$'))
 			tmp->needs_exp = 1;
 	}
 	overwrite_exp(tmp);

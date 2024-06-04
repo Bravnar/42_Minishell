@@ -106,6 +106,7 @@ char	*expand_if_needed(t_llex *iter, t_main *shell)
 		if (expanded && expanded != iter->value)
 		{
 			dup_expanded = ft_strdup(expanded);
+			free(expanded);
 			// if (iter->value[0] == '~')
 			// 	free(expanded);
 			return (dup_expanded);
