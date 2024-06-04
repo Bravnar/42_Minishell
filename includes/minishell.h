@@ -150,7 +150,7 @@ void	add_env(t_main *shell, char *str);
 
 /* ERRORS */
 
-void	error_handler(t_err code);
+void	error_handler(t_err code, char *file);
 
 /*----------------------------------INIT DIR----------------------------------*/
 
@@ -243,7 +243,7 @@ void	reset_quotes(t_lex *l);
 int		check_redirs(t_lex *l);
 int		check_pipes(t_lex *l);
 
-#endif
+
 
 // # define SHELL "\x1B[1;37mminish\x1B[1;34mEHL:\x1B[0m"
 // # define G_ARROW_SIGN "\001\033[1;32m\002\u279c\001\033[0m  "
@@ -265,3 +265,10 @@ int		check_pipes(t_lex *l);
 // //# define G_ARROW_SIGN "\001\u279c\002"
 // # define X_SIGN "\001\033[1;34m\002 ✘ \001\033[0m\002"
 
+
+/*----------------------------------EXPERIMENTS-------------------------------*/
+
+void	display_args(t_cmds *cmds);
+int		check_infiles(t_main *shell, t_cmds *cmds);
+
+#endif

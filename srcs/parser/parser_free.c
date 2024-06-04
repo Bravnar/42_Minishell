@@ -29,8 +29,6 @@ void	free_cmds_nodes(t_cmds *head)
 		free_files_nodes(tmp->files);
 		// printf("Freeing cmd_grp array\n");
 		ft_free_arr(tmp->cmd_grp);
-		free(tmp->file_in);
-		free(tmp->file_out);
 		free(tmp);
 	}
 	// printf("Exiting free_cmds_nodes\n");

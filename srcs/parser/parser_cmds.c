@@ -49,8 +49,6 @@ t_cmds	*new_cmds_node(char **cmds, t_files *files, int index)
 	node->cmd_grp = duplicate_cmds(cmds);
 	node->files = files;
 	node->index = index;
-	node->file_in = NULL;
-	node->file_out = NULL;
 	node->is_append = 0;
 	node->is_heredoc = 0;
 	//get_last_infile(node, files);

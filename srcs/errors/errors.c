@@ -7,14 +7,25 @@ void	print_error(char *err)
 	write(STDERR_FILENO, "\n", 1);
 }
 
-void	error_handler(t_err code)
+void	error_handler(t_err code, char *file)
 {
 	if (code == BAD_QUOTES)
-		print_error(RED"minishell: Mismatched quotation marks."RESET);
+		ft_fprintf(STDERR_FILENO,
+			RED"minishell: Mismatched quotation marks."RESET);
 	else if (code == BAD_REDIRS)
-		print_error(RED"minishell: syntax error near unexpected token '>' or '<'."RESET);
+		ft_fprintf(STDERR_FILENO,
+			RED"minishell: syntax error near \
+				unexpected token '>' or '<'."RESET);
 	else if (code == BAD_REDIRS_NL)
-		print_error(RED"minishell: syntax error near unexpected token 'newline'"RESET);
+		ft_fprintf(STDERR_FILENO,
+			RED"minishell: syntax error near unexpected token 'newline'"RESET);
 	else if (code == BAD_PIPES)
-		print_error(RED"minishell: syntax error near unexpected token '|'"RESET);
+		ft_fprintf(STDERR_FILENO,
+			RED"minishell: syntax error near unexpected token '|'"RESET);
+	else if (code == NO_INFILE)
+		ft_fprintf(STDERR_FILENO,
+			RED"minishell: %s: No such file or directory"RESET, file);
+	else if (code == PERM_DENIED)
+		ft_fprintf(STDERR_FILENO, RED"minishell: %s: Permission denied"RESET,
+			file);
 }

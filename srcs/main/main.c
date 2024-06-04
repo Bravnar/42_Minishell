@@ -36,7 +36,7 @@ void	builtins(t_cmds *cmds, t_main *shell)
 	}
 }
 
-/* Only used to trick the linux machines for correct compilation 
+/* Only used to trick the linux machines for correct compilation
    Uses an empty file to trick readline into executing once
    without user input */
 
@@ -77,6 +77,7 @@ void	gameplay_loop(t_main *shell)
 		lexer(lex, shell);
 		//parser_main() should be called here, for now is in lexer()
 		builtins(shell->cmds, shell);
+		check_infiles(shell, shell->cmds);
 		//execute();
 		free_all(shell);
 		clear_t_cmds(shell);

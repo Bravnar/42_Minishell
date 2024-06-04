@@ -26,6 +26,8 @@ typedef enum e_err
 	BAD_PIPES,
 	BAD_REDIRS_NL,
 	MANY_ARGS,
+	NO_INFILE,
+	PERM_DENIED
 }	t_err;
 
 typedef struct s_envp
@@ -88,8 +90,6 @@ typedef struct s_cmds
 {
 	char			**cmd_grp;
 	t_files			*files;
-	char			*file_in;
-	char			*file_out;
 	int				is_heredoc;
 	int				is_append;
 	int				index;
