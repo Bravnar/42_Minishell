@@ -71,12 +71,13 @@ void	gameplay_loop(t_main *shell)
 		terminal_prompt(shell);
 		lex->input = readline(shell->prompt);
 		if (!lex->input)
-			break ;
+			continue ;
 		if (lex->input[0])
 			add_history(lex->input);
 		lexer(lex, shell);
 		//parser_main() should be called here, for now is in lexer()
 		builtins(shell->cmds, shell);
+		//execute();
 		free_all(shell);
 		clear_t_cmds(shell);
 	}
