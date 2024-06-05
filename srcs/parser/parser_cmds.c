@@ -106,8 +106,8 @@ char	*expand_if_needed(t_llex *iter, t_main *shell)
 		if (expanded && expanded != iter->value)
 		{
 			dup_expanded = ft_strdup(expanded);
-			free(expanded);
-			// if (iter->value[0] == '~')
+			//free(expanded); ------------------------> THIS LINE CAUSES A LEAK... WHY?
+			// if (iter->value[0] == '~') ---> Try setting up a NULL value in the struct to be the temporary value of expanded
 			// 	free(expanded);
 			return (dup_expanded);
 		}

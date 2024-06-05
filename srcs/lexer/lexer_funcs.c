@@ -18,7 +18,8 @@ void	handle_dollar(t_lex *l)
 	}
 	else
 	{
-		while (l->trim[l->j] && !ft_strchr(SPECIAL_W_SPACE, l->trim[l->j]))
+		while ((l->trim[l->j] && !ft_strchr(SPECIAL_W_SPACE, l->trim[l->j])) && \
+			(l->trim[l->j] && ft_isalnum(l->trim[l->j])))
 			l->j++;
 		substr = ft_substr(l->trim, l->i, l->j - l->i);
 		add_token(&l->link, new_token(substr, is_con));
