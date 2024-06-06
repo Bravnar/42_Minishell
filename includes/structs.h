@@ -92,7 +92,9 @@ typedef struct s_cmds
 	t_files			*files;
 	int				is_heredoc;
 	int				is_append;
+	int				is_builtin;
 	int				index;
+	char			*path;
 	struct s_cmds	*next;
 	struct s_cmds	*prev;
 }	t_cmds;

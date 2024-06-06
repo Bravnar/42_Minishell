@@ -77,7 +77,7 @@ void	gameplay_loop(t_main *shell)
 		lexer(lex, shell);
 		//parser_main() should be called here, for now is in lexer()
 		builtins(shell->cmds, shell);
-		check_files(shell, shell->cmds);
+		execute(shell->cmds, shell);
 		//execute();
 		free_all(shell);
 		clear_t_cmds(shell);

@@ -39,20 +39,28 @@ char	**duplicate_cmds(char **cmds)
 	return (result);
 }
 
-t_cmds	*new_cmds_node(char **cmds, t_files *files, int index)
+t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 {
 	t_cmds	*node;
+	char	**paths;
 
 	node = malloc(sizeof(t_cmds));
 	if (!node)
 		return (NULL);
+	paths = get_paths(shell);
+	if (!paths)
+	{
+		free(node);
+		return (NULL);
+	}
+	node->path = get_path(paths, cmds[0]);
+	ft_printf("Path: %s\n", node->path);
+	ft_free_arr(paths);
 	node->cmd_grp = duplicate_cmds(cmds);
 	node->files = files;
 	node->index = index;
 	node->is_append = 0;
 	node->is_heredoc = 0;
-	//get_last_infile(node, files);
-	//get_last_outfile(node, files);
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);

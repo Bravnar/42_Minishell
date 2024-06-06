@@ -43,7 +43,7 @@ void	parser_body(t_main *shell)
 			count = count_commands(iter);
 			cmds = create_cmd_arr(iter, shell, count);
 			files = create_files_list(&iter, shell);
-			add_cmds_node(&shell->cmds, new_cmds_node(cmds, files, 0));
+			add_cmds_node(&shell->cmds, new_cmds_node(cmds, files, 0, shell));
 			ft_free_arr(cmds);
 			//free_files_nodes(files);
 		}
@@ -62,9 +62,9 @@ void	parser_body(t_main *shell)
 	  using pipes as the main separator it creates
 	  sub groups by putting commands and arguments into
 	  a char ** and files to check for redirection into
-	  a linked list within the main linked list 
+	  a linked list within the main linked list
 	  the final deliverable looks like this
-	  
+
 	typedef struct s_cmds
 	{
 		char			**cmd_grp; ---> char ** of all cmds and args per pipe partion
