@@ -64,7 +64,7 @@ header:
 
 $(NAME) : $(SRCS)
 			@$(MAKE) header
-			@echo "\n\nCompiling LIBFT: (courtesy of rrouille)\n"
+			@echo "\n\nCompiling LIBFT: (loading bar - courtesy of rrouille)\n"
 			@make -C $(LIBFT) all
 			@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_LIB) -lreadline $(SANITIZE)
 			@echo "$(YELLOW)\no------------------------------------o$(RESET)"

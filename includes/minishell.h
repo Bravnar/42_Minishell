@@ -113,7 +113,6 @@ void	go_home(t_main *shell, char **cmds, char *cwd);
 /* ENV */
 void	print_envp(t_envp **head);
 
-
 /* EXPORT */
 void	export(t_main *shell, char **cmds);
 void	sort_local_copy(t_envp	**local);
@@ -210,38 +209,40 @@ void	free_all(t_main *shell);
 
 /*----------------------------------PARSER DIR--------------------------------*/
 
-/* PARSER_MAIN */
-
-void	parser_main(t_main *shell);
-void	parser_body(t_main *shell);
-
 /* PARSER_CMDS */
 
-char 	**create_cmd_arr(t_llex *tmp, t_main *shell, int count);
-void	add_cmds_node(t_cmds **head, t_cmds *new_node);
-t_cmds	*new_cmds_node(char **cmds, t_files *files, int index);
 int		count_commands(t_llex *head);
-// char	*expand_if_needed(t_llex *iter, t_main *shell);
-int		expand_if_needed(t_llex *iter, t_main *shell);
-
-/* PARSER_FUNCS */
-
-void	parser_logic(t_lex *l);
-void	handle_pipe(t_llex **tmp);
-void	handle_complex_redirs(t_llex *tmp);
-void	handle_complex_redirs(t_llex *tmp);
+char	**duplicate_cmds(char **cmds);
+t_cmds	*new_cmds_node(char **cmds, t_files *files, int index);
+void	add_cmds_node(t_cmds **head, t_cmds *new_node);
+int		expand_if_needed(t_llex *iter, t_main *shell); //needs to go to expansion file
+char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count);
 
 /* PARSER FILES */
 
-t_files	*create_files_list(t_llex **tmp, t_main *shell);
-void	add_file_node(t_files **file_head, t_files *new_file);
 t_files	*new_file_node(t_llex *llex, t_main *shell);
+void	add_file_node(t_files **file_head, t_files *new_file);
+t_files	*create_files_list(t_llex **tmp, t_main *shell);
 
 /* PARSER FREE */
 
-void	clear_t_cmds(t_main *shell);
-void	free_cmds_nodes(t_cmds *head);
 void	free_files_nodes(t_files *head);
+void	free_cmds_nodes(t_cmds *head);
+void	clear_t_cmds(t_main *shell);
+
+/* PARSER_FUNCS */
+
+void	handle_simple_redirs(t_llex *tmp); //needs refactoring
+void	handle_complex_redirs(t_llex *tmp); //needs adapting and refactoring!
+void	handle_pipe(t_llex **tmp);
+void	parser_logic(t_lex *l);
+
+/* PARSER_MAIN */
+
+void	print_main_struct(t_cmds **main);
+void	parser_body(t_main *shell);
+void	parser_combiner(t_main *shell); // separate .c and refactor!
+void	parser_main(t_main *shell);
 
 /*----------------------------------SYNTAX DIR--------------------------------*/
 

@@ -133,8 +133,24 @@ void	add_cmds_node(t_cmds **head, t_cmds *new_node)
 	return (result);
 } */
 
+char	*replace_expansion(t_llex *iter, t_main *shell)
+{
+	char	*work;
+	int	i;
+
+	i = 0;
+	work = ft_strchr(iter->value, '$');
+	printf("part where $ is: %s\n", work);
+	printf("Entering replace expansion\n");
+	printf("iter: %s\n", iter->value);
+	(void) shell;
+	exit (1);
+}
+
 int	expand_if_needed(t_llex *iter, t_main *shell)
 {
+	// this function will need to become the main expansion function
+	// to contain ft_strreplace
 	if (iter->exp_tmp)
 	{
 		free(iter->exp_tmp);
@@ -142,7 +158,8 @@ int	expand_if_needed(t_llex *iter, t_main *shell)
 	}
 	if (iter->needs_exp)
 	{
-		go_through_arg();
+		if (iter->is_in_quotes == 34)
+			iter->exp_tmp = replace_expansion(iter, shell);
 		iter->exp_tmp = get_env(&shell->env, iter->value);
 		if (iter->exp_tmp && iter->exp_tmp != iter->value)
 			return (1);
@@ -156,6 +173,7 @@ char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 	t_llex	*iter;
 	int		i;
 
+	(void) shell;
 	iter = tmp;
 	i = 0;
 	cmd_list = (char **)malloc(sizeof(char *) * (count + 1));
@@ -163,16 +181,8 @@ char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 		return (NULL);
 	while (iter && iter->type != PIPE_SYMBOL)
 	{
-		// if (iter && iter->type == CMD)
-		// 	cmd_list[i++] = expand_if_needed(iter, shell);
-		// iter = iter->next;
 		if (iter && iter->type == CMD)
-		{
-			if (expand_if_needed(iter, shell))
-				cmd_list[i++] = ft_strdup(iter->exp_tmp);
-			else
-				cmd_list[i++] = ft_strdup(iter->value);
-		}
+			cmd_list[i++] = ft_strdup(iter->value);
 		iter = iter->next;
 	}
 	cmd_list[i] = NULL;
