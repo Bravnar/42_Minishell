@@ -143,11 +143,16 @@ t_envp	*new_env_node(char *key, char *value);
 void	add_env_node(t_envp **envp_head, t_envp *new_envp_node);
 void	print_envp(t_envp **head);
 void	populate_envp(t_main *shell);
-char	*get_env(t_envp **head, char *var);
 void	free_nodes(t_envp *token_list);
-void	set_env(t_envp **head, char *key, char *value, int print);
 void	make_no_env_prompt(t_main *shell);
+char	*handle_tilde(t_envp **head, char *var);
+char	*handle_quote(t_envp **head, char *var);
+
+/* ENV GET SET */
+
 void	add_env(t_main *shell, char *str);
+void	set_env(t_envp **head, char *key, char *value, int print);
+char	*get_env(t_envp **head, char *var);
 
 /*----------------------------------ERRORS DIR--------------------------------*/
 
@@ -216,7 +221,8 @@ char 	**create_cmd_arr(t_llex *tmp, t_main *shell, int count);
 void	add_cmds_node(t_cmds **head, t_cmds *new_node);
 t_cmds	*new_cmds_node(char **cmds, t_files *files, int index);
 int		count_commands(t_llex *head);
-char	*expand_if_needed(t_llex *iter, t_main *shell);
+// char	*expand_if_needed(t_llex *iter, t_main *shell);
+int		expand_if_needed(t_llex *iter, t_main *shell);
 
 /* PARSER_FUNCS */
 

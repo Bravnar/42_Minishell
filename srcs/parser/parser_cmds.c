@@ -93,7 +93,7 @@ void	add_cmds_node(t_cmds **head, t_cmds *new_node)
 	return (ft_strdup(iter->value));
 } */
 
-char	*expand_if_needed(t_llex *iter, t_main *shell)
+/* char	*expand_if_needed(t_llex *iter, t_main *shell)
 {
 	char	*expanded;
 	char	*dup_expanded;
@@ -113,6 +113,41 @@ char	*expand_if_needed(t_llex *iter, t_main *shell)
 		}
 	}
 	return (ft_strdup(iter->value));
+} */
+/* char	*expand_if_needed(t_llex *iter, t_main *shell)
+{
+	char	*result;
+
+	if (iter->exp_tmp)
+		free(iter->exp_tmp);
+	if (iter->needs_exp)
+	{
+		iter->exp_tmp = get_env(&shell->env, iter->value);
+		if (iter->exp_tmp && iter->exp_tmp != iter->value)
+		{
+			result = ft_strdup(iter->exp_tmp);
+			return (result);
+		}
+	}
+	result = ft_strdup(iter->value);
+	return (result);
+} */
+
+int	expand_if_needed(t_llex *iter, t_main *shell)
+{
+	if (iter->exp_tmp)
+	{
+		free(iter->exp_tmp);
+		iter->exp_tmp = NULL;
+	}
+	if (iter->needs_exp)
+	{
+		go_through_arg();
+		iter->exp_tmp = get_env(&shell->env, iter->value);
+		if (iter->exp_tmp && iter->exp_tmp != iter->value)
+			return (1);
+	}
+	return (0);
 }
 
 char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
@@ -128,10 +163,22 @@ char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 		return (NULL);
 	while (iter && iter->type != PIPE_SYMBOL)
 	{
+		// if (iter && iter->type == CMD)
+		// 	cmd_list[i++] = expand_if_needed(iter, shell);
+		// iter = iter->next;
 		if (iter && iter->type == CMD)
-			cmd_list[i++] = expand_if_needed(iter, shell);
+		{
+			if (expand_if_needed(iter, shell))
+				cmd_list[i++] = ft_strdup(iter->exp_tmp);
+			else
+				cmd_list[i++] = ft_strdup(iter->value);
+		}
 		iter = iter->next;
 	}
 	cmd_list[i] = NULL;
 	return (cmd_list);
 }
+
+/* Create an ft_strreplace
+  have the replace replace all occurences of items inside
+  save that into the actual value, and then it will be freed by value? */

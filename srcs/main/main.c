@@ -36,7 +36,7 @@ void	builtins(t_cmds *cmds, t_main *shell)
 		else if (!ft_strcmp(cmds->cmd_grp[0], "echo"))
 			echo(shell, cmds->cmd_grp);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
-			exit(1);
+			exit (1);
 	}
 }
 
@@ -66,11 +66,13 @@ void	my_rl_initialize(void)
 void	gameplay_loop(t_main *shell)
 {
 	t_lex	*lex;
+	int		count;
 
+	count = 0;
 	lex = shell->l;
 	if (!APPLE)
 		my_rl_initialize();
-	while (1)
+	while (count < 5)
 	{
 		terminal_prompt(shell);
 		lex->input = readline(shell->prompt);
@@ -84,6 +86,7 @@ void	gameplay_loop(t_main *shell)
 		//execute();
 		free_all(shell);
 		clear_t_cmds(shell);
+		count++;
 	}
 }
 

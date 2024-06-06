@@ -30,17 +30,19 @@ void	work_args(t_llex *tmp)
 	char	*swap;
 
 	i = -1;
+	swap = NULL;
 	if (ft_strchr(QUOTES, tmp->value[0]))
 		tmp->is_in_quotes = tmp->value[0];
 	if (tmp->value[0] == '$')
 		tmp->needs_exp = 1;
 	else if (tmp->is_in_quotes)
 	{
-		while (tmp->value[++i] && ft_strchr(QUOTES, tmp->value[i]))
-			;
-		if ((tmp->value[i - 1] == '\"' && tmp->value[i] == '$') || \
-		(tmp->value[0] == '\"' && tmp->value[i - 1] == \
-		'\'' && tmp->value[i] == '$'))
+		if (ft_strchr(tmp->value, '$'))
+		// while (tmp->value[++i] && ft_strchr(QUOTES, tmp->value[i]))
+		// 	;
+		// if ((tmp->value[i - 1] == '\"' && tmp->value[i] == '$') || \
+		// (tmp->value[0] == '\"' && tmp->value[i - 1] == \
+		// '\'' && tmp->value[i] == '$'))
 			tmp->needs_exp = 1;
 	}
 	overwrite_exp(tmp);

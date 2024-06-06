@@ -13,6 +13,7 @@ SRCS=	srcs/main/main.c \
 		srcs/lexer/lexer_llist_utils.c \
 		srcs/env/envp.c \
 		srcs/env/envp_utils.c \
+		srcs/env/envp_get_set.c \
 		srcs/cleanup/clean.c \
 		srcs/parser/parser_cmds.c \
 		srcs/parser/parser_files.c \
@@ -35,8 +36,8 @@ CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
 LIBFT = 	lib
 LIBFT_LIB = $(LIBFT)/my_lib.a
 
-SANITIZE= -g3 -fsanitize=address
-# SANITIZE= -g
+# SANITIZE= -g3 -fsanitize=address
+SANITIZE= -g
 
 # Color Variables
 RED=\033[0;31m

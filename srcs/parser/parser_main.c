@@ -45,6 +45,7 @@ void	parser_body(t_main *shell)
 			files = create_files_list(&iter, shell);
 			add_cmds_node(&shell->cmds, new_cmds_node(cmds, files, 0));
 			ft_free_arr(cmds);
+			cmds = NULL;
 			//free_files_nodes(files);
 		}
 		if (iter && iter->next)
