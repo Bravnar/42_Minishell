@@ -27,8 +27,10 @@ char	*get_path(char **paths, char *command)
 		path = ft_strjoin(*paths, subcommand);
 		if (access(path, F_OK) == 0)
 			break ;
+		free(path);
 		paths++;
 	}
+	free(subcommand);
 	if (access(path, F_OK) == 0)
 		return (path);
 	return (NULL);

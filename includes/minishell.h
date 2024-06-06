@@ -274,4 +274,5 @@ int		check_pipes(t_lex *l);
 
 int		execute(t_cmds *cmds, t_main *shell);
 int		check_files(t_main *shell, t_cmds *cmds);
+char	*var_replace(char *input, t_main *shell);
 #endif
