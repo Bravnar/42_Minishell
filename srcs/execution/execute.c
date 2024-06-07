@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+
+
 int	execute(t_cmds *cmds, t_main *shell)
 {
 	char	*replaced;
@@ -15,4 +17,5 @@ int	execute(t_cmds *cmds, t_main *shell)
 	free(str);
 	free(replaced);
 	return (EXIT_SUCCESS);
+
 }
