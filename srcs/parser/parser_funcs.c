@@ -9,7 +9,7 @@ void	handle_simple_redirs(t_llex *tmp)
 		{
 			tmp = tmp->next;
 			tmp->type = INFILE;
-			while (tmp->needs_exp && tmp->next->conn_with_prev)
+			while (tmp->next && tmp->next->conn_with_prev)
 			{
 				tmp = tmp->next;
 				tmp->type = INFILE;

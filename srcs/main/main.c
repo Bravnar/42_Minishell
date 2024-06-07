@@ -100,3 +100,20 @@ int	main(int ac, char **av, char **envp)
 	gameplay_loop(shell);
 	free_main(shell);
 }
+
+
+/* 
+	TO DO Friday 07.06:
+
+	Stan:
+	1) Refactor functions that need refactoring (handle redirs etc)
+	2) Adapt the "glueing logic" for heredoc and append
+	3) Finilize the "expansion()" function to follow all steps correctly
+		including the replace function from Hadri
+	4) Clean up all files and ensure norminette
+	5) Finish implementation of builtins in MAIN and NOENV
+
+	Hadrien:
+	1) Continue execution
+	2) See point 1)
+ */
