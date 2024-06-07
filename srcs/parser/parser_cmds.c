@@ -157,11 +157,11 @@ int	expand_if_needed(t_llex *iter, t_main *shell)
 {
 	// this function will need to become the main expansion function
 	// to contain ft_strreplace
-	if (iter->exp_tmp)
-	{
-		free(iter->exp_tmp);
-		iter->exp_tmp = NULL;
-	}
+	// if (iter->exp_tmp)
+	// {
+	// 	free(iter->exp_tmp);
+	// 	iter->exp_tmp = NULL;
+	// }
 	if (iter->needs_exp)
 	{
 		if (iter->is_in_quotes == 34)

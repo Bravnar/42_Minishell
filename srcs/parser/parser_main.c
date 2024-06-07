@@ -94,7 +94,10 @@ void	parser_combiner(t_main *shell)
 		if (iter->needs_exp)
 		{
 			if (expand_if_needed(iter, shell))
+			{
 				expanded = ft_strdup(iter->exp_tmp);
+				free(iter->exp_tmp); // added 07.06 as the only place to free this!
+			}
 			free(iter->value);
 			iter->value = expanded;
 		}
