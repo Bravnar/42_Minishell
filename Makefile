@@ -20,10 +20,14 @@ SRCS=	srcs/main/main.c \
 		srcs/parser/parser_funcs.c \
 		srcs/parser/parser_main.c \
 		srcs/parser/parser_free.c \
+		srcs/parser/parser_path.c \
 		srcs/builtins_stan/cd_new.c \
 		srcs/builtins_stan/env.c \
 		srcs/builtins_stan/export.c \
 		srcs/builtins_stan/echo.c \
+		srcs/execution/execute.c \
+		srcs/execution/check_files.c \
+		srcs/parser/ft_strreplace.c \
 		#srcs/builtins/pwd.c \
 		#rcs/builtins/cd.c \
 		#srcs/builtins/env.c \
