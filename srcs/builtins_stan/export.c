@@ -36,9 +36,9 @@ void	print_local_copy(t_envp **head)
 		if (!(tmp->key && tmp->key[0] == '_' && !tmp->key[1]))
 		{
 			if (!tmp->value)
-				printf("export %s\n", tmp->key);
+				printf("declare -x %s\n", tmp->key);
 			else
-				printf("export %s=\"%s\"\n", tmp->key, tmp->value);
+				printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
 		}
 		tmp = tmp->next;
 	}
@@ -135,6 +135,7 @@ void	export(t_main *shell, char **cmds)
 	{
 		while (cmds[i])
 			add_env(shell, cmds[i++]);
+		set_env(&shell->env, "_", cmds[count], 1);
 		return ;
 	}
 	local = copy_list(shell->env);
@@ -143,4 +144,5 @@ void	export(t_main *shell, char **cmds)
 	sort_local_copy(&local);
 	print_local_copy(&local);
 	free_local_copy(local);
+	set_env(&shell->env, "_", cmds[count], 1);
 }

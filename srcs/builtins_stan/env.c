@@ -7,7 +7,7 @@ void	print_envp(t_envp **head)
 	tmp = *head;
 
 	//printf("{\n");
-	set_env(head, "_", "/usr/bin/env");
+	set_env(head, "_", "/usr/bin/env", 1);
 	while (tmp != NULL)
 	{
 		// printf(BOLD_YELLOW"\t\"%s\" : \"%s\"\n"RESET, tmp->key, tmp->value);

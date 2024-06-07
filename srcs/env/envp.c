@@ -74,65 +74,22 @@ char	*handle_tilde(t_envp **head, char *var)
 	return (home);
 }
 
-/* Main getter function, searches through the t_envp
- linked list by key and returns the value */
-char	*get_env(t_envp **head, char *var)
+/* CAREFUL THIS LEAKS */
+
+char	*handle_quote(t_envp **head, char *var)
 {
-	t_envp	*tmp;
+	char	*trim;
+	char	*expand;
+	char	*first;
+	char	*result;
 
-	tmp = *head;
-	if (*var == '$')
-		var++;
-	if (*var == '~')
-		return (handle_tilde(head, var));
-	while (tmp)
-	{
-		if (!ft_strcmp(tmp->key, var))
-			return (tmp->value);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
-/* Main setter function, searches through t_envp by key and changes the value */
-void	set_env(t_envp **head, char *key, char *value)
-{
-	t_envp	*tmp;
-
-	tmp = *head;
-	if (*key == '$')
-		key++;
-	while (tmp)
-	{
-		if (!ft_strcmp(tmp->key, key))
-		{
-			if (tmp->value)
-			{
-				free(tmp->value);
-				tmp->value = ft_strdup(value);
-			}
-		}
-		tmp = tmp->next;
-	}
-}
-
-/* Main add function, adds a key : value + printable
- data to the end of t_envp */
-void	add_env(t_main *shell, char *str)
-{
-	char	**split;
-	t_envp	*new_node;
-
-	split = NULL;
-	if (ft_strchr(str, '='))
-	{
-		split = ft_split(str, '=');
-		new_node = new_env_node(split[0], split[1]);
-	}
-	else
-		new_node = new_env_node(str, NULL);
-	add_env_node(&shell->env, new_node);
-	ft_free_arr(split);
+	trim = ft_strtrim(var, "'");
+	expand = get_env(head, trim);
+	free(trim);
+	first = ft_better_join("'", expand);
+	result = ft_better_join(first, "'");
+	free(first);
+	return (result);
 }
 
 /* Function that is called once at the beginning of the 

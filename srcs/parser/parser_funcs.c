@@ -5,6 +5,38 @@ void	handle_simple_redirs(t_llex *tmp)
 	if (!ft_strcmp("<", tmp->value))
 	{
 		tmp->type = REDIR_IN;
+		if (tmp->next)
+		{
+			tmp = tmp->next;
+			tmp->type = INFILE;
+			while (tmp->next && tmp->next->conn_with_prev)
+			{
+				tmp = tmp->next;
+				tmp->type = INFILE;
+			}
+		}
+	}
+	else if (!ft_strcmp(">", tmp->value))
+	{
+		tmp->type = REDIR_OUT;
+		if (tmp->next)
+		{
+			tmp = tmp->next;
+			tmp->type = OUTFILE;
+			while (tmp->next && tmp->next->conn_with_prev)
+			{
+				tmp = tmp->next;
+				tmp->type = OUTFILE;
+			}
+		}
+	}
+}
+
+/* void	handle_simple_redirs(t_llex *tmp)
+{
+	if (!ft_strcmp("<", tmp->value))
+	{
+		tmp->type = REDIR_IN;
 		tmp->next->type = INFILE;
 	}
 	else if (!ft_strcmp(">", tmp->value))
@@ -12,7 +44,7 @@ void	handle_simple_redirs(t_llex *tmp)
 		tmp->type = REDIR_OUT;
 		tmp->next->type = OUTFILE;
 	}
-}
+} */
 
 void	handle_complex_redirs(t_llex *tmp)
 {

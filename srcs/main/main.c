@@ -33,6 +33,10 @@ void	builtins(t_cmds *cmds, t_main *shell)
 			print_envp(&shell->env);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "export"))
 			export(shell, cmds->cmd_grp);
+		else if (!ft_strcmp(cmds->cmd_grp[0], "echo"))
+			echo(shell, cmds->cmd_grp);
+		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
+			exit (1);
 	}
 }
 
@@ -62,11 +66,13 @@ void	my_rl_initialize(void)
 void	gameplay_loop(t_main *shell)
 {
 	t_lex	*lex;
+	int		count;
 
+	count = 0;
 	lex = shell->l;
 	if (!APPLE)
 		my_rl_initialize();
-	while (1)
+	while (count < 5)
 	{
 		terminal_prompt(shell);
 		lex->input = readline(shell->prompt);
@@ -81,6 +87,7 @@ void	gameplay_loop(t_main *shell)
 		//execute();
 		free_all(shell);
 		clear_t_cmds(shell);
+		count++;
 	}
 }
 
@@ -94,3 +101,20 @@ int	main(int ac, char **av, char **envp)
 	gameplay_loop(shell);
 	free_main(shell);
 }
+
+
+/* 
+	TO DO Friday 07.06:
+
+	Stan:
+	1) Refactor functions that need refactoring (handle redirs etc)
+	2) Adapt the "glueing logic" for heredoc and append
+	3) Finilize the "expansion()" function to follow all steps correctly
+		including the replace function from Hadri
+	4) Clean up all files and ensure norminette
+	5) Finish implementation of builtins in MAIN and NOENV
+
+	Hadrien:
+	1) Continue execution
+	2) See point 1)
+ */
