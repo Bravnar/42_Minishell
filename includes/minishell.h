@@ -150,7 +150,7 @@ void	add_env(t_main *shell, char *str);
 
 /* ERRORS */
 
-void	error_handler(t_err code);
+void	error_handler(t_err code, char *file);
 
 /*----------------------------------INIT DIR----------------------------------*/
 
@@ -211,7 +211,7 @@ void	parser_body(t_main *shell);
 
 char 	**create_cmd_arr(t_llex *tmp, t_main *shell, int count);
 void	add_cmds_node(t_cmds **head, t_cmds *new_node);
-t_cmds	*new_cmds_node(char **cmds, t_files *files, int index);
+t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell);
 int		count_commands(t_llex *head);
 char	*expand_if_needed(t_llex *iter, t_main *shell);
 
@@ -234,6 +234,10 @@ void	clear_t_cmds(t_main *shell);
 void	free_cmds_nodes(t_cmds *head);
 void	free_files_nodes(t_files *head);
 
+/* PARSER PATH */
+
+char	**get_paths(t_main *shell);
+char	*get_path(char **paths, char *command);
 /*----------------------------------SYNTAX DIR--------------------------------*/
 
 /* CHECK SYNTAX */
@@ -243,7 +247,7 @@ void	reset_quotes(t_lex *l);
 int		check_redirs(t_lex *l);
 int		check_pipes(t_lex *l);
 
-#endif
+
 
 // # define SHELL "\x1B[1;37mminish\x1B[1;34mEHL:\x1B[0m"
 // # define G_ARROW_SIGN "\001\033[1;32m\002\u279c\001\033[0m  "
@@ -265,3 +269,10 @@ int		check_pipes(t_lex *l);
 // //# define G_ARROW_SIGN "\001\u279c\002"
 // # define X_SIGN "\001\033[1;34m\002 ✘ \001\033[0m\002"
 
+
+/*----------------------------------EXECUTION-------------------------------*/
+
+int		execute(t_cmds *cmds, t_main *shell);
+int		check_files(t_main *shell, t_cmds *cmds);
+char	*var_replace(char *input, t_main *shell);
+#endif

@@ -28,9 +28,9 @@ void	free_cmds_nodes(t_cmds *head)
 		// printf("Freeing files linked list\n");
 		free_files_nodes(tmp->files);
 		// printf("Freeing cmd_grp array\n");
+		if (ft_strcmp(tmp->cmd_grp[0], "./minishell"))
+			free(tmp->path);
 		ft_free_arr(tmp->cmd_grp);
-		free(tmp->file_in);
-		free(tmp->file_out);
 		free(tmp);
 	}
 	// printf("Exiting free_cmds_nodes\n");
