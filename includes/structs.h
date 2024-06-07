@@ -96,6 +96,8 @@ typedef struct s_cmds
 	int				is_builtin;
 	int				index;
 	char			*path;
+	t_files			*last_infile;
+	t_files			*last_outfile;
 	struct s_cmds	*next;
 	struct s_cmds	*prev;
 }	t_cmds;

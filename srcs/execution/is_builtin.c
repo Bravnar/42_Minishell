@@ -13,6 +13,6 @@ int	is_builtin(t_cmds *cmds)
 		cmds->is_builtin = 1;
 		return (1);
 	}
-	cmds->is_builtin = 1;
+	cmds->is_builtin = 0;
 	return (0);
 }
