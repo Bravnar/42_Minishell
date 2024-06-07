@@ -13,6 +13,7 @@ SRCS=	srcs/main/main.c \
 		srcs/lexer/lexer_llist_utils.c \
 		srcs/env/envp.c \
 		srcs/env/envp_utils.c \
+		srcs/env/envp_get_set.c \
 		srcs/cleanup/clean.c \
 		srcs/parser/parser_cmds.c \
 		srcs/parser/parser_files.c \
@@ -23,8 +24,10 @@ SRCS=	srcs/main/main.c \
 		srcs/builtins_stan/cd_new.c \
 		srcs/builtins_stan/env.c \
 		srcs/builtins_stan/export.c \
+		srcs/builtins_stan/echo.c \
 		srcs/execution/execute.c \
 		srcs/execution/check_files.c \
+		srcs/parser/ft_strreplace.c \
 		#srcs/builtins/pwd.c \
 		#rcs/builtins/cd.c \
 		#srcs/builtins/env.c \
@@ -37,8 +40,8 @@ CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
 LIBFT = 	lib
 LIBFT_LIB = $(LIBFT)/my_lib.a
 
-SANITIZE= -g3 -fsanitize=address
-# SANITIZE= -g
+# SANITIZE= -g3 -fsanitize=address
+SANITIZE= -g
 
 # Color Variables
 RED=\033[0;31m
@@ -65,7 +68,7 @@ header:
 
 $(NAME) : $(SRCS)
 			@$(MAKE) header
-			@echo "\n\nCompiling LIBFT: (courtesy of rrouille)\n"
+			@echo "\n\nCompiling LIBFT: (loading bar - courtesy of rrouille)\n"
 			@make -C $(LIBFT) all
 			@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_LIB) -lreadline $(SANITIZE)
 			@echo "$(YELLOW)\no------------------------------------o$(RESET)"

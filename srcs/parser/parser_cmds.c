@@ -99,7 +99,7 @@ void	add_cmds_node(t_cmds **head, t_cmds *new_node)
 	return (ft_strdup(iter->value));
 } */
 
-char	*expand_if_needed(t_llex *iter, t_main *shell)
+/* char	*expand_if_needed(t_llex *iter, t_main *shell)
 {
 	char	*expanded;
 	char	*dup_expanded;
@@ -112,12 +112,65 @@ char	*expand_if_needed(t_llex *iter, t_main *shell)
 		if (expanded && expanded != iter->value)
 		{
 			dup_expanded = ft_strdup(expanded);
-			// if (iter->value[0] == '~')
+			//free(expanded); ------------------------> THIS LINE CAUSES A LEAK... WHY?
+			// if (iter->value[0] == '~') ---> Try setting up a NULL value in the struct to be the temporary value of expanded
 			// 	free(expanded);
 			return (dup_expanded);
 		}
 	}
 	return (ft_strdup(iter->value));
+} */
+/* char	*expand_if_needed(t_llex *iter, t_main *shell)
+{
+	char	*result;
+
+	if (iter->exp_tmp)
+		free(iter->exp_tmp);
+	if (iter->needs_exp)
+	{
+		iter->exp_tmp = get_env(&shell->env, iter->value);
+		if (iter->exp_tmp && iter->exp_tmp != iter->value)
+		{
+			result = ft_strdup(iter->exp_tmp);
+			return (result);
+		}
+	}
+	result = ft_strdup(iter->value);
+	return (result);
+} */
+
+char	*replace_expansion(t_llex *iter, t_main *shell)
+{
+	char	*work;
+	int	i;
+
+	i = 0;
+	work = ft_strchr(iter->value, '$');
+	printf("part where $ is: %s\n", work);
+	printf("Entering replace expansion\n");
+	printf("iter: %s\n", iter->value);
+	(void) shell;
+	exit (1);
+}
+
+int	expand_if_needed(t_llex *iter, t_main *shell)
+{
+	// this function will need to become the main expansion function
+	// to contain ft_strreplace
+	if (iter->exp_tmp)
+	{
+		free(iter->exp_tmp);
+		iter->exp_tmp = NULL;
+	}
+	if (iter->needs_exp)
+	{
+		if (iter->is_in_quotes == 34)
+			iter->exp_tmp = replace_expansion(iter, shell);
+		iter->exp_tmp = get_env(&shell->env, iter->value);
+		if (iter->exp_tmp && iter->exp_tmp != iter->value)
+			return (1);
+	}
+	return (0);
 }
 
 char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
@@ -126,6 +179,7 @@ char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 	t_llex	*iter;
 	int		i;
 
+	(void) shell;
 	iter = tmp;
 	i = 0;
 	cmd_list = (char **)malloc(sizeof(char *) * (count + 1));
@@ -134,9 +188,13 @@ char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 	while (iter && iter->type != PIPE_SYMBOL)
 	{
 		if (iter && iter->type == CMD)
-			cmd_list[i++] = expand_if_needed(iter, shell);
+			cmd_list[i++] = ft_strdup(iter->value);
 		iter = iter->next;
 	}
 	cmd_list[i] = NULL;
 	return (cmd_list);
 }
+
+/* Create an ft_strreplace
+  have the replace replace all occurences of items inside
+  save that into the actual value, and then it will be freed by value? */

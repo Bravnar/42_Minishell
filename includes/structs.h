@@ -54,6 +54,7 @@ typedef struct s_llex
 	int				index;
 	int				needs_exp;
 	int				conn_with_prev;
+	char			*exp_tmp;
 	t_type			type;
 	struct s_llex	*next;
 	struct s_llex	*prev;
