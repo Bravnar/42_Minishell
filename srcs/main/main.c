@@ -62,11 +62,12 @@ void	my_rl_initialize(void)
 void	gameplay_loop(t_main *shell)
 {
 	t_lex	*lex;
+	int	count = 0;
 
 	lex = shell->l;
 	if (!APPLE)
 		my_rl_initialize();
-	while (1)
+	while (count < 3)
 	{
 		terminal_prompt(shell);
 		lex->input = readline(shell->prompt);
@@ -81,6 +82,7 @@ void	gameplay_loop(t_main *shell)
 		//execute();
 		free_all(shell);
 		clear_t_cmds(shell);
+		count++;
 	}
 }
 
