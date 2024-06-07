@@ -165,8 +165,9 @@ int	expand_if_needed(t_llex *iter, t_main *shell)
 	if (iter->needs_exp)
 	{
 		if (iter->is_in_quotes == 34)
-			iter->exp_tmp = replace_expansion(iter, shell);
-		iter->exp_tmp = get_env(&shell->env, iter->value);
+			iter->exp_tmp = var_replace(iter->value, shell);
+		else if (!iter->is_in_quotes)
+			iter->exp_tmp = get_env(&shell->env, iter->value);
 		if (iter->exp_tmp && iter->exp_tmp != iter->value)
 			return (1);
 	}

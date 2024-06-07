@@ -27,6 +27,7 @@ SRCS=	srcs/main/main.c \
 		srcs/builtins_stan/echo.c \
 		srcs/execution/execute.c \
 		srcs/execution/check_files.c \
+		srcs/execution/is_builtin.c \
 		srcs/parser/ft_strreplace.c \
 		#srcs/builtins/pwd.c \
 		#rcs/builtins/cd.c \

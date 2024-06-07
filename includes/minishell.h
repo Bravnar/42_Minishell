@@ -159,6 +159,23 @@ char	*get_env(t_envp **head, char *var);
 
 void	error_handler(t_err code, char *file);
 
+/*----------------------------------EXECUTION DIR-----------------------------*/
+
+/* CHECK FILES */
+
+int		check_infile(char *infile, t_main *shell);
+int		check_outfile(char *outfile, t_main *shell);
+int		check_file(t_files *file, t_main *shell);
+int		check_files(t_main *shell, t_cmds *cmds);
+
+/* EXECUTE */
+
+int		execute(t_cmds *cmds, t_main *shell);
+
+/* IS_BUILTIN */
+
+int		is_builtin(t_cmds *cmds);
+
 /*----------------------------------INIT DIR----------------------------------*/
 
 /* INIT */
