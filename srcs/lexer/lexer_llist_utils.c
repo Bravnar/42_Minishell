@@ -4,7 +4,8 @@ t_llex	*new_token(char *value,	int is_con)
 {
 	t_llex	*token;
 
-	token = malloc(sizeof(t_llex));
+	//token = malloc(sizeof(t_llex));
+	token = ft_calloc(1, sizeof(t_llex));
 	if (!token)
 		return (NULL);
 	token->value = ft_strdup(value);
@@ -15,6 +16,7 @@ t_llex	*new_token(char *value,	int is_con)
 		token->conn_with_prev = 1;
 	else
 		token->conn_with_prev = 0;
+	token->exp_tmp = NULL;
 	token->type = NONE;
 	token->next = NULL;
 	token->prev = NULL;
@@ -50,6 +52,12 @@ void	free_tokens(t_llex *token_list)
 		tmp = token_list;
 		token_list = token_list->next;
 		free(tmp->value);
+		//printf("value of tmp->exp_tmp: %s\n", tmp->exp_tmp);
+		/* if (tmp->exp_tmp)
+		{
+			free(tmp->exp_tmp);
+			tmp->exp_tmp = NULL;
+		} */
 		free(tmp);
 	}
 	tmp = NULL;

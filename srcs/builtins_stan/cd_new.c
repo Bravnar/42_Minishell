@@ -32,8 +32,8 @@ void	adjust_pwd(t_main *shell, char *old_pwd)
 
 	get_path = NULL;
 	get_path = getcwd(get_path, sizeof(path));
-	set_env(&shell->env, "OLDPWD", old_pwd);
-	set_env(&shell->env, "PWD", get_path);
+	set_env(&shell->env, "OLDPWD", old_pwd, 1);
+	set_env(&shell->env, "PWD", get_path, 1);
 	free(get_path);
 }
 
