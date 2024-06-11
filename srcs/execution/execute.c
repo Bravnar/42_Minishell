@@ -1,71 +1,19 @@
 #include "minishell.h"
 
-int	redirect_output(t_files *outfile)
-{
-	int	fd;
-
-	if (outfile->type == OUTFILE)
-		fd = open(outfile->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else
-		fd = open(outfile->file_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (dup2(fd, STDOUT_FILENO) == -1)
-	{
-		ft_fprintf("dup2",);
-		exit(EXIT_FAILURE);
-	}
-	return (fd);
-}
-
-int	redirect_input(t_files *infile)
-{
-	int	fd;
-
-	fd = open(infile->file_name, O_RDONLY);
-	return (fd);
-}
-
-void	add_pid(pid_t pid, pid_t *cpids)
-{
-	while (*cpids)
-		cpids++;
-	*cpids++ = pid;
-	*cpids = 0;
-}
-
-int	wait_for_children(pid_t *cpids)
-{
-	int	status;
-
-	while (*cpids)
-	{
-		waitpid(*cpids, &status, 0);
-		cpids++;
-	}
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	if (WIFSIGNALED(status))
-		return (WTERMSIG(status) + 128);
-	return (0);
-}
-
-void	execute(t_pipex *pipex, int fds[2], int fd_in)
+int	execute_cmd(t_cmds *cmds, int fds[2], int fd_in, t_main *shell)
 {
 	close(fd_in);
 	close(fds[0]);
 	close(fds[1]);
-	if (!pipex->commands[pipex->current].path)
-	{
-		ft_printf(STDERR_FILENO, "pipex: %s: command not found\n",
-			pipex->commands[pipex->current].name);
-		exit(127);
-	}
-	execve(pipex->commands[pipex->current].path,
-		pipex->commands[pipex->current].args, pipex->env);
+	if (is_bad_command(cmds, shell))
+		return (error_handler(shell->err_code,
+				cmds->cmd_grp[0], shell), EXIT_FAILURE);
+	execve(cmds->path, cmds->cmd_grp, shell->envp);
 	perror("Execve");
 	exit(EXIT_FAILURE);
 }
 
-int	piping(t_cmds *cmds, int fd_in)
+int	piping(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 {
 	int		fds[2];
 	pid_t	pid;
@@ -77,14 +25,14 @@ int	piping(t_cmds *cmds, int fd_in)
 	{
 		if (cmds->last_infile)
 			fd_in = redirect_input(cmds->last_infile);
-		dup2(fd_in, STDIN_FILENO);
+		dup2(fd_in, shell->in);
 		if (cmds->last_outfile)
-			redirect_output(cmds->last_outfile);
+			redirect_output(cmds->last_outfile, shell);
 		else
-			dup2(fds[1], STDOUT_FILENO);
-		execute(pipex, fds, fd_in);
+			dup2(fds[1], shell->out);
+		execute_cmd(cmds, fds, fd_in, shell);
 	}
-	add_pid(pid, pipex->cpids);
+	add_pid(pid, cpids);
 	if (cmds->last_outfile)
 	{
 		close(fds[1]);
@@ -98,15 +46,20 @@ int	execute(t_cmds *cmds, t_main *shell)
 {
 	t_cmds	*tmp;
 	int		fd_in;
+	pid_t	*cpids;
 
 	if (check_files(shell, cmds))
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	cpids = malloc(sizeof(pid_t) * (cmd_size(cmds) + 1));
+	if (!cpids)
+		return (EXIT_FAILURE);
 	tmp = cmds;
 	fd_in = -1;
 	while (tmp)
 	{
-		piping()
+		fd_in = piping(tmp, fd_in, cpids, shell);
 		tmp = tmp->next;
 	}
+	wait_for_children(cpids);
+	return (EXIT_SUCCESS);
 }

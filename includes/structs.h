@@ -27,7 +27,9 @@ typedef enum e_err
 	BAD_REDIRS_NL,
 	MANY_ARGS,
 	NO_INFILE,
-	PERM_DENIED
+	PERM_DENIED,
+	NO_COMMAND,
+	IS_DIR
 }	t_err;
 
 typedef struct s_envp
@@ -115,6 +117,9 @@ typedef struct s_main
 	t_cmds			*cmds;
 	t_envp			*env;
 	t_counts		*counts;
+	int				in;
+	int				out;
+	int				err;
 }	t_main;
 
 #endif

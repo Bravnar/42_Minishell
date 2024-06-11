@@ -61,6 +61,8 @@ t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 	node->index = index;
 	node->is_append = 0;
 	node->is_heredoc = 0;
+	node->last_infile = NULL;
+	node->last_outfile = NULL;
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);

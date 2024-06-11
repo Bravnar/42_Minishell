@@ -66,7 +66,7 @@ int	check_files(t_main *shell, t_cmds *cmds)
 		{
 			if (check_file(tmp_file, shell))
 				return (error_handler(shell->err_code,
-						tmp_file->file_name), EXIT_FAILURE);
+						tmp_file->file_name, shell), EXIT_FAILURE);
 			if (tmp_file->type == INFILE)
 				temp->last_infile = tmp_file;
 			if (tmp_file->type == OUTFILE || tmp_file->type == OUTFILE_APP)
