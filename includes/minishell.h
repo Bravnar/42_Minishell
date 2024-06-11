@@ -163,9 +163,6 @@ void	error_handler(t_err code, char *file, t_main *shell);
 
 /* CHECK FILES */
 
-int		check_infile(char *infile, t_main *shell);
-int		check_outfile(char *outfile, t_main *shell);
-int		check_file(t_files *file, t_main *shell);
 int		check_files(t_main *shell, t_cmds *cmds);
 
 /* EXECUTE */
