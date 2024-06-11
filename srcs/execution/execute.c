@@ -61,5 +61,6 @@ int	execute(t_cmds *cmds, t_main *shell)
 		tmp = tmp->next;
 	}
 	wait_for_children(cpids);
+	free(cpids);
 	return (EXIT_SUCCESS);
 }
