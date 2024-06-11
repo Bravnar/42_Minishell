@@ -232,7 +232,8 @@ int		count_commands(t_llex *head);
 char	**duplicate_cmds(char **cmds);
 t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell);
 void	add_cmds_node(t_cmds **head, t_cmds *new_node);
-int		expand_if_needed(t_llex *iter, t_main *shell); //needs to go to expansion file
+// int		expand_if_needed(t_llex *iter, t_main *shell); //needs to go to expansion file
+char	*expand_if_needed(t_llex *iter, t_main *shell);
 char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count);
 
 /* PARSER FILES */

@@ -85,7 +85,7 @@ void	gameplay_loop(t_main *shell)
 		//parser_main() should be called here, for now is in lexer()
 		// builtins(shell->cmds, shell);
 		is_builtin(shell->cmds);
-		//execute(shell->cmds, shell);
+		execute(shell->cmds, shell);
 		//execute();
 		free_all(shell);
 		clear_t_cmds(shell);
