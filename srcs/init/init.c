@@ -23,6 +23,9 @@ t_main	*init_structs(char **envp)
 		shell->envp = envp;
 		shell->has_env = 1;
 		shell->prompt = NULL;
+		if (!(shell->lvl_incr > 1))
+			shell->lvl_incr = 1;
+		printf("lvl_incr: %d\n", shell->lvl_incr);
 		populate_envp(shell);
 		shell->username = get_env(&shell->env, "$USER");
 		shell->in = dup(STDIN_FILENO);

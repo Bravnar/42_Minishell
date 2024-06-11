@@ -120,6 +120,7 @@ typedef struct s_main
 	int				in;
 	int				out;
 	int				err;
+	int				lvl_incr;
 }	t_main;
 
 #endif

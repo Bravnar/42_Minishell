@@ -113,7 +113,8 @@ void	populate_envp(t_main *shell)
 		if (!ft_strcmp(tmp_split[0], "SHLVL"))
 		{
 			tmp_num = ft_atoi(tmp_split[1]);
-			tmp_num++;
+			tmp_num += shell->lvl_incr;
+			shell->lvl_incr++;
 			free(tmp_split[1]);
 			tmp_split[1] = ft_itoa(tmp_num);
 		}

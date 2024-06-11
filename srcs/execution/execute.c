@@ -2,6 +2,7 @@
 
 int	execute_cmd(t_cmds *cmds, int fds[2], int fd_in, t_main *shell)
 {
+	printf("fd_in %d\n", fd_in);
 	close(fd_in);
 	close(fds[0]);
 	close(fds[1]);
