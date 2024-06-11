@@ -193,7 +193,6 @@ char	*join_prompt(char **part);
 
 /* LEXER MAIN*/
 
-//int		lexer(t_lex	*l);
 int		lexer(t_lex	*l, t_main *shell);
 
 /* LEXER FUNCS */
@@ -214,7 +213,6 @@ void	work_args(t_llex *tmp);
 void	print_list(t_llex **head);
 void	free_tokens(t_llex *token_list);
 void	add_token(t_llex **token_list, t_llex *new_token);
-//t_llex	*new_token(char *value);
 t_llex	*new_token(char *value,	int is_con);
 int		ms_lstsize(t_llex *lst);
 
@@ -226,14 +224,25 @@ void	free_all(t_main *shell);
 
 /*----------------------------------PARSER DIR--------------------------------*/
 
+/* VAR REPLACE */
+
+char	*ft_strreplace(char *input, char *to, char *by, int *index);
+char	*check_replace(int *i, char *result, t_main *shell);
+char	*var_replace(char *input, t_main *shell);
+
+/* PARSER EXP COMB */
+
+char	*expand_if_needed(t_llex *iter, t_main *shell);
+void	expand_and_replace(t_llex *iter, t_main *shell);
+void	combine_with_prev(t_llex *iter);
+void	parser_combiner(t_main *shell);
+
 /* PARSER_CMDS */
 
 int		count_commands(t_llex *head);
 char	**duplicate_cmds(char **cmds);
 t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell);
 void	add_cmds_node(t_cmds **head, t_cmds *new_node);
-// int		expand_if_needed(t_llex *iter, t_main *shell); //needs to go to expansion file
-char	*expand_if_needed(t_llex *iter, t_main *shell);
 char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count);
 
 /* PARSER FILES */
@@ -259,7 +268,6 @@ void	parser_logic(t_lex *l);
 
 void	print_main_struct(t_cmds **main);
 void	parser_body(t_main *shell);
-void	parser_combiner(t_main *shell); // separate .c and refactor!
 void	parser_main(t_main *shell);
 
 /* PARSER PATH */
@@ -302,5 +310,5 @@ int		check_pipes(t_lex *l);
 
 int		execute(t_cmds *cmds, t_main *shell);
 int		check_files(t_main *shell, t_cmds *cmds);
-char	*var_replace(char *input, t_main *shell);
+
 #endif

@@ -78,9 +78,19 @@ void	parser_body(t_main *shell)
 		struct s_cmds	*prev;
 	}	t_cmds;*/
 
-/* NEEDS REFACTORING */
+void	parser_main(t_main *shell)
+{
+	t_lex	*lex;
 
-void	parser_combiner(t_main *shell)
+	lex = shell->l;
+	parser_logic(lex);
+	parser_combiner(shell);
+	parser_body(shell);
+	print_list(&lex->link);
+	print_main_struct(&shell->cmds);
+}
+
+/* void	parser_combiner(t_main *shell)
 {
 	t_llex	*iter;
 	t_llex	*prev;
@@ -113,16 +123,4 @@ void	parser_combiner(t_main *shell)
 			iter = iter->next;
 		}
 	}
-}
-
-void	parser_main(t_main *shell)
-{
-	t_lex	*lex;
-
-	lex = shell->l;
-	parser_logic(lex);
-	parser_combiner(shell);
-	parser_body(shell);
-	print_list(&lex->link);
-	print_main_struct(&shell->cmds);
-}
+} */

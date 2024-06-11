@@ -29,13 +29,8 @@ char	**duplicate_cmds(char **cmds)
 		return (NULL);
 	i = -1;
 	while (cmds[++i])
-	{
 		result[i] = ft_strdup(cmds[i]);
-		//free(cmds[i]);
-	}
 	result[i] = NULL;
-	//free(cmds);
-	//cmds = NULL;
 	return (result);
 }
 
@@ -86,36 +81,6 @@ void	add_cmds_node(t_cmds **head, t_cmds *new_node)
 	}
 }
 
-char	*replace_expansion(t_llex *iter, t_main *shell)
-{
-	char	*work;
-	int	i;
-
-	i = 0;
-	work = ft_strchr(iter->value, '$');
-	printf("part where $ is: %s\n", work);
-	printf("Entering replace expansion\n");
-	printf("iter: %s\n", iter->value);
-	(void) shell;
-	exit (1);
-}
-
-char	*expand_if_needed(t_llex *iter, t_main *shell)
-{
-	char	*result;
-	t_llex	*tmp;
-
-	result = NULL;
-	tmp = iter;
-	if (tmp->is_in_quotes == 34)
-		result = var_replace(tmp->value, shell);
-	else if (!tmp->is_in_quotes)
-		result = ft_strdup(get_env(&shell->env, tmp->value));
-	else
-		return (result);
-	return (result);
-}
-
 // int	expand_if_needed(t_llex *iter, t_main *shell)
 // {
 // 	char	*expanded;
@@ -153,7 +118,3 @@ char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 	cmd_list[i] = NULL;
 	return (cmd_list);
 }
-
-/* Create an ft_strreplace
-  have the replace replace all occurences of items inside
-  save that into the actual value, and then it will be freed by value? */

@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 char	*ft_strreplace(char *input, char *to, char *by, int *index)
 {
 	char	*result;

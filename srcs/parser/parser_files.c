@@ -10,14 +10,6 @@ t_files	*new_file_node(t_llex *llex, t_main *shell)
 	new = malloc(sizeof(t_files));
 	if (!new)
 		return (NULL);
-	// if (llex->needs_exp)
-	// {
-	// 	if (expand_if_needed(llex, shell))
-	// 		expanded = ft_strdup(llex->exp_tmp);
-	// 	free(llex->value);
-	// 	llex->value = expanded;
-	// }
-	// else
 	new->file_name = ft_strdup(llex->value);
 	if (!new->file_name)
 	{
