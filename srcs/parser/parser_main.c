@@ -46,7 +46,6 @@ void	parser_body(t_main *shell)
 			add_cmds_node(&shell->cmds, new_cmds_node(cmds, files, 0, shell));
 			ft_free_arr(cmds);
 			cmds = NULL;
-			//free_files_nodes(files);
 		}
 		if (iter && iter->next)
 			iter = iter->next;
@@ -79,13 +78,22 @@ void	parser_body(t_main *shell)
 		struct s_cmds	*prev;
 	}	t_cmds;*/
 
-/* NEEDS REFACTORING */
+void	parser_main(t_main *shell)
+{
+	t_lex	*lex;
 
-void	parser_combiner(t_main *shell)
+	lex = shell->l;
+	parser_logic(lex);
+	parser_combiner(shell);
+	parser_body(shell);
+	print_list(&lex->link);
+	print_main_struct(&shell->cmds);
+}
+
+/* void	parser_combiner(t_main *shell)
 {
 	t_llex	*iter;
 	t_llex	*prev;
-	char	*expanded;
 	char	*combined;
 
 	iter = shell->l->link;
@@ -93,10 +101,9 @@ void	parser_combiner(t_main *shell)
 	{
 		if (iter->needs_exp)
 		{
-			if (expand_if_needed(iter, shell))
-				expanded = ft_strdup(iter->exp_tmp);
+			iter->exp_tmp = expand_if_needed(iter, shell);
 			free(iter->value);
-			iter->value = expanded;
+			iter->value = iter->exp_tmp;
 		}
 		if (iter->conn_with_prev && iter->prev && (iter->type == iter->prev->type))
 		{
@@ -116,17 +123,4 @@ void	parser_combiner(t_main *shell)
 			iter = iter->next;
 		}
 	}
-}
-
-void	parser_main(t_main *shell)
-{
-	t_lex	*lex;
-
-	lex = shell->l;
-	parser_logic(lex);
-	parser_combiner(shell);
-	parser_body(shell);
-	print_list(&lex->link);
-	print_main_struct(&shell->cmds);
-	//clear_t_cmds(shell); Do I need this line?
-}
+} */

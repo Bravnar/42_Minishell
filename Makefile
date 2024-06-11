@@ -21,6 +21,8 @@ SRCS=	srcs/main/main.c \
 		srcs/parser/parser_main.c \
 		srcs/parser/parser_free.c \
 		srcs/parser/parser_path.c \
+		srcs/parser/parser_exp_comb.c \
+		srcs/parser/ft_strreplace.c \
 		srcs/builtins_stan/cd_new.c \
 		srcs/builtins_stan/env.c \
 		srcs/builtins_stan/export.c \

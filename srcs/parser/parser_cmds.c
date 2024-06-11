@@ -29,13 +29,8 @@ char	**duplicate_cmds(char **cmds)
 		return (NULL);
 	i = -1;
 	while (cmds[++i])
-	{
 		result[i] = ft_strdup(cmds[i]);
-		//free(cmds[i]);
-	}
 	result[i] = NULL;
-	//free(cmds);
-	//cmds = NULL;
 	return (result);
 }
 
@@ -88,92 +83,21 @@ void	add_cmds_node(t_cmds **head, t_cmds *new_node)
 	}
 }
 
-/* char	*expand_if_needed(t_llex *iter, t_main *shell)
-{
-	char	*expanded;
+// int	expand_if_needed(t_llex *iter, t_main *shell)
+// {
+// 	char	*expanded;
 
-	if (iter->needs_exp)
-	{
-		expanded = ft_strdup(get_env(&shell->env, iter->value));
-		if (expanded)
-			return (expanded);
-	}
-	return (ft_strdup(iter->value));
-} */
-
-/* char	*expand_if_needed(t_llex *iter, t_main *shell)
-{
-	char	*expanded;
-	char	*dup_expanded;
-
-	dup_expanded = NULL;
-	if (iter->needs_exp)
-	{
-		expanded = get_env(&shell->env, iter->value);
-		printf("expanded: %s\n", expanded);
-		if (expanded && expanded != iter->value)
-		{
-			dup_expanded = ft_strdup(expanded);
-			//free(expanded); ------------------------> THIS LINE CAUSES A LEAK... WHY?
-			// if (iter->value[0] == '~') ---> Try setting up a NULL value in the struct to be the temporary value of expanded
-			// 	free(expanded);
-			return (dup_expanded);
-		}
-	}
-	return (ft_strdup(iter->value));
-} */
-/* char	*expand_if_needed(t_llex *iter, t_main *shell)
-{
-	char	*result;
-
-	if (iter->exp_tmp)
-		free(iter->exp_tmp);
-	if (iter->needs_exp)
-	{
-		iter->exp_tmp = get_env(&shell->env, iter->value);
-		if (iter->exp_tmp && iter->exp_tmp != iter->value)
-		{
-			result = ft_strdup(iter->exp_tmp);
-			return (result);
-		}
-	}
-	result = ft_strdup(iter->value);
-	return (result);
-} */
-
-char	*replace_expansion(t_llex *iter, t_main *shell)
-{
-	char	*work;
-	int	i;
-
-	i = 0;
-	work = ft_strchr(iter->value, '$');
-	printf("part where $ is: %s\n", work);
-	printf("Entering replace expansion\n");
-	printf("iter: %s\n", iter->value);
-	(void) shell;
-	exit (1);
-}
-
-int	expand_if_needed(t_llex *iter, t_main *shell)
-{
-	// this function will need to become the main expansion function
-	// to contain ft_strreplace
-	if (iter->exp_tmp)
-	{
-		free(iter->exp_tmp);
-		iter->exp_tmp = NULL;
-	}
-	if (iter->needs_exp)
-	{
-		if (iter->is_in_quotes == 34)
-			iter->exp_tmp = replace_expansion(iter, shell);
-		iter->exp_tmp = get_env(&shell->env, iter->value);
-		if (iter->exp_tmp && iter->exp_tmp != iter->value)
-			return (1);
-	}
-	return (0);
-}
+// 	if (iter->needs_exp)
+// 	{
+// 		if (iter->is_in_quotes == 34)
+// 			iter->exp_tmp = var_replace(iter->value, shell);
+// 		else if (!iter->is_in_quotes)
+// 			iter->exp_tmp = get_env(&shell->env, iter->value);
+// 		if (iter->exp_tmp && iter->exp_tmp != iter->value)
+// 			return (1);
+// 	}
+// 	return (0);
+// }
 
 char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 {

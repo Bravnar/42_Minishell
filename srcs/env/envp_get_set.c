@@ -7,8 +7,8 @@ char	*get_env(t_envp **head, char *var)
 	t_envp	*tmp;
 
 	tmp = *head;
-	if (*var == '\'')
-		return (handle_quote(head, var));
+	// if (*var == '\'')
+	// 	return (handle_quote(head, var));
 	if (*var == '$')
 		var++;
 	if (*var == '~')
@@ -19,7 +19,7 @@ char	*get_env(t_envp **head, char *var)
 			return (tmp->value);
 		tmp = tmp->next;
 	}
-	return (NULL);
+	return ("\0");
 }
 
 /* Main setter function, searches through t_envp by key and changes the value */

@@ -12,7 +12,7 @@ void	free_nodes(t_envp *token_list)
 		token_list = token_list->next;
 		if (tmp->key)
 			free(tmp->key);
-		if (tmp->value)
+		if (tmp->value && tmp->value[0])
 			free(tmp->value);
 		free(tmp);
 	}

@@ -14,6 +14,9 @@ char	**get_paths(t_main *shell)
 	return (paths);
 }
 
+
+/* This function causes issues when the thing passed to it is not a command
+   Valgrind is unhappy because it tries access something that is not  */
 char	*get_path(char **paths, char *command)
 {
 	char	*path;

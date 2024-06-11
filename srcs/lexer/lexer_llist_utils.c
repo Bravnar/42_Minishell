@@ -51,13 +51,15 @@ void	free_tokens(t_llex *token_list)
 	{
 		tmp = token_list;
 		token_list = token_list->next;
+		// printf("freeing tmp->value: %s\n", tmp->value); removed 07/06 to test leaks and double free!, uncomment all to revert
 		free(tmp->value);
-		//printf("value of tmp->exp_tmp: %s\n", tmp->exp_tmp);
-		/* if (tmp->exp_tmp)
-		{
-			free(tmp->exp_tmp);
-			tmp->exp_tmp = NULL;
-		} */
+		// printf("value of tmp->exp_tmp: %s\n", tmp->exp_tmp);
+		// if (tmp->exp_tmp && tmp->exp_tmp[0])
+		// {
+		// 	printf("im here\n");
+		// 	free(tmp->exp_tmp);
+		// 	tmp->exp_tmp = NULL;
+		// }
 		free(tmp);
 	}
 	tmp = NULL;

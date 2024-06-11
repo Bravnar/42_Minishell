@@ -84,8 +84,8 @@ void	gameplay_loop(t_main *shell)
 		lexer(lex, shell);
 		//parser_main() should be called here, for now is in lexer()
 		builtins(shell->cmds, shell);
+		// is_builtin(shell->cmds);
 		execute(shell->cmds, shell);
-		//execute();
 		free_all(shell);
 		clear_t_cmds(shell);
 		count++;
@@ -105,15 +105,16 @@ int	main(int ac, char **av, char **envp)
 
 
 /* 
-	TO DO Friday 07.06:
+	TO DO:
 
 	Stan:
 	1) Refactor functions that need refactoring (handle redirs etc)
-	2) Adapt the "glueing logic" for heredoc and append
+	2) Adapt the "glueing logic" for heredoc and append ✅
 	3) Finilize the "expansion()" function to follow all steps correctly
-		including the replace function from Hadri
+		including the replace function from Hadri ✅
 	4) Clean up all files and ensure norminette
 	5) Finish implementation of builtins in MAIN and NOENV
+	6) for heredoc END, change the logic of expansion (ffs)
 
 	Hadrien:
 	1) Continue execution
