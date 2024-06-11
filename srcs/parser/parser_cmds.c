@@ -56,6 +56,8 @@ t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 	node->index = index;
 	node->is_append = 0;
 	node->is_heredoc = 0;
+	node->last_infile = NULL;
+	node->last_outfile = NULL;
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
@@ -118,3 +120,7 @@ char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 	cmd_list[i] = NULL;
 	return (cmd_list);
 }
+
+/* Create an ft_strreplace
+  have the replace replace all occurences of items inside
+  save that into the actual value, and then it will be freed by value? */

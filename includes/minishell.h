@@ -157,7 +157,7 @@ char	*get_env(t_envp **head, char *var);
 
 /* ERRORS */
 
-void	error_handler(t_err code, char *file);
+void	error_handler(t_err code, char *file, t_main *shell);
 
 /*----------------------------------EXECUTION DIR-----------------------------*/
 
@@ -283,7 +283,29 @@ void	reset_quotes(t_lex *l);
 int		check_redirs(t_lex *l);
 int		check_pipes(t_lex *l);
 
+/*--------------------------------EXECUTION DIR-------------------------------*/
 
+/* CHECKS */
+
+int		is_bad_command(t_cmds *cmds, t_main *shell);
+int		check_files(t_main *shell, t_cmds *cmds);
+int		is_builtin(t_cmds *cmds);
+
+/* PID_UTILS */
+
+void	add_pid(pid_t pid, pid_t *cpids);
+int		wait_for_children(pid_t *cpids);
+
+/* REDIRECTION_UTILS */
+
+int		redirect_output(t_files *outfile, t_main *shell);
+int		redirect_input(t_files *infile);
+
+/*----------------------------------UTILS DIR--------------------------------*/
+
+/* CMDS_UTILS */
+
+int		cmd_size(t_cmds *cmds);
 
 // # define SHELL "\x1B[1;37mminish\x1B[1;34mEHL:\x1B[0m"
 // # define G_ARROW_SIGN "\001\033[1;32m\002\u279c\001\033[0m  "
@@ -309,6 +331,5 @@ int		check_pipes(t_lex *l);
 /*----------------------------------EXECUTION-------------------------------*/
 
 int		execute(t_cmds *cmds, t_main *shell);
-int		check_files(t_main *shell, t_cmds *cmds);
-
+char	*var_replace(char *input, t_main *shell);
 #endif

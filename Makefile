@@ -28,8 +28,14 @@ SRCS=	srcs/main/main.c \
 		srcs/builtins_stan/export.c \
 		srcs/builtins_stan/echo.c \
 		srcs/execution/execute.c \
-		srcs/execution/check_files.c \
-		srcs/execution/is_builtin.c \
+		srcs/execution/utils/manage_pid.c \
+		srcs/execution/utils/redirection.c \
+		srcs/execution/execute.c \
+		srcs/execution/checks/check_files.c \
+		srcs/execution/checks/check_command.c \
+		srcs/execution/checks/is_builtin.c \
+		srcs/parser/ft_strreplace.c \
+		srcs/utils/cmd_size.c \
 		#srcs/builtins/pwd.c \
 		#rcs/builtins/cd.c \
 		#srcs/builtins/env.c \
