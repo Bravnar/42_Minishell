@@ -7,7 +7,7 @@ int	execute_cmd(t_cmds *cmds, t_main *shell)
 				cmds->cmd_grp[0], shell), EXIT_FAILURE);
 	execve(cmds->path, cmds->cmd_grp, shell->envp);
 	perror("Execve");
-	exit(EXIT_FAILURE);
+	return(EXIT_FAILURE);
 }
 
 int piping(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell) 
@@ -15,21 +15,26 @@ int piping(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 	int fds[2];
 	pid_t pid;
 
-	if (!cmds->last_outfile)
+	if (!cmds->last_outfile) // runs because no outfile
 	{
-		if (pipe(fds) == -1)
+		if (pipe(fds) == -1) // creates a pipe
 			exit(EXIT_FAILURE);
 	}
-	pid = fork();
+	pid = fork(); 
 	if (pid == -1)
 		exit(EXIT_FAILURE);
-	else if (pid == 0)
+	else if (pid == 0) // child process with ls -la
 	{
-		if (cmds->last_infile)
-			fd_in = redirect_input(cmds->last_infile);
-		dup2(fd_in, shell->in);
-		close(fd_in);
-		if (cmds->last_outfile)
+		if (cmds->last_infile) //skips
+			fd_in = redirect_input(cmds->last_infile, shell);
+		else if (fd_in != -1) //skips
+		{
+			dup2(fd_in, shell->in);
+			close(fd_in);
+		}
+		else
+			dup2(STDIN_FILENO, shell->in);
+		if (cmds->last_outfile) //skips
 			redirect_output(cmds->last_outfile, shell);
 		else
 		{
@@ -37,20 +42,23 @@ int piping(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 			close(fds[1]);
 		}
 		close(fds[0]);
-		execute_cmd(cmds, shell);
+		exit(execute_cmd(cmds, shell));
 	}
 	else
 	{
 		add_pid(pid, cpids);
 		close(fds[1]);
 		if (!cmds->last_outfile)
+		{
+			dup2(fds[0], shell->in);
+			//close(fds[0]);
 			return fds[0];
-		close(fds[0]);
+		}
 	}
-	return (-1);
+	return(-1);
 }
 
-int	execute(t_cmds *cmds, t_main *shell)
+int	execute(t_cmds *cmds, t_main *shell)  // ls -la | wc -l 
 {
 	t_cmds	*tmp;
 	int		fd_in;
@@ -66,11 +74,10 @@ int	execute(t_cmds *cmds, t_main *shell)
 	fd_in = -1;
 	while (tmp)
 	{
-		fd_in = piping(tmp, fd_in, cpids, shell);
+		fd_in = piping(tmp, fd_in, cpids, shell);   // cmds (ls -la), -1, [0, ..., ...], shell
 		tmp = tmp->next;
 	}
 	wait_for_children(cpids);
-	ft_printf("Here\n");
 	free(cpids);
 	return (EXIT_SUCCESS);
 }

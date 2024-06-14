@@ -18,12 +18,18 @@ void	redirect_output(t_files *outfile, t_main *shell)
 	close(fd);
 }
 
-int	redirect_input(t_files *infile)
+int	redirect_input(t_files *infile, t_main *shell)
 {
 	int	fd;
 
 	fd = open(infile->file_name, O_RDONLY);
+	
 	if (fd == -1)
 		perror("Failed to open input file");
+	if (dup2(fd, STDIN_FILENO) == -1)
+	{
+		ft_fprintf(shell->err, "dup2\n");
+		exit(EXIT_FAILURE);
+	}
 	return (fd);
 }

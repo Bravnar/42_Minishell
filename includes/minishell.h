@@ -286,7 +286,7 @@ int		wait_for_children(pid_t *cpids);
 /* REDIRECTION_UTILS */
 
 void	redirect_output(t_files *outfile, t_main *shell);
-int		redirect_input(t_files *infile);
+int		redirect_input(t_files *infile, t_main *shell);
 
 /*----------------------------------UTILS DIR--------------------------------*/
 
