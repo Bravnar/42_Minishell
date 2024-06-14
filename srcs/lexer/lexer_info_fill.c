@@ -26,10 +26,8 @@ void	overwrite_exp(t_llex *tmp)
 
 void	work_args(t_llex *tmp)
 {
-	int		i;
 	char	*swap;
 
-	i = -1;
 	swap = NULL;
 	if (ft_strchr(QUOTES, tmp->value[0]))
 		tmp->is_in_quotes = tmp->value[0];
