@@ -3,10 +3,8 @@
 t_files	*new_file_node(t_llex *llex, t_main *shell)
 {
 	t_files	*new;
-	char	*expanded;
 
 	(void) shell;
-	expanded = NULL;
 	new = malloc(sizeof(t_files));
 	if (!new)
 		return (NULL);

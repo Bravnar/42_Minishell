@@ -48,7 +48,7 @@ void	parser_logic(t_lex *l)
 				handle_redirs(tmp);
 			// if (!ft_strcmp("<", tmp->value) || !ft_strcmp(">", tmp->value))
 			// 	handle_simple_redirs(tmp);
-			// else if (!ft_strcmp("<<", tmp->value) \
+			// else if (!ft_strcmp("<<", tmp->value)
 			// || !ft_strcmp(">>", tmp->value))
 			// 	handle_complex_redirs(tmp);
 			else if (!ft_strcmp("|", tmp->value))
