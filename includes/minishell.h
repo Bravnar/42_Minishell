@@ -159,20 +159,6 @@ char	*get_env(t_envp **head, char *var);
 
 void	error_handler(t_err code, char *file, t_main *shell);
 
-/*----------------------------------EXECUTION DIR-----------------------------*/
-
-/* CHECK FILES */
-
-int		check_files(t_main *shell, t_cmds *cmds);
-
-/* EXECUTE */
-
-int		execute(t_cmds *cmds, t_main *shell);
-
-/* IS_BUILTIN */
-
-int		is_builtin(t_cmds *cmds);
-
 /*----------------------------------INIT DIR----------------------------------*/
 
 /* INIT */
@@ -282,6 +268,10 @@ int		check_pipes(t_lex *l);
 
 /*--------------------------------EXECUTION DIR-------------------------------*/
 
+/* MAIN */
+
+int		execute(t_cmds *cmds, t_main *shell);
+
 /* CHECKS */
 
 int		is_bad_command(t_cmds *cmds, t_main *shell);
@@ -295,7 +285,7 @@ int		wait_for_children(pid_t *cpids);
 
 /* REDIRECTION_UTILS */
 
-int		redirect_output(t_files *outfile, t_main *shell);
+void	redirect_output(t_files *outfile, t_main *shell);
 int		redirect_input(t_files *infile);
 
 /*----------------------------------UTILS DIR--------------------------------*/
@@ -327,6 +317,6 @@ int		cmd_size(t_cmds *cmds);
 
 /*----------------------------------EXECUTION-------------------------------*/
 
-int		execute(t_cmds *cmds, t_main *shell);
+
 char	*var_replace(char *input, t_main *shell);
 #endif
