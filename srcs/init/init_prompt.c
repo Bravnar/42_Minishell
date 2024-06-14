@@ -71,7 +71,8 @@ void	terminal_prompt(t_main *shell)
 
 	if (!shell->has_env)
 	{
-		make_no_env_prompt(shell);
+		// make_no_env_prompt(shell);
+		no_env_prompt(shell);
 		return ;
 	}
 	if (shell->prompt)

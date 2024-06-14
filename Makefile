@@ -5,6 +5,7 @@ INCLUDES = includes
 SRCS=	srcs/main/main.c \
 		srcs/init/init.c \
 		srcs/init/init_prompt.c \
+		srcs/init/no_env_prompt.c \
 		srcs/lexer/lexer_main.c \
 		srcs/errors/errors.c \
 		srcs/syntax/check_syntax.c \
@@ -48,8 +49,8 @@ CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
 LIBFT = 	lib
 LIBFT_LIB = $(LIBFT)/my_lib.a
 
-# SANITIZE= -g3 -fsanitize=address
-SANITIZE= -g
+SANITIZE= -g3 -fsanitize=address
+# SANITIZE= -g
 
 # Color Variables
 RED=\033[0;31m

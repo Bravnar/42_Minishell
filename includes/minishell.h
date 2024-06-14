@@ -76,8 +76,12 @@
 
 /* NO ENV LINUX */
 
-#  define FACE "\001\x1B[1;33m\002(\u256F\u00B0\u25A1\u00B0)\u256F"
-#  define THROW "\001\x1B[1;37m\002 \uFE35 | NO ENV |:\001\033[00m\002"
+/* #  define FACE "\001\033[1;33m\002(\u256F\u00B0\u25A1\u00B0)\u256F"
+#  define THROW "\001\033[1;37m\002 \uFE35 | NO ENV |:\001\033[00m\002"
+#  define X_YELLOW "\001\033[01;33m\002 ✘ \001\033[00m\002" */
+
+#  define FACE "\001\033[01;33m\002(╯°□°)╯\001\033[00m\002"
+#  define THROW "\001\033[01;37m\002︵| NO ENV |:\001\033[00m\002"
 #  define X_YELLOW "\001\033[01;33m\002 ✘ \001\033[00m\002"
 
 # endif
@@ -152,6 +156,10 @@ char	*handle_quote(t_envp **head, char *var);
 void	add_env(t_main *shell, char *str);
 void	set_env(t_envp **head, char *key, char *value, int print);
 char	*get_env(t_envp **head, char *var);
+
+/* NO ENV PROMPT */
+
+void	no_env_prompt(t_main *shell);
 
 /*----------------------------------ERRORS DIR--------------------------------*/
 

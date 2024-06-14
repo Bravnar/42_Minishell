@@ -26,11 +26,12 @@ void	populate_no_env(t_main *shell)
 	add_env_node(&shell->env, new_node);
 	new_node = new_env_node("HOME", NULL);
 	add_env_node(&shell->env, new_node);
+	new_node = new_env_node("COLUMNS", "1000");
 	free(get_path);
 }
 
 /* Function to create the prompt for the no environment program */
-void	make_no_env_prompt(t_main *shell)
+/* void	make_no_env_prompt(t_main *shell)
 {
 	char	*cwd;
 	char	*first_part;
@@ -48,13 +49,14 @@ void	make_no_env_prompt(t_main *shell)
 	free(first_part);
 	free(second_part);
 	free(final);
-}
+} */
 
 /* Main no_env function */
 void	no_env_handle(t_main *shell)
 {
 	shell->has_env = 0;
-	shell->prompt = NULL;
+	// shell->prompt = NULL;
+	shell->prompt = ft_strdup("Temp Prompt: ");
 	populate_no_env(shell);
 }
 
