@@ -57,8 +57,8 @@ int	check_files(t_main *shell, t_cmds *cmds)
 	t_files	*tmp_file;
 
 	temp = cmds;
-	temp->last_infile = NULL;
-	temp->last_outfile = NULL;
+	if (!temp)
+		return (EXIT_FAILURE);
 	while (temp)
 	{
 		tmp_file = temp->files;
