@@ -9,15 +9,22 @@ void	join_continued(char *final, t_main *shell)
 	free(one);
 }
 
-char	*join_prompt(char **part)
+char	*join_prompt(char **part, t_main *shell)
 {
 	int		i;
 	char	*result;
 	char	*tmp;
 
+	// (void) shell;
 	if (!part || !part[0])
 		return (NULL);
+	printf("part[0] : %s\n", part[0]);
+	printf("part[1] : %s\n", part[1]);
+	printf("home : %s\n", shell->home);
 	result = ft_strdup("");
+	tmp = ft_strjoin(result, "~");
+	free(result);
+	result = tmp;
 	i = 1;
 	while (part[++i])
 	{
@@ -26,9 +33,9 @@ char	*join_prompt(char **part)
 		result = ft_better_join(tmp, part[i]);
 		free (tmp);
 	}
-	tmp = ft_better_join("~", result);
-	free(result);
-	return (tmp);
+	//tmp = ft_better_join("~", result);
+	//free(result);
+	return (result);
 }
 
 /* Additional function to debug - not needed otherwise */
@@ -70,18 +77,14 @@ void	terminal_prompt(t_main *shell)
 	char	*final;
 
 	if (!shell->has_env)
-	{
-		// make_no_env_prompt(shell);
-		no_env_prompt(shell);
 		return ;
-	}
 	if (shell->prompt)
 		free(shell->prompt);
 	cwd = ft_split(get_env(&shell->env, "PWD"), '/');
 	tmp = ft_better_join(G_ARROW_SIGN, MINISH);
 	full_start = ft_better_join(tmp, EHL);
 	free(tmp);
-	tmp = join_prompt(cwd);
+	tmp = join_prompt(cwd, shell);
 	ft_free_arr(cwd);
 	end = ft_better_join(tmp, X_SIGN);
 	final = ft_better_join(full_start, end);

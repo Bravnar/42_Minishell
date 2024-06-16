@@ -126,6 +126,7 @@ void	copy_work(t_envp *n_n, t_envp **l_h, t_envp **l_t, t_envp *curr);
 void	print_local_copy(t_envp **head);
 int		count_export_args(char **cmds);
 void	free_local_copy(t_envp *local);
+char	**export_split(char *str);
 
 /* ECHO */
 void	echo(t_main *shell, char **cmds);
@@ -142,6 +143,8 @@ void	free_main(t_main *shell);
 
 /* ENV */
 
+char	*my_get_path(void);
+void	no_env_handle(t_main *shell);
 t_envp	*new_env_node(char *key, char *value);
 void	add_env_node(t_envp **envp_head, t_envp *new_envp_node);
 void	print_envp(t_envp **head);
@@ -178,7 +181,8 @@ t_lex	*init_lex(void);
 
 void	terminal_prompt(t_main *shell);
 void 	print_prompt_info(const char *prompt);
-char	*join_prompt(char **part);
+// char	*join_prompt(char **part);
+char	*join_prompt(char **part, t_main *shell);
 
 /*----------------------------------LEXER DIR---------------------------------*/
 

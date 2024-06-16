@@ -44,5 +44,5 @@ void	no_env_prompt(t_main *shell)
 	free(end);
 	free(final);
 	free(cwd);
-	print_prompt_info(shell->prompt);
+	//print_prompt_info(shell->prompt);
 }
