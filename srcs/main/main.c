@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 10:13:59 by smuravye          #+#    #+#             */
-/*   Updated: 2024/06/16 13:46:51 by smuravye         ###   ########.fr       */
+/*   Updated: 2024/06/17 11:27:07 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,17 @@ void	builtins(t_cmds *cmds, t_main *shell)
 		else if (!ft_strcmp(cmds->cmd_grp[0], "export"))
 			export(shell, cmds->cmd_grp);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "echo"))
-			echo(shell, cmds->cmd_grp);
+			my_echo(shell, cmds->cmd_grp);
+		else if (!ft_strcmp(cmds->cmd_grp[0], "unset"))
+			unset_env(cmds->cmd_grp, &shell->env);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
 			exit (1);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "my_env"))
 			print_my_env(shell);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "my_shell"))
 			print_my_shell(shell);
+		else if (!ft_strcmp(cmds->cmd_grp[0], "pwd"))
+			my_pwd(shell);
 	}
 }
 

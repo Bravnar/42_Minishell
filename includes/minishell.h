@@ -131,6 +131,18 @@ char	**export_split(char *str);
 /* ECHO */
 void	echo(t_main *shell, char **cmds);
 
+/* UNSET */
+
+void	unset_env(char **cmds, t_envp **head);
+
+/* PWD */
+
+void	my_pwd(t_main *shell);
+
+/* ECHO */
+
+void	my_echo(t_main *shell, char **cmds);
+
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
 /* CLEANUP */
