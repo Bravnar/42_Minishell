@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 10:13:59 by smuravye          #+#    #+#             */
-/*   Updated: 2024/06/14 10:33:41 by smuravye         ###   ########.fr       */
+/*   Created: 2024/06/17 19:52:11 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/17 19:52:11 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	main(int ac, char **av, char **envp)
 }
 
 
-/* 
+/*
 	TO DO:
 
 	Stan:
