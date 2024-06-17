@@ -22,8 +22,9 @@ void	free_cmds_nodes(t_cmds *head)
 		tmp = head;
 		head = head->next;
 		free_files_nodes(tmp->files);
-		if (ft_strcmp(tmp->cmd_grp[0], "./minishell"))
-			free(tmp->path);
+		if (tmp->cmd_grp && tmp->cmd_grp[0])
+			if (ft_strcmp(tmp->cmd_grp[0], "./minishell"))
+				free(tmp->path);
 		ft_free_arr(tmp->cmd_grp);
 		free(tmp);
 	}
