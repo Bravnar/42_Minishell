@@ -32,6 +32,7 @@ SRCS=	srcs/main/main.c \
 		srcs/builtins_stan/unset.c \
 		srcs/builtins_stan/pwd.c \
 		srcs/builtins_stan/echo.c \
+		srcs/builtins_stan/exit.c \
 		srcs/execution/execute.c \
 		srcs/execution/utils/manage_pid.c \
 		srcs/execution/utils/redirection.c \

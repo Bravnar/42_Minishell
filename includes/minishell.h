@@ -146,6 +146,8 @@ void	my_pwd(t_main *shell);
 
 void	my_echo(t_main *shell, char **cmds);
 
+void	my_exit(t_main *shell);
+
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
 /* CLEANUP */
