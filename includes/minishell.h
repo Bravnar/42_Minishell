@@ -38,6 +38,9 @@
 # define DOLLAR_CHARS "$?-0123456789"
 # define CANCEL_EXP "+~"
 # define NO_HOME "HOME not defined"
+# define ENVLIN "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+# define SH "minishell:"
+# define NOT_SET "HOME not set"
 
 /* PROMPT */
 
@@ -129,7 +132,7 @@ void	free_local_copy(t_envp *local);
 char	**export_split(char *str);
 
 /* ECHO */
-void	echo(t_main *shell, char **cmds);
+void	my_echo(t_main *shell, char **cmds);
 
 /* UNSET */
 
@@ -162,7 +165,7 @@ void	add_env_node(t_envp **envp_head, t_envp *new_envp_node);
 void	print_envp(t_envp **head);
 void	populate_envp(t_main *shell);
 void	free_nodes(t_envp *token_list);
-void	make_no_env_prompt(t_main *shell);
+// void	make_no_env_prompt(t_main *shell);
 char	*handle_tilde(t_envp **head, char *var);
 char	*handle_quote(t_envp **head, char *var);
 
@@ -195,6 +198,8 @@ void	terminal_prompt(t_main *shell);
 void 	print_prompt_info(const char *prompt);
 // char	*join_prompt(char **part);
 char	*join_prompt(char **part, t_main *shell);
+t_envp	*new_no_env_node(char *key, char *value, int print);
+void	make_no_env_prompt(t_main *shell);
 
 /*----------------------------------LEXER DIR---------------------------------*/
 

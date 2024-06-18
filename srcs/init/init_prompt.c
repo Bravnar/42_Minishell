@@ -108,7 +108,10 @@ void	terminal_prompt(t_main *shell)
 	char	*path;
 
 	if (!shell->has_env)
+	{
+		make_no_env_prompt(shell);
 		return ;
+	}
 	if (shell->prompt)
 		free(shell->prompt);
 	path = my_get_path();
