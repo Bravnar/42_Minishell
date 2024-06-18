@@ -1,1 +1,7 @@
-minishell.dSYM/Contents/Resources/DWARF/minishell
+minishell.dSYM/*
+*.DS_Store
+example
+outfile
+infile2
+outfile2
+.vscode/settings.json

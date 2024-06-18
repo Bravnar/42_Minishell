@@ -38,8 +38,9 @@ int	redirect_stdin(int fd_in, t_main *shell)
 {
 	if (fd_in != -1)
 	{
-		if (dup2(fd_in, shell->in) == -1)
+		if (dup2(shell->in, fd_in) == -1)
 		{
+			ft_fprintf(shell->err, "Here\n");
 			ft_fprintf(shell->err, "dup2\n");
 			exit(EXIT_FAILURE);
 		}
