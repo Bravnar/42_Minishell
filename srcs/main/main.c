@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 19:52:11 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/17 19:52:11 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/18 16:38:30 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/18 16:38:30 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	gameplay_loop(t_main *shell)
 		terminal_prompt(shell);
 		lex->input = readline(shell->prompt);
 		if (!lex->input)
-			continue ;
+			break ;
 		if (lex->input[0])
 			add_history(lex->input);
 		lexer(lex, shell);
