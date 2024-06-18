@@ -70,7 +70,7 @@ int	check_files(t_main *shell, t_cmds *cmds)
 			if (tmp_file->type == INFILE)
 				temp->last_infile = tmp_file;
 			if (tmp_file->type == OUTFILE || tmp_file->type == OUTFILE_APP)
-				temp->last_infile = tmp_file;
+				temp->last_outfile = tmp_file;
 			tmp_file = tmp_file->next;
 		}
 		temp = temp->next;
