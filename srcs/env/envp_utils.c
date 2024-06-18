@@ -35,6 +35,8 @@ t_envp	*new_env_node(char *key, char *value)
 		node->value = ft_strdup(value);
 	if (!ft_strcmp(node->key, "HOME"))
 		node->printable = 2;
+	else if (!ft_strcmp(node->key, "COLUMNS"))
+		node->printable = 2;
 	else if (!node->key || !node->value)
 		node->printable = 0;
 	else

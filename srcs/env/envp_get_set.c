@@ -56,7 +56,10 @@ void	add_env(t_main *shell, char *str)
 	split = NULL;
 	if (ft_strchr(str, '='))
 	{
-		split = ft_split(str, '=');
+		// split = ft_split(str, '=');
+		split = export_split(str);
+		if (!split[1])
+			split[1] = ft_strdup("");
 		set_env(&shell->env, split[0], split[1], 1);
 	}
 	else

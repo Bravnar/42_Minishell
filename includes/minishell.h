@@ -76,8 +76,12 @@
 
 /* NO ENV LINUX */
 
-#  define FACE "\001\x1B[1;33m\002(\u256F\u00B0\u25A1\u00B0)\u256F"
-#  define THROW "\001\x1B[1;37m\002 \uFE35 | NO ENV |:\001\033[00m\002"
+/* #  define FACE "\001\033[1;33m\002(\u256F\u00B0\u25A1\u00B0)\u256F"
+#  define THROW "\001\033[1;37m\002 \uFE35 | NO ENV |:\001\033[00m\002"
+#  define X_YELLOW "\001\033[01;33m\002 ✘ \001\033[00m\002" */
+
+#  define FACE "\001\033[01;33m\002(╯°□°)╯\001\033[00m\002"
+#  define THROW "\001\033[01;37m\002︵| NO ENV |:\001\033[00m\002"
 #  define X_YELLOW "\001\033[01;33m\002 ✘ \001\033[00m\002"
 
 # endif
@@ -122,9 +126,22 @@ void	copy_work(t_envp *n_n, t_envp **l_h, t_envp **l_t, t_envp *curr);
 void	print_local_copy(t_envp **head);
 int		count_export_args(char **cmds);
 void	free_local_copy(t_envp *local);
+char	**export_split(char *str);
 
 /* ECHO */
 void	echo(t_main *shell, char **cmds);
+
+/* UNSET */
+
+void	unset_env(char **cmds, t_envp **head);
+
+/* PWD */
+
+void	my_pwd(t_main *shell);
+
+/* ECHO */
+
+void	my_echo(t_main *shell, char **cmds);
 
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
@@ -138,6 +155,8 @@ void	free_main(t_main *shell);
 
 /* ENV */
 
+char	*my_get_path(void);
+void	no_env_handle(t_main *shell);
 t_envp	*new_env_node(char *key, char *value);
 void	add_env_node(t_envp **envp_head, t_envp *new_envp_node);
 void	print_envp(t_envp **head);
@@ -152,6 +171,10 @@ char	*handle_quote(t_envp **head, char *var);
 void	add_env(t_main *shell, char *str);
 void	set_env(t_envp **head, char *key, char *value, int print);
 char	*get_env(t_envp **head, char *var);
+
+/* NO ENV PROMPT */
+
+void	no_env_prompt(t_main *shell);
 
 /*----------------------------------ERRORS DIR--------------------------------*/
 
@@ -170,7 +193,8 @@ t_lex	*init_lex(void);
 
 void	terminal_prompt(t_main *shell);
 void 	print_prompt_info(const char *prompt);
-char	*join_prompt(char **part);
+// char	*join_prompt(char **part);
+char	*join_prompt(char **part, t_main *shell);
 
 /*----------------------------------LEXER DIR---------------------------------*/
 

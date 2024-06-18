@@ -49,7 +49,6 @@ t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 		return (NULL);
 	}
 	node->path = get_path(paths, cmds[0]);
-	ft_printf("Path: %s\n", node->path);
 	ft_free_arr(paths);
 	node->cmd_grp = duplicate_cmds(cmds);
 	node->files = files;

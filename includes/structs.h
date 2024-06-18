@@ -111,6 +111,8 @@ typedef struct s_main
 	char			**envp;
 	char			*prompt;
 	char			*username;
+	char			*home;
+	char			*tmp_path;
 	int				has_env;
 	t_err			err_code;
 	t_lex			*l;
