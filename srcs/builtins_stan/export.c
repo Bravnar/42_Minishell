@@ -123,6 +123,29 @@ void	sort_local_copy(t_envp	**local)
 	}
 }
 
+char	**export_split(char *str)
+{
+	int		i;
+	int		j;
+	char	**result;
+
+	i = 0;
+	j = 0;
+	result = malloc((sizeof(char *) * 3));
+	if (!result)
+		return (NULL);
+	while (str[j] != '=')
+		j++;
+	result[0] = ft_substr(str, i, j - i);
+	i = ++j;
+	while (str[j])
+		j++;
+	result[1] = ft_substr(str, i, j - i);
+	result[2] = NULL;
+	return (result);
+
+}
+
 void	export(t_main *shell, char **cmds)
 {
 	t_envp	*local;

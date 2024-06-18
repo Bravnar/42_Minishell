@@ -25,11 +25,10 @@ t_main	*init_structs(char **envp)
 		shell->prompt = NULL;
 		populate_envp(shell);
 		shell->username = get_env(&shell->env, "$USER");
+		shell->home = get_env(&shell->env, "$HOME");
 		shell->in = dup(STDIN_FILENO);
 		shell->out = dup(STDOUT_FILENO);
 		shell->err = dup(STDERR_FILENO);
-		// if (shell->username == NULL)
-		// 	shell->prompt = BOLD_YELLOW FACE BOLD_WHITE THROW RESET;
 	}
 	return (shell);
 }

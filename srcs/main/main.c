@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 19:52:11 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/17 19:52:11 by hmorand          ###   ########.ch       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 /* Gameplay loop free */
@@ -31,6 +19,31 @@ void	free_all(t_main *shell)
 		shell->l->link = NULL;
 	}
 }
+
+void	print_my_env(t_main	*shell)
+{
+	t_envp	*tmp;
+	
+	tmp = shell->env;
+	printf("Printing env info: ------------------\n");
+	while (tmp)
+	{
+		printf("%s :: %s\n", tmp->key, tmp->value);
+		printf("printable state: %d\n", tmp->printable);
+		tmp = tmp->next;
+	}
+	
+}
+
+void	print_my_shell(t_main	*shell)
+{
+	printf("Printing shell info: ------------------\n");
+	printf("has_env: %d\n", shell->has_env);
+	printf("fd_in: %d\n", shell->in);
+	printf("fd_out: %d\n", shell->out);
+	printf("fd_err: %d\n", shell->err);
+}
+
 /* Simple ft_strcmp to check builtins
    To "catch" the builtins before going
    to execution */
@@ -45,9 +58,17 @@ void	builtins(t_cmds *cmds, t_main *shell)
 		else if (!ft_strcmp(cmds->cmd_grp[0], "export"))
 			export(shell, cmds->cmd_grp);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "echo"))
-			echo(shell, cmds->cmd_grp);
+			my_echo(shell, cmds->cmd_grp);
+		else if (!ft_strcmp(cmds->cmd_grp[0], "unset"))
+			unset_env(cmds->cmd_grp, &shell->env);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
 			exit (1);
+		else if (!ft_strcmp(cmds->cmd_grp[0], "my_env"))
+			print_my_env(shell);
+		else if (!ft_strcmp(cmds->cmd_grp[0], "my_shell"))
+			print_my_shell(shell);
+		else if (!ft_strcmp(cmds->cmd_grp[0], "pwd"))
+			my_pwd(shell);
 	}
 }
 
@@ -77,29 +98,30 @@ void	my_rl_initialize(void)
 void	gameplay_loop(t_main *shell)
 {
 	t_lex	*lex;
-	int	count = 0;
+	// int	count = 0;
 
 
-	count = 0;
+	// count = 0;
 	lex = shell->l;
 	if (!APPLE)
 		my_rl_initialize();
-	while (count < 3)
+	// while (count < 3)
+	while (1)
 	{
 		terminal_prompt(shell);
 		lex->input = readline(shell->prompt);
 		if (!lex->input)
-			continue ;
+			break ;
 		if (lex->input[0])
 			add_history(lex->input);
 		lexer(lex, shell);
 		//parser_main() should be called here, for now is in lexer()
 		builtins(shell->cmds, shell);
 		// is_builtin(shell->cmds);
-		execute(shell->cmds, shell);
+		//execute(shell->cmds, shell);
 		free_all(shell);
 		clear_t_cmds(shell);
-		count++;
+		// count++;
 	}
 }
 

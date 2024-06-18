@@ -11,26 +11,8 @@ char	*my_get_path(void)
 	return (get_path);
 }
 
-/* Function to populate the no environment linked list (hardcoded) */
-void	populate_no_env(t_main *shell)
-{
-	t_envp	*new_node;
-	char	*get_path;
-
-	get_path = my_get_path();
-	new_node = new_env_node("PWD", get_path);
-	add_env_node(&shell->env, new_node);
-	new_node = new_env_node("SHLVL", "1");
-	add_env_node(&shell->env, new_node);
-	new_node = new_env_node("_", "/usr/bin/env");
-	add_env_node(&shell->env, new_node);
-	new_node = new_env_node("HOME", NULL);
-	add_env_node(&shell->env, new_node);
-	free(get_path);
-}
-
 /* Function to create the prompt for the no environment program */
-void	make_no_env_prompt(t_main *shell)
+/* void	make_no_env_prompt(t_main *shell)
 {
 	char	*cwd;
 	char	*first_part;
@@ -48,15 +30,9 @@ void	make_no_env_prompt(t_main *shell)
 	free(first_part);
 	free(second_part);
 	free(final);
-}
+} */
 
-/* Main no_env function */
-void	no_env_handle(t_main *shell)
-{
-	shell->has_env = 0;
-	shell->prompt = NULL;
-	populate_no_env(shell);
-}
+
 
 /* Function that handles the '~' character during the main getter function */
 char	*handle_tilde(t_envp **head, char *var)

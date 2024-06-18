@@ -5,6 +5,8 @@ INCLUDES = includes
 SRCS=	srcs/main/main.c \
 		srcs/init/init.c \
 		srcs/init/init_prompt.c \
+		srcs/init/no_env_prompt.c \
+		srcs/init/init_no_env.c \
 		srcs/lexer/lexer_main.c \
 		srcs/errors/errors.c \
 		srcs/syntax/check_syntax.c \
@@ -26,6 +28,9 @@ SRCS=	srcs/main/main.c \
 		srcs/builtins_stan/cd_new.c \
 		srcs/builtins_stan/env.c \
 		srcs/builtins_stan/export.c \
+		srcs/builtins_stan/echo.c \
+		srcs/builtins_stan/unset.c \
+		srcs/builtins_stan/pwd.c \
 		srcs/builtins_stan/echo.c \
 		srcs/execution/execute.c \
 		srcs/execution/utils/manage_pid.c \
