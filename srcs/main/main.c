@@ -92,6 +92,7 @@ void	my_rl_initialize(void)
 		dup2(saved_stdin, STDIN_FILENO);
 		close(saved_stdin);
 		close(fd);
+		printf("%d\n", STDIN_FILENO);
 	}
 }
 
@@ -118,7 +119,7 @@ void	gameplay_loop(t_main *shell)
 		//parser_main() should be called here, for now is in lexer()
 		builtins(shell->cmds, shell);
 		// is_builtin(shell->cmds);
-		//execute(shell->cmds, shell);
+		execute(shell->cmds, shell);
 		free_all(shell);
 		clear_t_cmds(shell);
 		// count++;

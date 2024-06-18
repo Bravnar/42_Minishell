@@ -69,7 +69,7 @@ int	execute(t_cmds *cmds, t_main *shell)  // ls -la | wc -l
 	fd_in = -1;
 	while (tmp)
 	{
-		if (tmp->cmd_grp[0])
+		if (tmp->cmd_grp && tmp->cmd_grp[0])
 			fd_in = piping(tmp, fd_in, cpids, shell);   // cmds (ls -la), -1, [0, ..., ...], shell
 		tmp = tmp->next;
 	}

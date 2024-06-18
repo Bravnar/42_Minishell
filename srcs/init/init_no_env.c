@@ -1,5 +1,33 @@
 #include "minishell.h"
 
+t_envp	*new_no_env_node(char *key, char *value)
+{
+	t_envp	*node;
+
+	node = malloc(sizeof(t_envp));
+	if (!node)
+		return (NULL);
+	if (!key)
+		node->key = NULL;
+	else
+		node->key = ft_strdup(key);
+	if (!value)
+		node->value = NULL;
+	else
+		node->value = ft_strdup(value);
+	if (!ft_strcmp(node->key, "HOME"))
+		node->printable = 2;
+	else if (!ft_strcmp(node->key, "COLUMNS"))
+		node->printable = 2;
+	else if (!node->key || !node->value)
+		node->printable = 0;
+	else
+		node->printable = 1;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
+}
+
 /* Function to populate the no environment linked list (hardcoded) */
 void	populate_no_env(t_main *shell)
 {
@@ -14,8 +42,6 @@ void	populate_no_env(t_main *shell)
 	new_node = new_env_node("_", "/usr/bin/env");
 	add_env_node(&shell->env, new_node);
 	new_node = new_env_node("HOME", NULL);
-	add_env_node(&shell->env, new_node);
-	new_node = new_env_node("COLUMNS", "1000");
 	free(get_path);
 }
 

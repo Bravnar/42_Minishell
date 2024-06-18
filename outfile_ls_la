@@ -1,0 +1,37 @@
+total 196
+drwxr-xr-x  9 smuravye 2023_lausanne    311 Jun 18 10:59 .
+drwxr-xr-x  4 smuravye 2023_lausanne     35 Jun 14 15:02 ..
+drwxr-xr-x  2 smuravye 2023_lausanne     20 Jun 11 18:09 dev
+-rw-r--r--  1 smuravye 2023_lausanne      6 Jun 14 09:18 file_00_smuravye
+-rw-r--r--  1 smuravye 2023_lausanne     50 Jun 11 18:09 force_test
+drwxr-xr-x  8 smuravye 2023_lausanne    220 Jun 18 10:40 .git
+-rw-r--r--  1 smuravye 2023_lausanne     83 Jun 18 09:32 .gitignore
+drwxr-xr-x  2 smuravye 2023_lausanne     58 Jun 18 09:32 includes
+drwxr-xr-x  5 smuravye 2023_lausanne     78 Jun 18 10:58 lib
+-rw-r--r--  1 smuravye 2023_lausanne   3287 Jun 18 09:32 Makefile
+-rwxr-xr-x  1 smuravye 2023_lausanne 143368 Jun 18 10:58 minishell
+-rw-r--r--  1 smuravye 2023_lausanne     14 Jun 11 18:09 new_test_file_smuravye
+-rw-r--r--  1 smuravye 2023_lausanne      0 Jun 18 10:59 outfile_ls_la
+-rw-r--r--  1 smuravye 2023_lausanne      0 Jun 18 09:32 outfile_test
+-rw-r--r--  1 smuravye 2023_lausanne     31 Jun 11 18:09 README.md
+drwxr-xr-x 15 smuravye 2023_lausanne    197 Jun 11 18:09 srcs
+drwxr-xr-x  2 smuravye 2023_lausanne    231 Jun 11 18:09 test
+drwxr-xr-x  2 smuravye 2023_lausanne     70 Jun 11 18:09 test2
+-rwxr-xr-x  1 smuravye 2023_lausanne  21736 Jun 18 09:32 test_deadly
+-rw-r--r--  1 smuravye 2023_lausanne      1 Jun 11 18:09 worldhello
+dev
+file_00_smuravye
+force_test
+includes
+lib
+Makefile
+minishell
+new_test_file_smuravye
+outfile_ls_la
+outfile_test
+README.md
+srcs
+test
+test2
+test_deadly
+worldhello
