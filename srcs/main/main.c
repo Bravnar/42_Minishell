@@ -2,6 +2,7 @@
 
 #include "minishell.h"
 
+sig_atomic_t	g_signal_received = 0;
 /* Gameplay loop free */
 void	free_all(t_main *shell)
 {
@@ -71,6 +72,8 @@ void	builtins(t_cmds *cmds, t_main *shell)
 			print_my_shell(shell);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "pwd"))
 			my_pwd(shell);
+		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
+			my_exit(shell);
 	}
 }
 
@@ -97,17 +100,30 @@ void	my_rl_initialize(void)
 	}
 }
 
+int event(void)
+{
+	return (0);
+}
+
+void	sig_handler(int status)
+{
+	(void) status;
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	rl_done = 1;
+}
+
 void	gameplay_loop(t_main *shell)
 {
 	t_lex	*lex;
-	// int	count = 0;
 
-
-	// count = 0;
 	lex = shell->l;
+	
 	if (!APPLE)
 		my_rl_initialize();
-	// while (count < 3)
+	rl_event_hook = event;
+	signal(SIGINT, sig_handler);
 	while (1)
 	{
 		terminal_prompt(shell);
@@ -143,15 +159,37 @@ int	main(int ac, char **av, char **envp)
 	TO DO:
 
 	Stan:
-	1) Refactor functions that need refactoring (handle redirs etc)
+	1) Refactor functions that need refactoring (handle redirs etc) ✅
 	2) Adapt the "glueing logic" for heredoc and append ✅
 	3) Finilize the "expansion()" function to follow all steps correctly
 		including the replace function from Hadri ✅
 	4) Clean up all files and ensure norminette
-	5) Finish implementation of builtins in MAIN and NOENV
+	5) Finish implementation of builtins in MAIN and NOENV ✅
 	6) for heredoc END, change the logic of expansion (ffs)
 
 	Hadrien:
 	1) Continue execution
 	2) See point 1)
+ */
+
+
+/* void	handle_sigint(int sig)
+{
+	(void) sig;
+	g_signal_received = 1;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+if (g_signal_received)
+		{
+			g_signal_received = 0;
+			free_all(shell);
+			clear_t_cmds(shell);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+
  */

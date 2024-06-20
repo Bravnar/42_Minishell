@@ -33,12 +33,15 @@ void	print_local_copy(t_envp **head)
 	tmp = *head;
 	while (tmp != NULL)
 	{
-		if (!(tmp->key && tmp->key[0] == '_' && !tmp->key[1]))
+		if (tmp->printable != 777)
 		{
-			if (!tmp->value)
-				printf("declare -x %s\n", tmp->key);
-			else
-				printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
+			if (!(tmp->key && tmp->key[0] == '_' && !tmp->key[1]))
+			{
+				if (!tmp->value)
+					printf("declare -x %s\n", tmp->key);
+				else
+					printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
+			}
 		}
 		tmp = tmp->next;
 	}
@@ -48,6 +51,7 @@ void	copy_work(t_envp *n_n, t_envp **l_h, t_envp **l_t, t_envp *curr)
 {
 	n_n->key = ft_strdup(curr->key);
 	n_n->value = ft_strdup(curr->value);
+	n_n->printable = curr->printable;
 	n_n->next = NULL;
 	n_n->prev = *l_t;
 	if (*l_t)

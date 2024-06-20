@@ -29,12 +29,16 @@ char	**duplicate_cmds(char **cmds)
 		return (NULL);
 	i = -1;
 	while (cmds[++i])
+	{
 		result[i] = ft_strdup(cmds[i]);
+		//free(cmds[i]);
+	}
 	result[i] = NULL;
+	//free(cmds);
 	return (result);
 }
 
-t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
+/* t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 {
 	t_cmds	*node;
 	char	**paths;
@@ -59,6 +63,30 @@ t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 	node->last_outfile = NULL;
 	node->next = NULL;
 	node->prev = NULL;
+	return (node);
+} */
+
+t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
+{
+	t_cmds	*node;
+	char	**paths;
+
+	node = calloc(1, sizeof(t_cmds));
+	if (!node)
+		return (NULL);
+	paths = get_paths(shell);
+	if (!paths)
+	{
+		free(node);
+		return (NULL);
+	}
+	if (cmds && cmds[0])
+		node->path = get_path(paths, cmds[0]);
+	ft_free_arr(paths);
+	if (cmds)
+		node->cmd_grp = duplicate_cmds(cmds);
+	node->files = files;
+	node->index = index;
 	return (node);
 }
 
@@ -107,6 +135,8 @@ char	**create_cmd_arr(t_llex *tmp, t_main *shell, int count)
 	(void) shell;
 	iter = tmp;
 	i = 0;
+	if (!count)
+		return (NULL);
 	cmd_list = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!cmd_list)
 		return (NULL);

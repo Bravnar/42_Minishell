@@ -29,7 +29,9 @@ typedef enum e_err
 	NO_INFILE,
 	PERM_DENIED,
 	NO_COMMAND,
-	IS_DIR
+	IS_DIR,
+	BAD_REDIR_IN,
+	BAD_REDIR_OUT
 }	t_err;
 
 typedef struct s_envp

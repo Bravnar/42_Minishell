@@ -5,6 +5,8 @@ int	execute_cmd(t_cmds *cmds, t_main *shell)
 	if (is_bad_command(cmds, shell))
 		return (error_handler(shell->err_code,
 				cmds->cmd_grp[0], shell), EXIT_FAILURE);
+	if (!cmds->path)
+		return (error_handler(NO_COMMAND, cmds->cmd_grp[0], shell), EXIT_FAILURE);
 	execve(cmds->path, cmds->cmd_grp, shell->envp);
 	perror("Execve");
 	return(EXIT_FAILURE);
@@ -136,7 +138,7 @@ int	execute(t_cmds *cmds, t_main *shell)  // ls -la | wc -l
 	fd_in = -1;
 	while (tmp)
 	{
-		if (tmp->cmd_grp[0])
+		if (tmp->cmd_grp && tmp->cmd_grp[0])
 			fd_in = piping(tmp, fd_in, cpids, shell);   // cmds (ls -la), -1, [0, ..., ...], shell
 		printf("FD IN - loop: %d\n", fd_in);
 		tmp = tmp->next;

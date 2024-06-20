@@ -5,6 +5,11 @@ void	go_home(t_main *shell, char **cmds, char *cwd)
 	char	*home_dir;
 
 	home_dir = get_env(&shell->env, "HOME");
+	if (cd_count(cmds) == 1 && !home_dir)
+	{
+		ft_fprintf(2, RED"%s %s: %s\n"RESET, SH, cmds[0], NOT_SET);
+		return ;
+	}
 	if (!ft_strcmp(cwd, home_dir))
 		return ;
 	if (!home_dir)

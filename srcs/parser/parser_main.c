@@ -12,7 +12,9 @@ void	print_main_struct(t_cmds **main)
 		i = -1;
 		printf("Path: %s\n", tmp->path);
 		printf("Commands: \n");
-		while (tmp->cmd_grp[++i])
+		if (!tmp->cmd_grp)
+			printf("No commands detected\n");
+		while (tmp->cmd_grp && tmp->cmd_grp[++i])
 			printf("[%s]\n", tmp->cmd_grp[i]);
 		printf("..............\nFiles: \n");
 		file_tmp = tmp->files;
@@ -87,8 +89,8 @@ void	parser_main(t_main *shell)
 	parser_logic(lex);
 	parser_combiner(shell);
 	parser_body(shell);
-	print_list(&lex->link);
-	print_main_struct(&shell->cmds);
+	//print_list(&lex->link);
+	//print_main_struct(&shell->cmds);
 }
 
 /* void	parser_combiner(t_main *shell)

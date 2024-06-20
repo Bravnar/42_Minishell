@@ -13,9 +13,8 @@ void	error_handler(t_err code, char *file, t_main *shell)
 		ft_fprintf(shell->err,
 			RED"minishell: Mismatched quotation marks.\n"RESET);
 	else if (code == BAD_REDIRS)
-		ft_fprintf(shell->err,
-			RED"minishell: syntax error near \
-				unexpected token '>' or '<'.\n"RESET);
+		ft_fprintf(shell->err, \
+			RED"minishell: syntax error near unexpected token '>' or '<'.\n"RESET);
 	else if (code == BAD_REDIRS_NL)
 		ft_fprintf(shell->err,
 			RED"minishell: syntax error near unexpected token 'newline'\n"RESET);
