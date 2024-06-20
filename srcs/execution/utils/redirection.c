@@ -36,15 +36,17 @@ int	redirect_input(t_files *infile, t_main *shell)
 
 int	redirect_stdin(int fd_in, t_main *shell)
 {
+	printf("Fd in: %d\n", fd_in);
 	if (fd_in != -1)
 	{
-		if (dup2(shell->in, fd_in) == -1)
+		if (dup2(STDIN_FILENO, fd_in) == -1)
 		{
-			ft_fprintf(shell->err, "Here\n");
 			ft_fprintf(shell->err, "dup2\n");
-			exit(EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		}
-		close(fd_in);
+		printf("Closing fd in: %d\n", fd_in);
+		if (fd_in != STDIN_FILENO)
+			close(fd_in);
 	}
 	return (0);
 }
