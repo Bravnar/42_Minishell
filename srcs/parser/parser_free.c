@@ -25,7 +25,8 @@ void	free_cmds_nodes(t_cmds *head)
 		if (tmp->cmd_grp && tmp->cmd_grp[0])
 		{
 			if (ft_strcmp(tmp->cmd_grp[0], "./minishell"))
-				free(tmp->path);
+				if (tmp->path)
+					free(tmp->path);
 			ft_free_arr(tmp->cmd_grp);
 		}
 		free(tmp);

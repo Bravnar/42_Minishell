@@ -6,7 +6,8 @@ char	**get_paths(t_main *shell)
 	char	*path;
 
 	path = get_env(&shell->env, "PATH");
-	if (!path)
+	printf("path: %s\n", path);
+	if (!path || !path[0])
 		return (NULL);
 	paths = ft_split(path, ':');
 	if (!paths)
