@@ -98,16 +98,32 @@ void	my_rl_initialize(void)
 	}
 }
 
+int event(void)
+{
+	return (0);
+}
+
+void	sig_handler(int status)
+{
+	(void) status;
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	rl_done = 1;
+}
+
 void	gameplay_loop(t_main *shell)
 {
 	t_lex	*lex;
 
 	lex = shell->l;
 	
+	if (!APPLE)
+		my_rl_initialize();
+	rl_event_hook = event;
+	signal(SIGINT, sig_handler);
 	while (1)
 	{
-		if (!APPLE)
-			my_rl_initialize();
 		terminal_prompt(shell);
 		lex->input = readline(shell->prompt);
 		if (!lex->input)

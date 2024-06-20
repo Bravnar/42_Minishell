@@ -94,6 +94,15 @@
 # define TOO_MANY_ARGS "too many arguments"
 # define NO_DIR "no such file or directory"
 
+# define QUOTES_ERR "Mismatched quotation marks."
+# define REDIR_IN_ERR "syntax error near unexpected token '<'"
+# define REDIR_OUT_ERR "syntax error near unexpected token '>'"
+# define PIPE_ERR "syntax error near unexpected token '|'"
+# define NEWLINE_ERR "syntax error near unexpected token 'newline'"
+# define APPEND_ERR "syntax error near unexpected token '>>'"
+# define HEREDOC_SIGN_ERR "syntax error near unexpected token '<<'"
+
+
 /*----------------------------------------------------------------------------*/
 /*                                  FUNCTIONS                                 */
 /*----------------------------------------------------------------------------*/

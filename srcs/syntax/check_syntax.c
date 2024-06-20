@@ -10,6 +10,26 @@ void	reset_quotes(t_lex *l)
 
 }
 
+void	set_redir_err(t_lex *l, t_llex *tmp)
+{
+	int	lst_size;
+
+	lst_size = ms_lstsize(l->link);
+	if (lst_size == 1)
+		l->err_code = BAD_REDIRS_NL;
+	else if (tmp->next && tmp->next->value[0] == '<')
+		l->err_code = BAD_REDIR_IN;
+	else if (tmp->next && tmp->next->value[0] == '>')
+		l->err_code = BAD_REDIR_OUT;
+	else if (tmp->next && (ft_strchr(PIPE, tmp->next->value[0])))
+		l->err_code = BAD_PIPES;
+	else if (ft_strlen(tmp->value) > 2)
+		l->err_code = BAD_REDIRS;
+	else if (!tmp->next)
+		l->err_code = BAD_REDIRS_NL;
+	
+}
+
 int	check_redirs(t_lex *l)
 {
 	t_llex	*tmp;
@@ -20,16 +40,17 @@ int	check_redirs(t_lex *l)
 	{
 		if (ft_strchr(REDIRS, tmp->value[0]))
 		{
-			if (ms_lstsize(l->link) == 1)
-				l->err_code = BAD_REDIRS_NL;
-			else if (tmp->next && (ft_strchr(REDIRS, tmp->next->value[0])))
-				l->err_code = BAD_REDIRS;
-			else if (tmp->next && (ft_strchr(PIPE, tmp->next->value[0])))
-				l->err_code = BAD_PIPES;
-			else if (ft_strlen(tmp->value) > 2)
-				l->err_code = BAD_REDIRS;
-			else if (!tmp->next)
-				l->err_code = BAD_REDIRS;
+			set_redir_err(l, tmp);
+			// if (ms_lstsize(l->link) == 1)
+			// 	l->err_code = BAD_REDIRS_NL;
+			// else if (tmp->next && (ft_strchr(REDIRS, tmp->next->value[0])))
+			// 	l->err_code = BAD_REDIRS;
+			// else if (tmp->next && (ft_strchr(PIPE, tmp->next->value[0])))
+			// 	l->err_code = BAD_PIPES;
+			// else if (ft_strlen(tmp->value) > 2)
+			// 	l->err_code = BAD_REDIRS;
+			// else if (!tmp->next)
+			// 	l->err_code = BAD_REDIRS;
 		}
 		tmp = tmp->next;
 	}
@@ -55,7 +76,7 @@ int	check_pipes(t_lex *l)
 			else if (ft_strlen(tmp->value) > 1)
 				l->err_code = BAD_PIPES;
 			else if (!tmp->next)
-				l->err_code = BAD_PIPES;
+				l->err_code = BAD_REDIRS_NL;
 		}
 		tmp = tmp->next;
 	}
