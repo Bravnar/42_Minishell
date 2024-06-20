@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_lib.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 20:02:07 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/06 14:10:42 by smuravye         ###   ########.fr       */
+/*   Created: 2024/06/20 17:03:25 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/20 17:03:25 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,6 @@ char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	**ft_megasplit(char *str, char *charset);
-char	*ft_better_join(char const *s1, char const *s2);
+char	*ft_better_join(char *s1, char *s2, int free_);
 
 #endif

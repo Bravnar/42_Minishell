@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_better_join.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 18:05:21 by smuravyev         #+#    #+#             */
-/*   Updated: 2024/06/06 10:54:40 by smuravye         ###   ########.fr       */
+/*   Created: 2024/06/20 17:03:08 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/20 17:03:08 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_lib.h"
 
-char	*ft_better_join(char const *s1, char const *s2)
+void	free_strs(char *s1, char *s2)
+{
+	free(s1);
+	free(s2);
+}
+
+char	*ft_better_join(char *s1, char *s2, int free_)
 {
 	char	*result;
 	size_t	i;
@@ -36,5 +42,7 @@ char	*ft_better_join(char const *s1, char const *s2)
 		result[j++] = s2[i];
 		i++;
 	}
+	if (free_)
+		free_strs(s1, s2);
 	return (result);
 }

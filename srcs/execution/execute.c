@@ -26,36 +26,96 @@ int piping(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 		exit(EXIT_FAILURE);
 	else if (pid == 0) // child process with ls -la
 	{
-		if (cmds->last_infile) // if infile
-			fd_in = redirect_input(cmds->last_infile, shell);
-		else if (fd_in != -1)
-			redirect_stdin(fd_in, shell);
-		if (cmds->last_outfile) //if it redirects output
-			redirect_output(cmds->last_outfile, shell);
-		else if (cmds->next)
+		if (cmds->prev && cmds->next)
 		{
-			dup2(fds[1], STDOUT_FILENO);
-			close(fds[1]);
-			close(fds[0]);
+			if (cmds->last_infile) // if infile
+				fd_in = redirect_input(cmds->last_infile, shell);
+			else
+				redirect_stdin(fd_in, shell);
+			if (cmds->last_outfile) //if it redirects output
+				redirect_output(cmds->last_outfile, shell);
+			else if (cmds->next)
+			{
+				dup2(fds[1], STDOUT_FILENO);
+				close(fds[1]);
+				close(fds[0]);
+			}
+		}
+		else if (!cmds->prev && !cmds->next)
+		{
+			if (cmds->last_infile) // if infile
+				fd_in = redirect_input(cmds->last_infile, shell);
+			if (cmds->last_outfile) //if it redirects output
+				redirect_output(cmds->last_outfile, shell);
+		}
+		else if (!cmds->prev)
+		{
+			if (cmds->last_infile) // if infile
+				fd_in = redirect_input(cmds->last_infile, shell);
+			if (cmds->last_outfile) //if it redirects output
+				redirect_output(cmds->last_outfile, shell);
+			else if (cmds->next)
+			{
+				dup2(fds[1], STDOUT_FILENO);
+				close(fds[1]);
+				close(fds[0]);
+			}
+		}
+		else if (!cmds->next)
+		{
+			if (cmds->last_infile) // if infile
+				fd_in = redirect_input(cmds->last_infile, shell);
+			else
+				redirect_stdin(fd_in, shell);
+			if (cmds->last_outfile) //if it redirects output
+				redirect_output(cmds->last_outfile, shell);
 		}
 		exit(execute_cmd(cmds, shell));
 	}
 	else
 	{
 		add_pid(pid, cpids);
+		if (!cmds->prev && !cmds->next) // only one command
+			return (-1);
+		else if (cmds->prev && cmds->next)
+		{
+			close(fds[1]);
+			dup2(fds[0], STDIN_FILENO);
+			close(fds[0]);
+			close(fd_in);
+			return fds[0];
+		}
+		else if (cmds->prev)
+		{
+			close(fds[1]);
+			close(fds[0]);
+			close(fd_in);
+			return (-1);
+		}
+		else if (cmds->next)
+		{
+			close(fds[1]);
+			return fds[0];
+		}
+			
+		/* if (fd_in != -1)
+		{
+			dup2(STDIN_FILENO, fd_in);
+		}
+		
 		if (!cmds->last_outfile)
 		{
 			printf("Here in parent - fd read: %d\n", fds[0]);
-			if (fd_in != -1 && fd_in != STDIN_FILENO)
+			if (fd_in != -1)
 				close(fd_in);
 			if (cmds->next || cmds->prev)
 			{
 				close(fds[1]);
-				dup2(shell->in, fds[0]);
+				dup2(STDIN_FILENO, fds[0]);
 				close(fds[0]);
 				return fds[0];
 			}
-		}
+		} */
 	}
 	return(-1);
 }
