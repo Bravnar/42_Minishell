@@ -29,8 +29,8 @@ void	no_env_handle(t_main *shell)
 	tmp = NULL;
 	shell->has_env = 0;
 	cwd = my_get_path();
-	tmp = ft_better_join("sadshell:", cwd);
-	tmp2 = ft_better_join(tmp, " $ ");
+	tmp = ft_better_join("sadshell:", cwd, 0);
+	tmp2 = ft_better_join(tmp, " $ ", 0);
 	free(cwd);
 	shell->prompt = ft_strdup(tmp2);
 	free(tmp);
