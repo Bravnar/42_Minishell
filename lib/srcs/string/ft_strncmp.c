@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 12:02:57 by codespace         #+#    #+#             */
-/*   Updated: 2023/11/07 10:16:45 by smuravye         ###   ########.fr       */
+/*   Created: 2024/06/20 14:54:37 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/20 14:54:37 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t			i;
 
+	if (!s2 && !s1)
+		return (0);
+	if (!s1)
+	 	return (s2[0]);
+	if (!s2)
+	 	return (s1[0]);
 	i = 0;
 	while ((s1[i] || s2[i]) && i < n)
 	{

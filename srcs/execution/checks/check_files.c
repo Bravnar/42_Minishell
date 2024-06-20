@@ -18,6 +18,29 @@ int	check_infile(char *infile, t_main *shell)
 	return (EXIT_SUCCESS);
 }
 
+t_files *extract_heredoc(t_files *file, t_main *shell)
+{
+	char	*line;
+	char	*input;
+	char	*final;
+
+	line = ft_strdup("");
+	input = ft_strdup("");
+	while (ft_strncmp(input, file->file_name, ft_strlen(file->file_name)))
+	{
+		line = ft_better_join(line, input, 1);
+		write(STDOUT_FILENO, "> ", 2);
+		input = get_next_line(STDIN_FILENO);
+	}
+	free(file->file_name);
+	final = var_replace(line, shell);
+	file->file_name = ft_strdup(final);
+	free(line);
+	free(final);
+	free(input);
+	return (file);
+}
+
 int	check_outfile(char *outfile, t_main *shell, t_type t)
 {
 	int	fd;
@@ -67,8 +90,12 @@ int	check_files(t_main *shell, t_cmds *cmds)
 			if (check_file(tmp_file, shell))
 				return (error_handler(shell->err_code,
 						tmp_file->file_name, shell), EXIT_FAILURE);
-			if (tmp_file->type == INFILE)
+			else if (tmp_file->type == INFILE)
 				temp->last_infile = tmp_file;
+			else if (tmp_file->type == HEREDOC_END)
+			{
+				temp->last_infile = extract_heredoc(tmp_file, shell);
+			}
 			if (tmp_file->type == OUTFILE || tmp_file->type == OUTFILE_APP)
 				temp->last_outfile = tmp_file;
 			tmp_file = tmp_file->next;

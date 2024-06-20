@@ -22,9 +22,9 @@ char	*my_get_path(void)
 	if (shell->prompt)
 		free(shell->prompt);
 	cwd = my_get_path();
-	first_part = ft_better_join(FACE, THROW);
-	second_part = ft_better_join(first_part, cwd);
-	final = ft_better_join(second_part, X_YELLOW);
+	first_part = ft_better_join(FACE, THROW, 0);
+	second_part = ft_better_join(first_part, cwd, 0);
+	final = ft_better_join(second_part, X_YELLOW, 0);
 	shell->prompt = ft_strdup(final);
 	free(cwd);
 	free(first_part);
@@ -62,8 +62,8 @@ char	*handle_quote(t_envp **head, char *var)
 	trim = ft_strtrim(var, "'");
 	expand = get_env(head, trim);
 	free(trim);
-	first = ft_better_join("'", expand);
-	result = ft_better_join(first, "'");
+	first = ft_better_join("'", expand, 0);
+	result = ft_better_join(first, "'", 0);
 	free(first);
 	return (result);
 }

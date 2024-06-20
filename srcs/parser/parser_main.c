@@ -10,6 +10,7 @@ void	print_main_struct(t_cmds **main)
 	while (tmp)
 	{
 		i = -1;
+		printf("Path: %s\n", tmp->path);
 		printf("Commands: \n");
 		if (!tmp->cmd_grp)
 			printf("No commands detected\n");

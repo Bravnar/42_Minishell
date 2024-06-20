@@ -11,16 +11,16 @@ char	*create_home(char **part)
 	tmp = NULL;
 	if (part[0] && part[1])
 	{
-		tmp = ft_better_join(result, part[0]);
+		tmp = ft_better_join(result, part[0], 0);
 		free(result);
-		result = ft_better_join(tmp, "/");
+		result = ft_better_join(tmp, "/", 0);
 		free(tmp);
-		tmp = ft_better_join(result, part[1]);
+		tmp = ft_better_join(result, part[1], 0);
 		free(result);
 	}
 	else if (part[0])
 	{
-		tmp = ft_better_join(result, part[0]);
+		tmp = ft_better_join(result, part[0], 0);
 		free(result);
 	}
 	else
@@ -49,9 +49,9 @@ char	*join_prompt(char **part, t_main *shell)
 	free(home);
 	while (i > 1 && part[i])
 	{
-		tmp = ft_better_join(result, "/");
+		tmp = ft_better_join(result, "/", 0);
 		free(result);
-		result = ft_better_join(tmp, part[i++]);
+		result = ft_better_join(tmp, part[i++], 0);
 		free (tmp);
 	}
 	return (result);
@@ -65,16 +65,18 @@ void	terminal_prompt_nonroot(t_main *shell, char **path)
 	char	*end;
 	char	*final;
 
+
 	breakdown = NULL;
 	breakdown = ft_split(*path, '/');
 	free(*path);
-	tmp = ft_better_join(G_ARROW_SIGN, MINISH);
-	full_start = ft_better_join(tmp, EHL);
+	tmp = ft_better_join(G_ARROW_SIGN, MINISH, 0);
+	full_start = ft_better_join(tmp, EHL, 0);
 	free(tmp);
 	tmp = join_prompt(breakdown, shell);
 	ft_free_arr(breakdown);
-	end = ft_better_join(tmp, X_SIGN);
-	final = ft_better_join(full_start, end);
+	end = ft_better_join(tmp, X_SIGN, 0);
+	final = ft_better_join(full_start, end, 0);
+
 	shell->prompt = ft_strdup(final);
 	free(tmp);
 	free(full_start);
@@ -90,12 +92,12 @@ void	terminal_prompt_root(t_main *shell, char **path)
 	char	*final;
 
 	free(*path);
-	tmp = ft_better_join(G_ARROW_SIGN, MINISH);
-	full_start = ft_better_join(tmp, EHL);
+	tmp = ft_better_join(G_ARROW_SIGN, MINISH, 0);
+	full_start = ft_better_join(tmp, EHL, 0);
 	free(tmp);
 	tmp = join_prompt(NULL, shell);
-	end = ft_better_join(tmp, X_SIGN);
-	final = ft_better_join(full_start, end);
+	end = ft_better_join(tmp, X_SIGN, 0);
+	final = ft_better_join(full_start, end, 0);
 	shell->prompt = ft_strdup(final);
 	free(tmp);
 	free(full_start);

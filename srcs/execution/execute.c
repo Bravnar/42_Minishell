@@ -17,7 +17,8 @@ int piping(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 	int fds[2];
 	pid_t pid;
 
-	if (!cmds->next) // runs because there is a next command
+	printf("Before pipe - fd_in: %d\n", fd_in);
+	if (cmds->next) // runs because there is a next command
 	{
 		if (pipe(fds) == -1) // creates a pipe
 			exit(EXIT_FAILURE);
@@ -27,30 +28,96 @@ int piping(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 		exit(EXIT_FAILURE);
 	else if (pid == 0) // child process with ls -la
 	{
-		if (cmds->last_infile) // if infile
-			fd_in = redirect_input(cmds->last_infile, shell);
-		else if (redirect_stdin(fd_in, shell))
-			exit(EXIT_FAILURE);
-		if (cmds->last_outfile) //if it redirects output
-			redirect_output(cmds->last_outfile, shell);
-		else
+		if (cmds->prev && cmds->next)
 		{
-			dup2(shell->out, fds[1]);
-			close(fds[1]);
+			if (cmds->last_infile) // if infile
+				fd_in = redirect_input(cmds->last_infile, shell);
+			else
+				redirect_stdin(fd_in, shell);
+			if (cmds->last_outfile) //if it redirects output
+				redirect_output(cmds->last_outfile, shell);
+			else if (cmds->next)
+			{
+				dup2(fds[1], STDOUT_FILENO);
+				close(fds[1]);
+				close(fds[0]);
+			}
 		}
-		close(fds[0]);
+		else if (!cmds->prev && !cmds->next)
+		{
+			if (cmds->last_infile) // if infile
+				fd_in = redirect_input(cmds->last_infile, shell);
+			if (cmds->last_outfile) //if it redirects output
+				redirect_output(cmds->last_outfile, shell);
+		}
+		else if (!cmds->prev)
+		{
+			if (cmds->last_infile) // if infile
+				fd_in = redirect_input(cmds->last_infile, shell);
+			if (cmds->last_outfile) //if it redirects output
+				redirect_output(cmds->last_outfile, shell);
+			else if (cmds->next)
+			{
+				dup2(fds[1], STDOUT_FILENO);
+				close(fds[1]);
+				close(fds[0]);
+			}
+		}
+		else if (!cmds->next)
+		{
+			if (cmds->last_infile) // if infile
+				fd_in = redirect_input(cmds->last_infile, shell);
+			else
+				redirect_stdin(fd_in, shell);
+			if (cmds->last_outfile) //if it redirects output
+				redirect_output(cmds->last_outfile, shell);
+		}
 		exit(execute_cmd(cmds, shell));
 	}
 	else
 	{
 		add_pid(pid, cpids);
-		close(fds[1]);
-		if (!cmds->last_outfile)
+		if (!cmds->prev && !cmds->next) // only one command
+			return (-1);
+		else if (cmds->prev && cmds->next)
 		{
-			dup2(fds[0], shell->in);
-			//close(fds[0]);
+			close(fds[1]);
+			dup2(fds[0], STDIN_FILENO);
+			close(fds[0]);
+			close(fd_in);
 			return fds[0];
 		}
+		else if (cmds->prev)
+		{
+			close(fds[1]);
+			close(fds[0]);
+			close(fd_in);
+			return (-1);
+		}
+		else if (cmds->next)
+		{
+			close(fds[1]);
+			return fds[0];
+		}
+			
+		/* if (fd_in != -1)
+		{
+			dup2(STDIN_FILENO, fd_in);
+		}
+		
+		if (!cmds->last_outfile)
+		{
+			printf("Here in parent - fd read: %d\n", fds[0]);
+			if (fd_in != -1)
+				close(fd_in);
+			if (cmds->next || cmds->prev)
+			{
+				close(fds[1]);
+				dup2(STDIN_FILENO, fds[0]);
+				close(fds[0]);
+				return fds[0];
+			}
+		} */
 	}
 	return(-1);
 }
@@ -73,6 +140,7 @@ int	execute(t_cmds *cmds, t_main *shell)  // ls -la | wc -l
 	{
 		if (tmp->cmd_grp && tmp->cmd_grp[0])
 			fd_in = piping(tmp, fd_in, cpids, shell);   // cmds (ls -la), -1, [0, ..., ...], shell
+		printf("FD IN - loop: %d\n", fd_in);
 		tmp = tmp->next;
 	}
 	wait_for_children(cpids);

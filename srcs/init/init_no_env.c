@@ -53,8 +53,8 @@ void	make_no_env_prompt(t_main *shell)
 	char	*tmp2;
 
 	cwd = my_get_path();
-	tmp = ft_better_join("sadshell:", cwd);
-	tmp2 = ft_better_join(tmp, " $ ");
+	tmp = ft_better_join("sadshell:", cwd, 0);
+	tmp2 = ft_better_join(tmp, " $ ", 0);
 	free(cwd);
 	shell->prompt = ft_strdup(tmp2);
 	free(tmp);
