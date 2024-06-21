@@ -325,9 +325,15 @@ int		wait_for_children(pid_t *cpids);
 
 /* REDIRECTION_UTILS */
 
-void	redirect_output(t_files *outfile, t_main *shell);
-int		redirect_input(t_files *infile, t_main *shell);
-int 	redirect_stdin(int fd_in, t_main *shell);
+void	redirect_output(t_files *outfilel);
+int		redirect_input(t_files *infile);
+int 	redirect_stdin(int fd_in);
+
+/* PIPING UTILS */
+void    close_middle_parent(int fds[2], int fd_in);
+void    close_middle_child(int fds[2], int fd_in);
+void    close_first_parent(int fds[2]);
+void    close_first_child(int fds[2]);
 
 /*----------------------------------UTILS DIR--------------------------------*/
 

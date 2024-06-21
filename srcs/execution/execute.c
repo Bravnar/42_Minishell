@@ -19,45 +19,42 @@ int exec_single(t_cmds *cmds, pid_t *cpids, t_main *shell)
 	pid = fork();
 	if (pid == -1)
 		exit(EXIT_FAILURE);
-	if (pid == 0) // child process with ls -la
+	if (pid == 0)
 	{
-		if (cmds->last_infile) // if infile
-			redirect_input(cmds->last_infile, shell);
-		if (cmds->last_outfile) //if it redirects output
-			redirect_output(cmds->last_outfile, shell);
+		if (cmds->last_infile)
+			redirect_input(cmds->last_infile);
+		if (cmds->last_outfile)
+			redirect_output(cmds->last_outfile);
 		exit(execute_cmd(cmds, shell));
 	}
 	add_pid(pid, cpids);
 	return(-1);
 }
 
-int exec_pipeline_first(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
+int exec_pipeline_first(t_cmds *cmds, pid_t *cpids, t_main *shell)
 {
 	int fds[2];
 	pid_t pid;
 
-	if (pipe(fds) == -1) // creates a pipe
+	if (pipe(fds) == -1)
 		exit(EXIT_FAILURE);
 	pid = fork();
 	if (pid == -1)
 		exit(EXIT_FAILURE);
-	if (pid == 0) // child process with ls -la
+	if (pid == 0)
 	{
-		dup2(fd_in, STDIN_FILENO);
-		dup2(fds[1], STDOUT_FILENO);
-		if (cmds->last_infile) // if infile
-			redirect_input(cmds->last_infile, shell);
-		if (cmds->last_outfile) //if it redirects output
-			redirect_output(cmds->last_outfile, shell);
-		close(fds[1]);
-		close(fds[0]);
-		close(fd_in);
+		if (dup2(fds[1], STDOUT_FILENO) == -1)
+			exit(EXIT_FAILURE);
+		if (cmds->last_infile)
+			redirect_input(cmds->last_infile);
+		if (cmds->last_outfile)
+			redirect_output(cmds->last_outfile);
+		close_first_child(fds);
 		exit(execute_cmd(cmds, shell));
 	}
 	add_pid(pid, cpids);
-	close(fd_in);
-	close(fds[1]);
-	return fds[0];
+	close_first_parent(fds);
+	return (fds[0]);
 }
 
 int exec_pipeline_last(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
@@ -67,18 +64,21 @@ int exec_pipeline_last(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 	pid = fork();
 	if (pid == -1)
 		exit(EXIT_FAILURE);
-	if (pid == 0) // child process with ls -la
+	if (pid == 0)
 	{
-		dup2(fd_in, STDIN_FILENO);
-		if (cmds->last_infile) // if infile
-			redirect_input(cmds->last_infile, shell);
-		if (cmds->last_outfile) //if it redirects output
-			redirect_output(cmds->last_outfile, shell);
-		close(fd_in);
+		if (dup2(fd_in, STDIN_FILENO) == -1)
+			exit(EXIT_FAILURE);
+		if (cmds->last_infile)
+			redirect_input(cmds->last_infile);
+		if (cmds->last_outfile)
+			redirect_output(cmds->last_outfile);
+		if (close(fd_in) == -1)
+			exit(EXIT_FAILURE);
 		exit(execute_cmd(cmds, shell));
 	}
 	add_pid(pid, cpids);
-	close(fd_in);
+	if (close(fd_in) == -1)
+		exit(EXIT_FAILURE);
 	return (-1);
 }
 
@@ -87,31 +87,30 @@ int exec_pipeline_middle(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 	int fds[2];
 	pid_t pid;
 
-	if (pipe(fds) == -1) // creates a pipe
+	if (pipe(fds) == -1)
 		exit(EXIT_FAILURE);
 	pid = fork();
 	if (pid == -1)
 		exit(EXIT_FAILURE);
-	if (pid == 0) // child process with ls -la
+	if (pid == 0)
 	{
-		dup2(fd_in, STDIN_FILENO);
-		dup2(fds[1], STDOUT_FILENO);
-		if (cmds->last_infile) // if infile
-			redirect_input(cmds->last_infile, shell);
-		if (cmds->last_outfile) //if it redirects output
-			redirect_output(cmds->last_outfile, shell);
-		close(fd_in);
-		close(fds[0]);
-		close(fds[1]);
+		if (dup2(fd_in, STDIN_FILENO) == -1)
+			exit(EXIT_FAILURE);
+		if (dup2(fds[1], STDOUT_FILENO) == -1)
+			exit(EXIT_FAILURE);
+		if (cmds->last_infile)
+			redirect_input(cmds->last_infile);
+		if (cmds->last_outfile)
+			redirect_output(cmds->last_outfile);
+		close_middle_child(fds, fd_in);
 		exit(execute_cmd(cmds, shell));
 	}
 	add_pid(pid, cpids);
-	close(fds[1]);
-	close(fd_in);
-	return fds[0];
+	close_middle_parent(fds, fd_in);
+	return (fds[0]);
 }
 
-int	execute(t_cmds *cmds, t_main *shell)  // ls -la | wc -l
+int	execute(t_cmds *cmds, t_main *shell)
 {
 	t_cmds	*tmp;
 	int		fd_in;
@@ -132,7 +131,7 @@ int	execute(t_cmds *cmds, t_main *shell)  // ls -la | wc -l
 			if (!tmp->prev && !tmp->next)
 				exec_single(tmp, cpids, shell);
 			else if (!tmp->prev)
-				fd_in = exec_pipeline_first(tmp, fd_in, cpids, shell);
+				fd_in = exec_pipeline_first(tmp, cpids, shell);
 			else if (!tmp->next)
 				fd_in = exec_pipeline_last(tmp, fd_in, cpids, shell);
 			else

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	redirect_output(t_files *outfile, t_main *shell)
+void	redirect_output(t_files *outfile)
 {
 	int	fd;
 
@@ -12,63 +12,76 @@ void	redirect_output(t_files *outfile, t_main *shell)
 		perror("Failed to open output file");
 	if (dup2(fd, STDOUT_FILENO) == -1)
 	{
-		ft_fprintf(shell->err, "dup2\n");
+		ft_fprintf(STDERR_FILENO, "dup2\n");
 		exit(EXIT_FAILURE);
 	}
-	close(fd);
+	if (close(fd) == -1)
+	{
+		ft_fprintf(STDERR_FILENO, "Closing fd - outfile");
+		exit(EXIT_FAILURE);
+	}
 }
 
-int	redirect_heredoc(t_files *infile, t_main *shell)
+int	redirect_heredoc(t_files *infile)
 {
 	int	fds[2];
 
 	if (pipe(fds) == -1)
 	{
-		ft_fprintf(shell->err, "pipe heredoc\n");
+		ft_fprintf(STDERR_FILENO, "Pipe heredoc\n");
 		exit(EXIT_FAILURE);
 	}
 	ft_fprintf(fds[1], "%s", infile->file_name);
-	close(fds[1]);
-	if (dup2(fds[0], STDIN_FILENO) == -1)
+	if (close(fds[1]) == -1)
 	{
-		ft_fprintf(shell->err, "dup2 heredoc stdin\n");
+		ft_fprintf(STDERR_FILENO, "Closing write end pipe heredoc");
 		exit(EXIT_FAILURE);
 	}
-	close(fds[0]);
+	if (dup2(fds[0], STDIN_FILENO) == -1)
+	{
+		ft_fprintf(STDERR_FILENO, "dup2 heredoc stdin\n");
+		exit(EXIT_FAILURE);
+	}
+	if (close(fds[0]) == -1)
+	{
+		ft_fprintf(STDERR_FILENO, "Closing read end pipe heredoc");
+		exit(EXIT_FAILURE);
+	}
 	return (STDIN_FILENO);
 }
 
-int	redirect_input(t_files *infile, t_main *shell)
+int	redirect_input(t_files *infile)
 {
 	int	fd;
 	
 	if (infile->type == HEREDOC_END)
-		return (redirect_heredoc(infile, shell));
+		return (redirect_heredoc(infile));
 	fd = open(infile->file_name, O_RDONLY);
-
 	if (fd == -1)
 		perror("Failed to open input file");
 	if (dup2(fd, STDIN_FILENO) == -1)
 	{
-		ft_fprintf(shell->err, "dup2\n");
+		ft_fprintf(STDERR_FILENO, "dup2\n");
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
 }
 
-int	redirect_stdin(int fd_in, t_main *shell)
+int	redirect_stdin(int fd_in)
 {
-	printf("Fd in: %d\n", fd_in);
 	if (fd_in != -1)
 	{
 		if (dup2(STDIN_FILENO, fd_in) == -1)
 		{
-			ft_fprintf(shell->err, "dup2\n");
+			ft_fprintf(STDERR_FILENO, "dup2\n");
 			return (EXIT_FAILURE);
 		}
-		printf("Closing fd in: %d\n", fd_in);
 		if (fd_in != STDIN_FILENO)
-			close(fd_in);
+			if (close(fd_in) == -1)
+			{
+				ft_fprintf(STDERR_FILENO, "Closing fd_in - stdin redirection");
+				exit(EXIT_FAILURE);
+			}
 	}
 	return (0);
 }

@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 int	check_infile(char *infile, t_main *shell)
 {
 	int	fd;
@@ -18,7 +17,7 @@ int	check_infile(char *infile, t_main *shell)
 	return (EXIT_SUCCESS);
 }
 
-t_files *extract_heredoc(t_files *file, t_main *shell)
+t_files	*extract_heredoc(t_files *file, t_main *shell)
 {
 	char	*line;
 	char	*input;
@@ -34,7 +33,10 @@ t_files *extract_heredoc(t_files *file, t_main *shell)
 	}
 	free(file->file_name);
 	final = var_replace(line, shell);
-	file->file_name = ft_strdup(final);
+	if (final)
+		file->file_name = ft_strdup(final);
+	else
+		file->file_name = ft_strdup("");
 	free(line);
 	free(final);
 	free(input);
@@ -93,9 +95,7 @@ int	check_files(t_main *shell, t_cmds *cmds)
 			else if (tmp_file->type == INFILE)
 				temp->last_infile = tmp_file;
 			else if (tmp_file->type == HEREDOC_END)
-			{
 				temp->last_infile = extract_heredoc(tmp_file, shell);
-			}
 			if (tmp_file->type == OUTFILE || tmp_file->type == OUTFILE_APP)
 				temp->last_outfile = tmp_file;
 			tmp_file = tmp_file->next;
