@@ -88,14 +88,10 @@ void	populate_envp(t_main *shell)
 		tmp_split = ft_split(shell->envp[i], '=');
 		if (!ft_strcmp(tmp_split[0], "SHLVL"))
 		{
-			// printf("populating SHLVL\n");
 			tmp_num = ft_atoi(tmp_split[1]);
-			// printf("tmp_num before ++: %d\n", tmp_num);
 			tmp_num++;
-			// printf("tmp_num after ++: %d\n", tmp_num);
 			free(tmp_split[1]);
 			tmp_split[1] = ft_itoa(tmp_num);
-			// printf("tmp_split = %s\n", tmp_split[1]);
 		}
 		new_node = new_env_node(tmp_split[0], tmp_split[1]);
 		add_env_node(&shell->env, new_node);

@@ -88,9 +88,11 @@ void	parser_main(t_main *shell)
 	lex = shell->l;
 	parser_logic(lex);
 	parser_combiner(shell);
+	printf("aftercombiner : \n");
+	print_list(&lex->link);
 	parser_body(shell);
-	//print_list(&lex->link);
-	//print_main_struct(&shell->cmds);
+	// print_list(&lex->link);
+	// print_main_struct(&shell->cmds);
 }
 
 /* void	parser_combiner(t_main *shell)

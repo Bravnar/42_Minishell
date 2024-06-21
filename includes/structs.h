@@ -22,6 +22,24 @@ typedef enum e_err
 {
 	NO_ERR,
 	BAD_QUOTES,
+	BAD_REDIR_APP,
+	BAD_REDIRS_NL,
+	BAD_PIPES,
+	BAD_REDIR_HD,
+	BAD_REDIR_IN,
+	BAD_REDIR_OUT,
+	FORB_CHAR,
+	NO_INFILE,
+	PERM_DENIED,
+	IS_DIR,
+	NO_COMMAND,
+	MANY_ARGS,
+}	t_err;
+
+/* typedef enum e_err
+{
+	NO_ERR,
+	BAD_QUOTES,
 	BAD_REDIRS,
 	BAD_PIPES,
 	BAD_REDIRS_NL,
@@ -35,7 +53,7 @@ typedef enum e_err
 	BAD_REDIR_IN,
 	BAD_REDIR_OUT,
 	FORB_CHAR
-}	t_err;
+}	t_err; */
 
 typedef struct s_envp
 {

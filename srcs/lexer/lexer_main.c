@@ -23,6 +23,7 @@ int	lexer(t_lex	*l, t_main *shell)
 	fill_info(l);
 	if (check_redirs(l) || check_pipes(l) || check_spec(l))
 		return (error_handler(l->err_code, NULL, shell), 1);
+   print_list(&l->link);
 	parser_main(shell);
 	return (0);
 }
