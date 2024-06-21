@@ -32,7 +32,6 @@ t_files	*extract_heredoc(t_files *file, t_main *shell)
 		input = get_next_line(STDIN_FILENO);
 	}
 	free(file->file_name);
-	printf("Input: %s\n", line);
 	final = var_replace(line, shell);
 	if (final)
 		file->file_name = ft_strdup(final);
