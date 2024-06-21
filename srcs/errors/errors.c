@@ -10,17 +10,21 @@ void	print_error(char *err)
 void	error_handler(t_err code, char *file, t_main *shell)
 {
 	if (code == BAD_QUOTES) // error code 2
-		ft_fprintf(shell->err,
-			RED"minishell: Mismatched quotation marks.\n"RESET);
-	else if (code == BAD_REDIRS) // error code 2
-		ft_fprintf(shell->err, \
-			RED"minishell: syntax error near unexpected token '>' or '<'.\n"RESET);
+		ft_fprintf(shell->err, RED"%s%s\n"RESET, MSHELL, QUOTES_ERR);
+	else if (code == BAD_REDIR_APP) // error code 2
+		ft_fprintf(shell->err, RED"%s%s\n"RESET, MSHELL, APPEND_ERR);
 	else if (code == BAD_REDIRS_NL) // error code 2
-		ft_fprintf(shell->err,
-			RED"minishell: syntax error near unexpected token 'newline'\n"RESET);
+		ft_fprintf(shell->err, RED"%s%s\n"RESET, MSHELL, NEWLINE_ERR);
 	else if (code == BAD_PIPES) // error code 2
-		ft_fprintf(shell->err,
-			RED"minishell: syntax error near unexpected token '|'\n"RESET);
+		ft_fprintf(shell->err, RED"%s%s\n"RESET, MSHELL, PIPE_ERR);
+	else if (code == BAD_REDIR_HD) // error code 2
+		ft_fprintf(shell->err, RED"%s%s\n"RESET, MSHELL, HEREDOC_SIGN_ERR);
+	else if (code == BAD_REDIR_IN) // error code 2
+		ft_fprintf(shell->err, RED"%s%s\n"RESET, MSHELL, REDIR_IN_ERR);
+	else if (code == BAD_REDIR_OUT) // error code 2
+		ft_fprintf(shell->err, RED"%s%s\n"RESET, MSHELL, REDIR_OUT_ERR);
+	else if (code == FORB_CHAR) // error code 2
+		ft_fprintf(shell->err, RED"%s%s\n"RESET, MSHELL, SIMPLE_SYNTAX);
 	else if (code == NO_INFILE) // error code 2
 		ft_fprintf(shell->err,
 			RED"minishell: %s: No such file or directory\n"RESET, file);

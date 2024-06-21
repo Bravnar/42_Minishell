@@ -20,9 +20,9 @@ int	lexer(t_lex	*l, t_main *shell)
 	if (check_quotes(l))
 		return (error_handler(l->err_code, NULL, shell), 1);
 	lex_input(l, SPECIAL_W_SPACE);
-	if (check_redirs(l) || check_pipes(l))
-		return (error_handler(l->err_code, NULL, shell), 1);
 	fill_info(l);
+	if (check_redirs(l) || check_pipes(l) || check_spec(l))
+		return (error_handler(l->err_code, NULL, shell), 1);
 	parser_main(shell);
 	return (0);
 }
