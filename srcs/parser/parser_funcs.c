@@ -40,7 +40,7 @@ void	parser_logic(t_lex *l)
 	tmp = l->link;
 	while (tmp)
 	{
-		if (tmp->next && !tmp->next->type && !tmp->type)
+		if (tmp->next && !tmp->next->type && !tmp->type && !tmp->is_in_quotes)
 		{
 			if (!ft_strcmp("<", tmp->value) || !ft_strcmp(">", tmp->value) \
 					|| !ft_strcmp("<<", tmp->value) || \

@@ -29,13 +29,14 @@
 # define TRUE 1
 # define FALSE 0
 # define WHITESPACE " \t\n\r\f\v"
-# define SPECIAL "<>|;"
+# define SPECIAL "<>|"
 # define QUOTES "\"\'"
-# define SPECIAL_W_SPACE " $<>|;\'\""
+# define SPECIAL_W_SPACE " $<>|\'\""
 # define REDIRS "<>"
 # define PIPE "|"
 # define PIPE_REDIRS "|<>"
 # define DOLLAR_CHARS "$?-0123456789"
+# define SYNTAX_STOP "&;`()"
 # define CANCEL_EXP "+~"
 # define NO_HOME "HOME not defined"
 # define ENVLIN "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -101,6 +102,7 @@
 # define NEWLINE_ERR "syntax error near unexpected token 'newline'"
 # define APPEND_ERR "syntax error near unexpected token '>>'"
 # define HEREDOC_SIGN_ERR "syntax error near unexpected token '<<'"
+# define SIMPLE_SYNTAX "syntax error: forbidden character"
 
 
 /*----------------------------------------------------------------------------*/
@@ -305,6 +307,7 @@ int		check_quotes(t_lex *l);
 void	reset_quotes(t_lex *l);
 int		check_redirs(t_lex *l);
 int		check_pipes(t_lex *l);
+int		check_spec(t_lex *l);
 
 /*--------------------------------EXECUTION DIR-------------------------------*/
 
