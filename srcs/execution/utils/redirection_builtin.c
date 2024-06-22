@@ -22,7 +22,6 @@ void	save_stdin(t_main *shell)
 
 void restore_stdout(t_main *shell)
 {
-	ft_printf("Here\n");
 	if (shell->out != STDOUT_FILENO)
 	{
 		if (dup2(shell->out, STDOUT_FILENO) == -1)
