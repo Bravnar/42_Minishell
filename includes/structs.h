@@ -147,14 +147,13 @@ typedef struct s_main
 	char			*home;
 	char			*tmp_path;
 	int				has_env;
+	int				in;
+	int				out;
 	t_err			err_code;
 	t_lex			*l;
 	t_cmds			*cmds;
 	t_envp			*env;
 	t_counts		*counts;
-	int				in;
-	int				out;
-	int				err;
 }	t_main;
 
 #endif

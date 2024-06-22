@@ -124,42 +124,39 @@ void	echo(char **args, char **ENV); */
 
 /* CD */
 
-void	cd_new(t_main *shell, char **cmds);
+int	    cd_new(t_main *shell, char **cmds);
 int		cd_count(char **cmds);
 void	adjust_pwd(t_main *shell, char *old_pwd);
 void	swap_old_new(t_main *shell, char **cmds, char *old_pwd);
 void	go_home(t_main *shell, char **cmds, char *cwd);
 
 /* ENV */
-void	print_envp(t_envp **head);
+int	    print_envp(t_envp **head, int fd);
 
 /* EXPORT */
-void	export(t_main *shell, char **cmds);
+int	    export(t_main *shell, char **cmds, int fd);
 void	sort_local_copy(t_envp	**local);
 void	swap_nodes(t_envp *a, t_envp *b);
 t_envp	*copy_list(t_envp *src);
 void	copy_work(t_envp *n_n, t_envp **l_h, t_envp **l_t, t_envp *curr);
-void	print_local_copy(t_envp **head);
 int		count_export_args(char **cmds);
 void	free_local_copy(t_envp *local);
 char	**export_split(char *str);
 
 /* ECHO */
-void	my_echo(t_main *shell, char **cmds);
+int 	my_echo(char **cmds, int fd);
 
 /* UNSET */
 
-void	unset_env(char **cmds, t_envp **head);
+int 	unset_env(char **cmds, t_envp **head);
 
 /* PWD */
 
-void	my_pwd(t_main *shell, char **cmds);
+int   my_pwd(int fd, t_main *shell, char **cmds);
 
-/* ECHO */
+/* EXIT */
 
-void	my_echo(t_main *shell, char **cmds);
-
-void	my_exit(t_main *shell, char **cmds);
+int	  my_exit(t_main *shell, char **cmds);
 
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
@@ -177,7 +174,6 @@ char	*my_get_path(void);
 void	no_env_handle(t_main *shell);
 t_envp	*new_env_node(char *key, char *value);
 void	add_env_node(t_envp **envp_head, t_envp *new_envp_node);
-void	print_envp(t_envp **head);
 void	populate_envp(t_main *shell);
 void	free_nodes(t_envp *token_list);
 // void	make_no_env_prompt(t_main *shell);
@@ -199,7 +195,7 @@ char	**back_to_array(t_envp *env);
 
 /* ERRORS */
 
-void	error_handler(t_err code, char *file, t_main *shell);
+void	error_handler(t_err code, char *file);
 
 /*----------------------------------INIT DIR----------------------------------*/
 
@@ -317,23 +313,39 @@ int		check_spec(t_lex *l);
 /* MAIN */
 
 int		execute(t_cmds *cmds, t_main *shell);
+int		builtins(t_cmds *cmds, t_main *shell, int fd);
 
 /* CHECKS */
 
 int		is_bad_command(t_cmds *cmds, t_main *shell);
 int		check_files(t_main *shell, t_cmds *cmds);
+
+/* BUILTINS */
+
+int     exec_single_builtin(t_cmds *cmds, t_main *shell);
+int     exec_first_builtin(t_cmds *cmds, t_main *shell);
+
 int		is_builtin(t_cmds *cmds);
+void	check_builtins(t_cmds *cmds);
 
 /* PID_UTILS */
 
 void	add_pid(pid_t pid, pid_t *cpids);
 int		wait_for_children(pid_t *cpids);
 
+/* REDIRECTION BUILTIN */
+
+void	save_stdout(t_main *shell);
+void	save_stdin(t_main *shell);
+int		redirect_output_builtin(t_files *outfile, t_main *shell);
+int		redirect_input_builtin(t_files *infile, t_main *shell);
+void	restore_stdout(t_main *shell);
+void	restore_stdin(t_main *shell, int redirected_fd);
+
 /* REDIRECTION_UTILS */
 
-void	redirect_output(t_files *outfilel);
+void	redirect_output(t_files *outfile);
 int		redirect_input(t_files *infile);
-int 	redirect_stdin(int fd_in);
 
 /* PIPING UTILS */
 void    close_middle_parent(int fds[2], int fd_in);
@@ -370,6 +382,4 @@ int		cmd_size(t_cmds *cmds);
 
 /*----------------------------------EXECUTION-------------------------------*/
 
-
-char	*var_replace(char *input, t_main *shell);
 #endif

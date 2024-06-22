@@ -52,7 +52,7 @@ int	cd_count(char **cmds)
 	return (i);
 }
 
-void	cd_new(t_main *shell, char **cmds)
+int	cd_new(t_main *shell, char **cmds)
 {
 	char	*old_pwd;
 
@@ -61,7 +61,7 @@ void	cd_new(t_main *shell, char **cmds)
 	{
 		ft_fprintf(2, BOLD_RED"%s %s: %s\n"RESET, \
 			MSHELL, cmds[0], TOO_MANY_ARGS);
-		return ;
+		return (EXIT_FAILURE);
 	}
 	if (cd_count(cmds) == 1 || cmds[1][0] == '~')
 		go_home(shell, cmds, old_pwd);
@@ -73,6 +73,7 @@ void	cd_new(t_main *shell, char **cmds)
 			ft_fprintf(2, BOLD_RED"chdir error\n"RESET);
 	}
 	adjust_pwd(shell, old_pwd);
+	return (EXIT_SUCCESS);
 }
 /*
 TO DO with CD

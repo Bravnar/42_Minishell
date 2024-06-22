@@ -56,7 +56,7 @@ long long	ft_strtoll(const char *nptr, char **endptr)
 	
 }
 
-void	my_exit(t_main *shell, char **cmds)
+int	my_exit(t_main *shell, char **cmds)
 {
 	long long	exit_status;
 	char		*endptr;
@@ -75,7 +75,7 @@ void	my_exit(t_main *shell, char **cmds)
 		else if (cmds[2])
 		{
 			ft_fprintf(2, "%s%s: %s\n", MSHELL, cmds[0], TOO_MANY_ARGS);
-			return ;
+			return (EXIT_FAILURE);
 		}
 	}
 	free_all(shell);

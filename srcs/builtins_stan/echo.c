@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	my_echo(t_main *shell, char **cmds)
+int	my_echo(char **cmds, int fd)
 {
 	int	nl_needed;
 	int	i;
@@ -17,11 +17,12 @@ void	my_echo(t_main *shell, char **cmds)
 		while (cmds[++i])
 		{
 			if (i == (count_export_args(cmds) - 1))
-				ft_fprintf(shell->out, "%s", cmds[i]);
+				ft_fprintf(fd, "%s", cmds[i]);
 			else
-				ft_fprintf(shell->out, "%s ", cmds[i]);
+				ft_fprintf(fd, "%s ", cmds[i]);
 		}
 	}
 	if (nl_needed)
-		write(shell->out, "\n", 1);		
+		write(fd, "\n", 1);
+	return (EXIT_SUCCESS);		
 }

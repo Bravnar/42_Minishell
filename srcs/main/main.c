@@ -20,7 +20,7 @@ void	free_all(t_main *shell)
 	}
 }
 
-void	print_my_env(t_main	*shell)
+/* void	print_my_env(t_main	*shell)
 {
 	t_envp	*tmp;
 
@@ -32,49 +32,14 @@ void	print_my_env(t_main	*shell)
 		printf("printable state: %d\n", tmp->printable);
 		tmp = tmp->next;
 	}
-	
+
 }
 
 void	print_my_shell(t_main	*shell)
 {
 	printf("Printing shell info: ------------------\n");
 	printf("has_env: %d\n", shell->has_env);
-	printf("fd_in: %d\n", shell->in);
-	printf("fd_out: %d\n", shell->out);
-	printf("fd_err: %d\n", shell->err);
-}
-
-/* Simple ft_strcmp to check builtins
-   To "catch" the builtins before going
-   to execution */
-void	builtins(t_cmds *cmds, t_main *shell)
-{
-	if (cmds && cmds->cmd_grp && cmds->cmd_grp[0])
-	{
-		if (!ft_strcmp(cmds->cmd_grp[0], "cd"))
-			cd_new(shell, cmds->cmd_grp);
-		else if (!ft_strcmp(cmds->cmd_grp[0], "env"))
-			print_envp(&shell->env);
-		else if (!ft_strcmp(cmds->cmd_grp[0], "export"))
-			export(shell, cmds->cmd_grp);
-		else if (!ft_strcmp(cmds->cmd_grp[0], "echo"))
-			my_echo(shell, cmds->cmd_grp);
-		else if (!ft_strcmp(cmds->cmd_grp[0], "unset"))
-			unset_env(cmds->cmd_grp, &shell->env);
-		else if (!ft_strcmp(cmds->cmd_grp[0], "my_env"))
-			print_my_env(shell);
-		else if (!ft_strcmp(cmds->cmd_grp[0], "my_shell"))
-			print_my_shell(shell);
-		else if (!ft_strcmp(cmds->cmd_grp[0], "pwd"))
-			my_pwd(shell, cmds->cmd_grp);
-		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
-			my_exit(shell, cmds->cmd_grp);
-	}
-}
-
-/* Only used to trick the linux machines for correct compilation
-   Uses an empty file to trick readline into executing once
-   without user input */
+} */
 
 void	my_rl_initialize(void)
 {
@@ -95,10 +60,7 @@ void	my_rl_initialize(void)
 	}
 }
 
-// int event(void)
-// {
-// 	return (0);
-// }
+
 
 void	sig_handler(int status)
 {
@@ -117,10 +79,12 @@ void	gameplay_loop(t_main *shell)
 	t_lex	*lex;
 
 	lex = shell->l;
+
 	// if (!APPLE)
 	// 	my_rl_initialize();
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
+
 	while (1)
 	{
 		terminal_prompt(shell);
@@ -130,8 +94,9 @@ void	gameplay_loop(t_main *shell)
 		if (lex->input[0])
 			add_history(lex->input);
 		lexer(lex, shell);
-		builtins(shell->cmds, shell);
-		//is_builtin(shell->cmds);
+		//parser_main() should be called here, for now is in lexer()
+		// builtins(shell->cmds, shell);
+		check_builtins(shell->cmds);
 		execute(shell->cmds, shell);
 		free_all(shell);
 		clear_t_cmds(shell);
@@ -153,7 +118,7 @@ int	main(int ac, char **av, char **envp)
 /*
 	1) Error management file, refactor and add set_env $?, 777 --OK
 	2) Fix signals Ctrl+C and Ctrl+\ ...
-	3) Built-ins for piping and execution 
+	3) Built-ins for piping and execution
 	4) Norminette and headers
 	5) Refactor and redistribute files where needed 
 	6) Test that env -i works with no issue

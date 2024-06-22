@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	print_envp(t_envp **head)
+int	print_envp(t_envp **head, int fd)
 {
 	t_envp	*tmp;
 
@@ -12,8 +12,9 @@ void	print_envp(t_envp **head)
 	{
 		// printf(BOLD_YELLOW"\t\"%s\" : \"%s\"\n"RESET, tmp->key, tmp->value);
 		if (tmp->printable && tmp->printable != 777)
-			printf("%s=%s ---> printable: %d\n", tmp->key, tmp->value, tmp->printable);
+			ft_fprintf(fd, "%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
+	return(EXIT_SUCCESS);
 	// printf("}\n");
 }
