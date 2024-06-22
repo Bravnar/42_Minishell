@@ -7,16 +7,12 @@ char	*expand_if_needed(t_llex *iter, t_main *shell)
 
 	result = NULL;
 	tmp = iter;
-	printf("I entered expand if needed, with %s\n", iter->value);
 	if (tmp->type == HEREDOC_END)
 		return (ft_strdup(tmp->value));
 	if (tmp->is_in_quotes == 34)
 		result = var_replace(tmp->value, shell);
 	else if (!tmp->is_in_quotes)
-	{
-		printf("I enter here to get_env\n");
 		result = ft_strdup(get_env(&shell->env, tmp->value));
-	}
 	else
 		return (result);
 	return (result);

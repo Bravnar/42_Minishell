@@ -37,19 +37,19 @@ void	errors_two(t_err code, char *file, t_main *shell)
 	else if (code == PERM_DENIED) // error code 1
 		ft_fprintf(shell->err, RED"minishell: %s: Permission denied\n"RESET,
 			file);
+	else if (code == EXPORT_ERR)
+		ft_fprintf(shell->err, RED"%s%s: %s\n"RESET, MSHELL, file, EXPORT_SIGN);
 	set_env(&shell->env, "?", "1", 777);
 }
 
 void	error_handler(t_err code, char *file, t_main *shell)
 {
-	printf("err_code: %d\n", code);
 	if (code < 9)
 		errors_one(code, file, shell);
-	else if (code < 11)
+	else if (code < 12)
 		errors_two(code, file, shell);
 	else
 	{
-		printf("Im here!\n");
 		if (code == IS_DIR) // error code 126
 		{
 			ft_fprintf(shell->err, RED"minishell: %s: Is a directory\n"RESET,

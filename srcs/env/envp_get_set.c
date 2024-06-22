@@ -8,10 +8,7 @@ char	*get_env(t_envp **head, char *var)
 	char	*var_copy;
 
 	var_copy = var;
-	printf("in get_env: var is: %s\n", var_copy);
 	tmp = *head;
-	// if (*var == '\'')
-	// 	return (handle_quote(head, var));
 	if (*var_copy == '$')
 		var_copy++;
 	if (*var_copy == '~')
@@ -19,11 +16,7 @@ char	*get_env(t_envp **head, char *var)
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, var_copy))
-		{
-			printf("am I here??\n");
-			printf("key: %s value: %s\n",tmp->key, tmp->value);
 			return (tmp->value);
-		}
 		tmp = tmp->next;
 	}
 	return ("\0");
@@ -43,11 +36,8 @@ void	set_env(t_envp **head, char *key, char *value, int print)
 	{
 		if (!ft_strcmp(tmp->key, key))
 		{
-			printf("found env var %s\n", tmp->key);
 			free(tmp->value);
 			tmp->value = ft_strdup(value);
-			printf("set tmp.value of %s to : %s\n", tmp->key, tmp->value);
-			printf("get_env result: %s\n", get_env(head, "?"));
 			tmp->printable = print;
 			return ;
 		}

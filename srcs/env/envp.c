@@ -97,4 +97,5 @@ void	populate_envp(t_main *shell)
 		add_env_node(&shell->env, new_node);
 		ft_free_arr(tmp_split);
 	}
+	shell->envp = NULL;
 }

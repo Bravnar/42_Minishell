@@ -37,6 +37,7 @@ void	free_main(t_main *shell)
 	free_cmds(shell->cmds);
 	free_count(shell->counts);
 	free_nodes(shell->env);
+	ft_free_arr(shell->envp); // stan line
 	clear_t_cmds(shell);
 	if (shell->has_env)
 		free(shell->prompt);

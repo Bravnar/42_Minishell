@@ -71,7 +71,7 @@ void	builtins(t_cmds *cmds, t_main *shell)
 		else if (!ft_strcmp(cmds->cmd_grp[0], "my_shell"))
 			print_my_shell(shell);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "pwd"))
-			my_pwd(shell);
+			my_pwd(shell, cmds->cmd_grp);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
 			my_exit(shell);
 	}
@@ -108,10 +108,14 @@ int event(void)
 void	sig_handler(int status)
 {
 	(void) status;
-	rl_replace_line("", 0);
+	// rl_replace_line("", 0);
+	// rl_on_new_line();
+	// rl_redisplay();
+	// rl_done = 1;
+	write(1, "\n", 2);
 	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay();
-	rl_done = 1;
 }
 
 void	gameplay_loop(t_main *shell)
@@ -119,9 +123,8 @@ void	gameplay_loop(t_main *shell)
 	t_lex	*lex;
 
 	lex = shell->l;
-	
-	if (!APPLE)
-		my_rl_initialize();
+	// if (!APPLE)
+	// 	my_rl_initialize();
 	rl_event_hook = event;
 	signal(SIGINT, sig_handler);
 	while (1)
@@ -133,13 +136,11 @@ void	gameplay_loop(t_main *shell)
 		if (lex->input[0])
 			add_history(lex->input);
 		lexer(lex, shell);
-		//parser_main() should be called here, for now is in lexer()
 		builtins(shell->cmds, shell);
-		// is_builtin(shell->cmds);
+		//is_builtin(shell->cmds);
 		execute(shell->cmds, shell);
 		free_all(shell);
 		clear_t_cmds(shell);
-		// count++;
 	}
 }
 
@@ -171,6 +172,7 @@ int	main(int ac, char **av, char **envp)
 	13) CHECK FOR LEAKS!
 	14) Fucking signals, triple check
 	15) Decide what to do with prompt issue with initialize?
+	16) fix the export thing-a-majigy
 */
 
 

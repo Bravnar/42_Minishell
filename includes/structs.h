@@ -31,6 +31,7 @@ typedef enum e_err
 	FORB_CHAR,
 	NO_INFILE,
 	PERM_DENIED,
+	EXPORT_ERR,
 	IS_DIR,
 	NO_COMMAND,
 	MANY_ARGS,

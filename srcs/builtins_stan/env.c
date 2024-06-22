@@ -12,7 +12,7 @@ void	print_envp(t_envp **head)
 	{
 		// printf(BOLD_YELLOW"\t\"%s\" : \"%s\"\n"RESET, tmp->key, tmp->value);
 		if (tmp->printable && tmp->printable != 777)
-			printf("%s=%s\n", tmp->key, tmp->value);
+			printf("%s=%s ---> printable: %d\n", tmp->key, tmp->value, tmp->printable);
 		tmp = tmp->next;
 	}
 	// printf("}\n");

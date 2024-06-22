@@ -4,7 +4,7 @@ char	**get_paths(t_main *shell)
 {
 	char	**paths;
 	char	*path;
-
+	
 	path = get_env(&shell->env, "PATH");
 	if (!path || !path[0])
 		return (NULL);
