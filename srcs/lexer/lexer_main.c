@@ -18,11 +18,11 @@ int	lexer(t_lex	*l, t_main *shell)
 	l->trim = ft_strtrim(l->input, WHITESPACE);
 	reset_quotes(l);
 	if (check_quotes(l))
-		return (error_handler(l->err_code, NULL, shell), 1);
+		return (error_handler(l->err_code, NULL), 1);
 	lex_input(l, SPECIAL_W_SPACE);
 	fill_info(l);
 	if (check_redirs(l) || check_pipes(l) || check_spec(l))
-		return (error_handler(l->err_code, NULL, shell), 1);
+		return (error_handler(l->err_code, NULL), 1);
 	parser_main(shell);
 	return (0);
 }

@@ -40,9 +40,6 @@ void	free_main(t_main *shell)
 	clear_t_cmds(shell);
 	if (shell->has_env)
 		free(shell->prompt);
-	close(shell->in);
-	close(shell->out);
-	close(shell->err);
 	free (shell);
 
 }
