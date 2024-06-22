@@ -15,9 +15,9 @@ int	builtins(t_cmds *cmds, t_main *shell, int fd)
 		else if (!ft_strcmp(cmds->cmd_grp[0], "unset"))
 			return(unset_env(cmds->cmd_grp, &shell->env));
 		else if (!ft_strcmp(cmds->cmd_grp[0], "pwd"))
-			return(my_pwd(fd));
+			return(my_pwd(fd, shell, cmds->cmd_grp));
 		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
-			return(my_exit(shell));
+			return(my_exit(shell, cmds->cmd_grp));
 	}
 	return (EXIT_FAILURE);
 }

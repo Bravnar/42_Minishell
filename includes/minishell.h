@@ -195,7 +195,7 @@ char	**back_to_array(t_envp *env);
 
 /* ERRORS */
 
-void	error_handler(t_err code, char *file);
+void	error_handler(t_err code, char *file, t_main *shell);
 
 /*----------------------------------INIT DIR----------------------------------*/
 
