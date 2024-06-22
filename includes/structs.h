@@ -86,6 +86,15 @@ typedef struct s_llex
 	struct s_llex	*prev;
 }	t_llex;
 
+typedef struct s_strtoll
+{
+	long long 	result;
+	int			sign;
+	int			digit;
+	int			digit_count;
+	const char	*s;
+} t_strtoll;
+
 typedef struct s_lex
 {
 	int				i;

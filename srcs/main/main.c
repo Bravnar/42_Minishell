@@ -64,8 +64,6 @@ void	builtins(t_cmds *cmds, t_main *shell)
 			my_echo(shell, cmds->cmd_grp);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "unset"))
 			unset_env(cmds->cmd_grp, &shell->env);
-		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
-			exit (1);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "my_env"))
 			print_my_env(shell);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "my_shell"))
@@ -73,7 +71,7 @@ void	builtins(t_cmds *cmds, t_main *shell)
 		else if (!ft_strcmp(cmds->cmd_grp[0], "pwd"))
 			my_pwd(shell, cmds->cmd_grp);
 		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
-			my_exit(shell);
+			my_exit(shell, cmds->cmd_grp);
 	}
 }
 
@@ -138,7 +136,7 @@ void	gameplay_loop(t_main *shell)
 		lexer(lex, shell);
 		builtins(shell->cmds, shell);
 		//is_builtin(shell->cmds);
-		execute(shell->cmds, shell);
+		//execute(shell->cmds, shell);
 		free_all(shell);
 		clear_t_cmds(shell);
 	}
@@ -173,6 +171,7 @@ int	main(int ac, char **av, char **envp)
 	14) Fucking signals, triple check
 	15) Decide what to do with prompt issue with initialize?
 	16) fix the export thing-a-majigy
+	17) fix exit arguments
 */
 
 

@@ -71,7 +71,7 @@ t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 	t_cmds	*node;
 	char	**paths;
 
-	node = calloc(1, sizeof(t_cmds));
+	node = ft_calloc(1, sizeof(t_cmds));
 	if (!node)
 		return (NULL);
 	paths = get_paths(shell);

@@ -105,7 +105,7 @@
 # define HEREDOC_SIGN_ERR "syntax error near unexpected token '<<'"
 # define SIMPLE_SYNTAX "syntax error: forbidden character"
 # define EXPORT_SIGN "'=': not a valid identifier"
-
+# define NUM_ARG "numeric argument required"
 
 /*----------------------------------------------------------------------------*/
 /*                                  FUNCTIONS                                 */
@@ -159,7 +159,7 @@ void	my_pwd(t_main *shell, char **cmds);
 
 void	my_echo(t_main *shell, char **cmds);
 
-void	my_exit(t_main *shell);
+void	my_exit(t_main *shell, char **cmds);
 
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
