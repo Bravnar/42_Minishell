@@ -36,8 +36,10 @@ SRCS=	srcs/main/main.c \
 		srcs/execution/execute.c \
 		srcs/execution/utils/manage_pid.c \
 		srcs/execution/utils/redirection.c \
+		srcs/execution/utils/redirection_builtin.c \
 		srcs/execution/utils/plumbing.c \
 		srcs/execution/execute.c \
+		srcs/execution/builtins_execution.c \
 		srcs/execution/checks/check_files.c \
 		srcs/execution/checks/check_command.c \
 		srcs/execution/checks/is_builtin.c \

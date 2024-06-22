@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	my_exit(t_main *shell)
+int	my_exit(t_main *shell)
 {
 	free_all(shell);
 	clear_t_cmds(shell);

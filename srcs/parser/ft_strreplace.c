@@ -55,9 +55,6 @@ char	*var_replace(char *input, t_main *shell)
 	int		i;
 
 	i = 0;
-	result = NULL;
-	if (!result)
-		return (NULL);
 	result = ft_strdup(input);
 	while (result[i])
 	{
