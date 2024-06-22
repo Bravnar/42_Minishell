@@ -26,7 +26,7 @@ int	count_export_args(char **cmds)
 	return (i);
 }
 
-void	print_local_copy(t_envp **head)
+void	print_local_copy(t_envp **head, int fd)
 {
 	t_envp	*tmp;
 
@@ -38,9 +38,9 @@ void	print_local_copy(t_envp **head)
 			if (!(tmp->key && tmp->key[0] == '_' && !tmp->key[1]))
 			{
 				if (!tmp->value)
-					printf("declare -x %s\n", tmp->key);
+					ft_fprintf(fd ,"declare -x %s\n", tmp->key);
 				else
-					printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
+					ft_fprintf(fd, "declare -x %s=\"%s\"\n", tmp->key, tmp->value);
 			}
 		}
 		tmp = tmp->next;
@@ -150,7 +150,7 @@ char	**export_split(char *str)
 
 }
 
-void	export(t_main *shell, char **cmds)
+int	export(t_main *shell, char **cmds, int fd)
 {
 	t_envp	*local;
 	int		count;
@@ -163,13 +163,14 @@ void	export(t_main *shell, char **cmds)
 		while (cmds[i])
 			add_env(shell, cmds[i++]);
 		set_env(&shell->env, "_", cmds[count], 1);
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	local = copy_list(shell->env);
 	if (!local)
-		return ;
+		return (EXIT_SUCCESS);
 	sort_local_copy(&local);
-	print_local_copy(&local);
+	print_local_copy(&local, fd);
 	free_local_copy(local);
 	set_env(&shell->env, "_", cmds[count], 1);
+	return(EXIT_SUCCESS);
 }

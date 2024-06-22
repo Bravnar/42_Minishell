@@ -19,7 +19,7 @@ void	unset_node(t_envp **head, t_envp *iter, char *cmd)
 	}
 }
 
-void	unset_env(char **cmds, t_envp **head)
+int	unset_env(char **cmds, t_envp **head)
 {
 	t_envp	*tmp;
 	t_envp	*next;
@@ -36,4 +36,5 @@ void	unset_env(char **cmds, t_envp **head)
 			tmp = next;
 		}
 	}
+	return (EXIT_SUCCESS);
 }
