@@ -15,11 +15,6 @@ void	redirect_output(t_files *outfile)
 		ft_fprintf(STDERR_FILENO, "dup2\n");
 		exit(EXIT_FAILURE);
 	}
-	if (close(fd) == -1)
-	{
-		ft_fprintf(STDERR_FILENO, "Closing fd - outfile");
-		exit(EXIT_FAILURE);
-	}
 }
 
 int	redirect_heredoc(t_files *infile)

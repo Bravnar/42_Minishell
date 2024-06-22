@@ -131,7 +131,12 @@ void	piping(t_cmds *tmp, pid_t *cpids, int *fd_in, t_main *shell)
 				*fd_in = exec_first_builtin(tmp, shell);
 		}
 		else if (!tmp->next)
-			*fd_in = exec_pipeline_last(tmp, *fd_in, cpids, shell);
+		{
+			if (!tmp->is_builtin)
+				*fd_in = exec_pipeline_last(tmp, *fd_in, cpids, shell);
+			else
+				*fd_in = exec_last_builtin(tmp, *fd_in, shell);
+		}
 		else
 			*fd_in = exec_pipeline_middle(tmp, *fd_in, cpids, shell);
 	}

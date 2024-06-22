@@ -61,10 +61,35 @@ int exec_first_builtin(t_cmds *cmds, t_main *shell)
 		restore_stdin(shell, fd_stds[0]);
 	if (cmds->last_outfile)
 		restore_stdout(shell);
-	else
-	{
-		if (dup2(shell->out, STDOUT_FILENO) == -1)
+	if (dup2(shell->out, STDOUT_FILENO) == -1)
 			exit(EXIT_FAILURE);
-	}
 	return (fds[0]);
+}
+
+int	exec_last_builtin(t_cmds *cmds, int fd_in, t_main *shell)
+{
+	int	fd_stds[2];
+
+	save_stdin(shell);
+	fd_stds[0] = -1;
+	fd_stds[1] = -1;
+	if (dup2(fd_in, STDIN_FILENO) == -1)
+	{
+		ft_fprintf(STDERR_FILENO, "Issue with dup fd_in");
+		exit(EXIT_FAILURE);
+	}
+	if (cmds->last_infile)
+		redirect_input_builtin(cmds->last_infile, shell);
+	if (cmds->last_outfile)
+		redirect_output_builtin(cmds->last_outfile, shell);
+	shell->err_code = builtins(cmds, shell, STDOUT_FILENO);
+	if (close(fd_in) == -1)
+		exit(EXIT_FAILURE);
+	if (cmds->last_infile)
+		restore_stdin(shell, fd_stds[0]);
+	if (cmds->last_outfile)
+		restore_stdout(shell);
+	if (dup2(shell->in, STDIN_FILENO) == -1)
+			exit(EXIT_FAILURE);
+	return (-1);
 }

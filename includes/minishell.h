@@ -322,8 +322,9 @@ int		check_files(t_main *shell, t_cmds *cmds);
 
 /* BUILTINS */
 
-int     exec_single_builtin(t_cmds *cmds, t_main *shell);
-int     exec_first_builtin(t_cmds *cmds, t_main *shell);
+int		exec_single_builtin(t_cmds *cmds, t_main *shell);
+int		exec_first_builtin(t_cmds *cmds, t_main *shell);
+int		exec_last_builtin(t_cmds *cmds, int fd_in, t_main *shell);
 
 int		is_builtin(t_cmds *cmds);
 void	check_builtins(t_cmds *cmds);
