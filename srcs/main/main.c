@@ -1,8 +1,5 @@
-
-
 #include "minishell.h"
 
-sig_atomic_t	g_signal_received = 0;
 /* Gameplay loop free */
 void	free_all(t_main *shell)
 {
@@ -63,19 +60,19 @@ void	my_rl_initialize(void)
 	}
 }
 
-/* int event(void)
-{
-	return (0);
-}
+
 
 void	sig_handler(int status)
 {
-	(void) status;
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	rl_done = 1;
-} */
+	if (status == SIGINT)
+	{
+		write(1, "\n", 2);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+
+	}
+}
 
 void	gameplay_loop(t_main *shell)
 {
@@ -83,10 +80,11 @@ void	gameplay_loop(t_main *shell)
 
 	lex = shell->l;
 
-	if (!APPLE)
-		my_rl_initialize();
-	//rl_event_hook = event;
-	//signal(SIGINT, sig_handler);
+	// if (!APPLE)
+	// 	my_rl_initialize();
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+
 	while (1)
 	{
 		terminal_prompt(shell);
@@ -102,7 +100,6 @@ void	gameplay_loop(t_main *shell)
 		execute(shell->cmds, shell);
 		free_all(shell);
 		clear_t_cmds(shell);
-		// count++;
 	}
 }
 
@@ -119,11 +116,11 @@ int	main(int ac, char **av, char **envp)
 
 
 /*
-	1) Error management file, refactor and add set_env $?, 777
+	1) Error management file, refactor and add set_env $?, 777 --OK
 	2) Fix signals Ctrl+C and Ctrl+\ ...
 	3) Built-ins for piping and execution
 	4) Norminette and headers
-	5) Refactor and redistribute files where needed
+	5) Refactor and redistribute files where needed 
 	6) Test that env -i works with no issue
 	7) Test pipes
 	8) Test redirs behaviour
@@ -134,6 +131,8 @@ int	main(int ac, char **av, char **envp)
 	13) CHECK FOR LEAKS!
 	14) Fucking signals, triple check
 	15) Decide what to do with prompt issue with initialize?
+	16) fix the export thing-a-majigy
+	17) fix exit arguments
 */
 
 

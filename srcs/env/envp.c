@@ -11,29 +11,6 @@ char	*my_get_path(void)
 	return (get_path);
 }
 
-/* Function to create the prompt for the no environment program */
-/* void	make_no_env_prompt(t_main *shell)
-{
-	char	*cwd;
-	char	*first_part;
-	char	*second_part;
-	char	*final;
-
-	if (shell->prompt)
-		free(shell->prompt);
-	cwd = my_get_path();
-	first_part = ft_better_join(FACE, THROW, 0);
-	second_part = ft_better_join(first_part, cwd, 0);
-	final = ft_better_join(second_part, X_YELLOW, 0);
-	shell->prompt = ft_strdup(final);
-	free(cwd);
-	free(first_part);
-	free(second_part);
-	free(final);
-} */
-
-
-
 /* Function that handles the '~' character during the main getter function */
 char	*handle_tilde(t_envp **head, char *var)
 {
@@ -49,8 +26,6 @@ char	*handle_tilde(t_envp **head, char *var)
 	}
 	return (home);
 }
-
-/* CAREFUL THIS LEAKS */
 
 char	*handle_quote(t_envp **head, char *var)
 {
@@ -88,17 +63,14 @@ void	populate_envp(t_main *shell)
 		tmp_split = ft_split(shell->envp[i], '=');
 		if (!ft_strcmp(tmp_split[0], "SHLVL"))
 		{
-			// printf("populating SHLVL\n");
 			tmp_num = ft_atoi(tmp_split[1]);
-			// printf("tmp_num before ++: %d\n", tmp_num);
 			tmp_num++;
-			// printf("tmp_num after ++: %d\n", tmp_num);
 			free(tmp_split[1]);
 			tmp_split[1] = ft_itoa(tmp_num);
-			// printf("tmp_split = %s\n", tmp_split[1]);
 		}
 		new_node = new_env_node(tmp_split[0], tmp_split[1]);
 		add_env_node(&shell->env, new_node);
 		ft_free_arr(tmp_split);
 	}
+	shell->envp = NULL;
 }

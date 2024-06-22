@@ -6,8 +6,10 @@ int	execute_cmd(t_cmds *cmds, t_main *shell)
 		return (error_handler(shell->err_code,
 				cmds->cmd_grp[0]), EXIT_FAILURE);
 	if (!cmds->path)
-		return (error_handler(NO_COMMAND, cmds->cmd_grp[0]), EXIT_FAILURE);
+		return (error_handler(NO_COMMAND, cmds->cmd_grp[0], shell), EXIT_FAILURE);
+	shell->envp = back_to_array(shell->env); // stan line
 	execve(cmds->path, cmds->cmd_grp, shell->envp);
+	ft_free_arr(shell->envp); // stan line
 	perror("Execve");
 	return(EXIT_FAILURE);
 }

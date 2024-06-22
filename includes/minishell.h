@@ -17,6 +17,7 @@
 # include <termios.h>
 # include <limits.h>
 # include <unistd.h>
+# include <errno.h>
 # include "colors.h"
 # include "structs.h"
 // # include "structures.h"
@@ -103,7 +104,8 @@
 # define APPEND_ERR "syntax error near unexpected token '>>'"
 # define HEREDOC_SIGN_ERR "syntax error near unexpected token '<<'"
 # define SIMPLE_SYNTAX "syntax error: forbidden character"
-
+# define EXPORT_SIGN "'=': not a valid identifier"
+# define NUM_ARG "numeric argument required"
 
 /*----------------------------------------------------------------------------*/
 /*                                  FUNCTIONS                                 */
@@ -150,11 +152,11 @@ int 	unset_env(char **cmds, t_envp **head);
 
 /* PWD */
 
-int		my_pwd(int fd);
+int   my_pwd(int fd, t_main *shell, char **cmds);
 
 /* EXIT */
 
-int		my_exit(t_main *shell);
+int	  my_exit(t_main *shell, char **cmds);
 
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
@@ -187,6 +189,7 @@ char	*get_env(t_envp **head, char *var);
 /* NO ENV PROMPT */
 
 void	no_env_prompt(t_main *shell);
+char	**back_to_array(t_envp *env);
 
 /*----------------------------------ERRORS DIR--------------------------------*/
 

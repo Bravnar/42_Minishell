@@ -161,9 +161,15 @@ int	export(t_main *shell, char **cmds, int fd)
 	if (count > 1)
 	{
 		while (cmds[i])
-			add_env(shell, cmds[i++]);
-		set_env(&shell->env, "_", cmds[count], 1);
+		{
+			if (cmds[i][0] == '=')
+				error_handler(EXPORT_ERR, cmds[i++], shell);
+			else
+				add_env(shell, cmds[i++]);
+		}
+		set_env(&shell->env, "_", cmds[count - 1], 1);
 		return (EXIT_SUCCESS);
+
 	}
 	local = copy_list(shell->env);
 	if (!local)
@@ -171,6 +177,6 @@ int	export(t_main *shell, char **cmds, int fd)
 	sort_local_copy(&local);
 	print_local_copy(&local, fd);
 	free_local_copy(local);
-	set_env(&shell->env, "_", cmds[count], 1);
-	return(EXIT_SUCCESS);
+	set_env(&shell->env, "_", cmds[count - 1], 1);
+  return(EXIT_SUCCESS);
 }

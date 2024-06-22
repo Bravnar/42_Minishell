@@ -24,6 +24,7 @@ t_main	*init_structs(char **envp)
 		shell->has_env = 1;
 		shell->prompt = NULL;
 		populate_envp(shell);
+		set_env(&shell->env, "?", "0", 777);
 		shell->username = get_env(&shell->env, "$USER");
 		shell->home = get_env(&shell->env, "$HOME");
 	}

@@ -16,6 +16,7 @@ SRCS=	srcs/main/main.c \
 		srcs/env/envp.c \
 		srcs/env/envp_utils.c \
 		srcs/env/envp_get_set.c \
+		srcs/env/back_to_array.c \
 		srcs/cleanup/clean.c \
 		srcs/parser/parser_cmds.c \
 		srcs/parser/parser_files.c \

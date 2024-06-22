@@ -5,17 +5,17 @@
 char	*get_env(t_envp **head, char *var)
 {
 	t_envp	*tmp;
+	char	*var_copy;
 
+	var_copy = var;
 	tmp = *head;
-	// if (*var == '\'')
-	// 	return (handle_quote(head, var));
-	if (*var == '$')
-		var++;
-	if (*var == '~')
-		return (handle_tilde(head, var));
+	if (*var_copy == '$')
+		var_copy++;
+	if (*var_copy == '~')
+		return (handle_tilde(head, var_copy));
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->key, var))
+		if (!ft_strcmp(tmp->key, var_copy))
 			return (tmp->value);
 		tmp = tmp->next;
 	}
