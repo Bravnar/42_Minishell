@@ -4,9 +4,9 @@ int	execute_cmd(t_cmds *cmds, t_main *shell)
 {
 	if (is_bad_command(cmds, shell))
 		return (error_handler(shell->err_code,
-				cmds->cmd_grp[0], shell), EXIT_FAILURE);
+				cmds->cmd_grp[0]), EXIT_FAILURE);
 	if (!cmds->path)
-		return (error_handler(NO_COMMAND, cmds->cmd_grp[0], shell), EXIT_FAILURE);
+		return (error_handler(NO_COMMAND, cmds->cmd_grp[0]), EXIT_FAILURE);
 	execve(cmds->path, cmds->cmd_grp, shell->envp);
 	perror("Execve");
 	return(EXIT_FAILURE);
@@ -110,6 +110,31 @@ int exec_pipeline_middle(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 	return (fds[0]);
 }
 
+void	piping(t_cmds *tmp, pid_t *cpids, int *fd_in, t_main *shell)
+{
+	if (tmp->cmd_grp && tmp->cmd_grp[0])
+	{
+		if (!tmp->prev && !tmp->next)
+		{
+			if (!tmp->is_builtin)
+				exec_single(tmp, cpids, shell);
+			else
+				exec_single_builtin(tmp, shell);
+		}
+		else if (!tmp->prev)
+		{
+			if (!tmp->is_builtin)
+				*fd_in = exec_pipeline_first(tmp, cpids, shell);
+			else
+				*fd_in = exec_first_builtin(tmp, shell);
+		}
+		else if (!tmp->next)
+			*fd_in = exec_pipeline_last(tmp, *fd_in, cpids, shell);
+		else
+			*fd_in = exec_pipeline_middle(tmp, *fd_in, cpids, shell);
+	}
+}
+
 int	execute(t_cmds *cmds, t_main *shell)
 {
 	t_cmds	*tmp;
@@ -126,17 +151,7 @@ int	execute(t_cmds *cmds, t_main *shell)
 	fd_in = -1;
 	while (tmp)
 	{
-		if (tmp->cmd_grp && tmp->cmd_grp[0])
-		{
-			if (!tmp->prev && !tmp->next)
-				exec_single(tmp, cpids, shell);
-			else if (!tmp->prev)
-				fd_in = exec_pipeline_first(tmp, cpids, shell);
-			else if (!tmp->next)
-				fd_in = exec_pipeline_last(tmp, fd_in, cpids, shell);
-			else
-				fd_in = exec_pipeline_middle(tmp, fd_in, cpids, shell);
-		}
+		piping(tmp, cpids, &fd_in, shell);
 		tmp = tmp->next;
 	}
 	wait_for_children(cpids);

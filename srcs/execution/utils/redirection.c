@@ -53,7 +53,7 @@ int	redirect_heredoc(t_files *infile)
 int	redirect_input(t_files *infile)
 {
 	int	fd;
-	
+
 	if (infile->type == HEREDOC_END)
 		return (redirect_heredoc(infile));
 	fd = open(infile->file_name, O_RDONLY);
@@ -65,23 +65,4 @@ int	redirect_input(t_files *infile)
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
-}
-
-int	redirect_stdin(int fd_in)
-{
-	if (fd_in != -1)
-	{
-		if (dup2(STDIN_FILENO, fd_in) == -1)
-		{
-			ft_fprintf(STDERR_FILENO, "dup2\n");
-			return (EXIT_FAILURE);
-		}
-		if (fd_in != STDIN_FILENO)
-			if (close(fd_in) == -1)
-			{
-				ft_fprintf(STDERR_FILENO, "Closing fd_in - stdin redirection");
-				exit(EXIT_FAILURE);
-			}
-	}
-	return (0);
 }
