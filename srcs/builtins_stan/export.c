@@ -169,7 +169,6 @@ int	export(t_main *shell, char **cmds, int fd)
 		}
 		set_env(&shell->env, "_", cmds[count - 1], 1);
 		return (EXIT_SUCCESS);
-
 	}
 	local = copy_list(shell->env);
 	if (!local)

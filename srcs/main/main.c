@@ -40,6 +40,24 @@ void	my_rl_initialize(void)
 	}
 }
 
+void	receive_err(t_main *shell)
+{
+	char	*convert_status;
+	int		err;
+	int		reset;
+
+	reset = 0;
+	err = send_err_code(NULL);
+	convert_status = NULL;
+	if (err == 130 || err == 131)
+	{
+		convert_status = ft_itoa(err);
+		set_env(&shell->env, "?", convert_status, 777);
+		free(convert_status);
+		send_err_code(&reset);
+	}
+}
+
 void	gameplay_loop(t_main *shell)
 {
 	t_lex	*lex;
@@ -50,13 +68,14 @@ void	gameplay_loop(t_main *shell)
 	// 	my_rl_initialize();
 	while (1)
 	{
-		g_signal_received = 0;
+		g_signal_received = NORMAL;
 		terminal_prompt(shell);
 		lex->input = readline(shell->prompt);
 		if (!lex->input)
 			break ;
 		if (lex->input[0])
 			add_history(lex->input);
+		receive_err(shell);
 		if (!lexer(lex, shell))
 		{
 			check_builtins(shell->cmds);
