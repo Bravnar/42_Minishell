@@ -2,12 +2,13 @@
 
 void	add_pid(pid_t pid, pid_t *cpids)
 {
-	int		i;
+	int				i;
 
 	i = -1;
 	while (cpids[++i])
 		;
 	cpids[i++] = pid;
+	pid_for_signal(&pid);
 	cpids[i] = 0;
 }
 

@@ -75,11 +75,11 @@ t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 	if (!node)
 		return (NULL);
 	paths = get_paths(shell);
-	if (!paths)
+	/* if (!paths)
 	{
 		free(node);
 		return (NULL);
-	}
+	} */
 	if (cmds && cmds[0])
 		node->path = get_path(paths, cmds[0]);
 	ft_free_arr(paths);

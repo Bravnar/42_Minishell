@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+int	g_signal_received = 0;
 /* Gameplay loop free */
 void	free_all(t_main *shell)
 {
@@ -20,27 +21,6 @@ void	free_all(t_main *shell)
 	}
 }
 
-/* void	print_my_env(t_main	*shell)
-{
-	t_envp	*tmp;
-
-	tmp = shell->env;
-	printf("Printing env info: ------------------\n");
-	while (tmp)
-	{
-		printf("%s :: %s\n", tmp->key, tmp->value);
-		printf("printable state: %d\n", tmp->printable);
-		tmp = tmp->next;
-	}
-
-}
-
-void	print_my_shell(t_main	*shell)
-{
-	printf("Printing shell info: ------------------\n");
-	printf("has_env: %d\n", shell->has_env);
-} */
-
 void	my_rl_initialize(void)
 {
 	int		fd;
@@ -60,20 +40,6 @@ void	my_rl_initialize(void)
 	}
 }
 
-
-
-void	sig_handler(int status)
-{
-	if (status == SIGINT)
-	{
-		write(1, "\n", 2);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-
-	}
-}
-
 void	gameplay_loop(t_main *shell)
 {
 	t_lex	*lex;
@@ -82,9 +48,6 @@ void	gameplay_loop(t_main *shell)
 
 	// if (!APPLE)
 	// 	my_rl_initialize();
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, SIG_IGN);
-
 	while (1)
 	{
 		terminal_prompt(shell);
@@ -131,8 +94,10 @@ int	main(int ac, char **av, char **envp)
 	13) CHECK FOR LEAKS!
 	14) Fucking signals, triple check
 	15) Decide what to do with prompt issue with initialize?
-	16) fix the export thing-a-majigy
-	17) fix exit arguments
+	16) fix the export thing-a-majigy --OK
+	17) fix exit arguments --OK
+	18)  echo hello > abc | cat < abc
+	19) unset PATH issue --OK
 */
 
 
