@@ -45,6 +45,13 @@ typedef enum e_exec
 	LAST
 }	t_exec;
 
+typedef enum e_sig
+{
+	NORMAL,
+	HEREDOC_SIG,
+	EXEC
+}	t_sig;
+
 /* typedef enum e_err
 {
 	NO_ERR,

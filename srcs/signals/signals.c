@@ -27,10 +27,14 @@ void	handle_interactive(void)
 
 void	handle_zero(void)
 {
+	int	err_code;
+
+	err_code = 130;
 	ft_fprintf(2, "\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
+	send_err_code(&err_code);
 }
 
 void	handle_one(void)
@@ -38,11 +42,26 @@ void	handle_one(void)
 
 }
 
+int	send_err_code(int *new_err)
+{
+	static int	err = 0;
+
+	if (new_err)
+	{
+		err = *new_err;
+	}
+	return (err);
+}
+
 void	handle_two(pid_t to_kill)
 {
+	int	err_code;
+
+	err_code = 130;
 	ft_fprintf(2, "\n");
 	if (to_kill > 0)
 		kill(to_kill, SIGINT);
+	send_err_code(&err_code);
 }
 
 
@@ -54,11 +73,11 @@ void	sigint_main(int signum)
 	(void) signum;
 	to_kill = pid_for_signal(NULL);
 	to_restore = -1;
-	if (g_signal_received == 0)
+	if (g_signal_received == NORMAL)
 		handle_zero();
-	else if (g_signal_received == 1)
+	else if (g_signal_received == HEREDOC)
 		handle_one();
-	else if (g_signal_received == 2)
+	else if (g_signal_received == EXEC)
 		handle_two(to_kill);
 	pid_for_signal(&to_restore);
 

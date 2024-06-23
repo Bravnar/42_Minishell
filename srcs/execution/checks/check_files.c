@@ -23,6 +23,7 @@ t_files	*extract_heredoc(t_files *file, t_main *shell)
 	char	*input;
 	char	*final;
 
+	g_signal_received = HEREDOC;
 	line = ft_strdup("");
 	input = ft_strdup("");
 	while (ft_strncmp(input, file->file_name, ft_strlen(file->file_name)))
