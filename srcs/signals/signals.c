@@ -102,6 +102,23 @@ void	subshell_handle(int signum)
 	pid_for_signal(&to_restore);
 }
 
+int	is_vscode_terminal(t_main *shell)
+{
+	char	*vscode_var;
+
+	vscode_var = get_env(&shell->env, "TERM_PROGRAM");
+	if (!ft_strcmp(vscode_var, "vscode"))
+	{
+		free(vscode_var);
+		return (3);
+	}
+	else
+	{
+		free(vscode_var);
+		return (2);
+	}
+}
+
 void	signal_daddy(t_main *shell)
 {
 	struct sigaction	s;
@@ -110,7 +127,7 @@ void	signal_daddy(t_main *shell)
 	sigemptyset(&s.sa_mask);
 	s.sa_flags = 0;
 	shlvl = ft_atoi(get_env(&shell->env, "SHLVL"));
-	if (shlvl <= 2)
+	if (shlvl <= is_vscode_terminal(shell))
 	{
 		s.sa_handler = SIG_IGN;
 		sigaction(SIGQUIT, &s, NULL);
