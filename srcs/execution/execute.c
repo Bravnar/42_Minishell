@@ -24,7 +24,7 @@ int	execute_cmd(t_cmds *cmds, t_main *shell)
 
 int exec_single(t_cmds *cmds, pid_t *cpids, t_main *shell)
 {
-	pid_t pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
@@ -40,8 +40,8 @@ int exec_single(t_cmds *cmds, pid_t *cpids, t_main *shell)
 
 int exec_pipeline_first(t_cmds *cmds, pid_t *cpids, t_main *shell)
 {
-	int fds[2];
-	pid_t pid;
+	int		fds[2];
+	pid_t	pid;
 
 	if (pipe(fds) == -1)
 		exit(EXIT_FAILURE);
@@ -90,8 +90,8 @@ int exec_pipeline_last(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 
 int exec_pipeline_middle(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 {
-	int fds[2];
-	pid_t pid;
+	int		fds[2];
+	pid_t	pid;
 
 	if (pipe(fds) == -1)
 		exit(EXIT_FAILURE);
