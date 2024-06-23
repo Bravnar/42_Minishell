@@ -307,11 +307,13 @@ char	*get_path(char **paths, char *command);
 
 /* HANDLE SIGNALS */
 
-void	sig_handler(int status);
-int		is_interactive(void);
-void	backslash_handler(int status);
-void	signals_main(int interactive);
+// void	sig_handler(int status);
+// int		is_interactive(void);
+// void	backslash_handler(int status);
+// void	signals_main(int interactive);
 pid_t	pid_for_signal(pid_t *new);
+void	init_termios(void);
+void	signal_daddy(t_main *shell);
 
 /*----------------------------------SYNTAX DIR--------------------------------*/
 
@@ -341,7 +343,7 @@ void	check_builtins(t_cmds *cmds);
 /* PID_UTILS */
 
 void	add_pid(pid_t pid, pid_t *cpids);
-int		wait_for_children(pid_t *cpids);
+int		wait_for_children(pid_t *cpids, t_main *shell);
 
 /*-------------------------------BUILTIN SUBDIR------------------------------*/
 

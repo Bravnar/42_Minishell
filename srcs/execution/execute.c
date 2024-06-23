@@ -145,7 +145,9 @@ int	execute(t_cmds *cmds, t_main *shell)
 	t_cmds	*tmp;
 	int		fd_in;
 	pid_t	*cpids;
-	
+
+	set_env(&shell->env, "?", "0", 777);
+	g_signal_received = 2;
 	if (check_files(shell, cmds))
 		return (EXIT_FAILURE);
 	cpids = malloc(sizeof(pid_t) * (cmd_size(cmds) + 1));
@@ -159,7 +161,8 @@ int	execute(t_cmds *cmds, t_main *shell)
 		piping(tmp, cpids, &fd_in, shell);
 		tmp = tmp->next;
 	}
-	wait_for_children(cpids);
+	wait_for_children(cpids, shell);
 	free(cpids);
+	g_signal_received = 0;
 	return (EXIT_SUCCESS);
 }
