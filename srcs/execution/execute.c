@@ -145,7 +145,7 @@ int	execute(t_cmds *cmds, t_main *shell)
 	t_cmds	*tmp;
 	int		fd_in;
 	pid_t	*cpids;
-
+	
 	if (check_files(shell, cmds))
 		return (EXIT_FAILURE);
 	cpids = malloc(sizeof(pid_t) * (cmd_size(cmds) + 1));

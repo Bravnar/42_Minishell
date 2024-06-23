@@ -26,6 +26,8 @@ char	*get_path(char **paths, char *command)
 		return (NULL);
 	if (access(command, F_OK) == 0)
 		return (ft_strdup(command));
+	if (!paths)
+		return (NULL);
 	subcommand = ft_strjoin("/", command);
 	while (*paths)
 	{
