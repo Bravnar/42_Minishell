@@ -149,6 +149,7 @@ typedef struct s_main
 	int				has_env;
 	int				in;
 	int				out;
+	int				interactive;
 	t_err			err_code;
 	t_lex			*l;
 	t_cmds			*cmds;

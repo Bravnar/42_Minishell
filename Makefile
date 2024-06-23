@@ -9,6 +9,7 @@ SRCS=	srcs/main/main.c \
 		srcs/init/init_no_env.c \
 		srcs/lexer/lexer_main.c \
 		srcs/errors/errors.c \
+		srcs/signals/signals.c \
 		srcs/syntax/check_syntax.c \
 		srcs/lexer/lexer_funcs.c \
 		srcs/lexer/lexer_info_fill.c \

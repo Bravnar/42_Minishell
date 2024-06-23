@@ -5,6 +5,9 @@
 /*                                  LIBRARIES                                 */
 /*----------------------------------------------------------------------------*/
 
+# define _POSIX_C_SOURCE 200809L
+# define _XOPEN_SOURCE 700
+
 # include "../lib/includes/my_lib.h"
 # include <stdio.h>
 # include <readline/readline.h>
@@ -12,6 +15,7 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <sys/types.h>
 # include <signal.h>
 # include <dirent.h>
 # include <termios.h>
@@ -298,6 +302,16 @@ void	parser_main(t_main *shell);
 
 char	**get_paths(t_main *shell);
 char	*get_path(char **paths, char *command);
+
+/*----------------------------------SIGNALS DIR-------------------------------*/
+
+/* HANDLE SIGNALS */
+
+void	sig_handler(int status);
+int		is_interactive(void);
+void	backslash_handler(int status);
+void	signals_main(int interactive);
+
 /*----------------------------------SYNTAX DIR--------------------------------*/
 
 /* CHECK SYNTAX */
@@ -379,7 +393,8 @@ int		cmd_size(t_cmds *cmds);
 // //# define G_ARROW_SIGN "\001\u279c\002"
 // # define X_SIGN "\001\033[1;34m\002 ✘ \001\033[0m\002"
 
-
 /*----------------------------------EXECUTION-------------------------------*/
+
+extern int	g_signal_received;
 
 #endif
