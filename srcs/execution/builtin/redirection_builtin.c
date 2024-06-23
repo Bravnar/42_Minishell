@@ -1,62 +1,5 @@
 #include "minishell.h"
 
-void	save_stdout(t_main *shell)
-{
-	shell->out = dup(STDOUT_FILENO);
-	if (shell->out == -1)
-	{
-		ft_fprintf(STDERR_FILENO, "Failed to save original stdout");
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	save_stdin(t_main *shell)
-{
-	shell->in = dup(STDIN_FILENO);
-	if (shell->in == -1)
-	{
-		ft_fprintf(STDERR_FILENO, "Failed to save original stdin");
-		exit(EXIT_FAILURE);
-	}
-}
-
-void restore_stdout(t_main *shell)
-{
-	if (shell->out != STDOUT_FILENO)
-	{
-		if (dup2(shell->out, STDOUT_FILENO) == -1)
-		{
-			ft_fprintf(STDERR_FILENO, "Failed to restore original stdout\n");
-			exit(EXIT_FAILURE);
-		}
-		if (close(shell->out) == -1)
-		{
-			ft_fprintf(STDERR_FILENO, "Failed to close saved stdout\n");
-			exit(EXIT_FAILURE);
-		}
-		shell->out = STDOUT_FILENO;
-	}
-}
-
-void restore_stdin(t_main *shell, int redirected_fd)
-{
-	if (dup2(shell->in, STDIN_FILENO) == -1)
-	{
-		ft_fprintf(STDERR_FILENO, "Failed to restore original stdin");
-		exit(EXIT_FAILURE);
-	}
-	if (close(shell->in) == -1)
-	{
-		ft_fprintf(STDERR_FILENO, "Failed to close saved stdin");
-		exit(EXIT_FAILURE);
-	}
-	if (close(redirected_fd) == -1)
-	{
-		ft_fprintf(STDERR_FILENO, "Failed to close redirected fd");
-		exit(EXIT_FAILURE);
-	}
-}
-
 int	redirect_output_builtin(t_files *outfile, t_main *shell)
 {
 	int	fd;
@@ -67,7 +10,7 @@ int	redirect_output_builtin(t_files *outfile, t_main *shell)
 	else
 		fd = open(outfile->file_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
-		ft_fprintf(STDERR_FILENO, "Failed to open output file");
+		ft_fprintf(STDERR_FILENO, "Failed to open output file\n");
 	if (dup2(fd, STDOUT_FILENO) == -1)
 	{
 		ft_fprintf(STDERR_FILENO, "dup2\n");
@@ -75,7 +18,7 @@ int	redirect_output_builtin(t_files *outfile, t_main *shell)
 	}
 	if (close(fd) == -1)
 	{
-		ft_fprintf(STDERR_FILENO, "Failed to close outfile fd");
+		ft_fprintf(STDERR_FILENO, "Failed to close outfile fd\n");
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
@@ -120,4 +63,28 @@ int	redirect_input_builtin(t_files *infile, t_main *shell)
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
+}
+
+void	redir_builtin(t_cmds *cmds, t_main *shell, t_stds *fd_stds, t_exec code)
+{
+	if (code == SINGLE || code == FIRST)
+	{
+		if (cmds->last_infile)
+			fd_stds->in = redirect_input_builtin(cmds->last_infile, shell);
+	}
+	else
+	{
+		if (cmds->last_infile)
+			redirect_input_builtin(cmds->last_infile, shell);
+	}
+	if (code == LAST)
+	{
+		if (cmds->last_outfile)
+			fd_stds->out = redirect_output_builtin(cmds->last_outfile, shell);
+	}
+	else
+	{
+		if (cmds->last_outfile)
+			redirect_output_builtin(cmds->last_outfile, shell);
+	}
 }

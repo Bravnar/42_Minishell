@@ -2,6 +2,15 @@
 
 int	execute_cmd(t_cmds *cmds, t_main *shell)
 {
+	if (!cmds->cmd_grp)
+	{
+		if (cmds->last_infile || cmds->last_outfile)
+			{
+				ft_fprintf(STDERR_FILENO, "Exiting cause no command\n");
+				return(EXIT_SUCCESS);
+			}
+
+	}
 	if (is_bad_command(cmds, shell))
 		return (error_handler(shell->err_code,
 				cmds->cmd_grp[0], shell), EXIT_FAILURE);
@@ -23,11 +32,8 @@ int exec_single(t_cmds *cmds, pid_t *cpids, t_main *shell)
 		exit(EXIT_FAILURE);
 	if (pid == 0)
 	{
-		if (cmds->last_infile)
-			redirect_input(cmds->last_infile);
-		if (cmds->last_outfile)
-			redirect_output(cmds->last_outfile);
-		exit(execute_cmd(cmds, shell));
+		handle_redirection(cmds);
+		return(execute_cmd(cmds, shell));
 	}
 	add_pid(pid, cpids);
 	return(-1);
@@ -47,12 +53,9 @@ int exec_pipeline_first(t_cmds *cmds, pid_t *cpids, t_main *shell)
 	{
 		if (dup2(fds[1], STDOUT_FILENO) == -1)
 			exit(EXIT_FAILURE);
-		if (cmds->last_infile)
-			redirect_input(cmds->last_infile);
-		if (cmds->last_outfile)
-			redirect_output(cmds->last_outfile);
+		handle_redirection(cmds);
 		close_first_child(fds);
-		exit(execute_cmd(cmds, shell));
+		return(execute_cmd(cmds, shell));
 	}
 	add_pid(pid, cpids);
 	close_first_parent(fds);
@@ -68,19 +71,17 @@ int exec_pipeline_last(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 		exit(EXIT_FAILURE);
 	if (pid == 0)
 	{
-		if (dup2(fd_in, STDIN_FILENO) == -1)
-			exit(EXIT_FAILURE);
-		if (cmds->last_infile)
-			redirect_input(cmds->last_infile);
-		if (cmds->last_outfile)
-			redirect_output(cmds->last_outfile);
-		if (close(fd_in) == -1)
-			exit(EXIT_FAILURE);
-		exit(execute_cmd(cmds, shell));
+		if (!cmds->last_infile)
+		{
+			if (dup2(fd_in, STDIN_FILENO) == -1)
+				exit(EXIT_FAILURE);
+		}
+		handle_redirection(cmds);
+		close_fdin_last_child(fd_in);
+		return(execute_cmd(cmds, shell));
 	}
 	add_pid(pid, cpids);
-	if (close(fd_in) == -1)
-		exit(EXIT_FAILURE);
+	close_fdin_last_parent(fd_in);
 	return (-1);
 }
 
@@ -100,12 +101,9 @@ int exec_pipeline_middle(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 			exit(EXIT_FAILURE);
 		if (dup2(fds[1], STDOUT_FILENO) == -1)
 			exit(EXIT_FAILURE);
-		if (cmds->last_infile)
-			redirect_input(cmds->last_infile);
-		if (cmds->last_outfile)
-			redirect_output(cmds->last_outfile);
+		handle_redirection(cmds);
 		close_middle_child(fds, fd_in);
-		exit(execute_cmd(cmds, shell));
+		return(execute_cmd(cmds, shell));
 	}
 	add_pid(pid, cpids);
 	close_middle_parent(fds, fd_in);
@@ -131,7 +129,12 @@ void	piping(t_cmds *tmp, pid_t *cpids, int *fd_in, t_main *shell)
 				*fd_in = exec_first_builtin(tmp, shell);
 		}
 		else if (!tmp->next)
-			*fd_in = exec_pipeline_last(tmp, *fd_in, cpids, shell);
+		{
+			if (!tmp->is_builtin)
+				*fd_in = exec_pipeline_last(tmp, *fd_in, cpids, shell);
+			else
+				*fd_in = exec_last_builtin(tmp, *fd_in, shell);
+		}
 		else
 			*fd_in = exec_pipeline_middle(tmp, *fd_in, cpids, shell);
 	}

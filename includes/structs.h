@@ -37,6 +37,14 @@ typedef enum e_err
 	MANY_ARGS,
 }	t_err;
 
+typedef enum e_exec
+{
+	SINGLE,
+	FIRST,
+	MIDDLE,
+	LAST
+}	t_exec;
+
 /* typedef enum e_err
 {
 	NO_ERR,
@@ -155,5 +163,11 @@ typedef struct s_main
 	t_envp			*env;
 	t_counts		*counts;
 }	t_main;
+
+typedef struct s_stds
+{
+					int	in;
+					int	out;
+}	t_stds;
 
 #endif

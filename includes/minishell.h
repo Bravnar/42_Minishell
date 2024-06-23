@@ -320,11 +320,6 @@ int		builtins(t_cmds *cmds, t_main *shell, int fd);
 int		is_bad_command(t_cmds *cmds, t_main *shell);
 int		check_files(t_main *shell, t_cmds *cmds);
 
-/* BUILTINS */
-
-int     exec_single_builtin(t_cmds *cmds, t_main *shell);
-int     exec_first_builtin(t_cmds *cmds, t_main *shell);
-
 int		is_builtin(t_cmds *cmds);
 void	check_builtins(t_cmds *cmds);
 
@@ -333,25 +328,45 @@ void	check_builtins(t_cmds *cmds);
 void	add_pid(pid_t pid, pid_t *cpids);
 int		wait_for_children(pid_t *cpids);
 
-/* REDIRECTION BUILTIN */
+/*-------------------------------BUILTIN SUBDIR------------------------------*/
+
+/* BUILTINS */
+
+int		exec_single_builtin(t_cmds *cmds, t_main *shell);
+int		exec_first_builtin(t_cmds *cmds, t_main *shell);
+int		exec_last_builtin(t_cmds *cmds, int fd_in, t_main *shell);
+
+/* STD MANAGEMENT */
 
 void	save_stdout(t_main *shell);
 void	save_stdin(t_main *shell);
-int		redirect_output_builtin(t_files *outfile, t_main *shell);
-int		redirect_input_builtin(t_files *infile, t_main *shell);
 void	restore_stdout(t_main *shell);
 void	restore_stdin(t_main *shell, int redirected_fd);
 
+/* REDIR */
+void	redir_builtin(t_cmds *cmds, t_main *shell, t_stds *fd_stds, t_exec code);
+int		redirect_output_builtin(t_files *outfile, t_main *shell);
+int		redirect_input_builtin(t_files *infile, t_main *shell);
+
+
 /* REDIRECTION_UTILS */
 
-void	redirect_output(t_files *outfile);
-int		redirect_input(t_files *infile);
+void	handle_redirection(t_cmds *cmd);
 
-/* PIPING UTILS */
-void    close_middle_parent(int fds[2], int fd_in);
-void    close_middle_child(int fds[2], int fd_in);
-void    close_first_parent(int fds[2]);
-void    close_first_child(int fds[2]);
+/*----------------------------PLUMBING UTILS SUBDIR--------------------------*/
+
+/* PLUMBING 1 */
+
+void	close_middle_parent(int fds[2], int fd_in);
+void	close_middle_child(int fds[2], int fd_in);
+void	close_first_parent(int fds[2]);
+void	close_first_child(int fds[2]);
+
+/* PLUMBING 2 */
+
+void	close_fdin_last_child(int fd_in);
+void	close_fdin_last_parent(int fd_in);
+void	close_fdin_builtin(int fd_in);
 
 /*----------------------------------UTILS DIR--------------------------------*/
 
