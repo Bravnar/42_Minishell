@@ -2,10 +2,13 @@
 
 void	close_middle_child(int fds[2], int fd_in)
 {
-	if (close(fd_in) == -1)
+	if (fd_in != -1)
 	{
-		ft_fprintf(STDERR_FILENO, "Child - closing fd_in - middle");
-		exit(EXIT_FAILURE);
+		if (close(fd_in) == -1)
+		{
+			ft_fprintf(STDERR_FILENO, "Child - closing fd in - middle pipe\n");
+			exit(EXIT_FAILURE);
+		}
 	}
 	if (close(fds[1]) == -1)
 	{
@@ -21,10 +24,13 @@ void	close_middle_child(int fds[2], int fd_in)
 
 void close_middle_parent(int fds[2], int fd_in)
 {
-	if (close(fd_in) == -1)
+	if (fd_in != -1)
 	{
-		ft_fprintf(STDERR_FILENO, "Parent - closing fd_in - middle");
-		exit(EXIT_FAILURE);
+		if (close(fd_in) == -1)
+		{
+			ft_fprintf(STDERR_FILENO, "Parent - closing fd in - middle pipe\n");
+			exit(EXIT_FAILURE);
+		}
 	}
 	if (close(fds[1]) == -1)
 	{

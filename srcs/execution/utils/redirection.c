@@ -53,11 +53,19 @@ int	redirect_input(t_files *infile)
 		return (redirect_heredoc(infile));
 	fd = open(infile->file_name, O_RDONLY);
 	if (fd == -1)
-		perror("Failed to open input file");
+		ft_fprintf(STDERR_FILENO, "Failed to open input file");
 	if (dup2(fd, STDIN_FILENO) == -1)
 	{
 		ft_fprintf(STDERR_FILENO, "dup2\n");
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
+}
+
+void	handle_redirection(t_cmds *cmd)
+{
+	if (cmd->last_infile)
+			redirect_input(cmd->last_infile);
+	if (cmd->last_outfile)
+		redirect_output(cmd->last_outfile);
 }

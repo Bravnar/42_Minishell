@@ -34,16 +34,17 @@ SRCS=	srcs/main/main.c \
 		srcs/builtins_stan/pwd.c \
 		srcs/builtins_stan/echo.c \
 		srcs/builtins_stan/exit.c \
-		srcs/execution/execute.c \
-		srcs/execution/utils/manage_pid.c \
-		srcs/execution/utils/redirection.c \
-		srcs/execution/utils/redirection_builtin.c \
-		srcs/execution/utils/plumbing.c \
-		srcs/execution/execute.c \
-		srcs/execution/builtins_execution.c \
+		srcs/execution/builtin/redirection_builtin.c \
+		srcs/execution/builtin/std_management.c \
+		srcs/execution/builtin/builtins_execution.c \
+		srcs/execution/builtin/is_builtin.c \
 		srcs/execution/checks/check_files.c \
 		srcs/execution/checks/check_command.c \
-		srcs/execution/checks/is_builtin.c \
+		srcs/execution/plumbing/plumbing.c \
+		srcs/execution/plumbing/plumbing2.c \
+		srcs/execution/utils/manage_pid.c \
+		srcs/execution/utils/redirection.c \
+		srcs/execution/execute.c \
 		srcs/parser/ft_strreplace.c \
 		srcs/utils/cmd_size.c \
 		#srcs/builtins/pwd.c \

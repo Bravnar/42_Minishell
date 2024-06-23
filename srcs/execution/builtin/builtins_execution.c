@@ -24,41 +24,39 @@ int	builtins(t_cmds *cmds, t_main *shell, int fd)
 
 int exec_single_builtin(t_cmds *cmds, t_main *shell)
 {
-	int	fd_in;
+	t_stds	fd_stds;
 
-	fd_in = -1;
+	fd_stds.in = -1;
+	fd_stds.out = -1;
 	if (cmds->last_infile)
-		fd_in = redirect_input_builtin(cmds->last_infile, shell);
+		fd_stds.in = redirect_input_builtin(cmds->last_infile, shell);
 	if (cmds->last_outfile)
 		redirect_output_builtin(cmds->last_outfile, shell);
 	shell->err_code = builtins(cmds, shell, STDOUT_FILENO);
 	if (cmds->last_outfile)
 		restore_stdout(shell);
 	if (cmds->last_infile)
-		restore_stdin(shell, fd_in);
+		restore_stdin(shell, fd_stds.in);
 	return (shell->err_code);
 }
 
 int exec_first_builtin(t_cmds *cmds, t_main *shell)
 {
 	int	fds[2];
-	int fd_stds[2];
+	t_stds	fd_stds;
 
 	save_stdout(shell);
-	fd_stds[0] = -1;
-	fd_stds[1] = -1;
+	fd_stds.in = -1;
+	fd_stds.out = -1;
 	if (pipe(fds) == -1)
 		exit(EXIT_FAILURE);
 	if (dup2(fds[1], STDOUT_FILENO) == -1)
 		exit(EXIT_FAILURE);
-	if (cmds->last_infile)
-		fd_stds[0] = redirect_input_builtin(cmds->last_infile, shell);
-	if (cmds->last_outfile)
-		fd_stds[1] = redirect_output_builtin(cmds->last_outfile, shell);
+	redir_builtin(cmds, shell, &fd_stds, FIRST);
 	builtins(cmds, shell, STDOUT_FILENO);
 	close_first_parent(fds);
 	if (cmds->last_infile)
-		restore_stdin(shell, fd_stds[0]);
+		restore_stdin(shell, fd_stds.in);
 	if (cmds->last_outfile)
 		restore_stdout(shell);
 	if (dup2(shell->out, STDOUT_FILENO) == -1)
@@ -68,28 +66,59 @@ int exec_first_builtin(t_cmds *cmds, t_main *shell)
 
 int	exec_last_builtin(t_cmds *cmds, int fd_in, t_main *shell)
 {
-	int	fd_stds[2];
+	t_stds	fd_stds;
 
 	save_stdin(shell);
-	fd_stds[0] = -1;
-	fd_stds[1] = -1;
-	if (dup2(fd_in, STDIN_FILENO) == -1)
+	if (cmds->last_infile)
 	{
-		ft_fprintf(STDERR_FILENO, "Issue with dup fd_in");
-		exit(EXIT_FAILURE);
+		if (dup2(fd_in, STDIN_FILENO) == -1)
+			exit(EXIT_FAILURE);
 	}
-	if (cmds->last_infile)
-		redirect_input_builtin(cmds->last_infile, shell);
-	if (cmds->last_outfile)
-		redirect_output_builtin(cmds->last_outfile, shell);
+	redir_builtin(cmds, shell, &fd_stds, LAST);
 	shell->err_code = builtins(cmds, shell, STDOUT_FILENO);
-	if (close(fd_in) == -1)
-		exit(EXIT_FAILURE);
-	if (cmds->last_infile)
-		restore_stdin(shell, fd_stds[0]);
+	close_fdin_builtin(fd_in);
+
 	if (cmds->last_outfile)
 		restore_stdout(shell);
-	if (dup2(shell->in, STDIN_FILENO) == -1)
+	if (cmds->last_infile)
+		restore_stdin(shell, -1);
+	else
+	{
+		if (dup2(shell->in, STDIN_FILENO) == -1)
+		{
+			ft_fprintf(STDERR_FILENO, "dup2 taking fd_in back %d\n", shell->in);
 			exit(EXIT_FAILURE);
+		}
+	}
 	return (-1);
 }
+
+/* int exec_pipeline_middle(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
+{
+	int fds[2];
+	pid_t pid;
+
+	save_stdin(shell);
+	s
+	if (pipe(fds) == -1)
+		exit(EXIT_FAILURE);
+	pid = fork();
+	if (pid == -1)
+		exit(EXIT_FAILURE);
+	if (pid == 0)
+	{
+		if (dup2(fd_in, STDIN_FILENO) == -1)
+			exit(EXIT_FAILURE);
+		if (dup2(fds[1], STDOUT_FILENO) == -1)
+			exit(EXIT_FAILURE);
+		if (cmds->last_infile)
+			redirect_input(cmds->last_infile);
+		if (cmds->last_outfile)
+			redirect_output(cmds->last_outfile);
+		close_middle_child(fds, fd_in);
+		exit(execute_cmd(cmds, shell));
+	}
+	add_pid(pid, cpids);
+	close_middle_parent(fds, fd_in);
+	return (fds[0]);
+} */
