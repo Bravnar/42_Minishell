@@ -311,6 +311,7 @@ void	sig_handler(int status);
 int		is_interactive(void);
 void	backslash_handler(int status);
 void	signals_main(int interactive);
+pid_t	pid_for_signal(pid_t *new);
 
 /*----------------------------------SYNTAX DIR--------------------------------*/
 

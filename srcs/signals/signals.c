@@ -11,8 +11,8 @@ pid_t	pid_for_signal(pid_t *new)
 
 void	sigint_handle(int signum)
 {
-	pid_t	child;
-	pid_t	reset;
+	/* pid_t	child;
+	pid_t	reset; */
 
 	(void) signum;
 }
