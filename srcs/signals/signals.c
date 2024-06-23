@@ -30,7 +30,8 @@ void	handle_zero(void)
 	int	err_code;
 
 	err_code = 130;
-	ft_fprintf(2, "\n");
+	// ft_fprintf(2, "\n");
+	write(STDERR_FILENO, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
@@ -55,6 +56,7 @@ int	send_err_code(int *new_err)
 
 void	handle_two(pid_t to_kill)
 {
+	printf("Handling BLOCKING signal\n");
 	int	err_code;
 
 	err_code = 130;
@@ -75,7 +77,7 @@ void	sigint_main(int signum)
 	to_restore = -1;
 	if (g_signal_received == NORMAL)
 		handle_zero();
-	else if (g_signal_received == HEREDOC)
+	else if (g_signal_received == HEREDOC_SIG)
 		handle_one();
 	else if (g_signal_received == EXEC)
 		handle_two(to_kill);

@@ -158,7 +158,7 @@ int	execute(t_cmds *cmds, t_main *shell)
 	pid_t	*cpids;
 
 	set_env(&shell->env, "?", "0", 777);
-	g_signal_received = HEREDOC;
+	g_signal_received = EXEC;
 	if (check_files(shell, cmds))
 		return (EXIT_FAILURE);
 	cpids = malloc(sizeof(pid_t) * (cmd_size(cmds) + 1));
