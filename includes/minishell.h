@@ -352,6 +352,7 @@ int		wait_for_children(pid_t *cpids, t_main *shell);
 int		exec_single_builtin(t_cmds *cmds, t_main *shell);
 int		exec_first_builtin(t_cmds *cmds, t_main *shell);
 int		exec_last_builtin(t_cmds *cmds, int fd_in, t_main *shell);
+int		exec_middle_builtins(t_cmds *cmds, int fd_in, t_main *shell);
 
 /* STD MANAGEMENT */
 
