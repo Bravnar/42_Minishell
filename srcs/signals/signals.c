@@ -56,7 +56,6 @@ int	send_err_code(int *new_err)
 
 void	handle_two(pid_t to_kill)
 {
-	printf("Handling BLOCKING signal\n");
 	int	err_code;
 
 	err_code = 130;
