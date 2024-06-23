@@ -22,6 +22,10 @@ void	save_stdin(t_main *shell)
 
 void restore_stdout(t_main *shell)
 {
+
+	/* ft_fprintf(STDERR_FILENO, "Fd of shell in: ", shell->out);
+	ft_putnbr_fd(shell->out, STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO); */
 	if (shell->out != STDOUT_FILENO)
 	{
 		if (dup2(shell->out, STDOUT_FILENO) == -1)
