@@ -50,17 +50,18 @@ void	gameplay_loop(t_main *shell)
 	// 	my_rl_initialize();
 	while (1)
 	{
+		g_signal_received = 0;
 		terminal_prompt(shell);
 		lex->input = readline(shell->prompt);
 		if (!lex->input)
 			break ;
 		if (lex->input[0])
 			add_history(lex->input);
-		lexer(lex, shell);
-		//parser_main() should be called here, for now is in lexer()
-		// builtins(shell->cmds, shell);
-		check_builtins(shell->cmds);
-		execute(shell->cmds, shell);
+		if (!lexer(lex, shell))
+		{
+			check_builtins(shell->cmds);
+			execute(shell->cmds, shell);
+		}
 		free_all(shell);
 		clear_t_cmds(shell);
 	}
@@ -73,6 +74,7 @@ int	main(int ac, char **av, char **envp)
 	(void) ac;
 	(void) av;
 	shell = init_structs(envp);
+	signal_daddy(shell);
 	gameplay_loop(shell);
 	free_main(shell);
 }
