@@ -46,6 +46,7 @@ int exec_first_builtin(t_cmds *cmds, t_main *shell)
 	t_stds	fd_stds;
 
 	save_stdout(shell);
+	save_stdin(shell);
 	fd_stds.in = -1;
 	fd_stds.out = -1;
 	if (pipe(fds) == -1)
@@ -65,13 +66,10 @@ int exec_first_builtin(t_cmds *cmds, t_main *shell)
 		restore_stdin(shell, fd_stds.in);
 	if (cmds->last_outfile)
 		restore_stdout(shell);
-	else
+	if (dup2(shell->out, STDOUT_FILENO) == -1)
 	{
-		if (dup2(shell->out, STDOUT_FILENO) == -1)
-		{
-			ft_fprintf(STDERR_FILENO, "Dup2 shellout first builtin");
-			exit(EXIT_FAILURE);
-		}
+		ft_fprintf(STDERR_FILENO, "Dup2 shellout first builtin");
+		exit(EXIT_FAILURE);
 	}
 	return (fds[0]);
 }

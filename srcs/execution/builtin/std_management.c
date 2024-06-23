@@ -62,4 +62,5 @@ void restore_stdin(t_main *shell, int redirected_fd)
 			exit(EXIT_FAILURE);
 		}
 	}
+	shell->in = STDIN_FILENO;
 }
