@@ -77,7 +77,7 @@ void	redir_builtin(t_cmds *cmds, t_main *shell, t_stds *fd_stds, t_exec code)
 		if (cmds->last_infile)
 			redirect_input_builtin(cmds->last_infile, shell);
 	}
-	if (code == LAST)
+	if (code == LAST || code == FIRST)
 	{
 		if (cmds->last_outfile)
 			fd_stds->out = redirect_output_builtin(cmds->last_outfile, shell);
