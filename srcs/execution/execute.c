@@ -2,6 +2,8 @@
 
 int	execute_cmd(t_cmds *cmds, t_main *shell)
 {
+	int	err_code;
+
 	if (!cmds->cmd_grp)
 	{
 		if (cmds->last_infile || cmds->last_outfile)
@@ -10,9 +12,10 @@ int	execute_cmd(t_cmds *cmds, t_main *shell)
 				return(EXIT_SUCCESS);
 			}
 	}
-	if (is_bad_command(cmds, shell))
+	err_code = is_bad_command(cmds, shell);
+	if (err_code)
 		return (error_handler(shell->err_code,
-				cmds->cmd_grp[0], shell), EXIT_FAILURE);
+				cmds->cmd_grp[0], shell), err_code);
 	if (!cmds->path)
 		return (error_handler(NO_COMMAND, cmds->cmd_grp[0], shell), EXIT_FAILURE);
 	shell->envp = back_to_array(shell->env);

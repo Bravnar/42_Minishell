@@ -8,7 +8,7 @@ int	is_bad_command(t_cmds *cmds, t_main *shell)
 	if (!cmds->path)
 		shell->err_code = NO_COMMAND;
 	if (!cmds->path)
-		return (EXIT_FAILURE);
+		return (127);
 	fd = open(cmds->path, O_RDONLY, 00644);
 	dir = opendir(cmds->path);
 	if (fd == -1)
@@ -23,7 +23,7 @@ int	is_bad_command(t_cmds *cmds, t_main *shell)
 	{
 		shell->err_code = IS_DIR;
 		closedir(dir);
-		return (EXIT_FAILURE);
+		return (126);
 	}
 	close (fd);
 	return (EXIT_SUCCESS);
