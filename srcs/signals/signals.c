@@ -39,7 +39,11 @@ void	handle_zero(void)
 
 void	handle_one(void)
 {
-
+	write(STDERR_FILENO, "\n", 1);
+	exit(130);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 int	send_err_code(int *new_err)

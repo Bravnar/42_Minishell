@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 09:11:06 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/24 09:11:06 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/24 14:21:40 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/24 14:29:20 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,68 @@ int	check_infile(char *infile, t_main *shell)
 	return (EXIT_SUCCESS);
 }
 
-t_files	*extract_heredoc(t_files *file, t_main *shell)
+t_files *extract_heredoc(t_files *file, t_main *shell)
+{
+	int		pipefd[2];
+	pid_t	pid;
+	int		status;
+	char	*final;
+	char	*input;
+	char	*full_input;
+
+	if (pipe(pipefd) == -1)
+	{
+		perror("pipe");
+		exit(EXIT_FAILURE);
+	}
+	pid = fork();
+	if (pid == -1)
+		exit(EXIT_FAILURE);
+	if (pid == 0)
+	{
+		close(pipefd[0]);
+		g_signal_received = EXEC;
+		input = ft_strdup("");
+		while (ft_strncmp(input, file->file_name, ft_strlen(file->file_name)))
+		{
+			write(STDOUT_FILENO, "> ", 2);
+			free(input);
+			input = get_next_line(STDIN_FILENO);
+			ft_fprintf(pipefd[1], "%s", input);
+		}
+		free(input);
+		close(pipefd[1]);
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		pid_for_signal(&pid);
+		full_input = ft_strdup("");
+		input = ft_strdup("");
+		close(pipefd[1]);
+		waitpid(pid, &status, 0);
+		determine_err(shell, status);
+		while (ft_strncmp(input, file->file_name, ft_strlen(file->file_name)))
+		{
+			full_input = ft_better_join(full_input, input, 1);
+			input = get_next_line(pipefd[0]);
+		}
+		free(file->file_name);
+		final = var_replace(full_input, shell);
+		if (final)
+			file->file_name = ft_strdup(final);
+		else
+			file->file_name = ft_strdup("");
+		g_signal_received = NORMAL;
+		free(full_input);
+		free(input);
+		free(final);
+	}
+	return file;
+}
+
+
+/* t_files	*extract_heredoc(t_files *file, t_main *shell)
 {
 	char	*line;
 	char	*input;
@@ -54,7 +115,7 @@ t_files	*extract_heredoc(t_files *file, t_main *shell)
 	free(final);
 	free(input);
 	return (file);
-}
+} */
 
 int	check_outfile(char *outfile, t_main *shell, t_type t)
 {

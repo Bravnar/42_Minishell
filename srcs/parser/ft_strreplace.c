@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 22/06/2024 17:13:11 by hmorand           #+#    #+#             */
-/*   Updated: 24/06/2024 09:19:11 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/24 13:50:32 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/24 13:50:32 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ char	*var_replace(char *input, t_main *shell)
 
 	i = 0;
 	result = ft_strdup(input);
+	if (!result)
+		return (NULL);
 	while (result[i])
 	{
 		while (result[i] != '$')

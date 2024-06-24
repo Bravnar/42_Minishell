@@ -362,6 +362,7 @@ void	piping(t_cmds *tmp, pid_t *cpids, int *fd_in, t_main *shell);
 
 void	add_pid(pid_t pid, pid_t *cpids);
 int		wait_for_children(pid_t *cpids, t_main *shell);
+void	determine_err(t_main *shell, int status);
 int		send_err_code(int *new_err);
 
 /*-------------------------------BUILTIN SUBDIR------------------------------*/
