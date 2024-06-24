@@ -28,7 +28,6 @@ void	free_count(t_counts *counts)
 	free(counts);
 }
 
-
 void	free_main(t_main *shell)
 {
 	if (!shell)
@@ -37,10 +36,9 @@ void	free_main(t_main *shell)
 	free_cmds(shell->cmds);
 	free_count(shell->counts);
 	free_nodes(shell->env);
-	ft_free_arr(shell->envp); // stan line
+	ft_free_arr(shell->envp);
 	clear_t_cmds(shell);
 	if (shell->has_env)
 		free(shell->prompt);
 	free (shell);
-
 }

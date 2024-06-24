@@ -31,7 +31,8 @@ void	errors_two(t_err code, char *file, t_main *shell)
 		ft_fprintf(STDERR_FILENO, RED"minishell: %s: Permission denied\n"RESET,
 			file);
 	else if (code == EXPORT_ERR)
-		ft_fprintf(STDERR_FILENO, RED"%s%s: %s\n"RESET, MSHELL, file, EXPORT_SIGN);
+		ft_fprintf(STDERR_FILENO,
+			RED"%s%s: %s\n"RESET, MSHELL, file, EXPORT_SIGN);
 	set_env(&shell->env, "?", "1", 777);
 }
 
@@ -47,7 +48,8 @@ void	error_handler(t_err code, char *file, t_main *shell)
 			ft_fprintf(STDERR_FILENO, RED"minishell: %s: Is a directory\n"RESET,
 				file);
 		else if (code == NO_COMMAND) // error code 127
-			ft_fprintf(STDERR_FILENO, RED"minishell: %s: command not found\n"RESET,
+			ft_fprintf(STDERR_FILENO,
+				RED"minishell: %s: command not found\n"RESET,
 				file);
 	}
 }

@@ -103,12 +103,12 @@ typedef struct s_llex
 
 typedef struct s_strtoll
 {
-	long long 	result;
+	long long	result;
 	int			sign;
 	int			digit;
 	int			digit_count;
 	const char	*s;
-} t_strtoll;
+}	t_strtoll;
 
 typedef struct s_lex
 {
@@ -173,8 +173,8 @@ typedef struct s_main
 
 typedef struct s_stds
 {
-					int	in;
-					int	out;
+	int	in;
+	int	out;
 }	t_stds;
 
 #endif

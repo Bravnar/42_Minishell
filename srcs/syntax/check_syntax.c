@@ -1,47 +1,5 @@
 #include "minishell.h"
 
-void	reset_quotes(t_lex *l)
-{
-	l->d_count = 0;
-	l->d_quotes = 0;
-	l->s_count = 0;
-	l->s_quotes = 0;
-	l->i = 0;
-
-}
-
-int	is_first(t_llex *l)
-{
-	if (!l->prev)
-		return (1);
-	return (0);
-}
-
-int	is_last(t_llex *l)
-{
-	if (!l->next)
-		return (1);
-	return (0);
-}
-
-int	set_err_code(char *value)
-{
-	if (!ft_strncmp(value, ">>", 2))
-		return BAD_REDIR_APP;
-	else if (!ft_strncmp(value, "<<", 2))
-		return BAD_REDIR_HD;
-	else if (!ft_strncmp(value, "<", 2))
-		return BAD_REDIR_IN;
-	else if (!ft_strncmp(value, ">", 2))
-		return BAD_REDIR_OUT;
-	else if (!ft_strncmp(value, "|", 2))
-		return BAD_PIPES;
-	else if (!ft_strncmp(value, "\n", 2))
-		return BAD_REDIRS_NL;
-	else
-		return (999);
-}
-
 void	set_redir_err(t_lex *l, t_llex *tmp)
 {
 	int	lst_size;
@@ -57,8 +15,6 @@ void	set_redir_err(t_lex *l, t_llex *tmp)
 		l->err_code = set_err_code(tmp->next->value);
 	else if (!is_last(tmp) && ft_strchr(PIPE, tmp->next->value[0]))
 		l->err_code = set_err_code("|");
-	
-	
 }
 
 int	check_redirs(t_lex *l)
@@ -90,7 +46,7 @@ int	check_spec(t_lex *l)
 	while (tmp && !stop)
 	{
 		i = 0;
-		while(tmp->value[i] && !tmp->is_in_quotes)
+		while (tmp->value[i] && !tmp->is_in_quotes)
 		{
 			if (ft_strchr(SYNTAX_STOP, tmp->value[i]))
 			{
@@ -158,7 +114,6 @@ int	check_quotes(t_lex *l)
 	}
 	return (0);
 }
-
 
 /* void	check_syntax(t_lex *l)
 {

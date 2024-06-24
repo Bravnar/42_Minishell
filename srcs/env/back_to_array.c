@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int		count_envp(t_envp *env)
+int	count_envp(t_envp *env)
 {
 	t_envp	*tmp;
 	int		count;

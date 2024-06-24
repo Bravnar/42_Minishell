@@ -43,7 +43,7 @@ char	*handle_quote(t_envp **head, char *var)
 	return (result);
 }
 
-/* Function that is called once at the beginning of the 
+/* Function that is called once at the beginning of the
 program to create our local copy of the envp */
 void	populate_envp(t_main *shell)
 {
@@ -53,10 +53,9 @@ void	populate_envp(t_main *shell)
 	t_envp	*new_node;
 
 	if (shell->envp[0] == NULL)
-	{
 		no_env_handle(shell);
+	if (shell->envp[0] == NULL)
 		return ;
-	}
 	i = -1;
 	while (shell->envp[++i])
 	{

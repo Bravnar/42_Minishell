@@ -65,7 +65,6 @@ void	terminal_prompt_nonroot(t_main *shell, char **path)
 	char	*end;
 	char	*final;
 
-
 	breakdown = NULL;
 	breakdown = ft_split(*path, '/');
 	free(*path);
@@ -76,7 +75,6 @@ void	terminal_prompt_nonroot(t_main *shell, char **path)
 	ft_free_arr(breakdown);
 	end = ft_better_join(tmp, X_SIGN, 0);
 	final = ft_better_join(full_start, end, 0);
-
 	shell->prompt = ft_strdup(final);
 	free(tmp);
 	free(full_start);
@@ -124,27 +122,33 @@ void	terminal_prompt(t_main *shell)
 }
 
 /* Additional function to debug - not needed otherwise */
-void print_prompt_info(const char *prompt) 
+/* void	print_prompt_info(const char *prompt)
 {
-    int visible_length = 0;
-    int actual_length = ft_strlen(prompt);
-    int i = 0;
+	int	visible_length;
+	int	actual_length;
+	int	i;
 
-    while (prompt[i] != '\0') {
-        if (prompt[i] == '\001') {
-            while (prompt[i] != '\002' && prompt[i] != '\0') {
-                i++;
-            }
-            if (prompt[i] == '\002') {
-                i++;
-            }
-        } else {
-            visible_length++;
-            i++;
-        }
-    }
-
-    printf("Prompt: %s\n", prompt);
-    printf("Actual Length: %d\n", actual_length);
-    printf("Visible Length: %d\n", visible_length);
-}
+	visible_length = 0;
+	i = 0;
+	actual_length = ft_strlen(prompt);
+	while (prompt[i] != '\0')
+	{
+		if (prompt[i] == '\001')
+		{
+			while (prompt[i] != '\002' && prompt[i] != '\0') {
+				i++;
+			}
+			if (prompt[i] == '\002') {
+				i++;
+			}
+		}
+		else
+		{
+			visible_length++;
+			i++;
+		}
+	}
+	printf("Prompt: %s\n", prompt);
+	printf("Actual Length: %d\n", actual_length);
+	printf("Visible Length: %d\n", visible_length);
+} */

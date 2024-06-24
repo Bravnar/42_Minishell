@@ -23,7 +23,6 @@ int	my_echo(char **cmds, int fd)
 
 	nl_needed = 1;
 	i = 1;
-
 	while (cmds[i] && is_valid_n(cmds[i]))
 	{
 		nl_needed = 0;
@@ -52,5 +51,5 @@ int	my_echo(char **cmds, int fd)
 	}
 	if (nl_needed)
 		write(fd, "\n", 1);
-	return (EXIT_SUCCESS);		
+	return (EXIT_SUCCESS);
 }

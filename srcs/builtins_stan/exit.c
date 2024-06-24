@@ -4,7 +4,6 @@ static void	toll_space_sign(const char **sptr, int *sign)
 {
 	while (ft_isspace(**sptr))
 		(*sptr)++;
-
 	if (ft_strchr("+-", **sptr))
 	{
 		if (**sptr == '-')
@@ -13,9 +12,9 @@ static void	toll_space_sign(const char **sptr, int *sign)
 	}
 }
 
-static long long	final_decision(t_strtoll strtoll, char **endptr, const char *nptr)
+static long long	final_decision(t_strtoll s, char **endptr, const char *nptr)
 {
-	if (strtoll.digit_count == 0)
+	if (s.digit_count == 0)
 	{
 		errno = EINVAL;
 		if (endptr)
@@ -23,8 +22,8 @@ static long long	final_decision(t_strtoll strtoll, char **endptr, const char *np
 		return (0);
 	}
 	if (endptr)
-		*endptr = (char *)strtoll.s;
-	return (strtoll.sign * strtoll.result);
+		*endptr = (char *)s.s;
+	return (s.sign * s.result);
 }
 
 long long	ft_strtoll(const char *nptr, char **endptr)
@@ -38,8 +37,9 @@ long long	ft_strtoll(const char *nptr, char **endptr)
 	while (ft_isdigit(*strtoll.s))
 	{
 		strtoll.digit = *strtoll.s - '0';
-		if (strtoll.result > LLONG_MAX / 10 ||
-		(strtoll.result == LLONG_MAX / 10 && strtoll.digit > LLONG_MAX % 10))
+		if (strtoll.result > LLONG_MAX / 10 || \
+			(strtoll.result == LLONG_MAX / 10 && \
+			strtoll.digit > LLONG_MAX % 10))
 		{
 			errno = ERANGE;
 			if (endptr)
@@ -50,10 +50,9 @@ long long	ft_strtoll(const char *nptr, char **endptr)
 		}
 		strtoll.result = strtoll.result * 10 + strtoll.digit;
 		strtoll.s++;
-		strtoll.digit_count++; 
+		strtoll.digit_count++;
 	}
 	return (final_decision(strtoll, endptr, nptr));
-	
 }
 
 int	my_exit(t_main *shell, char **cmds)

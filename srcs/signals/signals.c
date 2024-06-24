@@ -13,13 +13,12 @@ void	sigint_handle(int signum)
 {
 	/* pid_t	child;
 	pid_t	reset; */
-
 	(void) signum;
 }
 
 void	handle_interactive(void)
 {
-	ft_fprintf(2,"\n");
+	ft_fprintf(2, "\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
@@ -65,7 +64,6 @@ void	handle_two(pid_t to_kill)
 	send_err_code(&err_code);
 }
 
-
 void	sigint_main(int signum)
 {
 	pid_t	to_kill;
@@ -81,7 +79,6 @@ void	sigint_main(int signum)
 	else if (g_signal_received == EXEC)
 		handle_two(to_kill);
 	pid_for_signal(&to_restore);
-
 }
 
 void	handle_sigpipe(int signum)
@@ -123,7 +120,7 @@ int	is_vscode_terminal(t_main *shell)
 void	signal_daddy(t_main *shell)
 {
 	struct sigaction	s;
-	int	shlvl;
+	int					shlvl;
 
 	sigemptyset(&s.sa_mask);
 	s.sa_flags = 0;

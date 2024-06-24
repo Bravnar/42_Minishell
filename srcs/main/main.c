@@ -2,6 +2,7 @@
 
 int	g_signal_received = 0;
 /* Gameplay loop free */
+
 void	free_all(t_main *shell)
 {
 	if (shell->l->input)
@@ -63,7 +64,6 @@ void	gameplay_loop(t_main *shell)
 	t_lex	*lex;
 
 	lex = shell->l;
-
 	// if (!APPLE)
 	// 	my_rl_initialize();
 	while (1)
@@ -98,13 +98,12 @@ int	main(int ac, char **av, char **envp)
 	free_main(shell);
 }
 
-
 /*
 	1) Error management file, refactor and add set_env $?, 777 --OK
 	2) Fix signals Ctrl+C and Ctrl+\ ...
 	3) Built-ins for piping and execution
 	4) Norminette and headers
-	5) Refactor and redistribute files where needed 
+	5) Refactor and redistribute files where needed
 	6) Test that env -i works with no issue
 	7) Test pipes
 	8) Test redirs behaviour
@@ -120,7 +119,6 @@ int	main(int ac, char **av, char **envp)
 	18)  echo hello > abc | cat < abc
 	19) unset PATH issue --OK
 */
-
 
 /* void	handle_sigint(int sig)
 {

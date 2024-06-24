@@ -5,7 +5,6 @@ int	print_envp(t_envp **head, int fd)
 	t_envp	*tmp;
 
 	tmp = *head;
-
 	//printf("{\n");
 	set_env(head, "_", "/usr/bin/env", 1);
 	while (tmp != NULL)
@@ -15,6 +14,6 @@ int	print_envp(t_envp **head, int fd)
 			ft_fprintf(fd, "%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 	// printf("}\n");
 }

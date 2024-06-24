@@ -42,7 +42,6 @@ void	populate_no_env(t_main *shell)
 	add_env_node(&shell->env, new_node);
 	new_node = new_no_env_node("OLDPWD", NULL, 0);
 	add_env_node(&shell->env, new_node);
-	
 	free(get_path);
 }
 
@@ -67,7 +66,6 @@ void	no_env_handle(t_main *shell)
 	// char	*tmp;
 	// char	*tmp2;
 	// char	*cwd;
-
 	// tmp = NULL;
 	shell->has_env = 0;
 	make_no_env_prompt(shell);

@@ -128,17 +128,22 @@ void	echo(char **args, char **ENV); */
 
 /* CD */
 
-int	    cd_new(t_main *shell, char **cmds);
+int		cd_new(t_main *shell, char **cmds);
 int		cd_count(char **cmds);
 void	adjust_pwd(t_main *shell, char *old_pwd);
 void	swap_old_new(t_main *shell, char **cmds, char *old_pwd);
 void	go_home(t_main *shell, char **cmds, char *cwd);
 
 /* ENV */
-int	    print_envp(t_envp **head, int fd);
+void	free_local_copy(t_envp *local);
+int		count_export_args(char **cmds);
+void	print_local_copy(t_envp **head, int fd);
+void	copy_work(t_envp *n_n, t_envp **l_h, t_envp **l_t, t_envp *curr);
+
+int		print_envp(t_envp **head, int fd);
 
 /* EXPORT */
-int	    export(t_main *shell, char **cmds, int fd);
+int		export(t_main *shell, char **cmds, int fd);
 void	sort_local_copy(t_envp	**local);
 void	swap_nodes(t_envp *a, t_envp *b);
 t_envp	*copy_list(t_envp *src);
@@ -148,19 +153,19 @@ void	free_local_copy(t_envp *local);
 char	**export_split(char *str);
 
 /* ECHO */
-int 	my_echo(char **cmds, int fd);
+int		my_echo(char **cmds, int fd);
 
 /* UNSET */
 
-int 	unset_env(char **cmds, t_envp **head);
+int		unset_env(char **cmds, t_envp **head);
 
 /* PWD */
 
-int   my_pwd(int fd, t_main *shell, char **cmds);
+int		my_pwd(int fd, t_main *shell, char **cmds);
 
 /* EXIT */
 
-int	  my_exit(t_main *shell, char **cmds);
+int		my_exit(t_main *shell, char **cmds);
 
 /*----------------------------------CLEANUP DIR-------------------------------*/
 
@@ -212,8 +217,7 @@ t_lex	*init_lex(void);
 /* INIT_PROMPT */
 
 void	terminal_prompt(t_main *shell);
-void 	print_prompt_info(const char *prompt);
-// char	*join_prompt(char **part);
+void	print_prompt_info(const char *prompt);
 char	*join_prompt(char **part, t_main *shell);
 t_envp	*new_no_env_node(char *key, char *value, int print);
 void	make_no_env_prompt(t_main *shell);
@@ -326,6 +330,12 @@ int		check_redirs(t_lex *l);
 int		check_pipes(t_lex *l);
 int		check_spec(t_lex *l);
 
+/* CHECK SYNTAX UTILS */
+
+int		is_first(t_llex *l);
+int		is_last(t_llex *l);
+int		set_err_code(char *value);
+
 /*--------------------------------EXECUTION DIR-------------------------------*/
 
 /* MAIN */
@@ -342,8 +352,10 @@ int		check_files(t_main *shell, t_cmds *cmds);
 /* PIPING UTILS */
 
 int		exec_pipeline_first(t_cmds *cmds, pid_t *cpids, t_main *shell);
-int		exec_pipeline_last(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell);
-int		exec_pipeline_middle(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell);
+int		exec_pipeline_last(t_cmds *cmds,
+			int fd_in, pid_t *cpids, t_main *shell);
+int		exec_pipeline_middle(t_cmds *cmds,
+			int fd_in, pid_t *cpids, t_main *shell);
 void	piping(t_cmds *tmp, pid_t *cpids, int *fd_in, t_main *shell);
 
 /* PID_UTILS */
@@ -372,7 +384,6 @@ void	restore_stdin(t_main *shell, int redirected_fd);
 void	redir_builtin(t_cmds *cmds, t_main *shell, t_stds *fd_stds);
 int		redirect_output_builtin(t_files *outfile, t_main *shell);
 int		redirect_input_builtin(t_files *infile, t_main *shell);
-
 
 /* REDIRECTION_UTILS */
 
@@ -411,7 +422,6 @@ int		cmd_size(t_cmds *cmds);
 // # define EHL "\001\e\[1m\e[34m\002\001EHL:\002\001\e[0m\002"
 // # define G_ARROW_SIGN "\001\e[1m\e[32m\002\001\u279c\002\001 \002"
 // # define X_SIGN "\001\e[1m\e[34m\002\001 \002\001\u2718\002\001 \002\001\e[0m\002"
-
 
 // # define MINISH "\001\033[1;37m\002minish"
 // # define EHL "\001\033[1;34m\002EHL:\001\033[0m\002"

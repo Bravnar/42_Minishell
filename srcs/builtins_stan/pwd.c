@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 int	my_pwd(int fd, t_main *shell, char **cmds)
 {
 	char	*pwd_to_print;

@@ -4,7 +4,7 @@ char	**get_paths(t_main *shell)
 {
 	char	**paths;
 	char	*path;
-	
+
 	path = get_env(&shell->env, "PATH");
 	if (!path || !path[0])
 		return (NULL);
@@ -13,7 +13,6 @@ char	**get_paths(t_main *shell)
 		return (NULL);
 	return (paths);
 }
-
 
 /* This function causes issues when the thing passed to it is not a command
    Valgrind is unhappy because it tries access something that is not  */
