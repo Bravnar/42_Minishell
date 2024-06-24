@@ -1,13 +1,5 @@
 #include "minishell.h"
 
-void	print_error(char *err)
-{
-	while (*err)
-		write(STDERR_FILENO, err++, 1);
-	write(STDERR_FILENO, "\n", 1);
-}
-
-
 void	errors_one(t_err code, char *file, t_main *shell)
 {
 	(void) file;
@@ -52,17 +44,11 @@ void	error_handler(t_err code, char *file, t_main *shell)
 	else
 	{
 		if (code == IS_DIR) // error code 126
-		{
 			ft_fprintf(STDERR_FILENO, RED"minishell: %s: Is a directory\n"RESET,
 				file);
-			set_env(&shell->env, "?", "126", 777);
-		}
 		else if (code == NO_COMMAND) // error code 127
-		{
 			ft_fprintf(STDERR_FILENO, RED"minishell: %s: command not found\n"RESET,
 				file);
-			set_env(&shell->env, "?", "127", 777);
-		}
 	}
 }
 

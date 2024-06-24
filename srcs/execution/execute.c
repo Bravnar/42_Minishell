@@ -1,25 +1,23 @@
 #include "minishell.h"
 
-int	execute_cmd(t_cmds *cmds, t_main *shell)
+int	execute_cmd(t_cmds *cmds, t_main *shell, int fd)
 {
 	int	err_code;
 
 	if (cmds->is_builtin)
-		exit(builtins(cmds, shell, STDOUT_FILENO));
+		exit(builtins(cmds, shell, fd));
 	if (!cmds->cmd_grp)
 	{
 		if (cmds->last_infile || cmds->last_outfile)
-			{
-				ft_fprintf(STDERR_FILENO, "Exiting cause no command\n");
-				return(EXIT_SUCCESS);
-			}
+		{
+			ft_fprintf(STDERR_FILENO, "Exiting cause no command\n");
+			return(EXIT_SUCCESS);
+		}
 	}
 	err_code = is_bad_command(cmds, shell);
 	if (err_code)
 		return (error_handler(shell->err_code,
 				cmds->cmd_grp[0], shell), err_code);
-	if (!cmds->path)
-		return (error_handler(NO_COMMAND, cmds->cmd_grp[0], shell), EXIT_FAILURE);
 	shell->envp = back_to_array(shell->env);
 	execve(cmds->path, cmds->cmd_grp, shell->envp);
 	ft_free_arr(shell->envp);
@@ -37,7 +35,7 @@ int exec_single(t_cmds *cmds, pid_t *cpids, t_main *shell)
 	if (pid == 0)
 	{
 		handle_redirection(cmds);
-		exit(execute_cmd(cmds, shell));
+		exit(execute_cmd(cmds, shell, STDOUT_FILENO));
 	}
 	add_pid(pid, cpids);
 	return(-1);
@@ -59,7 +57,7 @@ int exec_pipeline_first(t_cmds *cmds, pid_t *cpids, t_main *shell)
 			exit(EXIT_FAILURE);
 		handle_redirection(cmds);
 		close_first_child(fds);
-		exit(execute_cmd(cmds, shell));
+		exit(execute_cmd(cmds, shell, STDOUT_FILENO));
 	}
 	add_pid(pid, cpids);
 	close_first_parent(fds);
@@ -75,17 +73,15 @@ int exec_pipeline_last(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 		exit(EXIT_FAILURE);
 	if (pid == 0)
 	{
-		if (!cmds->last_infile && !cmds->prev->last_outfile && cmds->prev->cmd_grp)
+
+		if (dup2(fd_in, STDIN_FILENO) == -1)
 		{
-			if (dup2(fd_in, STDIN_FILENO) == -1)
-			{
-				ft_fprintf(STDERR_FILENO, "Dup STDIN last pipe\n");
-				exit(EXIT_FAILURE);
-			}
+			ft_fprintf(STDERR_FILENO, "Dup STDIN last pipe\n");
+			exit(EXIT_FAILURE);
 		}
 		handle_redirection(cmds);
 		close_fdin_last_child(fd_in);
-		exit(execute_cmd(cmds, shell));
+		exit(execute_cmd(cmds, shell, STDOUT_FILENO));
 
 	}
 	add_pid(pid, cpids);
@@ -111,7 +107,7 @@ int exec_pipeline_middle(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 			exit(EXIT_FAILURE);
 		handle_redirection(cmds);
 		close_middle_child(fds, fd_in);
-		exit(execute_cmd(cmds, shell));
+		exit(execute_cmd(cmds, shell, STDOUT_FILENO));
 	}
 	add_pid(pid, cpids);
 	close_middle_parent(fds, fd_in);
