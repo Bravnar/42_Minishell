@@ -330,7 +330,6 @@ int		check_spec(t_lex *l);
 /* MAIN */
 
 int		execute(t_cmds *cmds, t_main *shell);
-int		builtins(t_cmds *cmds, t_main *shell, int fd);
 
 /* CHECKS */
 
@@ -350,10 +349,8 @@ int		send_err_code(int *new_err);
 
 /* BUILTINS */
 
+int		builtins(t_cmds *cmds, t_main *shell, int fd);
 int		exec_single_builtin(t_cmds *cmds, t_main *shell);
-int		exec_first_builtin(t_cmds *cmds, t_main *shell);
-int		exec_last_builtin(t_cmds *cmds, int fd_in, t_main *shell);
-int		exec_middle_builtins(t_cmds *cmds, int fd_in, t_main *shell);
 
 /* STD MANAGEMENT */
 
@@ -363,7 +360,7 @@ void	restore_stdout(t_main *shell);
 void	restore_stdin(t_main *shell, int redirected_fd);
 
 /* REDIR */
-void	redir_builtin(t_cmds *cmds, t_main *shell, t_stds *fd_stds, t_exec code);
+void	redir_builtin(t_cmds *cmds, t_main *shell, t_stds *fd_stds);
 int		redirect_output_builtin(t_files *outfile, t_main *shell);
 int		redirect_input_builtin(t_files *infile, t_main *shell);
 

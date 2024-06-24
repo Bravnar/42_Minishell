@@ -65,26 +65,10 @@ int	redirect_input_builtin(t_files *infile, t_main *shell)
 	return (fd);
 }
 
-void	redir_builtin(t_cmds *cmds, t_main *shell, t_stds *fd_stds, t_exec code)
+void	redir_builtin(t_cmds *cmds, t_main *shell, t_stds *fd_stds)
 {
-	if (code == SINGLE || code == FIRST)
-	{
-		if (cmds->last_infile)
-			fd_stds->in = redirect_input_builtin(cmds->last_infile, shell);
-	}
-	else
-	{
-		if (cmds->last_infile)
-			redirect_input_builtin(cmds->last_infile, shell);
-	}
-	if (code == LAST || code == FIRST)
-	{
-		if (cmds->last_outfile)
-			fd_stds->out = redirect_output_builtin(cmds->last_outfile, shell);
-	}
-	else
-	{
-		if (cmds->last_outfile)
-			redirect_output_builtin(cmds->last_outfile, shell);
-	}
+	if (cmds->last_infile)
+		fd_stds->in = redirect_input_builtin(cmds->last_infile, shell);
+	if (cmds->last_outfile)
+		redirect_output_builtin(cmds->last_outfile, shell);
 }

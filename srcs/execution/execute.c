@@ -4,6 +4,8 @@ int	execute_cmd(t_cmds *cmds, t_main *shell)
 {
 	int	err_code;
 
+	if (cmds->is_builtin)
+		exit(builtins(cmds, shell, STDOUT_FILENO));
 	if (!cmds->cmd_grp)
 	{
 		if (cmds->last_infile || cmds->last_outfile)
@@ -77,7 +79,7 @@ int exec_pipeline_last(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 		{
 			if (dup2(fd_in, STDIN_FILENO) == -1)
 			{
-				ft_fprintf(STDERR_FILENO, "Hello\n");
+				ft_fprintf(STDERR_FILENO, "Dup STDIN last pipe\n");
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -128,26 +130,11 @@ void	piping(t_cmds *tmp, pid_t *cpids, int *fd_in, t_main *shell)
 				exec_single_builtin(tmp, shell);
 		}
 		else if (!tmp->prev)
-		{
-			if (!tmp->is_builtin)
-				*fd_in = exec_pipeline_first(tmp, cpids, shell);
-			else
-				*fd_in = exec_first_builtin(tmp, shell);
-		}
+			*fd_in = exec_pipeline_first(tmp, cpids, shell);
 		else if (!tmp->next)
-		{
-			if (!tmp->is_builtin)
-				*fd_in = exec_pipeline_last(tmp, *fd_in, cpids, shell);
-			else
-				*fd_in = exec_last_builtin(tmp, *fd_in, shell);
-		}
+			*fd_in = exec_pipeline_last(tmp, *fd_in, cpids, shell);
 		else
-		{
-			if (!tmp->is_builtin)
-				*fd_in = exec_pipeline_middle(tmp, *fd_in, cpids, shell);
-			else
-				*fd_in = exec_middle_builtins(tmp, *fd_in, shell);
-		}
+			*fd_in = exec_pipeline_middle(tmp, *fd_in, cpids, shell);
 	}
 }
 
