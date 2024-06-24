@@ -11,6 +11,7 @@ SRCS=	srcs/main/main.c \
 		srcs/errors/errors.c \
 		srcs/signals/signals.c \
 		srcs/syntax/check_syntax.c \
+		srcs/syntax/check_syntax_utils.c \
 		srcs/lexer/lexer_funcs.c \
 		srcs/lexer/lexer_info_fill.c \
 		srcs/lexer/lexer_llist_utils.c \
@@ -31,6 +32,7 @@ SRCS=	srcs/main/main.c \
 		srcs/builtins_stan/cd_new.c \
 		srcs/builtins_stan/env.c \
 		srcs/builtins_stan/export.c \
+		srcs/builtins_stan/export_utils.c \
 		srcs/builtins_stan/echo.c \
 		srcs/builtins_stan/unset.c \
 		srcs/builtins_stan/pwd.c \
@@ -46,6 +48,7 @@ SRCS=	srcs/main/main.c \
 		srcs/execution/plumbing/plumbing2.c \
 		srcs/execution/utils/manage_pid.c \
 		srcs/execution/utils/redirection.c \
+		srcs/execution/piping.c \
 		srcs/execution/execute.c \
 		srcs/parser/ft_strreplace.c \
 		srcs/utils/cmd_size.c \
