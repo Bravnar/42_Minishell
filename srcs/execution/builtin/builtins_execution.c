@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins_execution.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 24/06/2024 08:06:42 by hmorand           #+#    #+#             */
+/*   Updated: 24/06/2024 09:07:49 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	builtins(t_cmds *cmds, t_main *shell, int fd)
@@ -5,24 +17,24 @@ int	builtins(t_cmds *cmds, t_main *shell, int fd)
 	if (cmds && cmds->cmd_grp && cmds->cmd_grp[0])
 	{
 		if (!ft_strcmp(cmds->cmd_grp[0], "cd"))
-			return(cd_new(shell, cmds->cmd_grp));
+			return (cd_new(shell, cmds->cmd_grp));
 		else if (!ft_strcmp(cmds->cmd_grp[0], "env"))
-			return(print_envp(&shell->env, fd));
+			return (print_envp(&shell->env, fd));
 		else if (!ft_strcmp(cmds->cmd_grp[0], "export"))
-			return(export(shell, cmds->cmd_grp, fd));
+			return (export(shell, cmds->cmd_grp, fd));
 		else if (!ft_strcmp(cmds->cmd_grp[0], "echo"))
-			return(my_echo(cmds->cmd_grp, fd));
+			return (my_echo(cmds->cmd_grp, fd));
 		else if (!ft_strcmp(cmds->cmd_grp[0], "unset"))
-			return(unset_env(cmds->cmd_grp, &shell->env));
+			return (unset_env(cmds->cmd_grp, &shell->env));
 		else if (!ft_strcmp(cmds->cmd_grp[0], "pwd"))
-			return(my_pwd(fd, shell, cmds->cmd_grp));
+			return (my_pwd(fd, shell, cmds->cmd_grp));
 		else if (!ft_strcmp(cmds->cmd_grp[0], "exit"))
-			return(my_exit(shell, cmds->cmd_grp));
+			return (my_exit(shell, cmds->cmd_grp));
 	}
 	return (EXIT_FAILURE);
 }
 
-int exec_single_builtin(t_cmds *cmds, t_main *shell)
+int	exec_single_builtin(t_cmds *cmds, t_main *shell)
 {
 	t_stds	fd_stds;
 
@@ -37,4 +49,3 @@ int exec_single_builtin(t_cmds *cmds, t_main *shell)
 	set_underscore(cmds, shell);
 	return (shell->err_code);
 }
-

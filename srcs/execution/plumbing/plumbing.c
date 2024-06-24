@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plumbing.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/24 09:06:30 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/24 09:06:30 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	close_middle_child(int fds[2], int fd_in)
@@ -22,7 +34,7 @@ void	close_middle_child(int fds[2], int fd_in)
 	}
 }
 
-void close_middle_parent(int fds[2], int fd_in)
+void	close_middle_parent(int fds[2], int fd_in)
 {
 	if (fd_in != -1)
 	{
@@ -53,7 +65,7 @@ void	close_first_child(int fds[2])
 	}
 }
 
-void close_first_parent(int fds[2])
+void	close_first_parent(int fds[2])
 {
 	if (close(fds[1]) == -1)
 	{

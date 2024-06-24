@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   std_management.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/24 09:08:43 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/24 09:08:43 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	save_stdout(t_main *shell)
@@ -20,7 +32,7 @@ void	save_stdin(t_main *shell)
 	}
 }
 
-void restore_stdout(t_main *shell)
+void	restore_stdout(t_main *shell)
 {
 	if (shell->out != STDOUT_FILENO)
 	{
@@ -38,7 +50,7 @@ void restore_stdout(t_main *shell)
 	}
 }
 
-void restore_stdin(t_main *shell, int redirected_fd)
+void	restore_stdin(t_main *shell, int redirected_fd)
 {
 	if (dup2(shell->in, STDIN_FILENO) == -1)
 	{

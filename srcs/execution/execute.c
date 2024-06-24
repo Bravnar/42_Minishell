@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 24/06/2024 08:06:42 by hmorand           #+#    #+#             */
+/*   Updated: 24/06/2024 09:17:23 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	execute_cmd(t_cmds *cmds, t_main *shell, int fd)
@@ -11,7 +23,7 @@ int	execute_cmd(t_cmds *cmds, t_main *shell, int fd)
 		if (cmds->last_infile || cmds->last_outfile)
 		{
 			ft_fprintf(STDERR_FILENO, "Exiting cause no command\n");
-			return(EXIT_SUCCESS);
+			return (EXIT_SUCCESS);
 		}
 	}
 	err_code = is_bad_command(cmds, shell);
@@ -22,10 +34,10 @@ int	execute_cmd(t_cmds *cmds, t_main *shell, int fd)
 	execve(cmds->path, cmds->cmd_grp, shell->envp);
 	ft_free_arr(shell->envp);
 	perror("Execve");
-	return(EXIT_FAILURE);
+	return (EXIT_FAILURE);
 }
 
-int exec_single(t_cmds *cmds, pid_t *cpids, t_main *shell)
+int	exec_single(t_cmds *cmds, pid_t *cpids, t_main *shell)
 {
 	pid_t	pid;
 
@@ -38,100 +50,7 @@ int exec_single(t_cmds *cmds, pid_t *cpids, t_main *shell)
 		exit(execute_cmd(cmds, shell, STDOUT_FILENO));
 	}
 	add_pid(pid, cpids);
-	return(-1);
-}
-
-int exec_pipeline_first(t_cmds *cmds, pid_t *cpids, t_main *shell)
-{
-	int		fds[2];
-	pid_t	pid;
-
-	if (pipe(fds) == -1)
-		exit(EXIT_FAILURE);
-	pid = fork();
-	if (pid == -1)
-		exit(EXIT_FAILURE);
-	if (pid == 0)
-	{
-		if (dup2(fds[1], STDOUT_FILENO) == -1)
-			exit(EXIT_FAILURE);
-		handle_redirection(cmds);
-		close_first_child(fds);
-		exit(execute_cmd(cmds, shell, STDOUT_FILENO));
-	}
-	add_pid(pid, cpids);
-	close_first_parent(fds);
-	return (fds[0]);
-}
-
-int exec_pipeline_last(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == -1)
-		exit(EXIT_FAILURE);
-	if (pid == 0)
-	{
-
-		if (dup2(fd_in, STDIN_FILENO) == -1)
-		{
-			ft_fprintf(STDERR_FILENO, "Dup STDIN last pipe\n");
-			exit(EXIT_FAILURE);
-		}
-		handle_redirection(cmds);
-		close_fdin_last_child(fd_in);
-		exit(execute_cmd(cmds, shell, STDOUT_FILENO));
-
-	}
-	add_pid(pid, cpids);
-	close_fdin_last_parent(fd_in);
 	return (-1);
-}
-
-int exec_pipeline_middle(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
-{
-	int		fds[2];
-	pid_t	pid;
-
-	if (pipe(fds) == -1)
-		exit(EXIT_FAILURE);
-	pid = fork();
-	if (pid == -1)
-		exit(EXIT_FAILURE);
-	if (pid == 0)
-	{
-		if (dup2(fd_in, STDIN_FILENO) == -1)
-			exit(EXIT_FAILURE);
-		if (dup2(fds[1], STDOUT_FILENO) == -1)
-			exit(EXIT_FAILURE);
-		handle_redirection(cmds);
-		close_middle_child(fds, fd_in);
-		exit(execute_cmd(cmds, shell, STDOUT_FILENO));
-	}
-	add_pid(pid, cpids);
-	close_middle_parent(fds, fd_in);
-	return (fds[0]);
-}
-
-void	piping(t_cmds *tmp, pid_t *cpids, int *fd_in, t_main *shell)
-{
-	if (tmp->cmd_grp && tmp->cmd_grp[0])
-	{
-		if (!tmp->prev && !tmp->next)
-		{
-			if (!tmp->is_builtin)
-				exec_single(tmp, cpids, shell);
-			else
-				exec_single_builtin(tmp, shell);
-		}
-		else if (!tmp->prev)
-			*fd_in = exec_pipeline_first(tmp, cpids, shell);
-		else if (!tmp->next)
-			*fd_in = exec_pipeline_last(tmp, *fd_in, cpids, shell);
-		else
-			*fd_in = exec_pipeline_middle(tmp, *fd_in, cpids, shell);
-	}
 }
 
 int	execute(t_cmds *cmds, t_main *shell)

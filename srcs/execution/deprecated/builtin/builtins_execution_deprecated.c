@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins_execution_deprecated.c                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 24/06/2024 08:06:42 by hmorand           #+#    #+#             */
+/*   Updated: 24/06/2024 09:04:50 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int exec_first_builtin(t_cmds *cmds, t_main *shell)
+/* int exec_first_builtin(t_cmds *cmds, t_main *shell)
 {
 	int		fds[2];
 	t_stds	fd_stds;
@@ -32,9 +44,9 @@ int exec_first_builtin(t_cmds *cmds, t_main *shell)
 		exit(EXIT_FAILURE);
 	}
 	return (fds[0]);
-}
+} */
 
-int	exec_last_builtin(t_cmds *cmds, int fd_in, t_main *shell)
+/* int	exec_last_builtin(t_cmds *cmds, int fd_in, t_main *shell)
 {
 	t_stds	fd_stds;
 
@@ -63,9 +75,9 @@ int	exec_last_builtin(t_cmds *cmds, int fd_in, t_main *shell)
 		}
 	}
 	return (-1);
-}
+} */
 
-int exec_middle_builtins(t_cmds *cmds, int fd_in, t_main *shell)
+/* int exec_middle_builtins(t_cmds *cmds, int fd_in, t_main *shell)
 {
 	int fds[2];
 	t_stds fd_stds;
@@ -110,4 +122,4 @@ int exec_middle_builtins(t_cmds *cmds, int fd_in, t_main *shell)
 		}
 	}
 	return (fds[0]);
-}
+} */

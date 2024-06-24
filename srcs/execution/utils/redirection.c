@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/24 09:11:12 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/24 09:11:26 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	redirect_output(t_files *outfile)
@@ -65,7 +77,7 @@ int	redirect_input(t_files *infile)
 void	handle_redirection(t_cmds *cmd)
 {
 	if (cmd->last_infile)
-			redirect_input(cmd->last_infile);
+		redirect_input(cmd->last_infile);
 	if (cmd->last_outfile)
 		redirect_output(cmd->last_outfile);
 }

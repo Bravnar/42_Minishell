@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/24 09:09:28 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/24 09:09:28 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	is_builtin(t_cmds *cmds)
@@ -19,7 +31,6 @@ int	is_builtin(t_cmds *cmds)
 	cmds->is_builtin = 0;
 	return (0);
 }
-
 
 void	check_builtins(t_cmds *cmds)
 {

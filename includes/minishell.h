@@ -331,14 +331,20 @@ int		check_spec(t_lex *l);
 /* MAIN */
 
 int		execute(t_cmds *cmds, t_main *shell);
+int		execute_cmd(t_cmds *cmds, t_main *shell, int fd);
+int		exec_single(t_cmds *cmds, pid_t *cpids, t_main *shell);
 
 /* CHECKS */
 
 int		is_bad_command(t_cmds *cmds, t_main *shell);
 int		check_files(t_main *shell, t_cmds *cmds);
 
-int		is_builtin(t_cmds *cmds);
-void	check_builtins(t_cmds *cmds);
+/* PIPING UTILS */
+
+int		exec_pipeline_first(t_cmds *cmds, pid_t *cpids, t_main *shell);
+int		exec_pipeline_last(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell);
+int		exec_pipeline_middle(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell);
+void	piping(t_cmds *tmp, pid_t *cpids, int *fd_in, t_main *shell);
 
 /* PID_UTILS */
 
@@ -352,6 +358,8 @@ int		send_err_code(int *new_err);
 
 int		builtins(t_cmds *cmds, t_main *shell, int fd);
 int		exec_single_builtin(t_cmds *cmds, t_main *shell);
+int		is_builtin(t_cmds *cmds);
+void	check_builtins(t_cmds *cmds);
 
 /* STD MANAGEMENT */
 

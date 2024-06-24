@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strreplace.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 22/06/2024 17:13:11 by hmorand           #+#    #+#             */
+/*   Updated: 24/06/2024 09:19:11 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	*ft_strreplace(char *input, char *to, char *by, int *index)
@@ -37,7 +49,7 @@ char	*check_replace(int *i, char *result, t_main *shell)
 
 	j = 1;
 	while (ft_isalnum(result[*i + j]) || result[*i + j] == '_')
-			j++;
+		j++;
 	to_replace = ft_strndup(result + *i, j);
 	var = get_env(&shell->env, to_replace);
 	if (var)
