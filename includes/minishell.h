@@ -189,6 +189,7 @@ char	*handle_quote(t_envp **head, char *var);
 void	add_env(t_main *shell, char *str);
 void	set_env(t_envp **head, char *key, char *value, int print);
 char	*get_env(t_envp **head, char *var);
+void	set_underscore(t_cmds *cmds, t_main *shell);
 
 /* NO ENV PROMPT */
 

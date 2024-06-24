@@ -147,6 +147,7 @@ int	execute(t_cmds *cmds, t_main *shell)
 	cpids = malloc(sizeof(pid_t) * (cmd_size(cmds) + 1));
 	if (!cpids)
 		return (EXIT_FAILURE);
+	set_underscore(cmds, shell);
 	cpids[0] = 0;
 	tmp = cmds;
 	fd_in = -1;
