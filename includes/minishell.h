@@ -319,6 +319,7 @@ char	*get_path(char **paths, char *command);
 pid_t	pid_for_signal(pid_t *new);
 void	init_termios(void);
 void	signal_daddy(t_main *shell);
+void 	setup_heredoc_signals(void);
 
 /*----------------------------------SYNTAX DIR--------------------------------*/
 

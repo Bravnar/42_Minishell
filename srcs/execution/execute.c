@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 24/06/2024 08:06:42 by hmorand           #+#    #+#             */
-/*   Updated: 24/06/2024 09:17:23 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/20 08:06:42 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/24 16:42:03 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ int	execute(t_cmds *cmds, t_main *shell)
 	}
 	wait_for_children(cpids, shell);
 	free(cpids);
-	g_signal_received = 0;
+	g_signal_received = NORMAL;
 	return (EXIT_SUCCESS);
 }

@@ -46,6 +46,17 @@ void	handle_one(void)
 	rl_redisplay();
 }
 
+void	handle_heredoco(pid_t to_kill)
+{
+	int	err_code;
+
+	err_code = 130;
+	ft_fprintf(2, "\n");
+	if (to_kill > 0)
+		kill(to_kill, SIGINT);
+	send_err_code(&err_code);
+}
+
 int	send_err_code(int *new_err)
 {
 	static int	err = 0;
@@ -79,7 +90,7 @@ void	sigint_main(int signum)
 	if (g_signal_received == NORMAL)
 		handle_zero();
 	else if (g_signal_received == HEREDOC_SIG)
-		handle_one();
+		handle_heredoco(to_kill);
 	else if (g_signal_received == EXEC)
 		handle_two(to_kill);
 	pid_for_signal(&to_restore);
@@ -109,6 +120,8 @@ int	is_vscode_terminal(t_main *shell)
 	char	*vscode_var;
 
 	vscode_var = get_env(&shell->env, "TERM_PROGRAM");
+	if (!vscode_var || vscode_var[0] == '\0')
+		return (2);
 	if (!ft_strcmp(vscode_var, "vscode"))
 	{
 		free(vscode_var);
@@ -119,6 +132,28 @@ int	is_vscode_terminal(t_main *shell)
 		free(vscode_var);
 		return (2);
 	}
+}
+
+void heredoc_sigint_handler(int signum)
+{
+    (void)signum;
+    write(STDOUT_FILENO, "\n", 1);
+    if (g_signal_received == HEREDOC_SIG)
+    {
+        exit(130);  // Exit the child process
+    }
+}
+
+void setup_heredoc_signals(void)
+{
+    struct sigaction s;
+    
+    sigemptyset(&s.sa_mask);
+    s.sa_flags = 0;
+    s.sa_handler = heredoc_sigint_handler;
+    sigaction(SIGINT, &s, NULL);
+	s.sa_handler = heredoc_sigint_handler;
+	sigaction(SIGQUIT, &s, NULL);
 }
 
 void	signal_daddy(t_main *shell)

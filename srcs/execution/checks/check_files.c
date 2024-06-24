@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:40 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/24 14:29:20 by hmorand          ###   ########.ch       */
+/*   Updated: 2024/06/24 17:52:13 by smuravyev        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_files *extract_heredoc(t_files *file, t_main *shell)
 	char	*input;
 	char	*full_input;
 
+	g_signal_received = HEREDOC_SIG;
 	if (pipe(pipefd) == -1)
 	{
 		perror("pipe");
@@ -49,16 +50,28 @@ t_files *extract_heredoc(t_files *file, t_main *shell)
 	if (pid == 0)
 	{
 		close(pipefd[0]);
-		g_signal_received = EXEC;
+		setup_heredoc_signals();
 		input = ft_strdup("");
-		while (ft_strncmp(input, file->file_name, ft_strlen(file->file_name)))
+		while (1)
 		{
-			write(STDOUT_FILENO, "> ", 2);
+			input = readline("> ");
+			if (!input || !ft_strncmp(input, file->file_name, ft_strlen(file->file_name)))
+			{
+				free(input);
+				break;
+			}
+			ft_fprintf(pipefd[1], "%s\n", input);
 			free(input);
-			input = get_next_line(STDIN_FILENO);
-			ft_fprintf(pipefd[1], "%s", input);
 		}
-		free(input);
+		// while (!input || ft_strncmp(input, file->file_name, ft_strlen(file->file_name)))
+		// {
+		// 	// write(STDOUT_FILENO, "> ", 2);
+		// 	free(input);
+		// 	input = readline("> ");
+		// 	// input = get_next_line(STDIN_FILENO);
+		// 	ft_fprintf(pipefd[1], "%s\n", input);
+		// }
+		// free(input);
 		close(pipefd[1]);
 		exit(EXIT_SUCCESS);
 	}
@@ -69,8 +82,19 @@ t_files *extract_heredoc(t_files *file, t_main *shell)
 		input = ft_strdup("");
 		close(pipefd[1]);
 		waitpid(pid, &status, 0);
+		printf("Child process finished, status: %d\n", status);
+		printf("Child process finished WIFSIGNALED: %d\n", WIFSIGNALED(status));
+		printf("Child process finished WTERMSIG: %d\n", WTERMSIG(status));
+		if (WIFSIGNALED(status))  // MODIFIED: Check if child was terminated by SIGINT
+        {
+			printf("Im here\n");
+            g_signal_received = NORMAL;
+            close(pipefd[0]);
+            free(full_input);
+            return file;  // MODIFIED: Return early if Ctrl-C was pressed
+        }
 		determine_err(shell, status);
-		while (ft_strncmp(input, file->file_name, ft_strlen(file->file_name)))
+		while (input && ft_strncmp(input, file->file_name, ft_strlen(file->file_name)))
 		{
 			full_input = ft_better_join(full_input, input, 1);
 			input = get_next_line(pipefd[0]);
