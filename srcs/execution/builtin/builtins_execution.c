@@ -34,6 +34,7 @@ int exec_single_builtin(t_cmds *cmds, t_main *shell)
 		restore_stdout(shell);
 	if (cmds->last_infile)
 		restore_stdin(shell, fd_stds.in);
+
 	return (shell->err_code);
 }
 
