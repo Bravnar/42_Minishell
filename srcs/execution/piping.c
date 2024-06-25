@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piping.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 09:17:08 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/25 08:00:19 by smuravye         ###   ########.fr       */
+/*   Created: 2024/06/25 09:01:17 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 09:01:17 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,13 @@ int	exec_pipeline_last(t_cmds *cmds, int fd_in, pid_t *cpids, t_main *shell)
 		exit(EXIT_FAILURE);
 	if (pid == 0)
 	{
-		if (dup2(fd_in, STDIN_FILENO) == -1)
+		if (cmds->prev->cmd_grp)
 		{
-			ft_fprintf(STDERR_FILENO, "Dup STDIN last pipe\n");
-			exit(EXIT_FAILURE);
+			if (dup2(fd_in, STDIN_FILENO) == -1)
+			{
+				ft_fprintf(STDERR_FILENO, "Child Dup STDIN last pipe\n");
+				exit(EXIT_FAILURE);
+			}
 		}
 		handle_redirection(cmds);
 		close_fdin_last_child(fd_in);
