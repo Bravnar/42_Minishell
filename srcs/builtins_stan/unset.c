@@ -36,5 +36,6 @@ int	unset_env(char **cmds, t_envp **head)
 			tmp = next;
 		}
 	}
+	set_env(head, "?", "0", 777);
 	return (EXIT_SUCCESS);
 }

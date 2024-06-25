@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   envp_get_set.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 22/06/2024 17:19:52 by smuravye          #+#    #+#             */
+/*   Updated: 25/06/2024 12:31:51 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /* Main getter function, searches through the t_envp
@@ -56,7 +68,6 @@ void	add_env(t_main *shell, char *str)
 	split = NULL;
 	if (ft_strchr(str, '='))
 	{
-		// split = ft_split(str, '=');
 		split = export_split(str);
 		if (!split[1])
 			split[1] = ft_strdup("");
@@ -66,3 +77,5 @@ void	add_env(t_main *shell, char *str)
 		set_env(&shell->env, str, NULL, 0);
 	ft_free_arr(split);
 }
+
+/* split = ft_split(str, '='); */

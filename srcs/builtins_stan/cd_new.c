@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_new.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/25 12:34:11 by smuravye          #+#    #+#             */
+/*   Updated: 2024/06/25 12:34:25 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	go_home(t_main *shell, char **cmds, char *cwd)
@@ -27,8 +39,9 @@ void	swap_old_new(t_main *shell, char **cmds, char *old_pwd)
 	old_pwd = get_env(&shell->env, "OLDPWD");
 	if (chdir(old_pwd) == -1)
 		printf(BOLD_RED"chdir error\n"RESET);
-	//free(old_pwd);
 }
+
+/* free(old_pwd); */
 
 void	adjust_pwd(t_main *shell, char *old_pwd)
 {
