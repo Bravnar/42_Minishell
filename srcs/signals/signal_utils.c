@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:54:01 by smuravye          #+#    #+#             */
-/*   Updated: 2024/06/25 16:54:01 by smuravye         ###   ########.ch       */
+/*   Updated: 2024/06/25 17:22:10 by smuravye         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,9 @@ int	is_vscode_terminal(t_main *shell)
 	if (!vscode_var || vscode_var[0] == '\0')
 		return (2);
 	if (!ft_strcmp(vscode_var, "vscode"))
-	{
-		free(vscode_var);
 		return (3);
-	}
 	else
-	{
-		free(vscode_var);
 		return (2);
-	}
 }
 
 int	send_err_code(int *new_err)

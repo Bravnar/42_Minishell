@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 25/06/2024 17:06:17 by smuravye          #+#    #+#             */
+/*   Updated: 25/06/2024 17:40:10 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -108,7 +120,7 @@
 # define APPEND_ERR "syntax error near unexpected token '>>'"
 # define HEREDOC_SIGN_ERR "syntax error near unexpected token '<<'"
 # define SIMPLE_SYNTAX "syntax error: forbidden character"
-# define EXPORT_SIGN "'=': not a valid identifier"
+# define EXPORT_SIGN "not a valid identifier"
 # define NUM_ARG "numeric argument required"
 
 /*----------------------------------------------------------------------------*/
@@ -322,7 +334,7 @@ void	sigaction_proc(void);
 
 /* SIGNALs */
 
-void 	heredoc_sigint_handler(int signum);
+void	heredoc_sigint_handler(int signum);
 void	main_sigint_handler(int signum);
 void	proc_sigint_handler(int signum);
 void	proc_sigquit_handler(int signum);
@@ -440,12 +452,14 @@ int		cmd_size(t_cmds *cmds);
 // # define SPACE_SIGN "\001\033[1;96m\002 "
 // # define X_SIGN " \033[1;34m\002\u2718\001\033[0m\002 "
 
-// # define SHELL "\001\x1B[1;37m\002minish\001\x1B[1;34m\002EHL:\001\x1B[0m\002"
+// # define SHELL "\001\x1B[1;37m\002minish\001\x1B
+// [1;34m\002EHL:\001\x1B[0m\002"
 
 // # define MINISH "\001\e\[1m\e[37m\002\001minish\002"
 // # define EHL "\001\e\[1m\e[34m\002\001EHL:\002\001\e[0m\002"
 // # define G_ARROW_SIGN "\001\e[1m\e[32m\002\001\u279c\002\001 \002"
-// # define X_SIGN "\001\e[1m\e[34m\002\001 \002\001\u2718\002\001 \002\001\e[0m\002"
+// # define X_SIGN "\001\e[1m\e[34m\002\001
+// \002\001\u2718\002\001 \002\001\e[0m\002"
 
 // # define MINISH "\001\033[1;37m\002minish"
 // # define EHL "\001\033[1;34m\002EHL:\001\033[0m\002"

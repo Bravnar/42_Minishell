@@ -6,7 +6,7 @@
 /*   By: smuravye <smuravye@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:50:25 by smuravye          #+#    #+#             */
-/*   Updated: 2024/06/25 17:08:48 by smuravye         ###   ########.ch       */
+/*   Updated: 2024/06/25 17:23:33 by smuravye         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ t_main	*init_structs(char **envp)
 		populate_envp(shell);
 		set_env(&shell->env, "?", "0", 777);
 		shell->username = get_env(&shell->env, "$USER");
+		shell->home = get_env(&shell->env, "$HOME");
 	}
 	return (shell);
 }
-
-/* shell->home = get_env(&shell->env, "$HOME"); */

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 22/06/2024 17:19:52 by smuravye          #+#    #+#             */
-/*   Updated: 24/06/2024 11:03:53 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 17:38:59 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 17:38:59 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	errors_two(t_err code, char *file, t_main *shell)
 			file);
 	else if (code == EXPORT_ERR)
 		ft_fprintf(STDERR_FILENO,
-			RED"%s%s: %s\n"RESET, MSHELL, file, EXPORT_SIGN);
+			RED"%sexport: `%s': %s\n"RESET, MSHELL, file, EXPORT_SIGN);
 	set_env(&shell->env, "?", "1", 777);
 }
 

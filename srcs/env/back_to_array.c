@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 22/06/2024 17:19:52 by smuravye          #+#    #+#             */
-/*   Updated: 24/06/2024 11:05:27 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 17:31:33 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 17:31:33 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**back_to_array(t_envp *env)
 		return (NULL);
 	while (tmp)
 	{
-		if (tmp->printable == 1)
+		if (tmp->printable == 1 || tmp->printable == 2)
 		{
 			tmp_join = ft_better_join(tmp->key, "=", 0);
 			result[i++] = ft_better_join(tmp_join, tmp->value, 0);

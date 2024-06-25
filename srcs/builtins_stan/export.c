@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 24/06/2024 08:06:42 by smuravye          #+#    #+#             */
-/*   Updated: 24/06/2024 10:41:00 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 17:35:24 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 17:35:24 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	export(t_main *shell, char **cmds, int fd)
 	{
 		while (cmds[i])
 		{
-			if (cmds[i][0] == '=')
+			if (cmds[i][0] == '=' || ft_isdigit(cmds[i][0]))
 				error_handler(EXPORT_ERR, cmds[i++], shell);
 			else
 				add_env(shell, cmds[i++]);
