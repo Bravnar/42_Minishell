@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   back_to_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 17:31:33 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/25 17:31:33 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 17:57:14 by smuravye          #+#    #+#             */
+/*   Updated: 2024/06/25 17:57:14 by smuravye         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	count_envp(t_envp *env)
 	count = 0;
 	while (tmp)
 	{
-		if (tmp->printable == 1)
+		if (tmp->printable == 1 || tmp->printable == 2)
 			count++;
 		tmp = tmp->next;
 	}
