@@ -333,7 +333,6 @@ void	sigaction_main(t_main *shell);
 void	sigaction_proc(void);
 void	subshell_handle(int signum);
 
-
 /*----------------------------------SYNTAX DIR--------------------------------*/
 
 /* CHECK SYNTAX */
