@@ -6,7 +6,7 @@
 #    By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/03 16:33:12 by smuravye          #+#    #+#              #
-#    Updated: 2024/05/06 16:54:43 by smuravyev        ###   ########.fr        #
+#    Updated: 2024/06/25 14:23:31 by smuravyev        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ NO_COLOR = \\033[0m
 
 # Source Folder -------------------------------------------------------------- #
 
+ARRUTILSDIR			=	arr_utils
 CONVERTERDIR		=	converter
 GNLDIR				=	gnl
 ISDIR				=	is
@@ -65,6 +66,7 @@ $(NAME):				$(OBJS)
 $(OBJECTDIR)/%.o:		$(SOURCEDIR)/%.c
 							@mkdir	-p	$(@D)
 #								@mkdir -p $(OBJECTDIR)
+#								@mkdir -p $(OBJECTDIR)/$(ARRUTILSDIR)
 #								@mkdir -p $(OBJECTDIR)/$(CONVERTERDIR)
 #								@mkdir -p $(OBJECTDIR)/$(GNLDIR)
 #								@mkdir -p $(OBJECTDIR)/$(ISDIR)
@@ -77,7 +79,7 @@ $(OBJECTDIR)/%.o:		$(SOURCEDIR)/%.c
 							@echo "$(BG_GREEN) $(NO_COLOR)\c"
 #							@printf	"\033[KCompiling libft -----------> $<\r"
 							@$(CC) $(CFLAGS) -I $(HEADERDIR) -c $< -o $@
-							
+
 
 clean:
 								@$(RM)	$(OBJECTDIR)

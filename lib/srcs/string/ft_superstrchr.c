@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_superstrchr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 16:37:35 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/25 16:37:35 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 15:00:06 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 15:00:06 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_lib.h"
 
-void	ft_free_arr(char **arr)
+char	*ft_superstrchr(char *s, char *chars)
 {
 	int	i;
 
 	i = 0;
-	if (!arr)
-		return ;
-	if (!arr[i])
+	while (s[i])
 	{
-		free(arr);
-		arr = NULL;
-		return ;
+		if (ft_strchr(chars, s[i]))
+			return ((char *)(s + i));
+		i++;
 	}
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-	arr = NULL;
+	if (ft_strchr(chars, s[i]))
+		return ((char *)s + i);
+	return (NULL);
 }

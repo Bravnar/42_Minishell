@@ -308,6 +308,10 @@ void	parser_main(t_main *shell);
 char	**get_paths(t_main *shell);
 char	*get_path(char **paths, char *command);
 
+/* PARSER PATCH */
+
+void	patch_commands(char ***cmds);
+
 /*----------------------------------SIGNALS DIR-------------------------------*/
 
 /* HANDLE SIGNALS */

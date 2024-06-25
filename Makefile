@@ -27,6 +27,7 @@ SRCS=	srcs/main/main.c \
 		srcs/parser/parser_main.c \
 		srcs/parser/parser_free.c \
 		srcs/parser/parser_path.c \
+		srcs/parser/parser_patch.c \
 		srcs/parser/parser_exp_comb.c \
 		srcs/parser/ft_strreplace.c \
 		srcs/builtins_stan/cd_new.c \
@@ -64,7 +65,6 @@ CFLAGS= -Wall -Wextra -Werror -I$(INCLUDES)
 
 LIBFT = 	lib
 LIBFT_LIB = $(LIBFT)/my_lib.a
-
 
 #SANITIZE= -g3 -fsanitize=address
 SANITIZE= -g

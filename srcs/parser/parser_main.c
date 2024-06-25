@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 22/06/2024 17:19:52 by smuravye          #+#    #+#             */
-/*   Updated: 22/06/2024 17:19:52 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 16:20:14 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 16:20:14 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	parser_body(t_main *shell)
 			cmds = create_cmd_arr(iter, shell, count);
 			files = create_files_list(&iter, shell);
 			add_cmds_node(&shell->cmds, new_cmds_node(cmds, files, 0, shell));
-			ft_free_arr(cmds);
 			cmds = NULL;
 		}
 		if (iter && iter->next)
