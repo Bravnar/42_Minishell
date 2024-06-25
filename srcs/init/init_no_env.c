@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_no_env.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smuravye <smuravye@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/25 14:59:49 by smuravye          #+#    #+#             */
+/*   Updated: 2024/06/25 15:00:25 by smuravye         ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_envp	*new_no_env_node(char *key, char *value, int print)
@@ -63,12 +75,15 @@ void	make_no_env_prompt(t_main *shell)
 /* Main no_env function */
 void	no_env_handle(t_main *shell)
 {
+	shell->has_env = 0;
+	make_no_env_prompt(shell);
+	populate_no_env(shell);
+}
+
 	// char	*tmp;
 	// char	*tmp2;
 	// char	*cwd;
 	// tmp = NULL;
-	shell->has_env = 0;
-	make_no_env_prompt(shell);
 	// cwd = my_get_path();
 	// tmp = ft_better_join("sadshell:", cwd);
 	// tmp2 = ft_better_join(tmp, " $ ");
@@ -76,5 +91,3 @@ void	no_env_handle(t_main *shell)
 	// shell->prompt = ft_strdup(tmp2);
 	// free(tmp);
 	// free(tmp2);
-	populate_no_env(shell);
-}

@@ -3,6 +3,7 @@ NAME= minishell
 INCLUDES = includes
 
 SRCS=	srcs/main/main.c \
+		srcs/main/main_utils.c \
 		srcs/init/init.c \
 		srcs/init/init_prompt.c \
 		srcs/init/no_env_prompt.c \
@@ -10,6 +11,8 @@ SRCS=	srcs/main/main.c \
 		srcs/lexer/lexer_main.c \
 		srcs/errors/errors.c \
 		srcs/signals/signals.c \
+		srcs/signals/signal_mains.c \
+		srcs/signals/signal_utils.c \
 		srcs/syntax/check_syntax.c \
 		srcs/syntax/check_syntax_utils.c \
 		srcs/lexer/lexer_funcs.c \
