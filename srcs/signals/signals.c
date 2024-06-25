@@ -196,7 +196,7 @@ void	main_sigint_handler(int signum)
 	int	err_code;
 
 	err_code = 130;
-	(void) signum;
+	// (void) signum;
 	if (g_signal_received == NORMAL)
 	{
 		write(STDERR_FILENO, "\n", 1);
@@ -204,6 +204,13 @@ void	main_sigint_handler(int signum)
 		rl_on_new_line();
 		rl_redisplay();
 		send_err_code(&err_code);
+	}
+	else if (g_signal_received == EXEC && signum == SIGINT)
+		proc_sigint_handler(signum);
+	else if (g_signal_received == EXEC && signum == SIGQUIT)
+	{
+		printf("Im here\n");
+		proc_sigquit_handler(signum);
 	}
 }
 
@@ -220,11 +227,10 @@ void	proc_sigint_handler(int signum)
 	write(STDOUT_FILENO, "\n", 1);
 	if (g_signal_received == EXEC)
 	{
-		printf("Im here \n");
 		if (to_kill > 0)
 			kill(to_kill, SIGINT);
 		send_err_code(&err_code);
-		exit(130);
+		// exit(130);
 	}
 	pid_for_signal(&to_restore);
 }
@@ -288,9 +294,9 @@ void	sigaction_proc(void)
 
 	sigemptyset(&s.sa_mask);
 	s.sa_flags = SA_RESTART;
-	s.sa_handler = proc_sigint_handler;
+	s.sa_handler = SIG_DFL;
 	sigaction(SIGINT, &s, NULL);
-	s.sa_handler = proc_sigquit_handler;
+	s.sa_handler = SIG_DFL;
 	sigaction(SIGQUIT, &s, NULL);
 	s.sa_handler = handle_sigpipe;
 	sigaction(SIGPIPE, &s, NULL);
