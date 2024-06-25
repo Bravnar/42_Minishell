@@ -43,6 +43,7 @@ SRCS=	srcs/main/main.c \
 		srcs/execution/builtin/builtins_execution.c \
 		srcs/execution/builtin/is_builtin.c \
 		srcs/execution/checks/check_files.c \
+		srcs/execution/checks/heredoc.c \
 		srcs/execution/checks/check_command.c \
 		srcs/execution/plumbing/plumbing.c \
 		srcs/execution/plumbing/plumbing2.c \

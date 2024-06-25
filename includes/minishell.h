@@ -324,8 +324,8 @@ char	*get_path(char **paths, char *command);
 pid_t	pid_for_signal(pid_t *new);
 int		send_err_code(int *new_err);
 int		is_vscode_terminal(t_main *shell);
-void 	heredoc_sigint_handler(int signum);
-void	main_sigint_handler(int	signum);
+void	heredoc_sigint_handler(int signum);
+void	main_sigint_handler(int signum);
 void	proc_sigint_handler(int signum);
 void	proc_sigquit_handler(int signum);
 void	sigaction_hd(void);
@@ -362,6 +362,10 @@ int		exec_single(t_cmds *cmds, pid_t *cpids, t_main *shell);
 
 int		is_bad_command(t_cmds *cmds, t_main *shell);
 int		check_files(t_main *shell, t_cmds *cmds);
+
+/* HEREDOC */
+
+t_files	*extract_heredoc(t_files *file, t_main *shell);
 
 /* PIPING UTILS */
 
