@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer_llist_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smuravye <smuravye@student.42lausanne.ch>    +#+  +:+       +#+      */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 14/06/2024 09:18:30 by smuravye          #+#    #+#             */
+/*   Updated: 25/06/2024 15:06:22 by smuravye         ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_llex	*new_token(char *value,	int is_con)
 {
 	t_llex	*token;
 
-	//token = malloc(sizeof(t_llex));
 	token = ft_calloc(1, sizeof(t_llex));
 	if (!token)
 		return (NULL);
@@ -51,15 +62,7 @@ void	free_tokens(t_llex *token_list)
 	{
 		tmp = token_list;
 		token_list = token_list->next;
-		// printf("freeing tmp->value: %s\n", tmp->value); removed 07/06 to test leaks and double free!, uncomment all to revert
 		free(tmp->value);
-		// printf("value of tmp->exp_tmp: %s\n", tmp->exp_tmp);
-		// if (tmp->exp_tmp && tmp->exp_tmp[0])
-		// {
-		// 	printf("im here\n");
-		// 	free(tmp->exp_tmp);
-		// 	tmp->exp_tmp = NULL;
-		// }
 		free(tmp);
 	}
 	tmp = NULL;
@@ -92,3 +95,14 @@ int	ms_lstsize(t_llex *lst)
 	}
 	return (size);
 }
+
+		// printf("freeing tmp->value: %s\n", tmp->value); 
+		// removed 07/06 to test leaks and double free!, 
+		// uncomment all to revert
+		// printf("value of tmp->exp_tmp: %s\n", tmp->exp_tmp);
+		// if (tmp->exp_tmp && tmp->exp_tmp[0])
+		// {
+		// 	printf("im here\n");
+		// 	free(tmp->exp_tmp);
+		// 	tmp->exp_tmp = NULL;
+		// }

@@ -41,7 +41,7 @@
 # define PIPE "|"
 # define PIPE_REDIRS "|<>"
 # define DOLLAR_CHARS "$?-0123456789"
-# define SYNTAX_STOP "&;`()"
+# define SYNTAX_STOP "&;()"
 # define CANCEL_EXP "+~"
 # define NO_HOME "HOME not defined"
 # define ENVLIN "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -314,28 +314,26 @@ void	patch_commands(char ***cmds);
 
 /*----------------------------------SIGNALS DIR-------------------------------*/
 
-/* HANDLE SIGNALS */
+/* SIGNAL MAINS */
 
-// void	sig_handler(int status);
-// int		is_interactive(void);
-// void	backslash_handler(int status);
-// void	signals_main(int interactive);
-// pid_t	pid_for_signal(pid_t *new);
-// void	init_termios(void);
-// void	signal_daddy(t_main *shell);
-// void 	setup_heredoc_signals(void);
+void	sigaction_hd(void);
+void	sigaction_main(t_main *shell, int is_blocking);
+void	sigaction_proc(void);
 
-pid_t	pid_for_signal(pid_t *new);
-int		send_err_code(int *new_err);
-int		is_vscode_terminal(t_main *shell);
-void	heredoc_sigint_handler(int signum);
+/* SIGNALs */
+
+void 	heredoc_sigint_handler(int signum);
 void	main_sigint_handler(int signum);
 void	proc_sigint_handler(int signum);
 void	proc_sigquit_handler(int signum);
-void	sigaction_hd(void);
-void	sigaction_main(t_main *shell);
-void	sigaction_proc(void);
+
+/* SIGNAL UTILS*/
+
 void	subshell_handle(int signum);
+int		is_vscode_terminal(t_main *shell);
+int		send_err_code(int *new_err);
+void	handle_sigpipe(int signum);
+pid_t	pid_for_signal(pid_t *new);
 
 /*----------------------------------SYNTAX DIR--------------------------------*/
 
@@ -427,6 +425,10 @@ void	close_fdin_last_parent(int fd_in);
 void	close_fdin_builtin(int fd_in);
 
 /*----------------------------------UTILS DIR--------------------------------*/
+
+void	free_all(t_main *shell);
+void	my_rl_initialize(void);
+void	receive_err(t_main *shell);
 
 /* CMDS_UTILS */
 

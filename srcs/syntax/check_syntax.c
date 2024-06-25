@@ -1,3 +1,4 @@
+
 #include "minishell.h"
 
 void	set_redir_err(t_lex *l, t_llex *tmp)
@@ -25,7 +26,7 @@ int	check_redirs(t_lex *l)
 	l->err_code = 0;
 	while (tmp)
 	{
-		if (ft_strchr(REDIRS, tmp->value[0]))
+		if (tmp->value[0] != '\0' && ft_strchr(REDIRS, tmp->value[0]))
 			set_redir_err(l, tmp);
 		tmp = tmp->next;
 	}
@@ -48,7 +49,7 @@ int	check_spec(t_lex *l)
 		i = 0;
 		while (tmp->value[i] && !tmp->is_in_quotes)
 		{
-			if (ft_strchr(SYNTAX_STOP, tmp->value[i]))
+			if (tmp->value[0] != '\0' && ft_strchr(SYNTAX_STOP, tmp->value[i]))
 			{
 				l->err_code = FORB_CHAR;
 				stop = 1;
@@ -71,7 +72,7 @@ int	check_pipes(t_lex *l)
 	l->err_code = 0;
 	while (tmp)
 	{
-		if (ft_strchr(PIPE, tmp->value[0]))
+		if (tmp->value[0] != '\0' && ft_strchr(PIPE, tmp->value[0]))
 		{
 			if (ms_lstsize(l->link) == 1)
 				l->err_code = BAD_PIPES;

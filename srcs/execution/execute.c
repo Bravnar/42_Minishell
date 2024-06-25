@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 08:06:42 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/25 12:33:47 by smuravye         ###   ########.fr       */
+/*   Created: 2024/06/25 16:43:02 by smuravye          #+#    #+#             */
+/*   Updated: 2024/06/25 16:44:19 by smuravye         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	execute(t_cmds *cmds, t_main *shell)
 	cpids[0] = 0;
 	tmp = cmds;
 	fd_in = -1;
+	sigaction_main(shell, 1);
 	while (tmp)
 	{
 		piping(tmp, cpids, &fd_in, shell);
@@ -77,6 +78,6 @@ int	execute(t_cmds *cmds, t_main *shell)
 	}
 	wait_for_children(cpids, shell);
 	free(cpids);
-	g_signal_received = NORMAL;
+	sigaction_main(shell, 0);
 	return (EXIT_SUCCESS);
 }
