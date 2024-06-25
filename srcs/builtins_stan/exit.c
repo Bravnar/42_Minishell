@@ -61,7 +61,7 @@ int	my_exit(t_main *shell, char **cmds)
 	char		*endptr;
 
 	exit_status = 0;
-	ft_fprintf(2, "exit\n");
+	ft_fprintf(STDOUT_FILENO, "exit\n");
 	if (cmds && cmds[1])
 	{
 		errno = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 25/06/2024 06:36:25 by smuravye          #+#    #+#             */
-/*   Updated: 25/06/2024 15:02:26 by smuravye         ###   ########.ch       */
+/*   Created: 2024/06/25 16:54:59 by smuravye          #+#    #+#             */
+/*   Updated: 2024/06/25 16:59:15 by smuravye         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	terminal_prompt(t_main *shell)
 		make_no_env_prompt(shell);
 		return ;
 	}
+	shell->home = get_env(&shell->env, "$HOME");
 	if (shell->prompt)
 		free(shell->prompt);
 	path = my_get_path();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 15:22:16 by smuravye          #+#    #+#             */
-/*   Updated: 2024/06/25 15:22:26 by smuravye         ###   ########.ch       */
+/*   Created: 2024/06/25 16:54:01 by smuravye          #+#    #+#             */
+/*   Updated: 2024/06/25 16:54:01 by smuravye         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

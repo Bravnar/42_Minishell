@@ -313,7 +313,7 @@ char	*get_path(char **paths, char *command);
 /* SIGNAL MAINS */
 
 void	sigaction_hd(void);
-void	sigaction_main(t_main *shell);
+void	sigaction_main(t_main *shell, int is_blocking);
 void	sigaction_proc(void);
 
 /* SIGNALs */

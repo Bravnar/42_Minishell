@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 15:11:14 by smuravye          #+#    #+#             */
-/*   Updated: 2024/06/25 15:11:30 by smuravye         ###   ########.ch       */
+/*   Created: 2024/06/25 16:24:42 by smuravye          #+#    #+#             */
+/*   Updated: 2024/06/25 16:24:42 by smuravye         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av, char **envp)
 	(void) ac;
 	(void) av;
 	shell = init_structs(envp);
-	sigaction_main(shell);
+	sigaction_main(shell, 0);
 	gameplay_loop(shell);
 	free_main(shell);
 }
