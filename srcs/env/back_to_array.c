@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   back_to_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:57:14 by smuravye          #+#    #+#             */
 /*   Updated: 2024/06/25 17:57:14 by smuravye         ###   ########.ch       */
