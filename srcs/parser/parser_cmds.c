@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_cmds.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/25 17:00:30 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 17:00:30 by hmorand          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	count_commands(t_llex *head)
@@ -66,6 +78,7 @@ char	**duplicate_cmds(char **cmds)
 	return (node);
 } */
 
+
 t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 {
 	t_cmds	*node;
@@ -75,20 +88,25 @@ t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 	if (!node)
 		return (NULL);
 	paths = get_paths(shell);
-	/* if (!paths)
-	{
-		free(node);
-		return (NULL);
-	} */
 	if (cmds && cmds[0])
+	{
+		patch_commands(&cmds);
 		node->path = get_path(paths, cmds[0]);
+	}
 	ft_free_arr(paths);
 	if (cmds)
 		node->cmd_grp = duplicate_cmds(cmds);
+	ft_free_arr(cmds);
 	node->files = files;
 	node->index = index;
 	return (node);
 }
+
+/* if (!paths)
+	{
+		free(node);
+		return (NULL);
+	} */
 
 void	add_cmds_node(t_cmds **head, t_cmds *new_node)
 {

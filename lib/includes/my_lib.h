@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 17:03:25 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/20 17:03:25 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 15:16:08 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 15:16:08 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include "garbage.h"
+
+/* ************************************************************************** */
+/*                        ARR UTILS FUNCTIONS                                 */
+/* ************************************************************************** */
+
+int		strarr_len(char **arr);
+char	**arr_insert(char **arr, int pos, char *elem);
+char	**strarr_pop(char **arr, int index);
 
 /* ************************************************************************** */
 /*                          CONVERTER FUNCTIONS                               */
@@ -120,10 +128,6 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 
-/* ************************************************************************** */
-/*                          STRING FUNCTIONS                                  */
-/* ************************************************************************** */
-
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
@@ -142,5 +146,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	**ft_megasplit(char *str, char *charset);
 char	*ft_better_join(char *s1, char *s2, int free_);
+char	*ft_superstrchr(char *s, char *chars);
 
 #endif

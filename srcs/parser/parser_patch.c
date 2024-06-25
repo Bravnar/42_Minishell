@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   parser_patch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 12:35:40 by smuravye          #+#    #+#             */
-/*   Updated: 2024/06/25 12:35:58 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 17:00:23 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 17:00:23 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	print_envp(t_envp **head, int fd)
+void	patch_commands(char ***cmds)
 {
-	t_envp	*tmp;
+	char	*space;
+	char	*remaining;
+	char	**subcoms;
 
-	tmp = *head;
-	set_env(head, "_", "/usr/bin/env", 1);
-	while (tmp != NULL)
+	space = ft_strdup(ft_superstrchr((*cmds)[0], " \n\t"));
+	if (space != NULL && space[0] != '\0')
 	{
-		if (tmp->printable && tmp->printable != 777)
-			ft_fprintf(fd, "%s=%s\n", tmp->key, tmp->value);
-		tmp = tmp->next;
+		remaining = ft_strdup(space + 1);
+		subcoms = ft_split((*cmds)[0], space[0]);
+		*cmds = strarr_pop(*cmds, 0);
+		*cmds = arr_insert(*cmds, 0, remaining);
+		*cmds = arr_insert(*cmds, 0, subcoms[0]);
+		free(remaining);
+		ft_free_arr(subcoms);
 	}
-	return (EXIT_SUCCESS);
+	free(space);
 }
-
-/* printf("{\n"); */
-/* printf(BOLD_YELLOW"\t\"%s\" : \"%s\"\n"RESET, tmp->key, tmp->value); */
-/* printf("}\n"); */

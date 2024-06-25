@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_superstrchr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 22/06/2024 17:19:52 by smuravye          #+#    #+#             */
-/*   Updated: 24/06/2024 11:00:50 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 15:00:06 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 15:00:06 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "my_lib.h"
 
-int	my_pwd(int fd, t_main *shell, char **cmds)
+char	*ft_superstrchr(char *s, char *chars)
 {
-	char	*pwd_to_print;
-	int		cmds_count;
+	int	i;
 
-	cmds_count = count_export_args(cmds);
-	pwd_to_print = my_get_path();
-	ft_fprintf(fd, "%s\n", pwd_to_print);
-	free(pwd_to_print);
-	set_env(&shell->env, "_", cmds[cmds_count - 1], 1);
-	return (EXIT_SUCCESS);
+	i = 0;
+	while (s[i])
+	{
+		if (ft_strchr(chars, s[i]))
+			return ((char *)(s + i));
+		i++;
+	}
+	if (ft_strchr(chars, s[i]))
+		return ((char *)s + i);
+	return (NULL);
 }

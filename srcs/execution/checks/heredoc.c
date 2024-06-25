@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 08:49:33 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/25 08:58:24 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 12:32:49 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 16:58:26 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	heredoc_child(int fds[2], t_files *file)
 	while (1)
 	{
 		in = readline("> ");
-		if (!in || !ft_strncmp(in, file->file_name, ft_strlen(file->file_name)))
+		if (!in || !ft_strcmp(in, file->file_name))
 		{
 			free(in);
 			break ;
