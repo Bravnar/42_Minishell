@@ -15,28 +15,6 @@
 	rl_redisplay();
 }
 
-void	handle_zero(void)
-{
-	int	err_code;
-
-	err_code = 130;
-	// ft_fprintf(2, "\n");
-	write(STDERR_FILENO, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	send_err_code(&err_code);
-}
-
-void	handle_one(void)
-{
-	write(STDERR_FILENO, "\n", 1);
-	exit(130);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
-
 void	handle_heredoco(pid_t to_kill)
 {
 	int	err_code;
@@ -48,17 +26,6 @@ void	handle_heredoco(pid_t to_kill)
 	send_err_code(&err_code);
 }
 
-
-void	handle_two(pid_t to_kill)
-{
-	int	err_code;
-
-	err_code = 130;
-	ft_fprintf(2, "\n");
-	if (to_kill > 0)
-		kill(to_kill, SIGINT);
-	send_err_code(&err_code);
-}
 
 void	sigint_main(int signum)
 {
@@ -118,17 +85,36 @@ void	signal_daddy(t_main *shell)
 } */
 
 
+/* void	handle_zero(void)
+{
+	int	err_code;
+
+	err_code = 130;
+	write(STDERR_FILENO, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	send_err_code(&err_code);
+}
 
 
+void	handle_two(pid_t to_kill)
+{
+	int	err_code;
 
+	err_code = 130;
+	ft_fprintf(2, "\n");
+	if (to_kill > 0)
+		kill(to_kill, SIGINT);
+	send_err_code(&err_code);
+} */
 
-
-void	handle_sigpipe(int signum)
+void	handle_sigpipe(int signum) // GOOD
 {
 	(void) signum;
 }
 
-pid_t	pid_for_signal(pid_t *new)
+pid_t	pid_for_signal(pid_t *new) // GOOD
 {
 	static pid_t	to_kill;
 
@@ -137,7 +123,7 @@ pid_t	pid_for_signal(pid_t *new)
 	return (to_kill);
 }
 
-int	send_err_code(int *new_err)
+int	send_err_code(int *new_err) // GOOD
 {
 	static int	err = 0;
 
@@ -184,22 +170,36 @@ void	subshell_handle(int signum)
 void heredoc_sigint_handler(int signum)
 {
     (void)signum;
-    write(STDOUT_FILENO, "\n", 1);
+    write(STDERR_FILENO, "\n", 1);
     if (g_signal_received == HEREDOC_SIG)
     {
         exit(130);  // Exit the child process
     }
 }
 
-void	main_sigint_handler(int	signum)
+/* void	main_sigint_handler(int	signum)
+{
+	pid_t	to_kill;
+	pid_t	to_restore;
+
+	(void) signum;
+	to_kill = pid_for_signal(NULL);
+	if (g_signal_received == NORMAL)
+		handle_zero();
+	else if (g_signal_received == EXEC)
+		handle_two(to_kill);
+	pid_for_signal(&to_restore);
+} */
+
+void	main_sigint_handler(int signum)
 {
 	int	err_code;
-	
-	(void) signum;
+
 	err_code = 130;
+	(void) signum;
 	if (g_signal_received == NORMAL)
 	{
-		ft_fprintf(2, "\n");
+		write(STDERR_FILENO, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
@@ -209,50 +209,51 @@ void	main_sigint_handler(int	signum)
 
 void	proc_sigint_handler(int signum)
 {
-	// pid_t	to_kill;
-	// pid_t	to_restore;
+	pid_t	to_kill;
+	pid_t	to_restore;
 	int		err_code;
 
 	(void) signum;
-	// to_kill = pid_for_signal(NULL);
-	// to_restore = -1;
+	to_kill = pid_for_signal(NULL);
+	to_restore = -1;
 	err_code = 130;
+	write(STDOUT_FILENO, "\n", 1);
 	if (g_signal_received == EXEC)
 	{
-		write(STDERR_FILENO, "\n", 1);
-		// if (to_kill > 0)
-		// 	kill(to_kill, SIGINT);
+		printf("Im here \n");
+		if (to_kill > 0)
+			kill(to_kill, SIGINT);
 		send_err_code(&err_code);
 		exit(130);
 	}
-	// pid_for_signal(&to_restore);
+	pid_for_signal(&to_restore);
 }
 
 void	proc_sigquit_handler(int signum)
 {
-	// pid_t	to_kill;
-	// pid_t	to_restore;
+	pid_t	to_kill;
+	pid_t	to_restore;
 	int		err_code;
 
 	(void) signum;
-	// to_kill = pid_for_signal(NULL);
-	// to_restore = -1;
+	to_kill = pid_for_signal(NULL);
+	to_restore = -1;
 	err_code = 131;
+	write(STDERR_FILENO, "Quit (core dumped)\n", 19);
 	if (g_signal_received == EXEC)
 	{
-		write(STDERR_FILENO, "Quit (core dumped)\n", 19);
-		// if (to_kill > 0)
-		// {
-		// 	kill(to_kill, SIGQUIT);
-		// 	waitpid(to_kill, NULL, 0);
-		// }
+		if (to_kill > 0)
+		{
+			kill(to_kill, SIGQUIT);
+			waitpid(to_kill, NULL, 0);
+		}
 		send_err_code(&err_code);
-		exit(131);
+		// exit(131);
 	}
-	// pid_for_signal(&to_restore);
+	pid_for_signal(&to_restore);
 }
 
-void	sigaction_hd(void)
+void	sigaction_hd(void) // GOOD
 {
 	struct sigaction	s;
 
@@ -269,12 +270,10 @@ void	sigaction_hd(void)
 void	sigaction_main(t_main *shell)
 {
 	struct sigaction	s;
-	// int					shlvl;
 
 	(void) shell;
 	sigemptyset(&s.sa_mask);
 	s.sa_flags = SA_RESTART;
-	// shlvl = ft_atoi(get_env(&shell->env, "SHLVL"));
 	s.sa_handler = main_sigint_handler;
 	sigaction(SIGINT, &s, NULL);
 	s.sa_handler = SIG_IGN;
