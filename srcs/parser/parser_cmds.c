@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 17:00:30 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/25 17:00:30 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 17:11:20 by smuravye          #+#    #+#             */
+/*   Updated: 2024/06/25 17:11:50 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,8 @@ char	**duplicate_cmds(char **cmds)
 		return (NULL);
 	i = -1;
 	while (cmds[++i])
-	{
 		result[i] = ft_strdup(cmds[i]);
-		//free(cmds[i]);
-	}
 	result[i] = NULL;
-	//free(cmds);
 	return (result);
 }
 
@@ -77,7 +73,6 @@ char	**duplicate_cmds(char **cmds)
 	node->prev = NULL;
 	return (node);
 } */
-
 
 t_cmds	*new_cmds_node(char **cmds, t_files *files, int index, t_main *shell)
 {

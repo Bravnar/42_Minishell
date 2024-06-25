@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 22/06/2024 17:19:52 by smuravye          #+#    #+#             */
-/*   Updated: 22/06/2024 17:19:52 by hmorand          ###   ########.ch       */
+/*   Created: 2024/06/25 17:10:55 by hmorand           #+#    #+#             */
+/*   Updated: 2024/06/25 17:10:55 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	free_cmds_nodes(t_cmds *head)
 		free_files_nodes(tmp->files);
 		if (tmp->cmd_grp && tmp->cmd_grp[0])
 		{
-			// if (ft_strcmp(tmp->cmd_grp[0], "./minishell"))
 			if (tmp->path)
 				free(tmp->path);
 			ft_free_arr(tmp->cmd_grp);
@@ -44,6 +43,8 @@ void	free_cmds_nodes(t_cmds *head)
 		free(tmp);
 	}
 }
+
+/* if (ft_strcmp(tmp->cmd_grp[0], "./minishell")) */
 
 void	clear_t_cmds(t_main *shell)
 {

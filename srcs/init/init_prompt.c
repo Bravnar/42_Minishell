@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravye <smuravye@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:54:59 by smuravye          #+#    #+#             */
-/*   Updated: 2024/06/25 16:59:15 by smuravye         ###   ########.ch       */
+/*   Updated: 2024/06/25 17:09:28 by smuravye         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
