@@ -6,7 +6,7 @@
 /*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 08:49:33 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/25 08:54:39 by hmorand          ###   ########.ch       */
+/*   Updated: 2024/06/25 08:58:24 by hmorand          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	heredoc_child(int fds[2], t_files *file)
 	exit(EXIT_SUCCESS);
 }
 
-t_files	*early_exit(int fds[2], t_files *file)
+t_files	*early_exit(int fds[2])
 {
 	g_signal_received = NORMAL;
 	if (close(fds[0]) == -1)
@@ -110,7 +110,7 @@ t_files	*extract_heredoc(t_files *file, t_main *shell)
 	{
 		setup_parent_heredoc(&pid, &status, pipefd);
 		if (WIFSIGNALED(status))
-			early_exit(pipefd, file);
+			early_exit(pipefd);
 		determine_err(shell, status);
 		parse_heredoc(file, pipefd, shell);
 	}
