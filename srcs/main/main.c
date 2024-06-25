@@ -93,7 +93,8 @@ int	main(int ac, char **av, char **envp)
 	(void) ac;
 	(void) av;
 	shell = init_structs(envp);
-	signal_daddy(shell);
+	// signal_daddy(shell);
+	sigaction_main(shell);
 	gameplay_loop(shell);
 	free_main(shell);
 }

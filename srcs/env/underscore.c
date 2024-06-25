@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   underscore.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorand <hmorand@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:20:29 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/24 09:20:29 by hmorand          ###   ########.ch       */
+/*   Updated: 2024/06/25 07:41:38 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ void	set_underscore(t_cmds *cmds, t_main *shell)
 		return ;
 	if (!cmds->cmd_grp)
 	{
-		underscore = ft_strdup("");
-		set_env(&shell->env, "_", underscore, 777);
+		underscore = "\0";
+		set_env(&shell->env, "_", underscore, 1);
+		return ;
 	}
 	else
 	{
@@ -30,7 +31,7 @@ void	set_underscore(t_cmds *cmds, t_main *shell)
 		while (cmds->cmd_grp[++i])
 			;
 		underscore = ft_strdup(cmds->cmd_grp[i - 1]);
-		set_env(&shell->env, "_", underscore, 777);
+		set_env(&shell->env, "_", underscore, 1);
 	}
 	free(underscore);
 }

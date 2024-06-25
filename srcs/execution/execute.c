@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 08:06:42 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/24 16:42:03 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/06/25 08:00:40 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	execute_cmd(t_cmds *cmds, t_main *shell, int fd)
 {
 	int	err_code;
 
+	sigaction_proc();
 	if (cmds->is_builtin)
 		exit(builtins(cmds, shell, fd));
 	if (!cmds->cmd_grp)

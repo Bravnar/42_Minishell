@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuravyev <smuravyev@student.42.fr>        +#+  +:+       +#+        */
+/*   By: smuravye <smuravye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:40 by hmorand           #+#    #+#             */
-/*   Updated: 2024/06/24 17:52:13 by smuravyev        ###   ########.fr       */
+/*   Updated: 2024/06/25 07:36:46 by smuravye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ t_files *extract_heredoc(t_files *file, t_main *shell)
 	if (pid == 0)
 	{
 		close(pipefd[0]);
-		setup_heredoc_signals();
-		input = ft_strdup("");
+		// setup_heredoc_signals();
+		sigaction_hd();
+		// input = ft_strdup("");
 		while (1)
 		{
 			input = readline("> ");

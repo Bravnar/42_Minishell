@@ -316,10 +316,23 @@ char	*get_path(char **paths, char *command);
 // int		is_interactive(void);
 // void	backslash_handler(int status);
 // void	signals_main(int interactive);
+// pid_t	pid_for_signal(pid_t *new);
+// void	init_termios(void);
+// void	signal_daddy(t_main *shell);
+// void 	setup_heredoc_signals(void);
+
 pid_t	pid_for_signal(pid_t *new);
-void	init_termios(void);
-void	signal_daddy(t_main *shell);
-void 	setup_heredoc_signals(void);
+int		send_err_code(int *new_err);
+int		is_vscode_terminal(t_main *shell);
+void 	heredoc_sigint_handler(int signum);
+void	main_sigint_handler(int	signum);
+void	proc_sigint_handler(int signum);
+void	proc_sigquit_handler(int signum);
+void	sigaction_hd(void);
+void	sigaction_main(t_main *shell);
+void	sigaction_proc(void);
+void	subshell_handle(int signum);
+
 
 /*----------------------------------SYNTAX DIR--------------------------------*/
 
